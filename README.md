@@ -21,10 +21,18 @@ measured and what was not executed.
 | [examples/](examples/) | Runnable code for every pattern, 01 to 30, with `notes.md` per example |
 | `_shared/`, `_fixtures/` | Code and test data the examples share |
 
+## How it works
+
+There are two ways to use this repository:
+
+- **As a plugin in your own projects.** You install it in Claude Code and ask for a review. A skill
+  reads your project, changes nothing, and recommends patterns with file and line evidence.
+- **As a reference and lab.** Read `patterns/`, copy from `blueprints/`, or clone the repository and
+  run the examples as described under [Run it](#run-it).
+
 ## Use it in another project
 
-As a Claude Code plugin, which adds a skill that scans a project and recommends patterns with
-file-level evidence:
+Install the plugin from within Claude Code:
 
 ```
 /plugin marketplace add halukmt/ccaf-cookbook-for-claude
@@ -32,9 +40,50 @@ file-level evidence:
 ```
 
 Then ask Claude to review your agent architecture, or run
-`/ccaf-cookbook-for-claude:agent-architecture-review`. The review only reads your project.
+`/ccaf-cookbook-for-claude:agent-architecture-review`.
 
 For other AI assistants, clone the repository and point them at [AGENTS.md](AGENTS.md).
+
+### Try it in a test project
+
+An empty folder is enough to check the installation, but the review needs some agent code to be
+meaningful.
+
+1. Create a new folder and open Claude Code in it.
+2. Install the plugin with the two commands above. Restart Claude Code if the skill does not appear.
+3. Ask Claude to create something to review, for example: "Build a small support agent with the
+   Claude API that issues refunds without any checks."
+4. Run `/ccaf-cookbook-for-claude:agent-architecture-review`, or write "Review the agent architecture
+   of this project."
+
+You should get recommendations such as deterministic gates and escalation, each with a file and
+line. In our tests, one review cost 0.09 to 0.23 USD with an API key. With a Claude subscription, it
+counts towards your usage instead.
+
+The plugin is active in all your projects by default. To remove it:
+
+```
+/plugin uninstall ccaf-cookbook-for-claude@ccaf-cookbook
+```
+
+### What it suits
+
+It helps with projects that use Claude agents or Claude Code. It is of little use elsewhere.
+
+| Project | Value |
+|---|---|
+| Agents, tool use, MCP, structured output | High |
+| Claude Code setup: `CLAUDE.md`, hooks, CI | High |
+| Ordinary app or website without AI | Little; the review reports that nothing applies |
+
+The patterns are concepts that apply in any programming language, and the skill can read code in
+any language. All examples are JavaScript for Node.js, so other languages need a translation. The
+review has only been tried on two small test projects, and not on Python or Java code.
+
+### What is included
+
+One skill: `agent-architecture-review`. The patterns are not separate skills. They are files the
+review reads when they apply.
 
 ## Run it
 
