@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>26 Escalation triggers</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<main>
+  <a class="back" href="/">← Dashboard</a>
+  <h1>26 Escalation triggers</h1>
+  <p class="lede">
+    Three reliable triggers, not frustration or a confidence score.
+    <strong>Two rules also sit in code: a person on request, and no guessing between accounts.</strong>
+  </p>
+  <div id="example"></div>
+</main>
+<script type="module">
+import { mountExamplePage } from "/assets/example-page.js";
+
+mountExamplePage({
+  api: "/api/26-escalation-triggers/run",
+  runLabel: "Show it",
+  fields: [
+    { name: "mode", label: "What to run", options: [["saved", "Saved results: no cost"], ["live", "Live, one customer message: about $0.01"]] },
+    { name: "gate", label: "Code gate for human requests", options: [["off", "Off: the prompt decides"], ["on", "On: code decides when it detects a request"]] },
+    { name: "tool", label: "Customer lookup tool", options: [["safe", "Safe: an ambiguous match returns no records"], ["exposed", "Exposed: returns every match, only the prompt forbids choosing"]] },
+    { name: "message", label: "Customer message, for a live run", kind: "textarea", value: "I'm John Smith from London. What's the status of my order?" },
+  ],
+  presets: [
+    { label: "Saved results", values: { mode: "saved" } },
+    { label: "Frustrated, resolvable", values: { mode: "live", gate: "off", tool: "safe", message: "This is SO frustrating! My order ORD-12345 arrived broken! I'm Anna Weber, anna.weber@example.com." } },
+    { label: "Policy gap", values: { mode: "live", gate: "off", tool: "safe", message: "Please match the lower price a competitor is charging." } },
+    { label: "Policy says no", values: { mode: "live", gate: "off", tool: "safe", message: "I'm Anna Weber, anna.weber@example.com. I changed my mind about order ORD-12345 and want to return it." } },
+    { label: "Human, code gate", values: { mode: "live", gate: "on", tool: "safe", message: "Get me a manager." } },
+    { label: "Two John Smiths, exposed", values: { mode: "live", gate: "off", tool: "exposed", message: "I'm John Smith from London. What's the status of my order?" } },
+  ],
+  hint: "Mock data: Anna Weber has two orders, and two customers are named John Smith. The gate's own run makes no model call and costs nothing.",
+});
+</script>
+</body>
+</html>

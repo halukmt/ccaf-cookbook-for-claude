@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>22 Validation and retry</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<main>
+  <a class="back" href="/">← Dashboard</a>
+  <h1>22 Validation and retry</h1>
+  <p class="lede">
+    A schema-valid extraction can still be wrong. Code checks it, sends fixable errors back to the model, and hands the rest to a person.
+    <strong>A retry cannot create information the document does not contain.</strong>
+  </p>
+  <div id="example"></div>
+</main>
+<script type="module">
+import { mountExamplePage } from "/assets/example-page.js";
+
+mountExamplePage({
+  api: "/api/22-validation-retry/run",
+  runLabel: "Show it",
+  fields: [
+    { name: "mode", label: "What to run", options: [["saved", "Saved results: no cost"], ["live", "Live loop, one document: under $0.002"]] },
+    { name: "doc", label: "Document, for a live run", value: "d10", options: [
+      ["d10", "Subtotal and discount"],
+      ["d18", "Reordered columns"],
+      ["d16", "Its own total is wrong"],
+      ["d17", "Due before invoice date"],
+      ["d13", "One line, almost nothing"],
+      ["d03", "Receipt, no due date"],
+    ] },
+    { name: "seed", label: "Start from a seeded bad extraction (d10 and d18 only)", options: [["yes", "Yes"], ["no", "No, real first pass"]] },
+    { name: "retries", label: "Retry cap, at most 3", value: "3", kind: "number" },
+  ],
+  presets: [
+    { label: "Saved results", values: { mode: "saved" } },
+    { label: "Fixable: misread subtotal", values: { mode: "live", doc: "d10", seed: "yes", retries: "3" } },
+    { label: "Unfixable: wrong total", values: { mode: "live", doc: "d16", seed: "no", retries: "3" } },
+    { label: "No retries allowed", values: { mode: "live", doc: "d10", seed: "yes", retries: "0" } },
+  ],
+  hint: "Seeded extractions are written by hand and marked. Everything after the seed is a real call.",
+});
+</script>
+</body>
+</html>

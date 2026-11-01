@@ -1,0 +1,17 @@
+[
+  {
+    "toolChoice": {
+      "type": "any"
+    },
+    "status": 400,
+    "message": "tool_choice: type \"tool\" and \"any\" are not supported for this model."
+  },
+  {
+    "toolChoice": {
+      "type": "tool",
+      "name": "extract_document"
+    },
+    "status": 400,
+    "message": "tool_choice: type \"tool\" and \"any\" are not supported for this model."
+  }
+]

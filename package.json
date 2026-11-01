@@ -1,0 +1,18 @@
+{
+  "name": "ccaf-cookbook-for-claude",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Runnable agent patterns for Claude, covering the Claude Certified Architect Foundations topics. Unofficial.",
+  "license": "MIT",
+  "scripts": {
+    "start": "node --watch server.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/claude-agent-sdk": "^0.3.226",
+    "@anthropic-ai/sdk": "^0.116.0",
+    "@modelcontextprotocol/sdk": "^1.30.0",
+    "dotenv": "^17.4.2",
+    "zod": "^4.4.3"
+  }
+}

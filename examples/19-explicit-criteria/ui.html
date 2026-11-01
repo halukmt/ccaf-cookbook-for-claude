@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>19 Explicit review criteria</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<main>
+  <a class="back" href="/">← Dashboard</a>
+  <h1>19 Explicit review criteria</h1>
+  <p class="lede">
+    One vague review prompt and one with explicit criteria, scored against labelled snippets.
+    <strong>The difference is what the model does with code it should leave alone.</strong>
+  </p>
+  <div id="example"></div>
+</main>
+<script type="module">
+import { mountExamplePage } from "/assets/example-page.js";
+
+mountExamplePage({
+  api: "/api/19-explicit-criteria/run",
+  runLabel: "Show it",
+  fields: [
+    { name: "mode", label: "What to run", options: [["saved", "Saved comparison: no cost"], ["live", "Live, one snippet, both prompts: under $0.001"]] },
+    { name: "snippet", label: "Snippet, for a live run", value: "naming-inconsistency", options: [
+      ["naming-inconsistency", "Skip: naming inconsistency"],
+      ["doc-accurate", "Skip: an accurate comment"],
+      ["doc-vague-history", "Skip: a historical comment"],
+      ["safe-sql", "Skip: safe SQL"],
+      ["sql-injection", "Report: SQL injection"],
+      ["doc-contradiction", "Report: a comment that contradicts the code"],
+      ["page-short", "Report: one item short per page"],
+    ] },
+  ],
+  presets: [
+    { label: "Comparison", values: { mode: "saved" } },
+    { label: "Live: a nitpick", values: { mode: "live", snippet: "naming-inconsistency" } },
+    { label: "Live: a real bug", values: { mode: "live", snippet: "page-short" } },
+  ],
+  hint: "Labels are in _fixtures/review-snippets.js. A green card means the decision matches the label.",
+});
+</script>
+</body>
+</html>

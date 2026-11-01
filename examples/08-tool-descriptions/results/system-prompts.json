@@ -1,0 +1,312 @@
+{
+  "conflicting": {
+    "model": "claude-sonnet-5-5",
+    "system": "Always check customer details before proceeding with any request.",
+    "rows": [
+      {
+        "query": "What is the status of order #12345?",
+        "expected": "lookup_order",
+        "tool": "get_customer",
+        "outcome": "wrong tool",
+        "identifier": "current",
+        "allTools": [
+          "get_customer",
+          "lookup_order"
+        ],
+        "stopReason": "tool_use",
+        "text": "",
+        "inputTokens": 879,
+        "outputTokens": 145
+      },
+      {
+        "query": "Look up customer john@example.com",
+        "expected": "get_customer",
+        "tool": "get_customer",
+        "outcome": "correct",
+        "identifier": "john@example.com",
+        "allTools": [
+          "get_customer"
+        ],
+        "stopReason": "tool_use",
+        "text": "",
+        "inputTokens": 879,
+        "outputTokens": 54
+      },
+      {
+        "query": "Check my order tracking",
+        "expected": "lookup_order",
+        "tool": "get_customer",
+        "outcome": "wrong tool",
+        "identifier": "current",
+        "allTools": [
+          "get_customer",
+          "lookup_order"
+        ],
+        "stopReason": "tool_use",
+        "text": "",
+        "inputTokens": 876,
+        "outputTokens": 212
+      },
+      {
+        "query": "Find the account for phone 555-0123",
+        "expected": "get_customer",
+        "tool": "get_customer",
+        "outcome": "correct",
+        "identifier": "555-0123",
+        "allTools": [
+          "get_customer"
+        ],
+        "stopReason": "tool_use",
+        "text": "",
+        "inputTokens": 881,
+        "outputTokens": 53
+      },
+      {
+        "query": "Where is my package?",
+        "expected": "lookup_order",
+        "tool": "get_customer",
+        "outcome": "wrong tool",
+        "identifier": "current",
+        "allTools": [
+          "get_customer",
+          "lookup_order"
+        ],
+        "stopReason": "tool_use",
+        "text": "",
+        "inputTokens": 875,
+        "outputTokens": 161
+      },
+      {
+        "query": "Is order #67890 eligible for a refund?",
+        "expected": "lookup_order",
+        "tool": "get_customer",
+        "outcome": "wrong tool",
+        "identifier": "current",
+        "allTools": [
+          "get_customer",
+          "lookup_order"
+        ],
+        "stopReason": "tool_use",
+        "text": "",
+        "inputTokens": 884,
+        "outputTokens": 161
+      },
+      {
+        "query": "What loyalty tier is this customer?",
+        "expected": "get_customer",
+        "tool": "get_customer",
+        "outcome": "correct",
+        "identifier": "current",
+        "allTools": [
+          "get_customer"
+        ],
+        "stopReason": "tool_use",
+        "text": "",
+        "inputTokens": 881,
+        "outputTokens": 50
+      },
+      {
+        "query": "I need details on order #11111",
+        "expected": "lookup_order",
+        "tool": "get_customer",
+        "outcome": "wrong tool",
+        "identifier": "current",
+        "allTools": [
+          "get_customer",
+          "lookup_order"
+        ],
+        "stopReason": "tool_use",
+        "text": "",
+        "inputTokens": 877,
+        "outputTokens": 160
+      },
+      {
+        "query": "Verify the customer account status",
+        "expected": "get_customer",
+        "tool": "get_customer",
+        "outcome": "correct",
+        "identifier": "current",
+        "allTools": [
+          "get_customer"
+        ],
+        "stopReason": "tool_use",
+        "text": "",
+        "inputTokens": 877,
+        "outputTokens": 50
+      },
+      {
+        "query": "When will order #99999 arrive?",
+        "expected": "lookup_order",
+        "tool": "get_customer",
+        "outcome": "wrong tool",
+        "identifier": "current",
+        "allTools": [
+          "get_customer",
+          "lookup_order"
+        ],
+        "stopReason": "tool_use",
+        "text": "",
+        "inputTokens": 880,
+        "outputTokens": 148
+      }
+    ],
+    "correct": 4,
+    "wrongTool": 6,
+    "noCall": 0,
+    "total": 10,
+    "inputTokens": 8789,
+    "outputTokens": 1194
+  },
+  "rewritten": {
+    "model": "claude-sonnet-5-5",
+    "system": "You are a support assistant. Choose tools by what the request asks about, as each tool's description explains.",
+    "rows": [
+      {
+        "query": "What is the status of order #12345?",
+        "expected": "lookup_order",
+        "tool": "lookup_order",
+        "outcome": "correct",
+        "identifier": "#12345",
+        "allTools": [
+          "lookup_order"
+        ],
+        "stopReason": "tool_use",
+        "text": "",
+        "inputTokens": 894,
+        "outputTokens": 53
+      },
+      {
+        "query": "Look up customer john@example.com",
+        "expected": "get_customer",
+        "tool": "get_customer",
+        "outcome": "correct",
+        "identifier": "john@example.com",
+        "allTools": [
+          "get_customer"
+        ],
+        "stopReason": "tool_use",
+        "text": "",
+        "inputTokens": 894,
+        "outputTokens": 54
+      },
+      {
+        "query": "Check my order tracking",
+        "expected": "lookup_order",
+        "tool": "lookup_order",
+        "outcome": "correct",
+        "identifier": "latest",
+        "allTools": [
+          "lookup_order"
+        ],
+        "stopReason": "tool_use",
+        "text": "",
+        "inputTokens": 891,
+        "outputTokens": 52
+      },
+      {
+        "query": "Find the account for phone 555-0123",
+        "expected": "get_customer",
+        "tool": "get_customer",
+        "outcome": "correct",
+        "identifier": "555-0123",
+        "allTools": [
+          "get_customer"
+        ],
+        "stopReason": "tool_use",
+        "text": "",
+        "inputTokens": 896,
+        "outputTokens": 53
+      },
+      {
+        "query": "Where is my package?",
+        "expected": "lookup_order",
+        "tool": "lookup_order",
+        "outcome": "correct",
+        "identifier": "latest",
+        "allTools": [
+          "lookup_order"
+        ],
+        "stopReason": "tool_use",
+        "text": "",
+        "inputTokens": 890,
+        "outputTokens": 52
+      },
+      {
+        "query": "Is order #67890 eligible for a refund?",
+        "expected": "lookup_order",
+        "tool": "lookup_order",
+        "outcome": "correct",
+        "identifier": "#67890",
+        "allTools": [
+          "lookup_order"
+        ],
+        "stopReason": "tool_use",
+        "text": "",
+        "inputTokens": 899,
+        "outputTokens": 53
+      },
+      {
+        "query": "What loyalty tier is this customer?",
+        "expected": "get_customer",
+        "tool": "get_customer",
+        "outcome": "correct",
+        "identifier": "current",
+        "allTools": [
+          "get_customer"
+        ],
+        "stopReason": "tool_use",
+        "text": "",
+        "inputTokens": 896,
+        "outputTokens": 50
+      },
+      {
+        "query": "I need details on order #11111",
+        "expected": "lookup_order",
+        "tool": "lookup_order",
+        "outcome": "correct",
+        "identifier": "#11111",
+        "allTools": [
+          "lookup_order"
+        ],
+        "stopReason": "tool_use",
+        "text": "",
+        "inputTokens": 892,
+        "outputTokens": 53
+      },
+      {
+        "query": "Verify the customer account status",
+        "expected": "get_customer",
+        "tool": "get_customer",
+        "outcome": "correct",
+        "identifier": "current",
+        "allTools": [
+          "get_customer"
+        ],
+        "stopReason": "tool_use",
+        "text": "",
+        "inputTokens": 892,
+        "outputTokens": 50
+      },
+      {
+        "query": "When will order #99999 arrive?",
+        "expected": "lookup_order",
+        "tool": "lookup_order",
+        "outcome": "correct",
+        "identifier": "#99999",
+        "allTools": [
+          "lookup_order"
+        ],
+        "stopReason": "tool_use",
+        "text": "",
+        "inputTokens": 895,
+        "outputTokens": 53
+      }
+    ],
+    "correct": 10,
+    "wrongTool": 0,
+    "noCall": 0,
+    "total": 10,
+    "inputTokens": 8939,
+    "outputTokens": 523
+  }
+}

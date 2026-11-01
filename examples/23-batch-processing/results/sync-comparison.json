@@ -1,0 +1,47 @@
+[
+  {
+    "id": "doc-invoice-000-d01",
+    "ms": 2351,
+    "usage": {
+      "input_tokens": 1135,
+      "output_tokens": 368
+    },
+    "serviceTier": "standard"
+  },
+  {
+    "id": "doc-receipt-001-d06",
+    "ms": 1357,
+    "usage": {
+      "input_tokens": 992,
+      "output_tokens": 282
+    },
+    "serviceTier": "standard"
+  },
+  {
+    "id": "doc-invoice-002-d09",
+    "ms": 1529,
+    "usage": {
+      "input_tokens": 1079,
+      "output_tokens": 353
+    },
+    "serviceTier": "standard"
+  },
+  {
+    "id": "doc-receipt-003-d12",
+    "ms": 1391,
+    "usage": {
+      "input_tokens": 993,
+      "output_tokens": 308
+    },
+    "serviceTier": "standard"
+  },
+  {
+    "id": "doc-invoice-004-d16",
+    "ms": 1653,
+    "usage": {
+      "input_tokens": 1081,
+      "output_tokens": 355
+    },
+    "serviceTier": "standard"
+  }
+]

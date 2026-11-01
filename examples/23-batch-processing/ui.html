@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>23 Batch processing</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<main>
+  <a class="back" href="/">← Dashboard</a>
+  <h1>23 Batch processing</h1>
+  <p class="lede">
+    Half the price in exchange for no latency promise. Results come back in any order, so
+    <strong><code>custom_id</code> is the only link between a request and its result.</strong>
+  </p>
+  <div id="example"></div>
+</main>
+<script type="module">
+import { mountExamplePage } from "/assets/example-page.js";
+
+mountExamplePage({
+  api: "/api/23-batch-processing/run",
+  runLabel: "Show it",
+  fields: [
+    { name: "mode", label: "What to run", options: [
+      ["saved", "Saved results: no cost"],
+      ["sla", "SLA calculator: no cost"],
+      ["status", "Status of the saved batches: no cost"],
+      ["mini", "Real two-document batch: under $0.001, may wait 10 minutes"],
+    ] },
+    { name: "sla", label: "SLA in hours, for the calculator", value: "30", kind: "number" },
+    { name: "interval", label: "Submit every this many hours, for the calculator", value: "4.5", kind: "number" },
+  ],
+  presets: [
+    { label: "Saved results", values: { mode: "saved" } },
+    { label: "SLA met", values: { mode: "sla", sla: "30", interval: "4.5" } },
+    { label: "SLA missed", values: { mode: "sla", sla: "30", interval: "7" } },
+  ],
+  hint: "A batch run can take minutes with nothing to show. The elapsed time keeps counting while it waits.",
+});
+</script>
+</body>
+</html>

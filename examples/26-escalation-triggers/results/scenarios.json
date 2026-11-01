@@ -1,0 +1,219 @@
+{
+  "model": "claude-sonnet-5-5",
+  "results": [
+    {
+      "id": "frustrated",
+      "input": "This is SO frustrating! My order arrived broken!",
+      "decidedBy": "model",
+      "action": "replied",
+      "investigationSteps": 0,
+      "tools": [],
+      "toolInputs": [],
+      "trigger": null,
+      "text": "I'm sorry your order arrived broken. I'll get this fixed. Please give me your full name. Please also give me an email, phone number, or order number so I can find your account.",
+      "usage": {
+        "input_tokens": 1625,
+        "output_tokens": 55
+      },
+      "blocked": []
+    },
+    {
+      "id": "policy-gap",
+      "input": "I want you to match the price I saw at a competitor.",
+      "decidedBy": "model",
+      "action": "escalate_immediate",
+      "investigationSteps": 0,
+      "tools": [
+        "escalate_to_human"
+      ],
+      "toolInputs": [
+        {
+          "name": "escalate_to_human",
+          "input": {
+            "trigger": "policy_gap",
+            "summary": "Customer requests a price match against a competitor's price. Documented policy doesn't cover price matching. No account or order looked up yet. Needs human judgement."
+          }
+        }
+      ],
+      "trigger": "policy_gap",
+      "text": "I can't approve price matching myself, because our policy doesn't cover it. I've passed your request to a human agent who can decide. Your ticket number is HUM-2001. Please have the competitor's price and a link or screenshot ready.",
+      "usage": {
+        "input_tokens": 3457,
+        "output_tokens": 256
+      },
+      "blocked": []
+    },
+    {
+      "id": "human",
+      "input": "I want to talk to a real human being.",
+      "decidedBy": "model",
+      "action": "escalate_immediate",
+      "investigationSteps": 0,
+      "tools": [
+        "escalate_to_human"
+      ],
+      "toolInputs": [
+        {
+          "name": "escalate_to_human",
+          "input": {
+            "trigger": "explicit_human_request",
+            "summary": "Customer said they want to talk to a real human being. No details given yet; no lookup or investigation done."
+          }
+        }
+      ],
+      "trigger": "explicit_human_request",
+      "text": "I've passed you to a human agent. Your ticket number is HUM-2001. They'll take it from here.",
+      "usage": {
+        "input_tokens": 3377,
+        "output_tokens": 146
+      },
+      "blocked": []
+    },
+    {
+      "id": "ambiguous",
+      "input": "Look up my account, name is John Smith.",
+      "decidedBy": "model",
+      "action": "disambiguate",
+      "investigationSteps": 1,
+      "tools": [
+        "get_customer"
+      ],
+      "toolInputs": [
+        {
+          "name": "get_customer",
+          "input": {
+            "name": "John Smith"
+          }
+        }
+      ],
+      "trigger": null,
+      "text": "I found more than one account under that name. Please give me one of these so I can find yours:\n- Email address\n- Phone number\n- Order number\n- Postcode",
+      "usage": {
+        "input_tokens": 3376,
+        "output_tokens": 99
+      },
+      "blocked": []
+    },
+    {
+      "id": "frustrated-with-details",
+      "input": "This is SO frustrating! My order ORD-12345 arrived broken! I'm Anna Weber, anna.weber@example.com.",
+      "decidedBy": "model",
+      "action": "resolved",
+      "investigationSteps": 3,
+      "tools": [
+        "get_customer",
+        "lookup_order",
+        "issue_replacement"
+      ],
+      "toolInputs": [
+        {
+          "name": "get_customer",
+          "input": {
+            "name": "Anna Weber",
+            "email": "anna.weber@example.com",
+            "order_id": "ORD-12345"
+          }
+        },
+        {
+          "name": "lookup_order",
+          "input": {
+            "customer_id": "C-1001",
+            "order_id": "ORD-12345"
+          }
+        },
+        {
+          "name": "issue_replacement",
+          "input": {
+            "customer_id": "C-1001",
+            "order_id": "ORD-12345"
+          }
+        }
+      ],
+      "trigger": null,
+      "text": "I'm sorry your headphones arrived broken, Anna. I've sent you a free replacement for order ORD-12345.",
+      "usage": {
+        "input_tokens": 7465,
+        "output_tokens": 318
+      },
+      "blocked": []
+    },
+    {
+      "id": "policy-violation",
+      "input": "I'm Anna Weber, anna.weber@example.com. I changed my mind about order ORD-12345 and want to return it.",
+      "decidedBy": "model",
+      "action": "replied",
+      "investigationSteps": 2,
+      "tools": [
+        "get_customer",
+        "lookup_order"
+      ],
+      "toolInputs": [
+        {
+          "name": "get_customer",
+          "input": {
+            "name": "Anna Weber",
+            "email": "anna.weber@example.com",
+            "order_id": "ORD-12345"
+          }
+        },
+        {
+          "name": "lookup_order",
+          "input": {
+            "customer_id": "C-1001",
+            "order_id": "ORD-12345"
+          }
+        }
+      ],
+      "trigger": null,
+      "text": "I'm sorry, Anna, but I can't accept this return. Order ORD-12345 (noise-cancelling headphones) was placed on 2026-09-02, which is 59 days ago. Our change-of-mind return window is 30 days from the order date.\n\nIf the headphones are damaged or defective, tell me and I'll arrange a free replacement.",
+      "usage": {
+        "input_tokens": 5391,
+        "output_tokens": 375
+      },
+      "blocked": []
+    },
+    {
+      "id": "tool-failure",
+      "input": "I'm Anna Weber, anna.weber@example.com. Where is my order ORD-12345?",
+      "decidedBy": "model",
+      "action": "escalate",
+      "investigationSteps": 2,
+      "tools": [
+        "get_customer",
+        "lookup_order",
+        "escalate_to_human"
+      ],
+      "toolInputs": [
+        {
+          "name": "get_customer",
+          "input": {
+            "name": "Anna Weber",
+            "email": "anna.weber@example.com",
+            "order_id": "ORD-12345"
+          }
+        },
+        {
+          "name": "lookup_order",
+          "input": {
+            "customer_id": "C-1001",
+            "order_id": "ORD-12345"
+          }
+        },
+        {
+          "name": "escalate_to_human",
+          "input": {
+            "trigger": "inability_to_progress",
+            "summary": "Customer Anna Weber (C-1001) asks where order ORD-12345 is. Identified her via get_customer, but lookup_order failed with \"Order system unavailable: connection refused. Retries failed.\" Could not retrieve order status."
+          }
+        }
+      ],
+      "trigger": "inability_to_progress",
+      "text": "Hi Anna, I can't reach our order system right now, so I can't see where ORD-12345 is. I've passed your case to a human agent. The ticket number is HUM-2001. They'll follow up with you about the order's status.",
+      "usage": {
+        "input_tokens": 7406,
+        "output_tokens": 424
+      },
+      "blocked": []
+    }
+  ]
+}

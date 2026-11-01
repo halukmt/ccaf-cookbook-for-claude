@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>03 Subagents and explicit context</title>
+<link rel="stylesheet" href="/assets/style.css">
+<style>
+  .examples { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .9rem; }
+
+  .roster li { display: flex; gap: .6rem; padding: .3rem 0; border-bottom: 1px solid var(--border); }
+  .roster li:last-child { border-bottom: 0; }
+  .roster ul { list-style: none; margin: .4rem 0 0; padding: 0; }
+  .roster .agent { font-weight: 600; font-family: ui-monospace, monospace; font-size: .82rem; flex: none; }
+  .roster .tools { color: var(--muted); font-size: .8rem; font-family: ui-monospace, monospace; }
+
+  .toolcall { border-left: 3px solid var(--tool); }
+  .toolcall h2 { font-size: .8rem; font-family: ui-monospace, monospace; color: var(--tool); margin: 0; }
+
+  ul.findings { list-style: none; margin: 0; padding: 0; }
+  ul.findings li { padding: .55rem 0; border-bottom: 1px solid var(--border); }
+  ul.findings li:last-child { border-bottom: 0; }
+  .claim-row { display: flex; gap: .6rem; align-items: baseline; }
+  .claim { font-weight: 500; flex: 1; }
+  .who { flex: none; font-family: ui-monospace, monospace; font-size: .72rem; color: var(--muted);
+    border: 1px solid var(--border); border-radius: 4px; padding: 0 .3rem; }
+  .attribution { color: var(--accent); font-size: .8rem; font-family: ui-monospace, monospace; margin-top: .2rem; }
+  .attribution.missing { color: var(--warn); }
+
+  .answer { border-left: 3px solid var(--done); }
+  .answer h2 { font-size: .78rem; text-transform: uppercase; letter-spacing: .06em; color: var(--done); margin: 0 0 .5rem; }
+  .answer .text { white-space: pre-wrap; }
+  .cost { color: var(--muted); font-size: .78rem; margin-top: .6rem; }
+
+  .notice { border-left: 3px solid var(--warn); }
+  .notice h2 { font-size: .78rem; text-transform: uppercase; letter-spacing: .06em; color: var(--warn); margin: 0 0 .4rem; }
+  .notice p { margin: 0; }
+
+  .status { display: flex; align-items: center; gap: .6rem; padding: .6rem .9rem; margin-bottom: .8rem;
+    border: 1px solid var(--border); border-radius: 8px; background: var(--code-bg); font-size: .85rem; }
+  .status .spinner { width: .9rem; height: .9rem; border-radius: 50%; flex: none;
+    border: 2px solid var(--border); border-top-color: var(--accent); animation: spin 0.8s linear infinite; }
+  .status .elapsed { color: var(--muted); font-family: ui-monospace, monospace; margin-left: auto; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+<main>
+  <a class="back" href="/">← Dashboard</a>
+
+  <h1>03 Subagents and explicit context</h1>
+  <p class="lede">
+    Real <code>Task</code>/<code>Agent</code> spawning via the Claude Agent SDK — not the hand-rolled
+    coordinator from example 02. Two research subagents run in parallel and hand their full, sourced
+    findings (not just the claim text) to a synthesis subagent, so every sentence in the final
+    report can be traced back to a URL or a page number.
+  </p>
+
+  <div class="panel roster">
+    <h2>The three subagents — scoped tools, nothing inherited</h2>
+    <ul>
+      <li><span class="agent">web-search</span><span class="tools">tools: WebSearch only</span></li>
+      <li><span class="agent">doc-analysis</span><span class="tools">tools: Read, Grep only</span></li>
+      <li><span class="agent">synthesis</span><span class="tools">tools: none — writes from what it's given</span></li>
+    </ul>
+  </div>
+
+  <div class="panel">
+    <label for="topic">Research topic (goes to web-search; doc-analysis always reads sample-report.md)</label>
+    <textarea id="topic">EV battery second-life storage</textarea>
+
+    <div class="row">
+      <button id="run">Run the coordinator</button>
+    </div>
+    <div class="examples" id="examples"></div>
+  </div>
+
+  <div id="output"><p class="empty">No run yet.</p></div>
+</main>
+
+<script>
+const API = "/api/03-subagent-context/run";
+
+const EXAMPLES = [
+  ["EV batteries", "EV battery second-life storage"],
+  ["Solar recycling", "solar panel recycling"],
+  ["Grid curtailment", "renewable curtailment and grid storage"],
+];
+
+const el = (tag, className, text) => {
+  const node = document.createElement(tag);
+  if (className) node.className = className;
+  if (text !== undefined) node.textContent = text;
+  return node;
+};
+
+const topicEl = document.getElementById("topic");
+const runBtn = document.getElementById("run");
+const output = document.getElementById("output");
+
+for (const [label, text] of EXAMPLES) {
+  const b = el("button", "ghost", label);
+  b.title = text;
+  b.onclick = () => { topicEl.value = text; };
+  document.getElementById("examples").append(b);
+}
+
+function panel(className) {
+  const p = el("div", "panel " + className);
+  output.append(p);
+  return p;
+}
+
+function findingRow(f) {
+  const li = el("li");
+  const head = el("div", "claim-row");
+  head.append(el("span", "claim", f.finding.claim || "(no content)"));
+  head.append(el("span", "who", `${f.finding.retrieved_by ?? "?"} · ${f.finding.confidence ?? "?"}`));
+  li.append(head);
+
+  const hasSource = Boolean(f.finding.source_url) || f.finding.page_number !== null;
+  const cite = f.finding.source_url
+    ? `source: ${f.finding.source_url}`
+    : f.finding.page_number !== null
+      ? `source: ${f.finding.document_name || "document"}, page ${f.finding.page_number}`
+      : "no source attached";
+  li.append(el("div", "attribution" + (hasSource ? "" : " missing"), cite));
+  return li;
+}
+
+runBtn.onclick = () => {
+  const topic = topicEl.value.trim();
+  if (!topic) return;
+
+  output.replaceChildren();
+  runBtn.disabled = true;
+  runBtn.textContent = "Running…";
+
+  const statusBar = el("div", "status");
+  statusBar.append(el("span", "spinner"));
+  statusBar.append(el("span", "label", "Working — real subagents are running, this can take several minutes"));
+  const elapsedEl = el("span", "elapsed", "0:00");
+  statusBar.append(elapsedEl);
+  output.append(statusBar);
+
+  const startedAt = Date.now();
+  const tick = () => {
+    const s = Math.floor((Date.now() - startedAt) / 1000);
+    elapsedEl.textContent = `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
+  };
+  tick();
+  const timer = setInterval(tick, 1000);
+
+  const findingsPanel = panel("");
+  findingsPanel.append(el("h2", "", "Findings as they arrive (best-effort preview)"));
+  findingsPanel.append(el("p", "hint",
+    "The coordinator hands off findings to synthesis inside its own reasoning, not through this " +
+    "page — this list only catches the ones a subagent happened to fence in a matching ```json " +
+    "block, so it can legitimately stay empty even on a successful run. The final report below is " +
+    "the authoritative, attributed result."));
+  const findingsList = el("ul", "findings");
+  findingsPanel.append(findingsList);
+
+  const stream = new EventSource(`${API}?topic=${encodeURIComponent(topic)}`);
+
+  const finish = () => {
+    stream.close();
+    clearInterval(timer);
+    statusBar.remove();
+    runBtn.disabled = false;
+    runBtn.textContent = "Run the coordinator";
+  };
+
+  let toolCallCount = 0;
+  stream.onmessage = (message) => {
+    const event = JSON.parse(message.data);
+
+    if (event.type === "subagentToolUse") {
+      toolCallCount++;
+      statusBar.querySelector(".label").textContent =
+        `Working — ${toolCallCount} subagent tool call${toolCallCount === 1 ? "" : "s"} so far`;
+      const p = panel("toolcall");
+      p.append(el("h2", "", `tool_use → ${event.tool}`));
+    }
+
+    if (event.type === "finding") {
+      findingsList.append(findingRow({ finding: event.finding }));
+    }
+
+    if (event.type === "report") {
+      const p = panel("answer");
+      p.append(el("h2", "", "Final report"));
+      p.append(el("div", "text", event.text));
+      if (typeof event.costUsd === "number") {
+        p.append(el("div", "cost", `cost of this run: $${event.costUsd.toFixed(4)}`));
+      }
+    }
+
+    if (event.type === "error") {
+      const p = panel("notice");
+      p.append(el("h2", "", "Request failed"));
+      p.append(el("p", "", event.message));
+      finish();
+    }
+
+    if (event.type === "runSaved") {
+      output.append(el("p", "hint", `Run recorded as _runs/${event.runId}.json`));
+      finish();
+    }
+  };
+
+  stream.onerror = () => finish();
+};
+</script>
+</body>
+</html>

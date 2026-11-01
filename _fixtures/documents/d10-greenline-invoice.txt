@@ -1,0 +1,14 @@
+Greenline Print Co. (EIN 12-3456789)
+Invoice GP-7741, January 22, 2024. Payment due February 21, 2024 (Net 30). Customer PO: PO-5502.
+
+Items as discussed with your marketing team:
+
+| Item      | USD    |
+|-----------|--------|
+| Brochures | 600.00 |
+| Posters   | 200.00 |
+| Subtotal  | 800.00 |
+
+A loyalty discount of 10% (-80.00) applies to the subtotal, and sales tax of 57.60 was charged on the discounted amount.
+
+Amount due: USD 777.60

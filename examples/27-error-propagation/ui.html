@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>27 Error propagation</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<main>
+  <a class="back" href="/">← Dashboard</a>
+  <h1>27 Error propagation</h1>
+  <p class="lede">
+    A failed search and a search that found nothing look alike unless the code keeps them apart.
+    <strong>Subagents retry locally, the coordinator decides by failure type, and every gap stays visible in the report.</strong>
+  </p>
+  <div id="example"></div>
+</main>
+<script type="module">
+import { mountExamplePage } from "/assets/example-page.js";
+
+mountExamplePage({
+  api: "/api/27-error-propagation/run",
+  runLabel: "Show it",
+  fields: [
+    { name: "mode", label: "What to run", options: [["saved", "Saved results, with the real synthesis: no cost"], ["one", "Simulate one topic: no cost"], ["all", "Simulate all topics, up to a minute of real waits: no cost"]] },
+    { name: "topic", label: "Topic, for one", options: [
+      ["session tokens", "session tokens: works"],
+      ["rollout speed", "rollout speed: two timeouts, then works"],
+      ["gateway patches", "gateway patches: gets 3 of 5, then drops"],
+      ["customer outages", "customer outages: valid empty result"],
+      ["vendor pricing", "vendor pricing: down, archive works"],
+      ["regional rollout", "regional rollout: down everywhere"],
+      ["migration dates", "migration dates: bad date input"],
+      ["security audit", "security audit: permission denied"],
+      ["legal exemption", "legal exemption: business rule"],
+    ] },
+  ],
+  presets: [
+    { label: "Saved results", values: { mode: "saved" } },
+    { label: "Valid empty result", values: { mode: "one", topic: "customer outages" } },
+    { label: "Failed access", values: { mode: "one", topic: "regional rollout" } },
+    { label: "Partial results", values: { mode: "one", topic: "gateway patches" } },
+  ],
+  hint: "Every failure is simulated, from a plan per topic. The one model call, the synthesis, is saved; a new one costs under $0.01 from the terminal.",
+});
+</script>
+</body>
+</html>

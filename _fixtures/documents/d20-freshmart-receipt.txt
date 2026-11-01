@@ -1,0 +1,7 @@
+FreshMart Store 221            VAT No GB555666777
+Receipt 00917                  2024-09-30
+
+Groceries      43.20
+Household      12.80
+---------------------
+TOTAL GBP      56.00

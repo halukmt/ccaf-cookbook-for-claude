@@ -1,0 +1,189 @@
+{
+  "model": "claude-haiku-5-5",
+  "modules": [
+    "api-routes.js",
+    "auth.js",
+    "cart.js",
+    "config.js",
+    "database.js",
+    "inventory.js",
+    "notifications.js",
+    "orders.js",
+    "payments.js",
+    "reports.js",
+    "users.js",
+    "utils.js"
+  ],
+  "arms": [
+    {
+      "id": "full",
+      "label": "No scratchpad, full history",
+      "useScratchpad": false,
+      "dropOld": false,
+      "answer": "api-routes.js: router\nauth.js: login, issueToken, verifyToken\ncart.js: createCart, addItem, cartTotal\nconfig.js: config\ndatabase.js: query, closePool\ninventory.js: stockLevel, reserveStock\nnotifications.js: sendOrderEmail\norders.js: orderTax, placeOrder\npayments.js: chargeCard, refundCharge\nreports.js: salesReport, orderCount\nusers.js: findUserById, findUserByEmail, deleteUser\nutils.js: formatCurrency, paginate, isEmail\n\nThe imported `mailer-stub.js` and `provider-stub.js` were never read, so I have no exports for them.",
+      "usage": {
+        "input_tokens": 94896,
+        "output_tokens": 3449
+      },
+      "perTurnInput": [
+        2392,
+        3044,
+        4228,
+        4976,
+        5804,
+        6602,
+        7585,
+        8584,
+        9821,
+        10823,
+        11683,
+        12647,
+        6707
+      ],
+      "filesRead": [
+        "api-routes.js",
+        "auth.js",
+        "cart.js",
+        "config.js",
+        "database.js",
+        "inventory.js",
+        "notifications.js",
+        "orders.js",
+        "payments.js",
+        "reports.js",
+        "users.js",
+        "utils.js"
+      ],
+      "lateReads": 0,
+      "scratchpad": ""
+    },
+    {
+      "id": "full-pad",
+      "label": "Scratchpad, full history",
+      "useScratchpad": true,
+      "dropOld": false,
+      "answer": "api-routes.js: router\nauth.js: login, issueToken, verifyToken\ncart.js: createCart, addItem, cartTotal\nconfig.js: config\ndatabase.js: query, closePool\ninventory.js: stockLevel, reserveStock\nnotifications.js: sendOrderEmail\norders.js: orderTax, placeOrder\npayments.js: chargeCard, refundCharge\nreports.js: salesReport, orderCount\nusers.js: findUserById, findUserByEmail, deleteUser\nutils.js: formatCurrency, paginate, isEmail",
+      "usage": {
+        "input_tokens": 651505,
+        "output_tokens": 10542
+      },
+      "perTurnInput": [
+        4143,
+        8951,
+        14785,
+        20805,
+        27984,
+        36135,
+        47501,
+        60306,
+        74669,
+        88715,
+        103312,
+        119188,
+        45011
+      ],
+      "filesRead": [
+        "api-routes.js",
+        "auth.js",
+        "cart.js",
+        "config.js",
+        "database.js",
+        "inventory.js",
+        "notifications.js",
+        "orders.js",
+        "payments.js",
+        "reports.js",
+        "users.js",
+        "utils.js"
+      ],
+      "lateReads": 0,
+      "scratchpad": "\n\n## api-routes.js\n- Files: api-routes.js\n- Functions: router (exported express.Router), requireUser (internal middleware: verifyToken on Authorization header, 401 on failure), POST /login handler (calls login from auth.js), POST /orders handler (calls placeOrder from orders.js), GET /reports/sales handler (calls salesReport from reports.js), DELETE /admin/users/:id handler (calls deleteUser from users.js)\n- Dependencies: api-routes.js -> auth.js (login, verifyToken) -> api-routes.js -> orders.js (placeOrder) -> api-routes.js -> reports.js (salesReport) -> api-routes.js -> users.js (deleteUser)\n- Critical: DELETE /admin/users/:id has no requireUser middleware, so it is unauthenticated. /reports/sales only checks that a user is logged in, with no admin role check. /login does not catch errors from login() (async handler without try/catch).\n- Summary: Express router for the shop API, defining login, order placement, sales report, and admin user deletion endpoints.\n\n## auth.js\n- Files: auth.js\n- Functions: login(email, password) (async, exported: builds SQL by string concatenation, compares MD5 hash, returns token or null), issueToken(userId) (exported: signs JWT with config.jwtSecret, expiresIn = config.sessionTtlMinutes), verifyToken(token) (exported: returns decoded payload or null, never throws)\n- Dependencies: auth.js -> config.js (jwtSecret, sessionTtlMinutes) -> auth.js -> database.js (query) -> auth.js -> jsonwebtoken, node:crypto -> api-routes.js -> auth.js (login, verifyToken)\n- Critical: SQL injection in login(): email is concatenated directly into the query. Passwords are hashed with unsalted MD5. verifyToken() returns null instead of throwing, so requireUser's catch block in api-routes.js never runs; an invalid token sets req.user = null and the request proceeds (e.g. placeOrder then reads req.user.id and fails). expiresIn is set from a value named in minutes, but jsonwebtoken interprets a numeric expiresIn as seconds, so the TTL may be off by a factor of 60.\"]\n- Summary: Authentication module that checks credentials against the users table and issues or verifies JWT session tokens.\n\n## cart.js\n- Files: cart.js\n- Functions: createCart() (exported: returns empty cart { items: [] }), addItem(cart, item) (exported: throws 'Cart is full' at config.maxCartItems; merges quantity for an existing sku, otherwise pushes a copy; returns cart), cartTotal(cart) (exported: sums priceCents * quantity over items, integer cents)\n- Dependencies: cart.js -> config.js (maxCartItems) -> cart.js has no dependency on the other modules reviewed so far\n- Critical: addItem() does not validate quantity or priceCents. A negative or zero quantity, or a negative priceCents, would be accepted and could produce a negative total. The maxCartItems check counts distinct lines, not total quantity. Nothing in this module checks whether the caller's item values come from a trusted source.\"]\n- Summary: Shopping cart module that holds line items in integer cents, enforces a maximum line count, and computes totals.\n\n## config.js\n- Files: config.js\n- Functions: config (exported object: databaseUrl and jwtSecret from env; sessionTtlMinutes = 30; vatRate = 0.19; maxCartItems = 50; mailFrom = 'orders@shop.example')\n- Dependencies: config.js has no imports; it is read by auth.js (jwtSecret, sessionTtlMinutes), cart.js (maxCartItems), and likely database.js and the order/tax code (databaseUrl, vatRate, mailFrom)\n- Critical: sessionTtlMinutes = 30 is passed to jsonwebtoken as expiresIn, which treats a number as seconds, so tokens expire after 30 seconds instead of 30 minutes. This confirms the auth.js concern. jwtSecret and databaseUrl come from env with no fallback or startup check, so they may be undefined at runtime.\n- Summary: Central settings module: session TTL, VAT rate, cart limit, mail sender, and env-sourced secrets and database URL.\n\n## database.js\n- Files: database.js\n- Functions: query(sql, params = []) (async, exported: checks out a pool connection, runs the statement with params, releases the connection, resolves to { rows, rowCount }), closePool() (async, exported: ends the pg pool)\n- Dependencies: database.js -> config.js (databaseUrl) -> database.js -> pg (Pool) -> auth.js -> database.js (query) -> Per its own comment, every other module goes through query()\n- Critical: query() supports parameterized params, but auth.js login() does not use them, so the SQL injection stays. If connection.query throws, connection.release() is never called, which leaks a pool client on every failed statement. The pool is created at import time using config.databaseUrl, which may be undefined.\"]\n- Summary: Thin database wrapper around a pg connection pool, exposing a single parameterized query function and a pool shutdown function.\n\n## inventory.js\n- Files: inventory.js\n- Functions: stockLevel(sku) (async, exported: reads quantity from stock table, returns 0 if no row), reserveStock(sku, quantity) (async, exported: checks stockLevel, throws 'Not enough stock' if short, issues UPDATE to decrement stock, returns { sku, reserved })\n- Dependencies: inventory.js -> database.js (query) -> Likely consumed by orders.js (placeOrder), not yet verified\n- Critical: stockLevel() destructures the result of query() as an array (const [row] = ...), but query() returns { rows, rowCount }, which is not iterable, so it will throw a TypeError on every call. reserveStock() does not await the UPDATE, so the decrement is fire-and-forget: errors are lost and the response can return before stock changes. The check and the update are also not atomic, so concurrent orders can oversell.\"]\n<parameter name=\"summary\">Inventory module that reads stock levels and reserves quantity for a SKU, with a check-then-decrement flow.\n- Summary: -\n\n## inventory.js\n- Files: inventory.js\n- Functions: stockLevel(sku) (async, exported: reads quantity from stock table, returns 0 if no row), reserveStock(sku, quantity) (async, exported: checks stockLevel, throws 'Not enough stock' if short, issues UPDATE to decrement stock, returns { sku, reserved })\n- Dependencies: inventory.js -> database.js (query) -> Likely consumed by orders.js (placeOrder), not yet verified\n- Critical: stockLevel() destructures the result of query() as an array (const [row] = ...), but query() returns { rows, rowCount }, which is not iterable, so it will throw a TypeError on every call. reserveStock() does not await the UPDATE, so the decrement is fire-and-forget: errors are lost and the response can return before stock changes. The check and the update are also not atomic, so concurrent orders can oversell.\n- Summary: Inventory module that reads stock levels and reserves quantity for a SKU, with a check-then-decrement flow.\n\n## notifications.js\n- Files: notifications.js\n- Functions: sendOrderEmail(user, order) (async, exported: builds an HTML order confirmation with user.name and formatted order.total, sends via mailer.send from config.mailFrom, swallows all errors)\n- Dependencies: notifications.js -> config.js (mailFrom) -> notifications.js -> utils.js (formatCurrency) -> notifications.js -> mailer-stub.js (mailer) -> Likely called from orders.js, not yet verified\n- Critical: user.name is interpolated into HTML without escaping, so a crafted name can inject markup into the email. The try/catch with an empty catch block silently drops send failures, so a failed order email leaves no trace. order.total is assumed to be integer cents in the formatCurrency call; the unit contract is not verified here.\n- Summary: Customer email module that sends an order confirmation containing the user's name and formatted total.\n\n## orders.js\n- Files: orders.js\n- Functions: orderTax(netCents) (exported: Math.round(netCents * config.taxRate)), placeOrder(userId, cart, card) (async, exported: reserves stock per cart item, charges card for cartTotal, inserts order row, sends confirmation email, returns { id, total, tax })\n- Dependencies: orders.js -> cart.js (cartTotal) -> orders.js -> config.js (taxRate) -> orders.js -> database.js (query) -> orders.js -> inventory.js (reserveStock) -> orders.js -> notifications.js (sendOrderEmail) -> orders.js -> payments.js (chargeCard), not yet reviewed -> orders.js -> users.js (findUserById), not yet reviewed -> api-routes.js -> orders.js (placeOrder)\n- Critical: Off-by-one: the loop runs i <= cart.items.length, so the last iteration reads an undefined item and throws after earlier stock was already reserved. Stock is reserved before the card is charged, with no rollback if the charge or insert fails. orderTax reads config.taxRate, but config.js defines vatRate, so tax is NaN. The charge uses the net total with no tax added, which may be a bug. An empty or invalid cart is not rejected. findUserById may return null, and sendOrderEmail then reads user.name outside its try block, so the order is saved but the request fails. A null req.user from verifyToken would also throw at req.user.id.\n- Summary: Order placement module that reserves stock, charges the card, records the order, and sends a confirmation email.\n\n## payments.js\n- Files: payments.js\n- Functions: chargeCard(card, amountEuros) (async, exported: logs card number and cvc, calls provider.charge with Math.round(amountEuros * 100) cents in EUR, returns { id }), refundCharge(chargeId) (async, exported: calls provider.refund; always returns true, including when the refund fails)\n- Dependencies: payments.js -> provider-stub.js (provider) -> payments.js is imported by orders.js (chargeCard) -> refundCharge has no caller found in the modules reviewed so far\n- Critical: chargeCard() logs the full card number and CVC to the console, which is a serious PCI-style data exposure. Unit mismatch: the doc comment says amountEuros is euros, but orders.js passes cartTotal(), which is integer cents, and this function multiplies by 100 again, so customers would be charged 100 times the intended amount. refundCharge() swallows errors and always returns true, so callers cannot detect a failed refund.\n- Summary: Card payment module that charges the provider in cents and offers a refund function.\n\n## reports.js\n- Files: reports.js\n- Functions: salesReport(from, to) (async, exported: builds a per-day SUM(total) query by string concatenation of from and to, returns rows, returns [] on any error), orderCount() (async, exported: returns Number of rows in orders table)\n- Dependencies: reports.js -> database.js (query) -> api-routes.js -> reports.js (salesReport) -> orderCount has no caller found in the modules reviewed so far\n- Critical: salesReport() concatenates the from and to query parameters directly into SQL, which is a second SQL injection path, reachable from GET /reports/sales by any logged-in user. The empty catch returns [] on any error, so database failures look like empty sales. The route also lacks an admin check. Dates are not validated.\n- Summary: Sales reporting module that aggregates order totals by day over a date range, plus a total order count.\n\n## users.js\n- Files: users.js\n- Functions: findUserById(id) (async, exported: parameterized SELECT of id, name, email; returns row or null), findUserByEmail(email) (async, exported: SELECT by email built by string concatenation; returns row or null), deleteUser(id) (async, exported: parameterized DELETE; returns true if exactly one row deleted)\n- Dependencies: users.js -> database.js (query) -> api-routes.js -> users.js (deleteUser) -> orders.js -> users.js (findUserById) -> findUserByEmail has no caller found in the modules reviewed so far\n- Critical: findUserByEmail() concatenates email into SQL, a third SQL injection path, and it is exported, so future callers may reuse the pattern. deleteUser() is reachable without authentication through the unprotected DELETE /admin/users/:id route. Nothing here checks whether the caller is allowed to delete the user. findUserById() returning null is not handled by orders.js or notifications.js.\n- Summary: User account lookup and deletion module, with id and email lookups and a delete by id.\n\n## utils.js\n- Files: utils.js\n- Functions: formatCurrency(amountCents, currency) (exported: formats integer cents as a two-decimal string with currency code), paginate(items, page, pageSize) (exported: returns one page of items, pages start at 1), isEmail(value) (exported: returns true for strings matching a basic email regex)\n- Dependencies: utils.js has no imports -> notifications.js -> utils.js (formatCurrency) -> paginate and isEmail have no caller found in the modules reviewed so far\n- Critical: paginate() is off by one: it slices to start + pageSize - 1, so each page returns one item fewer than pageSize, and the last item of every page is dropped. isEmail() is a loose check and is not used by any reviewed route, so login and user creation do not validate email format. formatCurrency() expects integer cents, while the email path passes order.total, so it should be checked against the total unit.\n- Summary: Small helper module for currency formatting, pagination, and basic email validation."
+    },
+    {
+      "id": "dropped",
+      "label": "Forced: no scratchpad, old tool calls dropped",
+      "useScratchpad": false,
+      "dropOld": true,
+      "answer": "I have no verified export names for any module, because I never read these files with my tools in this conversation.\n\napi-routes.js: none retained (not read)\nauth.js: none retained (not read)\ncart.js: none retained (not read)\nconfig.js: none retained (not read)\ndatabase.js: none retained (not read)\ninventory.js: none retained (not read)\nnotifications.js: none retained (not read)\norders.js: none retained (not read)\npayments.js: none retained (not read)\nreports.js: none retained (not read)\nusers.js: none retained (not read)\nutils.js: none retained (not read)",
+      "usage": {
+        "input_tokens": 51615,
+        "output_tokens": 8057
+      },
+      "perTurnInput": [
+        2392,
+        2387,
+        2640,
+        2816,
+        3102,
+        3582,
+        4004,
+        4694,
+        5158,
+        5672,
+        5888,
+        6216,
+        3064
+      ],
+      "filesRead": [
+        "api-routes.js",
+        "auth.js",
+        "api-routes.js",
+        "cart.js",
+        "config.js",
+        "database.js",
+        "inventory.js",
+        "notifications.js",
+        "orders.js",
+        "payments.js",
+        "reports.js",
+        "users.js",
+        "utils.js"
+      ],
+      "lateReads": 0,
+      "scratchpad": ""
+    },
+    {
+      "id": "dropped-pad",
+      "label": "Forced: scratchpad, old tool calls dropped",
+      "useScratchpad": true,
+      "dropOld": true,
+      "answer": "api-routes.js: router\nauth.js: login, issueToken, verifyToken\ncart.js: createCart, addItem, cartTotal\nconfig.js: config\ndatabase.js: query, closePool\ninventory.js: stockLevel, reserveStock\nnotifications.js: sendOrderEmail\norders.js: orderTax, placeOrder\npayments.js: chargeCard, refundCharge\nreports.js: salesReport, orderCount\nusers.js: findUserById, findUserByEmail, deleteUser\nutils.js: formatCurrency, paginate, isEmail",
+      "usage": {
+        "input_tokens": 417596,
+        "output_tokens": 12193
+      },
+      "perTurnInput": [
+        4133,
+        5403,
+        7820,
+        10766,
+        15456,
+        29130,
+        27678,
+        36138,
+        45323,
+        56143,
+        67600,
+        80753,
+        31253
+      ],
+      "filesRead": [
+        "api-routes.js",
+        "auth.js",
+        "cart.js",
+        "config.js",
+        "database.js",
+        "inventory.js",
+        "database.js",
+        "notifications.js",
+        "orders.js",
+        "payments.js",
+        "reports.js",
+        "users.js",
+        "utils.js"
+      ],
+      "lateReads": 0,
+      "scratchpad": "\n\n## api-routes\n- Files: api-routes.js\n- Functions: router (exported express.Router instance), requireUser (internal middleware, not exported; verifies token from authorization header, returns 401 on failure)\n- Dependencies: api-routes -> auth.js (login, verifyToken) -> api-routes -> orders.js (placeOrder) -> api-routes -> reports.js (salesReport) -> api-routes -> users.js (deleteUser)\n- Critical: DELETE /admin/users/:id has no requireUser middleware, so any caller can delete users. GET /reports/sales only checks that a user is logged in, not that they are an admin. No role check exists in this file. Also, the login and order handlers do not catch async errors.\n- Summary: Express HTTP routes for the shop API. Routes: POST /login (calls login, returns token), POST /orders (requireUser, calls placeOrder), GET /reports/sales (requireUser, calls salesReport), DELETE /admin/users/:id (calls deleteUser).\n\n## auth\n- Files: auth.js\n- Functions: login(email, password) - async; looks up user by email, compares MD5 hash, returns issueToken(id) or null, issueToken(userId) - signs JWT {id} with config.jwtSecret, expiresIn = config.sessionTtlMinutes, verifyToken(token) - returns decoded JWT payload or null on failure\n- Dependencies: auth -> config.js (jwtSecret, sessionTtlMinutes) -> auth -> database.js (query) -> auth -> jsonwebtoken -> api-routes -> auth.js (login, verifyToken)\n- Critical: login() builds SQL by string concatenation of email, so it is SQL-injectable. Passwords are verified with unsalted MD5. issueToken passes sessionTtlMinutes as jwt expiresIn, which jsonwebtoken reads as seconds, so the TTL is likely far shorter than the name implies. Login returns null for both unknown email and wrong password, which is fine, but it does not distinguish them.\n- Summary: Login and session token module. login authenticates by email and MD5 password and returns a signed JWT; issueToken signs tokens; verifyToken validates them and returns null on failure.\n\n## cart\n- Files: cart.js\n- Functions: createCart() - returns empty cart {items: []}, addItem(cart, item) - throws 'Cart is full' when items.length >= config.maxCartItems; merges quantity into existing line with same sku, otherwise pushes a copy; returns cart, cartTotal(cart) - sums priceCents * quantity across lines, returns integer cents\n- Dependencies: cart -> config.js (maxCartItems)\n- Critical: addItem performs no validation on item.quantity or item.priceCents, so a negative quantity could reduce a cart total. Priority: check whether callers validate input before reaching addItem.\n- Summary: Shopping cart with integer-cent pricing. createCart makes an empty cart, addItem adds or merges lines, cartTotal computes the total. addItem does not validate quantity (zero, negative, or non-integer values are accepted), and the maxCartItems limit counts distinct lines rather than units.\n\n## config\n- Files: config.js\n- Functions: config (exported object): databaseUrl and jwtSecret from env, sessionTtlMinutes=30, vatRate=0.19, maxCartItems=50, mailFrom='orders@shop.example'\n- Dependencies: config -> consumed by auth.js (jwtSecret, sessionTtlMinutes), cart.js (maxCartItems), database.js (databaseUrl, presumed)\n- Critical: jwtSecret and databaseUrl are undefined if env vars are unset; no fallback or startup check. sessionTtlMinutes=30 is passed to jsonwebtoken expiresIn, which treats numbers as seconds, so tokens expire in 30 seconds (confirms auth.js concern). No validation of vatRate or maxCartItems.\n- Summary: Central settings object. Secrets come from env vars; other values are hardcoded. Notable: sessionTtlMinutes unit mismatch with jsonwebtoken, and missing startup check for required secrets.\n\n## database\n- Files: database.js\n- Functions: query(sql, params = []) - async; checks out a pg pool connection, runs the statement with params, releases the connection, returns { rows, rowCount }, closePool() - async; ends the pg pool\n- Dependencies: database -> config.js (databaseUrl) -> database -> pg (Pool) -> all other modules -> database.js (query), per file comment\n- Critical: query() uses parameterized params, but auth.js login() concatenates SQL and bypasses that protection. The connection is released only on the success path with no try/finally, so a failed query leaks a pooled connection. No timeout or error wrapping. Pool is created at import time using config.databaseUrl, which may be undefined.\n- Summary: Thin wrapper around a pg Pool. query() runs one parameterized statement and returns rows and rowCount. closePool() shuts the pool down. Main risk is the connection leak on query error.\n\n## inventory\n- Files: inventory.js\n- Functions: stockLevel(sku) - async; reads quantity from stock table, returns 0 if no row, reserveStock(sku, quantity) - async; checks stockLevel >= quantity, throws 'Not enough stock' otherwise, issues UPDATE to decrement stock (NOT awaited), returns { sku, reserved }\n- Dependencies: inventory -> database.js (query) -> database.js query() returns { rows, rowCount }, not an array\n- Critical: Bug: stockLevel uses `const [row] = await query(...)` but query() returns an object { rows, rowCount }, which is not iterable, so stockLevel throws TypeError and reserveStock never succeeds. Should read result.rows[0]. Second bug: the UPDATE in reserveStock is not awaited, so failures are unhandled and the decrement may race with the next request. Third: check-then-decrement has no transaction or row lock, so concurrent reservations can oversell.\n- Summary: Stock levels and reservations. stockLevel reads quantity; reserveStock checks availability then decrements. Both are broken as written: the array destructuring of query() result throws, and the UPDATE is fire-and-forget.\n\n## notifications\n- Files: notifications.js\n- Functions: sendOrderEmail(user, order) - async; builds HTML order confirmation with user.name and formatCurrency('EUR', order.total), sends via mailer.send with config.mailFrom, errors silently swallowed\n- Dependencies: notifications -> config.js (mailFrom) -> notifications -> utils.js (formatCurrency) -> notifications -> mailer-stub.js (mailer)\n- Critical: HTML built by string interpolation of user.name with no escaping, so a crafted name could inject markup into emails. Empty catch block silently swallows all mail failures, so failed order emails are never logged or retried. Currency is hardcoded to EUR regardless of order currency. Order total assumed to be in cents for formatCurrency; unverified.\n- Summary: Sends the customer order confirmation email. Single exported async function sendOrderEmail; errors are ignored.\n\n## orders\n- Files: orders.js\n- Functions: orderTax(netCents) - returns Math.round(netCents * config.taxRate), placeOrder(userId, cart, card) - async; reserves stock per cart line, computes cartTotal, charges card via payments.chargeCard, inserts orders row, sends confirmation email, returns { id, total, tax }\n- Dependencies: orders -> cart.js (cartTotal) -> orders -> config.js (taxRate) -> orders -> database.js (query) -> orders -> inventory.js (reserveStock) -> orders -> notifications.js (sendOrderEmail) -> orders -> payments.js (chargeCard) -> orders -> users.js (findUserById) -> api-routes.js -> orders.js (placeOrder)\n- Critical: Off-by-one: loop uses i <= cart.items.length, so the last iteration reads cart.items[length] (undefined) and throws TypeError after earlier stock was already reserved, with no rollback. Config mismatch: orderTax reads config.taxRate but config.js defines vatRate, so tax is NaN unless taxRate exists elsewhere. Ordering risk: the card is charged before the orders INSERT, and no refund happens if the insert or email fails. Reservations are not released if chargeCard fails. No empty-cart check. Inherits inventory.js bugs (broken stockLevel, unawaited UPDATE). sendOrderEmail errors are swallowed, so the email step cannot fail the order.\n- Summary: Order placement. placeOrder reserves stock, charges the card, records the order, and emails a confirmation. It has an off-by-one loop that throws on every order, and it charges before recording the order with no compensation on failure.\n\n## payments\n- Files: payments.js\n- Functions: chargeCard(card, amountEuros) - async; logs card number and cvc to console, calls provider.charge with amountCents = Math.round(amountEuros * 100) and currency EUR, returns { id: charge.id }, refundCharge(chargeId) - async; calls provider.refund, returns true on success; on error the catch is empty and it still returns true\n- Dependencies: payments -> provider-stub.js (provider.charge, provider.refund) -> orders.js -> payments.js (chargeCard); caller unit must be checked: chargeCard expects euros, orders.js may pass cents\n- Critical: chargeCard logs the full card number and CVC in plaintext, a PCI-level data exposure. refundCharge swallows all errors and always returns true, so callers cannot detect failed refunds, which matters because orders.js has no compensation path that relies on refunds. chargeCard takes euros while the rest of the codebase uses integer cents (cart, notifications), so an orders.js call passing cents would overcharge 100x. Unverified until orders.js call site is checked. Also: no idempotency key on provider.charge, so retries can double-charge.\n- Summary: Card payment wrapper around a provider stub. chargeCard charges and returns a charge id; refundCharge attempts a refund but always reports success.\n\n## reports\n- Files: reports.js\n- Functions: salesReport(from, to) - async; builds SQL by string concatenation of from and to into a BETWEEN clause, groups orders by day and returns rows; catch swallows all errors and returns [], orderCount() - async; returns Number(COUNT(*)) from orders, no error handling\n- Dependencies: reports -> database.js (query) -> api-routes.js -> reports.js (salesReport)\n- Critical: salesReport is SQL-injectable: from and to are concatenated directly into the query, and the query is run without params. Combined with api-routes GET /reports/sales requiring only a logged-in user (not admin), any authenticated user can inject SQL. salesReport's empty catch returns [] on any failure, so DB errors look like \"no sales\". orderCount has no error handling and is not referenced by api-routes. SUM(total) may come back as a string from pg depending on the column type; unverified.\n- Summary: Sales reporting for staff. salesReport builds a date-range query by string concatenation and hides all errors by returning an empty array; orderCount returns the total number of orders.\n\n## users\n- Files: users.js\n- Functions: findUserById(id) - async; parameterized SELECT of id, name, email; returns row or null, findUserByEmail(email) - async; builds SELECT by string concatenation of email; returns row or null, deleteUser(id) - async; parameterized DELETE; returns true if exactly one row deleted\n- Dependencies: users -> database.js (query) -> orders.js -> users.js (findUserById) -> api-routes.js DELETE /admin/users/:id -> users.js (deleteUser), no auth check\n- Critical: findUserByEmail is SQL-injectable (string concatenation, same pattern as auth.js login). findUserById and deleteUser are parameterized. deleteUser has no authorization of its own; the only guard would be requireUser/admin check in api-routes, which is missing on DELETE /admin/users/:id. No soft delete or cascade handling visible for orders referencing the user.\n- Summary: User account lookup and deletion. findUserById and deleteUser use parameterized queries; findUserByEmail concatenates the email into SQL and is injectable. deleteUser is reachable unauthenticated through api-routes.\n\n## utils\n- Files: utils.js\n- Functions: formatCurrency(amountCents, currency) - returns '<amount/100 to 2dp> <currency>', assumes integer cents, paginate(items, page, pageSize) - returns one page of items, pages start at 1; BUG: slice end is start + pageSize - 1, so each page drops its last item, isEmail(value) - returns true if value is a string matching a basic email regex\n- Dependencies: notifications.js -> utils.js (formatCurrency) -> utils.js has no imports\n- Critical: paginate has an off-by-one: slice(start, start + pageSize - 1) returns pageSize-1 items per page, silently dropping one row each page. No validation of page or pageSize (page 0 or negative gives a negative start). formatCurrency does not validate integer input. isEmail is a loose regex, and the only check that is not an input-validation gap in the codebase. Note: no caller of paginate or isEmail was found in the modules read so far; verify via search_code.\n- Summary: Small helper module: currency formatting, pagination, and basic email validation. paginate has an off-by-one bug that drops one item per page."
+    }
+  ]
+}

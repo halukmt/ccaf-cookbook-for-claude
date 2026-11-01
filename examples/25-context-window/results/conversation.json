@@ -1,0 +1,1432 @@
+{
+  "model": "claude-sonnet-5-5",
+  "opening": {
+    "turns": [
+      {
+        "customer": "Hi, my blender from order #8891 stopped working after two uses. Can you look into it?",
+        "answer": "Thanks for waiting. I found order #8891, an Aurora X2 blender ordered on 2024-03-03 for $247.83. It's eligible for return.\n\nWould you like me to start a return for it? I'm sorry it stopped working so soon.",
+        "tools": [
+          "lookup_order"
+        ],
+        "inputTokens": 1397,
+        "outputTokens": 134,
+        "iterations": 2
+      },
+      {
+        "customer": "Okay. I also bought a replacement jug on order #8917 and that cracked. Can you check that one too?",
+        "answer": "I found order #8917, a replacement jug for the Aurora X2, ordered on 2024-03-19 for $64.19. It's also eligible for return.\n\nDo you want me to start returns for both orders, or just one? I'll wait for your answer before I start anything.",
+        "tools": [
+          "lookup_order"
+        ],
+        "inputTokens": 1871,
+        "outputTokens": 185,
+        "iterations": 2
+      },
+      {
+        "customer": "Please start the return on #8891 only. I'll keep the jug for now and think about it.",
+        "answer": "I've started the return for order #8891.\n\n- **RMA reference:** RMA-55210\n- **Restocking fee:** $12.50\n- **Net refund:** $235.33\n- **Refund due by:** 2024-03-29\n\nI haven't changed anything on the jug order #8917, so you can decide on that later.",
+        "tools": [
+          "create_return"
+        ],
+        "inputTokens": 2435,
+        "outputTokens": 151,
+        "iterations": 2
+      },
+      {
+        "customer": "Send the refund to my Visa ending 4417, not to the store card.",
+        "answer": "I can't change where the refund goes. I have no tool for that, and the order details I can see don't show which payment method was used. I can't confirm that it will go to your Visa ending 4417, or that it won't go to the store card.\n\nI'd suggest checking the refund destination with the team that handles payments, and quoting RMA-55210. Do it before the refund due date of 2024-03-29 if you can.",
+        "tools": [],
+        "inputTokens": 1403,
+        "outputTokens": 185,
+        "iterations": 1
+      }
+    ],
+    "usage": {
+      "input_tokens": 7106,
+      "output_tokens": 655
+    },
+    "facts": {
+      "customerId": "C-4471",
+      "issues": [
+        {
+          "orderId": "#8891",
+          "orderDate": "2024-03-03",
+          "orderTotal": 247.83,
+          "status": "delivered",
+          "itemDescription": "Aurora X2 blender",
+          "rmaId": "RMA-55210",
+          "restockingFee": 12.5,
+          "netRefund": 235.33,
+          "refundDueDate": "2024-03-29"
+        },
+        {
+          "orderId": "#8917",
+          "orderDate": "2024-03-19",
+          "orderTotal": 64.19,
+          "status": "delivered",
+          "itemDescription": "Replacement jug for Aurora X2"
+        }
+      ]
+    }
+  },
+  "arms": [
+    {
+      "id": "control",
+      "label": "Full history, no summary",
+      "summariseAfter": [],
+      "style": null,
+      "useBlock": false,
+      "facts": {
+        "customerId": "C-4471",
+        "issues": [
+          {
+            "orderId": "#8891",
+            "orderDate": "2024-03-03",
+            "orderTotal": 247.83,
+            "status": "delivered",
+            "itemDescription": "Aurora X2 blender",
+            "rmaId": "RMA-55210",
+            "restockingFee": 12.5,
+            "netRefund": 235.33,
+            "refundDueDate": "2024-03-29"
+          },
+          {
+            "orderId": "#8917",
+            "orderDate": "2024-03-19",
+            "orderTotal": 64.19,
+            "status": "delivered",
+            "itemDescription": "Replacement jug for Aurora X2"
+          }
+        ]
+      },
+      "summaries": [],
+      "turns": [
+        {
+          "customer": "Unrelated: how does your loyalty programme work?",
+          "answer": "You earn 1 loyalty point for every dollar you spend, and 100 points are worth $1. For example, 1,000 points would be worth $10.\n\nI can't see your points balance, so I can't tell you how many you have.",
+          "tools": [],
+          "inputTokens": 1609,
+          "outputTokens": 71,
+          "iterations": 1
+        },
+        {
+          "customer": "What are your weekend opening hours?",
+          "answer": "Our stores are open from 10:00 to 16:00 at weekends.",
+          "tools": [],
+          "inputTokens": 1695,
+          "outputTokens": 25,
+          "iterations": 1
+        },
+        {
+          "customer": "If I give the replacement blender away as a gift, does the warranty go with it?",
+          "answer": "Yes, the warranty stays with the product when it's gifted, so the recipient is covered.\n\nYou mentioned a replacement blender, but the order I have is a replacement jug (#8917). The blender on #8891 is being returned. If you meant the jug, the same rule applies.",
+          "tools": [],
+          "inputTokens": 1748,
+          "outputTokens": 143,
+          "iterations": 1
+        },
+        {
+          "customer": "My neighbour has the same blender and it failed too. Should she contact you?",
+          "answer": "Yes, she should contact us. I can't see her order or check her blender, so I can't say what we'd offer. If she has her order number, we can look into it the same way we did yours.",
+          "tools": [],
+          "inputTokens": 1918,
+          "outputTokens": 56,
+          "iterations": 1
+        },
+        {
+          "customer": "Do you ship to Ireland?",
+          "answer": "Yes, we ship to both the UK and Ireland.",
+          "tools": [],
+          "inputTokens": 1989,
+          "outputTokens": 20,
+          "iterations": 1
+        },
+        {
+          "customer": "Before I go, please confirm everything you have on my case: my customer ID, both order numbers with their dates, totals and status, the return reference, the restocking fee, the net refund, the refund date, and the card it goes to.",
+          "answer": "Here's what I have on your case.\n\n**Customer ID:** I don't have one. It wasn't in the order data I could see.\n\n**Order #8891**\n- Item: Aurora X2 blender\n- Date: 2024-03-03\n- Total: $247.83\n- Status: Eligible for return, and a return has been started\n\n**Order #8917**\n- Item: Replacement jug for Aurora X2\n- Date: 2024-03-19\n- Total: $64.19\n- Status: Eligible for return. No return has been started, because you're keeping it for now.\n\n**Return on #8891**\n- RMA reference: RMA-55210\n- Restocking fee: $12.50\n- Net refund: $235.33\n- Refund due date: 2024-03-29\n\n**Refund card:** I don't have this. I can't see the payment method, and I can't set the refund to go to your Visa ending 4417. Please check that with the payments team, and quote RMA-55210.",
+          "tools": [],
+          "inputTokens": 2081,
+          "outputTokens": 302,
+          "iterations": 1
+        }
+      ],
+      "answer": "Here's what I have on your case.\n\n**Customer ID:** I don't have one. It wasn't in the order data I could see.\n\n**Order #8891**\n- Item: Aurora X2 blender\n- Date: 2024-03-03\n- Total: $247.83\n- Status: Eligible for return, and a return has been started\n\n**Order #8917**\n- Item: Replacement jug for Aurora X2\n- Date: 2024-03-19\n- Total: $64.19\n- Status: Eligible for return. No return has been started, because you're keeping it for now.\n\n**Return on #8891**\n- RMA reference: RMA-55210\n- Restocking fee: $12.50\n- Net refund: $235.33\n- Refund due date: 2024-03-29\n\n**Refund card:** I don't have this. I can't see the payment method, and I can't set the refund to go to your Visa ending 4417. Please check that with the payments team, and quote RMA-55210.",
+      "score": {
+        "survived": [
+          "order number #8891",
+          "order date 2024-03-03",
+          "total $247.83",
+          "order number #8917",
+          "order date 2024-03-19",
+          "total $64.19",
+          "return RMA-55210",
+          "restocking fee $12.50",
+          "net refund $235.33",
+          "refund date 2024-03-29",
+          "Visa ending 4417"
+        ],
+        "lost": [
+          "customer ID",
+          "status delivered"
+        ],
+        "inventedAmounts": []
+      },
+      "relookups": 0,
+      "usage": {
+        "input_tokens": 11040,
+        "output_tokens": 617
+      },
+      "finalMessages": [
+        {
+          "role": "user",
+          "content": "Hi, my blender from order #8891 stopped working after two uses. Can you look into it?"
+        },
+        {
+          "role": "assistant",
+          "content": [
+            {
+              "type": "tool_use",
+              "id": "toolu_017CJuCdmQjKzRbJSg9fbR32",
+              "name": "lookup_order",
+              "input": {
+                "order_id": "8891"
+              },
+              "caller": {
+                "type": "direct"
+              }
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "content": [
+            {
+              "type": "tool_result",
+              "tool_use_id": "toolu_017CJuCdmQjKzRbJSg9fbR32",
+              "content": "{\"order_id\":\"#8891\",\"order_date\":\"2024-03-03\",\"total_amount\":247.83,\"return_eligible\":true,\"item_description\":\"Aurora X2 blender\"}"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "content": [
+            {
+              "type": "text",
+              "text": "Thanks for waiting. I found order #8891, an Aurora X2 blender ordered on 2024-03-03 for $247.83. It's eligible for return.\n\nWould you like me to start a return for it? I'm sorry it stopped working so soon."
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "content": "Okay. I also bought a replacement jug on order #8917 and that cracked. Can you check that one too?"
+        },
+        {
+          "role": "assistant",
+          "content": [
+            {
+              "type": "tool_use",
+              "id": "toolu_019XdsQiCssrVqHevEnThUJr",
+              "name": "lookup_order",
+              "input": {
+                "order_id": "8917"
+              },
+              "caller": {
+                "type": "direct"
+              }
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "content": [
+            {
+              "type": "tool_result",
+              "tool_use_id": "toolu_019XdsQiCssrVqHevEnThUJr",
+              "content": "{\"order_id\":\"#8917\",\"order_date\":\"2024-03-19\",\"total_amount\":64.19,\"return_eligible\":true,\"item_description\":\"Replacement jug for Aurora X2\"}"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "content": [
+            {
+              "type": "thinking",
+              "thinking": "",
+              "signature": "CAQSgQYKEAgTGAI4AUIIdGhpbmtpbmcSDL/dra0aKGNnn9IyJRoMoNUzVw++QWTNre0iIjAkGJVCPixW2XATTA481nn9RTNcEx8HeAcDkJIH1e1hkB+6SX1KJSVFOIEgCoaAkdIqngWKlSk3N4Ox3JfYxmEXihNaq+p2IJxXG4oY3KwyUTK7DnFTiMk97Im3oT6FzDff9CgqwHlnZQpJEUKMGJ/QSGZCJ81pnJJAgrtVcjoEDr9ndpn9C7hnx3qrmeiU/ZzHHwmZZhmOOBxxH5L7sWNDoSWNkPhAhbb9ijZxvKU3u316/vHav3fN63zLErmUGJAp9MF4i73LWtX032vXb0h4eDGCKqj+5boR0QL1PvRt9Mim5Dlv7M7fQmeL/mkBE3i+XHPGKeFsZjKItt12/XYfJvZCeHvJPMB4H10Tq0KhaEEYV0SumP5n9rcF9of03O5REreb2Q+DcUtwiNaUlN63T0PoXh8Nkg8nhYVtWOv4HFHpVuPpqp12IiXsYcUwnY6jmXrNoB/7vHcFZFFWFficyvJQI0NnSttRBi/p/Gtz68S94qcyiM4km4zkHO/7IpI7oVboK3FONdYd6jny0Stc4WT9zNhjSeR4vei2qxkeP8kRLwyNoahA8XIcSmBlkRgvRCrpsP8xkqafeskK+6URzqW7te8xWM81DEGup6CpvTM+ywRq2aFFf/LAsQFfD+FC5DpTdxPdimW4SA7lCb8yRNPLG4pQEtCFscCNP0cmVXVaZH8aMeKA83Zcgu8BBeSFr4fZCxlyzQfWkSBfWtBlbHVtPeCqSmIDed09R0bg8WxH0hNNmLDxsKfUWB1Pj3MRaQN1u/8QA+AvSZcZgb3f8VpVGiHZeZ66Ngrg7eC/GA/buFMmlMHq5KtvkVpPrFkbhHFwIe+h/sqY8GHoDiAuBsfN3Ge/32T5Ik6agPGXdswksnYhJza7lJZ18QCq6jPF2OXSy2gna6bqfSt6w4rWPdiish/8BY2Y/xaywnGeePa7qrIOWhVspREt0lnz9219GAE="
+            },
+            {
+              "type": "text",
+              "text": "I found order #8917, a replacement jug for the Aurora X2, ordered on 2024-03-19 for $64.19. It's also eligible for return.\n\nDo you want me to start returns for both orders, or just one? I'll wait for your answer before I start anything."
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "content": "Please start the return on #8891 only. I'll keep the jug for now and think about it."
+        },
+        {
+          "role": "assistant",
+          "content": [
+            {
+              "type": "tool_use",
+              "id": "toolu_01BSaDJwUqdpDes2GoMyBWXF",
+              "name": "create_return",
+              "input": {
+                "order_id": "8891"
+              },
+              "caller": {
+                "type": "direct"
+              }
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "content": [
+            {
+              "type": "tool_result",
+              "tool_use_id": "toolu_01BSaDJwUqdpDes2GoMyBWXF",
+              "content": "{\"order_id\":\"#8891\",\"rma_id\":\"RMA-55210\",\"restocking_fee\":12.5,\"net_refund\":235.33,\"refund_due_date\":\"2024-03-29\"}"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "content": [
+            {
+              "type": "text",
+              "text": "I've started the return for order #8891.\n\n- **RMA reference:** RMA-55210\n- **Restocking fee:** $12.50\n- **Net refund:** $235.33\n- **Refund due by:** 2024-03-29\n\nI haven't changed anything on the jug order #8917, so you can decide on that later."
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "content": "Send the refund to my Visa ending 4417, not to the store card."
+        },
+        {
+          "role": "assistant",
+          "content": [
+            {
+              "type": "thinking",
+              "thinking": "",
+              "signature": "CAQSqQcKEAgTGAI4AUIIdGhpbmtpbmcSDBL5tG4VLPiH2j3uHRoMK+tKDP17Ig+3TRVqIjA5mBGdTtStTarB77y8YL0f68XHTAJg2VmfX1kOV/wjkNIzyQUtYACDNaJbquSGXSYqxgZi5M50m7BjOpQI93M5i3BajRD1I8zW/yUskZ/ZeMeObTaEmriB6wXE/ayAI4WbgZgGssz42RU9JeBleh5xuflwQ+K9XTFu5LKsqYBbzUy5GK77cSNlo7u1k1E3Am0w7eP/DkZlI0B7fBUzOwW1eRgbFYRNMESk6kSM0sAXosAIWW2OClepThBoLzud4q0FmUtC+iqmubRvWa6saxtSAucf2Oc10y//0JEfkCtg/2AvJkVYRzd346+ga8pHE1flChLNWfQeSiXgrKT1d0PcZ9kYBfAMKXrL+Ex06S8lBMs9edWdhkE01fQgwVY44OkhjI6thxpOZsfq8IvOH9HzPKFI+3tHhehuzzbFUml6y1TyuoVVg8h8Z7/TRH+3q8AJRBDfRchbVYxquiQHqsqHvdnPgo7yNVSxh1uX8llc3HiZj9XJQJJSKG+0iVqJ95xWkv09oeu3XxjDpsP5D0J1/vQ6LOJ/ridcJmh0Na7ODzOnUJD+rt/1ieBgmmX2sKpRkjEpm3c+0Trr1jeMnU/wvRYGi6vnKkPYYkh5WHzfVTDNOd3wZKEEWgAbccYAz5b21yail1+e3MrGH1jn+UJYyzIgjaDYUq4HrRulmIv+OkkNh8iS9TuYcsGODVyAIQeJY5+YlKEY8rMu59sbgLH8LfJnSuv1UIg1dfsfP2XL3Yhu9TRKsb92zWzltIAGOkJUfFweFJlPJHCureOvyI7BeHupfUwZProi3/l+9/EWxnW591n18VBsTBWx64FD3SH7qb4pkbl0A7HYeKsQSro60nYIuf5ZfylGmesHtH9RYMyrOfzk5QPfQ1h3FlWhB0Tbwp2+qrlDCg2U2aXh41R+q8n1OT+aHTyhaSIGuocb68t1cuivHPXHpJWZ41yR6t3VrsiMwTGh5lgwwYO7105FnzHhJTrSxCBun1Cr2YN2D8ULz/VDuPcJnFlHPE1y76D+QFJmVELiVP0lgZHqlrXPrGWuYF6kOTFUtrKGOii/VgaBMnZ/dm6PBmI9/BXIwCOFpztzaMmBXYQzpf/RJXZPpCbtwJR5gcA4R1QgBpbp++2gNRX1AEX+93+BCOhtQEFh9+KiKXld61QcNQo3nui6YeKPWvnFsiUDGAE="
+            },
+            {
+              "type": "text",
+              "text": "I can't change where the refund goes. I have no tool for that, and the order details I can see don't show which payment method was used. I can't confirm that it will go to your Visa ending 4417, or that it won't go to the store card.\n\nI'd suggest checking the refund destination with the team that handles payments, and quoting RMA-55210. Do it before the refund due date of 2024-03-29 if you can."
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "content": "Unrelated: how does your loyalty programme work?"
+        },
+        {
+          "role": "assistant",
+          "content": [
+            {
+              "type": "text",
+              "text": "You earn 1 loyalty point for every dollar you spend, and 100 points are worth $1. For example, 1,000 points would be worth $10.\n\nI can't see your points balance, so I can't tell you how many you have."
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "content": "What are your weekend opening hours?"
+        },
+        {
+          "role": "assistant",
+          "content": [
+            {
+              "type": "text",
+              "text": "Our stores are open from 10:00 to 16:00 at weekends."
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "content": "If I give the replacement blender away as a gift, does the warranty go with it?"
+        },
+        {
+          "role": "assistant",
+          "content": [
+            {
+              "type": "thinking",
+              "thinking": "",
+              "signature": "CAQSrwcKEAgTGAI4AUIIdGhpbmtpbmcSDJ33LLPEHvDYQm44/BoMhnQpnv+9NnP2COpbIjC2yXLP1DKa9laSSOsLav0i/ovOKdhNa1dQKRe1trxDgmT2YyH4XKis3DFRjGYfpRcqzAa26agZg9zsYOXSZpu56b7L+z6EoYju1D1eIXndpH8UY0Ip6NEIuYg1iFX3pp5zzLJr4wcFvcvcFkrcI/nMS/nDkabGHaznZPEZ9ACOow8ighzueQAJB+fHqjmw1wjM/72+rt8qUJKpbprq4Q/u1iQXShCHAz76dv0ZUTX8ZDYBge7oi0n2DCh/GHOnPQ3j36Ld9vfWV1ycntgUFjOkhlyf/wrHYRoCRov2O7zkFh3iVinuy/1pnJnpf4bUajCJoRmx8KWyUDsO6sAJNmWOYm7v8nbbPfr/YT1usIJlWiTOgCzubKKLhJpdsNqPe2CtqgmbTiHo3Mwk0cvtlEe39RurNTNdtMMCMDThuxJMO5rG7gsQUOiTJ9R8qbSOxZPbLmUPER+jFUEklsUekGjhwotxEKUpqF9VYQ8eR4mOwR5cyFwZPQurQltSzhmK+Q7wa+riZ1BReSbWa7SmN8C+H9XsqrZez8Ie6UNjlfwVFCRHcQAXTzOEKfqoypgaa0gKJ7O0eiHOIBg33axDzqCJUXzbLlLGVXM9gqwnrNx75HXJil4LdofHXT4mbX4VqUBsckHq6VUfjKyWg6LPYyOSqtij7Jk1WAw9s0s0kNWS0+a+8+0HwHBzoz/nhazX9HT2VUqqolfx+gITPPubcaLKgFNjxIkZNnbhzrd+p+cSAL3+/SrQ8+qJM7QzK5Je62vF/HcaAf1LsKZIrtcQC1UxSFqC4gPO1uavrlDlY52i21wCJ64VaO5wdbkRYaQBp8FHXv4icwXmxNRMxdqYr9iZ/h3qEzJ6rnKhm8z+Jy+aqLj/tuzrRuYVMcbRt0xKiHseaY+9nd0qjcoQTi5so57uFSyrc7CQy5ct0KlZDX4HTkc9Jnwveze9riYIl77FTAfW/+6TGpIm/hWlg6+7N0vHxCVb4Uk6buZZ6H/w6fv8VZRUYpU7GV34SO5hLbVMLnljj0wtfepTmE5wPQ6iI6z1eHS5sa2THuS4k8fToXupeTxPh+SlSP9j9EXaHMJUEya8+/PFNH7jEdufNLrFUJioHaoEEu/LtCgQdmAYKimQSKdpaaGzIShAGvr3DHljmZT906/FT7cMR/w/lzqWISsidU9KtezM4d3QTTJakog5GAE="
+            },
+            {
+              "type": "text",
+              "text": "Yes, the warranty stays with the product when it's gifted, so the recipient is covered.\n\nYou mentioned a replacement blender, but the order I have is a replacement jug (#8917). The blender on #8891 is being returned. If you meant the jug, the same rule applies."
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "content": "My neighbour has the same blender and it failed too. Should she contact you?"
+        },
+        {
+          "role": "assistant",
+          "content": [
+            {
+              "type": "text",
+              "text": "Yes, she should contact us. I can't see her order or check her blender, so I can't say what we'd offer. If she has her order number, we can look into it the same way we did yours."
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "content": "Do you ship to Ireland?"
+        },
+        {
+          "role": "assistant",
+          "content": [
+            {
+              "type": "text",
+              "text": "Yes, we ship to both the UK and Ireland."
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "content": "Before I go, please confirm everything you have on my case: my customer ID, both order numbers with their dates, totals and status, the return reference, the restocking fee, the net refund, the refund date, and the card it goes to."
+        },
+        {
+          "role": "assistant",
+          "content": [
+            {
+              "type": "text",
+              "text": "Here's what I have on your case.\n\n**Customer ID:** I don't have one. It wasn't in the order data I could see.\n\n**Order #8891**\n- Item: Aurora X2 blender\n- Date: 2024-03-03\n- Total: $247.83\n- Status: Eligible for return, and a return has been started\n\n**Order #8917**\n- Item: Replacement jug for Aurora X2\n- Date: 2024-03-19\n- Total: $64.19\n- Status: Eligible for return. No return has been started, because you're keeping it for now.\n\n**Return on #8891**\n- RMA reference: RMA-55210\n- Restocking fee: $12.50\n- Net refund: $235.33\n- Refund due date: 2024-03-29\n\n**Refund card:** I don't have this. I can't see the payment method, and I can't set the refund to go to your Visa ending 4417. Please check that with the payments team, and quote RMA-55210."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "single",
+      "label": "One concise summary after turn 4",
+      "summariseAfter": [
+        4
+      ],
+      "style": "concise",
+      "useBlock": false,
+      "facts": {
+        "customerId": "C-4471",
+        "issues": [
+          {
+            "orderId": "#8891",
+            "orderDate": "2024-03-03",
+            "orderTotal": 247.83,
+            "status": "delivered",
+            "itemDescription": "Aurora X2 blender",
+            "rmaId": "RMA-55210",
+            "restockingFee": 12.5,
+            "netRefund": 235.33,
+            "refundDueDate": "2024-03-29"
+          },
+          {
+            "orderId": "#8917",
+            "orderDate": "2024-03-19",
+            "orderTotal": 64.19,
+            "status": "delivered",
+            "itemDescription": "Replacement jug for Aurora X2"
+          }
+        ]
+      },
+      "summaries": [
+        {
+          "afterTurn": 4,
+          "style": "concise",
+          "text": "**Summary for continuing agent**\n\n**Customer issue:** The Aurora X2 blender from order #8891 (ordered 2024-03-03, $247.83) stopped working after two uses.\n\n**Actions taken:**\n- Looked up #8891 and confirmed it is return eligible.\n- Created a return for #8891: **RMA-55210**, restocking fee $12.50, net refund $235.33, refund due by 2024-03-29.\n- Looked up #8917 (replacement jug, ordered 2024-03-19, $64.19). It is return eligible but cracked. **No return started**, because the customer wants to keep it for now and think it over.\n\n**Open issue:** The customer wants the refund sent to their **Visa ending 4417**, not the store card. The previous agent said this can't be changed with the available tools, and that the payment method used on the order isn't visible. Nothing has been confirmed about where the refund will go. The customer was advised to contact the payments team and quote RMA-55210 before 2024-03-29.\n\n**Next steps:**\n- Help route the refund-destination request to the payments team, or escalate it if possible.\n- Follow up on the jug (#8917) if the customer decides to return it.",
+          "survived": [
+            "order number #8891",
+            "order date 2024-03-03",
+            "total $247.83",
+            "order number #8917",
+            "order date 2024-03-19",
+            "total $64.19",
+            "return RMA-55210",
+            "restocking fee $12.50",
+            "net refund $235.33",
+            "refund date 2024-03-29",
+            "Visa ending 4417"
+          ],
+          "lost": [
+            "customer ID",
+            "status delivered"
+          ],
+          "inventedAmounts": []
+        }
+      ],
+      "turns": [
+        {
+          "customer": "Unrelated: how does your loyalty programme work?",
+          "answer": "The loyalty programme gives you 1 point for every dollar you spend. Every 100 points are worth $1.",
+          "tools": [],
+          "inputTokens": 1036,
+          "outputTokens": 37,
+          "iterations": 1
+        },
+        {
+          "customer": "What are your weekend opening hours?",
+          "answer": "Our stores are open from 10:00 to 16:00 at weekends.",
+          "tools": [],
+          "inputTokens": 1086,
+          "outputTokens": 25,
+          "iterations": 1
+        },
+        {
+          "customer": "If I give the replacement blender away as a gift, does the warranty go with it?",
+          "answer": "Yes. The warranty stays with the product when it's gifted, so the person you give it to is covered.\n\nOne thing to check first: the replacement you mentioned was a jug (#8917), and it's cracked. If you meant that item, you may want to sort out the crack before gifting it. I can start a return for it if you decide you want one.",
+          "tools": [],
+          "inputTokens": 1137,
+          "outputTokens": 104,
+          "iterations": 1
+        },
+        {
+          "customer": "My neighbour has the same blender and it failed too. Should she contact you?",
+          "answer": "Yes, she should get in touch. If she has her order number, she can send it to us and we'll check whether the order is eligible for a return. If she shares it here, I can look it up now.",
+          "tools": [],
+          "inputTokens": 1266,
+          "outputTokens": 134,
+          "iterations": 1
+        },
+        {
+          "customer": "Do you ship to Ireland?",
+          "answer": "Yes, we ship to both the UK and Ireland.",
+          "tools": [],
+          "inputTokens": 1415,
+          "outputTokens": 20,
+          "iterations": 1
+        },
+        {
+          "customer": "Before I go, please confirm everything you have on my case: my customer ID, both order numbers with their dates, totals and status, the return reference, the restocking fee, the net refund, the refund date, and the card it goes to.",
+          "answer": "Here is what I have on your case.\n\n**Order #8891**\n- Item: Aurora X2 blender\n- Ordered: 2024-03-03\n- Total: $247.83\n- Status: Return eligible. A return has been started.\n\n**Return RMA-55210** (for #8891)\n- Restocking fee: $12.50\n- Net refund: $235.33\n- Refund due by: 2024-03-29\n\n**Order #8917**\n- Item: Replacement jug for the Aurora X2. You told us it's cracked.\n- Ordered: 2024-03-19\n- Total: $64.19\n- Status: Return eligible. No return has been started, because you want to think it over.\n\n**Details I don't have**\n- **Customer ID:** It isn't in the order data I can see.\n- **Refund card:** I can't see which payment method was used on the order. Nothing confirms the refund will go to your Visa ending 4417. For that, please contact the payments team and quote RMA-55210 before 2024-03-29.",
+          "tools": [
+            "lookup_order",
+            "lookup_order"
+          ],
+          "inputTokens": 3587,
+          "outputTokens": 714,
+          "iterations": 2
+        }
+      ],
+      "answer": "Here is what I have on your case.\n\n**Order #8891**\n- Item: Aurora X2 blender\n- Ordered: 2024-03-03\n- Total: $247.83\n- Status: Return eligible. A return has been started.\n\n**Return RMA-55210** (for #8891)\n- Restocking fee: $12.50\n- Net refund: $235.33\n- Refund due by: 2024-03-29\n\n**Order #8917**\n- Item: Replacement jug for the Aurora X2. You told us it's cracked.\n- Ordered: 2024-03-19\n- Total: $64.19\n- Status: Return eligible. No return has been started, because you want to think it over.\n\n**Details I don't have**\n- **Customer ID:** It isn't in the order data I can see.\n- **Refund card:** I can't see which payment method was used on the order. Nothing confirms the refund will go to your Visa ending 4417. For that, please contact the payments team and quote RMA-55210 before 2024-03-29.",
+      "score": {
+        "survived": [
+          "order number #8891",
+          "order date 2024-03-03",
+          "total $247.83",
+          "order number #8917",
+          "order date 2024-03-19",
+          "total $64.19",
+          "return RMA-55210",
+          "restocking fee $12.50",
+          "net refund $235.33",
+          "refund date 2024-03-29",
+          "Visa ending 4417"
+        ],
+        "lost": [
+          "customer ID",
+          "status delivered"
+        ],
+        "inventedAmounts": []
+      },
+      "relookups": 2,
+      "usage": {
+        "input_tokens": 10349,
+        "output_tokens": 1426
+      },
+      "finalMessages": [
+        {
+          "role": "user",
+          "content": "Unrelated: how does your loyalty programme work?"
+        },
+        {
+          "role": "assistant",
+          "content": [
+            {
+              "type": "text",
+              "text": "The loyalty programme gives you 1 point for every dollar you spend. Every 100 points are worth $1."
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "content": "What are your weekend opening hours?"
+        },
+        {
+          "role": "assistant",
+          "content": [
+            {
+              "type": "text",
+              "text": "Our stores are open from 10:00 to 16:00 at weekends."
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "content": "If I give the replacement blender away as a gift, does the warranty go with it?"
+        },
+        {
+          "role": "assistant",
+          "content": [
+            {
+              "type": "text",
+              "text": "Yes. The warranty stays with the product when it's gifted, so the person you give it to is covered.\n\nOne thing to check first: the replacement you mentioned was a jug (#8917), and it's cracked. If you meant that item, you may want to sort out the crack before gifting it. I can start a return for it if you decide you want one."
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "content": "My neighbour has the same blender and it failed too. Should she contact you?"
+        },
+        {
+          "role": "assistant",
+          "content": [
+            {
+              "type": "thinking",
+              "thinking": "",
+              "signature": "CAQShwcKEAgTGAI4AUIIdGhpbmtpbmcSDMJgrbxVUq0VKLaUfRoM9kVnrnrIA5VW6QtmIjCaxNDfBVoRCtv95G4wJBHBeUc/XE7cPwmhi6ruIVqHTvOOtzE4al1wqijNgBP+jzkqpAbOYTh1yazdynLfw4SP1CKoFBDDJoUq0ekCRnXgy/7GRbSG369oV3oDIs60kLhFgNKvzOSGngZGcXfJSPatJQejIcZ9eXzR1unbygF1jrUKs3lBHthaSDu7dy+4ZF8KWD5A7szqtLw2XUf0NL1C37jn+ZoShuY91poEXmHwPGYOlu6m9mqtkHry6/F8SCNqjHzXXJO2Et008NnPUJSiRKgzcCLVaGvS482MZdlZLOcq9zYj4ee9xvElvMBJvigylDnLBt0cljY8vuoa/t+EecT1C6K7+k9kVR68w2qhD80zLUaA0CrR41snn0WxMrTibSpO9y4OfcZ/VsEbCQWfbczBiP9f4lcdPoiT6RBirlswaHBhIK0krKdw/zEb2g84vyll+idjbqqy1l4mmiAkmdpUQsP4uDEBJRRqxUpEVnSNhDtq7S0zZDXL3opWoPKxi0xoXRnYhC+2P2+Ok8jnEVL/sQ19h1VF8PVQwPmgo++utx6EoPq+GVxKJYjxSs8VRFqdzYyJYPrSufz7VD+th7/+h4oL5xtahmVW03Hw9w9eZ4JlLywCdotNg5VBKV3ZYbRKnfOnYHUvixYcgQSEzT0EZWGF/KmUhHKJS6xuv8n87b2BjFPkz4+77S7pb8i/yg8VpNltTbHNk54CxC7tt5FYC5zfc+jLK9RUHnsskbzizdo3yH/QiBZNT31O+MvSumZrxEsbdDWvXolL90DyclbRRAZPVTvHFR5PcT9AegiKDbaWi8p4hbcpYQKvLln24sRY/3YLcqYwuEGEOaG8SWihB3DNISNqLdAoNWrfvsxVVnLWcjCzaYu6v0ZKVU4M8TsoeUJGddQ6Md78YXkdJLGbZgq8uchspC6pM+9P6rJqw5rGYQH4+g4xBhYf8+wdaQApl0i0pHxl6QTZ/wPc4YUVCsgSvaUXbvx+4TbNjuze7xRMzfAHEfi4/JTqSrLaoKw8B/zzhGmU0Zkmx5YecuUFD5rbo0D9QZwdYaw7xZv8H/hCRMNJfEk4Jlz9BpgReNILsgc6zSGJVAQQGBCB1Qd019u2JiiBu+i4u7p73hI1Rgk7B18YAQ=="
+            },
+            {
+              "type": "text",
+              "text": "Yes, she should get in touch. If she has her order number, she can send it to us and we'll check whether the order is eligible for a return. If she shares it here, I can look it up now."
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "content": "Do you ship to Ireland?"
+        },
+        {
+          "role": "assistant",
+          "content": [
+            {
+              "type": "text",
+              "text": "Yes, we ship to both the UK and Ireland."
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "content": "Before I go, please confirm everything you have on my case: my customer ID, both order numbers with their dates, totals and status, the return reference, the restocking fee, the net refund, the refund date, and the card it goes to."
+        },
+        {
+          "role": "assistant",
+          "content": [
+            {
+              "type": "thinking",
+              "thinking": "",
+              "signature": "CAQSuQwKEAgTGAI4AUIIdGhpbmtpbmcSDASTdo8wEgu/+AGJOhoMIIhi4o492UJlqGQFIjD3c9yrl32KCYsdoEcENDQk9cWb8uunMYZrit0he+pDGd5NeH32Ui/WVNPuCOawR3Yq1gt70jEFFlEPIyLbvRNejpQfIRPhGpnNNKjCbQE7ufuoYW06Obq19h/vTYBOVm6hE1YHWVq8g+NpplX6R13bwaUV2B7ZYfuIMW0ltfFXLGxpt1E3V+DX5u2HgrZj8RUdk8AAX5MUT3ut9/Xu9GUfg9V+09wpg9EThLBEY6lApT9dak7WRuv1GMRygaEDuyxMTjRsUeh9dXrYcfHrhN57r9hflCTMDHhY+Muyo2CNzgWISzziC1z0KmPQ/fx+zQAjZDMcnHgWUeqR+9M0OcaLteZsn4L7onMqEPeB4VgoqOCa7miAJkR34gu4Y31EaZUjxpZGHZwtjzhVtJlUpwImJ2zkPE5upFqzwdfEi8aE30D8yjJnQl51JitOt+OOdPsl7oFYyTMsnL3/xW/4tuLJ5fIKGy3vO5oFB7GTZxPPrQJGcc+NPkRERC6yZdzuzN3uaqopfCD3DWfZkFbFe/7hmu0kk92Q8Wr2WUwj2Rrz7k9viH9773KUYc1Vqmp8qRlr4fWUIcR5YccjioOgsbiP0Rf192cp5ka57AZcjNnJzZ7iu5ZI1IhyhTy+oy70GWiyTi0LJsvzonzXJ5mOfzUL+TJbRYA2AkMAL/V9117xSppXYJQ8BKY7d3NRzznFNHoLI/Tedhcmruxm49OpAAjimBafJ3AfiqLWNA9pDyeUeWIIIKzkJkbRPTAmDsv2kAm8GQaAktSJzj9ELvmZjNWvR4mTIh/HHXr1RbdX2TDs1MELIpTSX4Llg63Z4HNPJsSBIYRPcentcFTW8mXMS6Tg6VUTXv9eY0yhMn1IEbUMMmeIYqlegqEV+80XGo3mJl+DlooPpeDgPgV/an1dw9R85uzEUAvr01dneN1BIQuwnUxRS2T68U5NQln+KrLkrJyBfnHmZa8+xp8Fv9jvxMdUUAZKzODbWJmlnWjyD0K4wVCGqFjWQKpV4nMxW9Z2F6zfBQmQPOl+SUcLuJ9Cw2hscwPy6PpRqw6YISksP68edDrjO9GT/yMJgvW3HCVTdb9vTAS6hx8WHBUNXKO8F9EWl4WyOtnEUSl3scFT+N2gzBhuKWQcnolrfI6yFEyRn0WmCYQBUnUNemfg55xCGLOIYZqlbP8Mw0LpuazXbnmpSbnw+iU4TzN4NDSolpRNooHn1O8rEvKkJPBzBQ4JEfqCUk/ziPo522dfSonQR6NDjmikkMg+S/YQeWCIh/WiP254UoMZtctl8qYQiyE3IGY+oxisRGYfGwAGRSXhJZpeVfh/hF4ewTTX7fyxn7yFjda1G1oH3AM+DXwDryfhzmtikjpwZxF8uC6bjiY+Rs9wvFmp/gcjK+F6BVxJJKONOKnVcCO80/ofIVVbAGZIAL+kjjHdgFUaIVP07d9V7b4YROB2S8tgGrS51AWlCgEhyPpF/k5mudCo+80tmiyXFWR3jmXy60R20y6nJYcGjxW0rVon7UBfDsrBxTPwaA9p7ciob+X46qNIdtpqynij/e2S/W6kWozqHlNUE6NGp5oMrF1pC/YhFRx+WIr7jI4d2lj8F96mcCMvXQ/3OEsJRr54CnOChYQzVp2tL0tTd6wEJ7KyjIPpMdmr+zoJ4qrbe0mK7s9URXOuS5DjfYI3Un4brYqZ5DoeIkFV6zmUUdJ304e/nRVL8ouiIzPuxGA6OJHtJUD+YD736w61HBREikyWWSUKpGcYLPxrGA9PGYQH8MtakNYV8qKQbWIonVefaGUq8a8AyiUnYlplV8XJaIFYMHtIHEUu+osH0D0uIzMGlJhjVHe6FVWpaGX1uz7G0fk4VClvtX9ToLOzVoksvGqczV45Je3G0WdM0rCrcNUPIfKxS/SvohWRUFJno1KVzlyYr/O1DgtO3OQ6EuCtN0j/DvAVIKLmdiyLa3vqiJ/VSjqPfkMpR7KsRYwW2KJTe/GON0QNUh6b4v+NSlFLxuzCR+eaukZgmsSSpRFuoyqjnDrDsCSJf728OOg7d8zrCJqu5ift6T+7CAoYAQ=="
+            },
+            {
+              "type": "tool_use",
+              "id": "toolu_01L6WqbawtKy6QYRwhnnBupm",
+              "name": "lookup_order",
+              "input": {
+                "order_id": "8891"
+              },
+              "caller": {
+                "type": "direct"
+              }
+            },
+            {
+              "type": "tool_use",
+              "id": "toolu_01Wt2Vm8n4QmpdbScaEjy31G",
+              "name": "lookup_order",
+              "input": {
+                "order_id": "8917"
+              },
+              "caller": {
+                "type": "direct"
+              }
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "content": [
+            {
+              "type": "tool_result",
+              "tool_use_id": "toolu_01L6WqbawtKy6QYRwhnnBupm",
+              "content": "{\"order_id\":\"#8891\",\"order_date\":\"2024-03-03\",\"total_amount\":247.83,\"return_eligible\":true,\"item_description\":\"Aurora X2 blender\"}"
+            },
+            {
+              "type": "tool_result",
+              "tool_use_id": "toolu_01Wt2Vm8n4QmpdbScaEjy31G",
+              "content": "{\"order_id\":\"#8917\",\"order_date\":\"2024-03-19\",\"total_amount\":64.19,\"return_eligible\":true,\"item_description\":\"Replacement jug for Aurora X2\"}"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "content": [
+            {
+              "type": "text",
+              "text": "Here is what I have on your case.\n\n**Order #8891**\n- Item: Aurora X2 blender\n- Ordered: 2024-03-03\n- Total: $247.83\n- Status: Return eligible. A return has been started.\n\n**Return RMA-55210** (for #8891)\n- Restocking fee: $12.50\n- Net refund: $235.33\n- Refund due by: 2024-03-29\n\n**Order #8917**\n- Item: Replacement jug for the Aurora X2. You told us it's cracked.\n- Ordered: 2024-03-19\n- Total: $64.19\n- Status: Return eligible. No return has been started, because you want to think it over.\n\n**Details I don't have**\n- **Customer ID:** It isn't in the order data I can see.\n- **Refund card:** I can't see which payment method was used on the order. Nothing confirms the refund will go to your Visa ending 4417. For that, please contact the payments team and quote RMA-55210 before 2024-03-29."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "progressive",
+      "label": "Concise summary after turns 4, 6, 8",
+      "summariseAfter": [
+        4,
+        6,
+        8
+      ],
+      "style": "concise",
+      "useBlock": false,
+      "facts": {
+        "customerId": "C-4471",
+        "issues": [
+          {
+            "orderId": "#8891",
+            "orderDate": "2024-03-03",
+            "orderTotal": 247.83,
+            "status": "delivered",
+            "itemDescription": "Aurora X2 blender",
+            "rmaId": "RMA-55210",
+            "restockingFee": 12.5,
+            "netRefund": 235.33,
+            "refundDueDate": "2024-03-29"
+          },
+          {
+            "orderId": "#8917",
+            "orderDate": "2024-03-19",
+            "orderTotal": 64.19,
+            "status": "delivered",
+            "itemDescription": "Replacement jug for Aurora X2"
+          }
+        ]
+      },
+      "summaries": [
+        {
+          "afterTurn": 4,
+          "style": "concise",
+          "text": "**Summary for next agent**\n\n**Customer issue:** Aurora X2 blender (order #8891, placed 2024-03-03, $247.83) stopped working after two uses.\n\n**Actions taken:**\n- Looked up #8891 (return eligible) and #8917 (replacement jug, placed 2024-03-19, $64.19, also return eligible; the customer says it cracked).\n- At the customer's request, started a return for **#8891 only**: **RMA-55210**, $12.50 restocking fee, **net refund $235.33**, refund due by **2024-03-29**.\n- No action taken on #8917. The customer is undecided and will keep the jug for now.\n\n**Open issue:** The customer wants the refund sent to their **Visa ending 4417**, not the store card. The previous agent couldn't change or confirm the refund destination (no tool for it, and order data doesn't show the payment method). The customer was advised to check with the payments team, quoting RMA-55210, ideally before 2024-03-29.\n\n**Next steps:**\n- Escalate or route the refund-destination request to payments, or confirm how the customer can do so.\n- Offer to start a return for #8917 if the customer decides to proceed.",
+          "survived": [
+            "order number #8891",
+            "order date 2024-03-03",
+            "total $247.83",
+            "order number #8917",
+            "order date 2024-03-19",
+            "total $64.19",
+            "return RMA-55210",
+            "restocking fee $12.50",
+            "net refund $235.33",
+            "refund date 2024-03-29",
+            "Visa ending 4417"
+          ],
+          "lost": [
+            "customer ID",
+            "status delivered"
+          ],
+          "inventedAmounts": []
+        },
+        {
+          "afterTurn": 6,
+          "style": "concise",
+          "text": "**Summary for next agent**\n\n**Customer issue:** Aurora X2 blender (order #8891, placed 2024-03-03, $247.83) stopped working after two uses.\n\n**Actions taken:**\n- Looked up #8891 (return eligible) and #8917 (replacement jug, placed 2024-03-19, $64.19, also return eligible; the customer says it cracked).\n- At the customer's request, started a return for **#8891 only**: **RMA-55210**, $12.50 restocking fee, **net refund $235.33**, refund due by **2024-03-29**.\n- No action taken on #8917. The customer is undecided and will keep the jug for now.\n- Since the last summary, the customer asked two general questions. I told them the loyalty programme is 1 point per dollar spent, with every 100 points worth $1 off. I also told them weekend store hours are 10:00 to 16:00.\n\n**Open issue:** The customer wants the refund sent to their **Visa ending 4417**, not the store card. We have no tool to change or confirm the refund destination, and order data doesn't show the payment method. The customer was told twice to check with the payments team, quoting RMA-55210, ideally before 2024-03-29. Nobody has escalated this yet.\n\n**Next steps:**\n- Escalate or route the refund-destination request to payments, or confirm how the customer can do so.\n- Offer to start a return for #8917 if the customer decides to proceed.",
+          "survived": [
+            "order number #8891",
+            "order date 2024-03-03",
+            "total $247.83",
+            "order number #8917",
+            "order date 2024-03-19",
+            "total $64.19",
+            "return RMA-55210",
+            "restocking fee $12.50",
+            "net refund $235.33",
+            "refund date 2024-03-29",
+            "Visa ending 4417"
+          ],
+          "lost": [
+            "customer ID",
+            "status delivered"
+          ],
+          "inventedAmounts": []
+        },
+        {
+          "afterTurn": 8,
+          "style": "concise",
+          "text": "**Summary for next agent**\n\n**Customer issue:** Aurora X2 blender (order #8891, placed 2024-03-03, $247.83) stopped working after two uses.\n\n**Actions taken:**\n- Looked up #8891 (return eligible) and #8917 (replacement jug, placed 2024-03-19, $64.19, also return eligible; the customer says it cracked).\n- At the customer's request, started a return for **#8891 only**: **RMA-55210**, $12.50 restocking fee, **net refund $235.33**, refund due by **2024-03-29**.\n- No action taken on #8917. The customer is undecided and will keep the jug for now.\n- Answered general questions: loyalty programme is 1 point per dollar, with every 100 points worth $1 off. Weekend store hours are 10:00 to 16:00.\n- Since the last summary:\n  - Told the customer the warranty transfers if the product is gifted. I noted that our records show a replacement **jug**, not a blender, and the rule applies to the jug too.\n  - The customer's neighbour has the same blender and it also failed. I told them she should contact us with her order number. I can't see her order or say what she'd be eligible for.\n\n**Open issue:** The customer wants the refund sent to their **Visa ending 4417**, not the store card. We have no tool to change or confirm the refund destination, and order data doesn't show the payment method. The customer was told twice to check with the payments team, quoting RMA-55210, ideally before 2024-03-29. Nobody has escalated this yet.\n\n**Next steps:**\n- Escalate or route the refund-destination request to payments, or confirm how the customer can do so.\n- Offer to start a return for #8917 if the customer decides to proceed.",
+          "survived": [
+            "order number #8891",
+            "order date 2024-03-03",
+            "total $247.83",
+            "order number #8917",
+            "order date 2024-03-19",
+            "total $64.19",
+            "return RMA-55210",
+            "restocking fee $12.50",
+            "net refund $235.33",
+            "refund date 2024-03-29",
+            "Visa ending 4417"
+          ],
+          "lost": [
+            "customer ID",
+            "status delivered"
+          ],
+          "inventedAmounts": []
+        }
+      ],
+      "turns": [
+        {
+          "customer": "Unrelated: how does your loyalty programme work?",
+          "answer": "You earn 1 point for every dollar you spend. Every 100 points is worth $1 off.\n\nOn your open return, RMA-55210 is still waiting on the refund destination. Please check with the payments team and quote that reference. Do you have any other questions?",
+          "tools": [],
+          "inputTokens": 1037,
+          "outputTokens": 81,
+          "iterations": 1
+        },
+        {
+          "customer": "What are your weekend opening hours?",
+          "answer": "Our stores are open 10:00 to 16:00 at weekends.",
+          "tools": [],
+          "inputTokens": 1131,
+          "outputTokens": 24,
+          "iterations": 1
+        },
+        {
+          "customer": "If I give the replacement blender away as a gift, does the warranty go with it?",
+          "answer": "Yes. The warranty stays with the product when it's gifted, so the recipient is covered.\n\nMy records show a replacement **jug** (#8917), not a replacement blender. If you mean the jug, the same rule applies. The Aurora X2 from #8891 is going back under RMA-55210.",
+          "tools": [],
+          "inputTokens": 1124,
+          "outputTokens": 325,
+          "iterations": 1
+        },
+        {
+          "customer": "My neighbour has the same blender and it failed too. Should she contact you?",
+          "answer": "Yes, she should contact us. If she has her order number, that will let us look up her purchase and check her options. I can't see her order from here, so I can't say what she'd be eligible for.",
+          "tools": [],
+          "inputTokens": 1476,
+          "outputTokens": 135,
+          "iterations": 1
+        },
+        {
+          "customer": "Do you ship to Ireland?",
+          "answer": "Yes, we ship to both the UK and Ireland.",
+          "tools": [],
+          "inputTokens": 1210,
+          "outputTokens": 20,
+          "iterations": 1
+        },
+        {
+          "customer": "Before I go, please confirm everything you have on my case: my customer ID, both order numbers with their dates, totals and status, the return reference, the restocking fee, the net refund, the refund date, and the card it goes to.",
+          "answer": "Here is what I have.\n\n**Orders**\n- **#8891:** Aurora X2 blender, placed 2024-03-03, total $247.83. The order data shows it as return eligible. I started a return on it.\n- **#8917:** Replacement jug for the Aurora X2, placed 2024-03-19, total $64.19. The order data shows it as return eligible. No return has been started, because you haven't decided yet.\n\n**Return on #8891**\n- Reference: RMA-55210\n- Restocking fee: $12.50\n- Net refund: $235.33\n- Refund due by: 2024-03-29\n\n**Details I don't have**\n- **Customer ID:** It isn't in the order data or my notes, so I can't confirm it.\n- **Refund card:** I can't see the payment method or the refund destination. You've asked for the refund to go to your Visa ending 4417 instead of the store card. That is your request, and I can't confirm it has been applied. I also have no tool to change it or escalate it. Please contact the payments team, quote RMA-55210, and do it before 2024-03-29.",
+          "tools": [
+            "lookup_order",
+            "lookup_order"
+          ],
+          "inputTokens": 2987,
+          "outputTokens": 656,
+          "iterations": 2
+        }
+      ],
+      "answer": "Here is what I have.\n\n**Orders**\n- **#8891:** Aurora X2 blender, placed 2024-03-03, total $247.83. The order data shows it as return eligible. I started a return on it.\n- **#8917:** Replacement jug for the Aurora X2, placed 2024-03-19, total $64.19. The order data shows it as return eligible. No return has been started, because you haven't decided yet.\n\n**Return on #8891**\n- Reference: RMA-55210\n- Restocking fee: $12.50\n- Net refund: $235.33\n- Refund due by: 2024-03-29\n\n**Details I don't have**\n- **Customer ID:** It isn't in the order data or my notes, so I can't confirm it.\n- **Refund card:** I can't see the payment method or the refund destination. You've asked for the refund to go to your Visa ending 4417 instead of the store card. That is your request, and I can't confirm it has been applied. I also have no tool to change it or escalate it. Please contact the payments team, quote RMA-55210, and do it before 2024-03-29.",
+      "score": {
+        "survived": [
+          "order number #8891",
+          "order date 2024-03-03",
+          "total $247.83",
+          "order number #8917",
+          "order date 2024-03-19",
+          "total $64.19",
+          "return RMA-55210",
+          "restocking fee $12.50",
+          "net refund $235.33",
+          "refund date 2024-03-29",
+          "Visa ending 4417"
+        ],
+        "lost": [
+          "customer ID",
+          "status delivered"
+        ],
+        "inventedAmounts": []
+      },
+      "relookups": 2,
+      "usage": {
+        "input_tokens": 11108,
+        "output_tokens": 2679
+      },
+      "finalMessages": [
+        {
+          "role": "user",
+          "content": "Do you ship to Ireland?"
+        },
+        {
+          "role": "assistant",
+          "content": [
+            {
+              "type": "text",
+              "text": "Yes, we ship to both the UK and Ireland."
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "content": "Before I go, please confirm everything you have on my case: my customer ID, both order numbers with their dates, totals and status, the return reference, the restocking fee, the net refund, the refund date, and the card it goes to."
+        },
+        {
+          "role": "assistant",
+          "content": [
+            {
+              "type": "thinking",
+              "thinking": "",
+              "signature": "CAQShAcKEAgTGAI4AUIIdGhpbmtpbmcSDPG98/bUvUhhdr9MtxoMiD64Hfk4TNBs6eKEIjAykxxTH6FBNgOkcSdHH19PZ7zrmzgwnZxIFIxQyot64avEwigMW+ymEcL18MCpqIUqoQaqPzod2BvjV+mlGemjp0rwrxKtgYEbQWPZQLqR38Iki79E+7LvnL9lupnDKvZ91JYzLuB4nKtc3qk4Uu3ho+f1h8Edun9CZNK+9JR1+u+ZbgA0FN5757B4j6DA+Vb9x+85XWevZ0dsbohkd/h0Lw2pzdKJmrbn26+k3qphR+f+24Gz3bfjO4C02k0MJMxYFymcGB379ELKtqy+e2vaBYHc5docq2WjfQNwLd5wLXwe2XsS+Ee5wUk8j2ZEcvRWFhKftXpMG4cTtgmwFLHTiQ4CzkYhubgXJ7p5e958Cp7lu91sYA9C40anepwzGNKNjSj0aaoue2qX2YBKJsvd5RCphrVXEh7IzwtYU2oZzddkm4QwT5TkillwjQ908cTEv0RtEwJZfyZUG6iDIVAKfghuooPDAV3vaD4CBUnISCDDuwmL4mFMMxZgXZxswdm7tQGU57d7XaHeCk660JVyiLz/vWdbTcgafjN3WhZPCFmf0hb4HQqVTu31lSxgBItYGtcCDtS4xD1966m8cfWsP42bSZHEoE53z7S0hNBwH0x+iKDyMKHqCip2IOdUp8SwOfC6PbYClet/RXsXhxTQzEsgk5XM2gHszybK6ra2JrouW+sNZrc85rcfzh7WgRTRxM2BmESwdT94SNxwrXQdrdvTy67PKRuqXrrDFjHbuMJ8DPERM9p2szTc7JLjxuFvbYWTlTNBP/dcwHyFrK3b57B3aNRlmqN4MWnh8UoiG2aOVVBcE+BRusz3ZWKjdydHa1hLkVMOYug8RttYnMmw6BT8qyS3tDrF87WRkeYVa2rkiKly2hpeh5GgwWS0aZy4ijAKkD+0/dJjzBR31rX4Z6w5QQgDmjYYHF9K2VdQyU/ufD7OiJLZz3mCN5eu6tk9QOjGzIvGRKXjuujwuUZTtIAApk1k41k9TFuTJJph9u5gy9aqoZvihs1JHnTxyZ27IXPtqi39a0fLmTuxBNmgvFxuvek7cYC8O3od1Vg+nQAw7IOtrKWes0Bq5xAjdUl/prRdPXDNXqDbWNn8E9de25R9sT2HClWWXbge8w6GA2xDp24YAQ=="
+            },
+            {
+              "type": "text",
+              "text": "I'll re-check both orders so the details are current."
+            },
+            {
+              "type": "tool_use",
+              "id": "toolu_01SYGwpeHp69jgL4J5UxcfzF",
+              "name": "lookup_order",
+              "input": {
+                "order_id": "8891"
+              },
+              "caller": {
+                "type": "direct"
+              }
+            },
+            {
+              "type": "tool_use",
+              "id": "toolu_01PWG9akNfLaJHpWsaHNKh2V",
+              "name": "lookup_order",
+              "input": {
+                "order_id": "8917"
+              },
+              "caller": {
+                "type": "direct"
+              }
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "content": [
+            {
+              "type": "tool_result",
+              "tool_use_id": "toolu_01SYGwpeHp69jgL4J5UxcfzF",
+              "content": "{\"order_id\":\"#8891\",\"order_date\":\"2024-03-03\",\"total_amount\":247.83,\"return_eligible\":true,\"item_description\":\"Aurora X2 blender\"}"
+            },
+            {
+              "type": "tool_result",
+              "tool_use_id": "toolu_01PWG9akNfLaJHpWsaHNKh2V",
+              "content": "{\"order_id\":\"#8917\",\"order_date\":\"2024-03-19\",\"total_amount\":64.19,\"return_eligible\":true,\"item_description\":\"Replacement jug for Aurora X2\"}"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "content": [
+            {
+              "type": "thinking",
+              "thinking": "",
+              "signature": "CAQS0AcKEAgTGAI4AUIIdGhpbmtpbmcSDDS5nwSHE8Y9n4/wRhoMKCEnffGdRKk2ES6pIjDDU0Mk7TAv2h0tIWUr1bQ4mOZ3fDcisHZ0UkNBWtYquDzY/MAW+5ajkFm93D81dU0q7Qb6a/SMekxl+BLbnDlEFUCGE7DihcdL3YL2rtZBxWp7NkDeRWI/ttavf4Wk4qveuEuhwrpjIccX/w4sDCtpn5IEgL5lm0/v9HT+TIudURkpEjwn+4c4F985QPQ4RSFIj0ozZktHXLEhlA2iG+inkLT3Tq7cLZyhojhp9PnBJS3o59lQB2kPiHf483E7DGYEBHDrc9LZ3WTMUNfJArm7pn3auSqNHuGaO+djyDKathPGIUnOofh+F+9faEd0eg5bG8bb2NxDG3OANi4qwSqI43Y06RdPwuTGs10JzDl8TbR6eH0kEXUn3qJbGJCiouAp6WkVba6XY+1uoWyIZcMnyAc1S41lT1HhgTDcHb7KjCasXpyYj9w9WSuU278iKvlf4RiLfHIEgq23oLf/Tq9ZY/rzM+/Z20dcg52cGzGhkCGy26+fD88jkaATorGGdr8hOXarURDImFrS+DhwDUU2UQouBfpWG+q4LWcH6xpF9TC47KdBBfN/lfXbTawZT9KlLrSaiaAAba74C2a4scZPtHcb+4eI0lEe+DSVtKCAJoMucVryP39FTIPDru+wTGlCD8wZLXLEkADAY3JKygg0rCqfdlzbe5DcYe6wzaESUYqbNffHwL/ioVXmWSYuLgKVk88tiUsAxHo3UzV8qa++VH4DrqoDvjzmDNTOZFOnZ390InEpTkISgtgar1DhradLF1gs6MNeVCrlWoTBhD/Msu0sVayKZvK7BhpgWfC3S0LeSyBFrViZoLgFyavaRQuOPgRAJlrwHS+Gel1HrMN4QjloY+algRxsIt22l8Wk0bV6rdBeCpRxbpN2C0JCOmlhffZCTH+VbA+YZ9wEB4J0DCywxOT4cE1e0ImBiY3W0p7L0npi1+kn6s52W+fmtK33gGO9fzfFSaQ526+JBM+McFIUlKpz0G5pjcD8hzDYRspSgeP6q4R1IFckrwK1Vf+QCTc9ET5Vohclp2i+oYQH4wivVtHYj4yEyxhQo5eGtQr+3WDSALkYOLdOxC8nymWpX3dWu74ZQsUAvjITK1fT2DeYN0Eg2DaYsK75ZeNTakb898eJ6qN0x11rOah2198hmV+RZMoMrnvLqw1UIrjG0G52MdmCfzX0fmgXHw8lt7wECHiTinNZiGwuCeFZbmdR8ryI4uNRLU6hoJ9xTS5cGAE="
+            },
+            {
+              "type": "text",
+              "text": "Here is what I have.\n\n**Orders**\n- **#8891:** Aurora X2 blender, placed 2024-03-03, total $247.83. The order data shows it as return eligible. I started a return on it.\n- **#8917:** Replacement jug for the Aurora X2, placed 2024-03-19, total $64.19. The order data shows it as return eligible. No return has been started, because you haven't decided yet.\n\n**Return on #8891**\n- Reference: RMA-55210\n- Restocking fee: $12.50\n- Net refund: $235.33\n- Refund due by: 2024-03-29\n\n**Details I don't have**\n- **Customer ID:** It isn't in the order data or my notes, so I can't confirm it.\n- **Refund card:** I can't see the payment method or the refund destination. You've asked for the refund to go to your Visa ending 4417 instead of the store card. That is your request, and I can't confirm it has been applied. I also have no tool to change it or escalate it. Please contact the payments team, quote RMA-55210, and do it before 2024-03-29."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tight",
+      "label": "40-word summary after turns 4, 6, 8",
+      "summariseAfter": [
+        4,
+        6,
+        8
+      ],
+      "style": "tight",
+      "useBlock": false,
+      "facts": {
+        "customerId": "C-4471",
+        "issues": [
+          {
+            "orderId": "#8891",
+            "orderDate": "2024-03-03",
+            "orderTotal": 247.83,
+            "status": "delivered",
+            "itemDescription": "Aurora X2 blender",
+            "rmaId": "RMA-55210",
+            "restockingFee": 12.5,
+            "netRefund": 235.33,
+            "refundDueDate": "2024-03-29"
+          },
+          {
+            "orderId": "#8917",
+            "orderDate": "2024-03-19",
+            "orderTotal": 64.19,
+            "status": "delivered",
+            "itemDescription": "Replacement jug for Aurora X2"
+          }
+        ]
+      },
+      "summaries": [
+        {
+          "afterTurn": 4,
+          "style": "tight",
+          "text": "Customer started return for blender order #8891 (RMA-55210, net refund $235.33, due 2024-03-29). Jug order #8917 left untouched; customer undecided. Customer wants refund to Visa ending 4417, not store card; this couldn't be confirmed or changed. Needs payments team follow-up.",
+          "survived": [
+            "order number #8891",
+            "order number #8917",
+            "return RMA-55210",
+            "net refund $235.33",
+            "refund date 2024-03-29",
+            "Visa ending 4417"
+          ],
+          "lost": [
+            "customer ID",
+            "order date 2024-03-03",
+            "total $247.83",
+            "status delivered",
+            "order date 2024-03-19",
+            "total $64.19",
+            "restocking fee $12.50"
+          ],
+          "inventedAmounts": []
+        },
+        {
+          "afterTurn": 6,
+          "style": "tight",
+          "text": "Blender return #8891 (RMA-55210, net refund $235.33, due 2024-03-29) started; jug order #8917 untouched, customer undecided. Customer wants refund to Visa ending 4417, not store card; unconfirmed, needs payments team follow-up. Also answered loyalty and weekend hours (10:00–16:00) questions.",
+          "survived": [
+            "order number #8891",
+            "order number #8917",
+            "return RMA-55210",
+            "net refund $235.33",
+            "refund date 2024-03-29",
+            "Visa ending 4417"
+          ],
+          "lost": [
+            "customer ID",
+            "order date 2024-03-03",
+            "total $247.83",
+            "status delivered",
+            "order date 2024-03-19",
+            "total $64.19",
+            "restocking fee $12.50"
+          ],
+          "inventedAmounts": []
+        },
+        {
+          "afterTurn": 8,
+          "style": "tight",
+          "text": "Blender return #8891 (RMA-55210, $235.33 refund due 2024-03-29) started; refund to Visa 4417 unconfirmed, needs payments follow-up. Jug order #8917 untouched, undecided. Warranty transfers if gifted. Neighbour with failed blender should contact us with her order number; outcome unpromised.",
+          "survived": [
+            "order number #8891",
+            "order number #8917",
+            "return RMA-55210",
+            "net refund $235.33",
+            "refund date 2024-03-29",
+            "Visa ending 4417"
+          ],
+          "lost": [
+            "customer ID",
+            "order date 2024-03-03",
+            "total $247.83",
+            "status delivered",
+            "order date 2024-03-19",
+            "total $64.19",
+            "restocking fee $12.50"
+          ],
+          "inventedAmounts": []
+        }
+      ],
+      "turns": [
+        {
+          "customer": "Unrelated: how does your loyalty programme work?",
+          "answer": "Our loyalty programme gives you 1 point for every dollar you spend. Every 100 points is worth $1 in value.\n\nFor example, spending $100 earns 100 points, which is worth $1.\n\nIf you'd like to go back to the blender return or the Visa refund question, let me know.",
+          "tools": [],
+          "inputTokens": 749,
+          "outputTokens": 91,
+          "iterations": 1
+        },
+        {
+          "customer": "What are your weekend opening hours?",
+          "answer": "Our stores are open 10:00 to 16:00 at weekends.",
+          "tools": [],
+          "inputTokens": 853,
+          "outputTokens": 24,
+          "iterations": 1
+        },
+        {
+          "customer": "If I give the replacement blender away as a gift, does the warranty go with it?",
+          "answer": "Yes. The warranty stays with the product when it's gifted, so the person you give it to is covered.",
+          "tools": [],
+          "inputTokens": 769,
+          "outputTokens": 33,
+          "iterations": 1
+        },
+        {
+          "customer": "My neighbour has the same blender and it failed too. Should she contact you?",
+          "answer": "Yes, she should contact us. If she has her order number, we can look up her order and see what options she has. I can't say yet whether she'd get a return or a replacement, because that depends on her order details.",
+          "tools": [],
+          "inputTokens": 827,
+          "outputTokens": 198,
+          "iterations": 1
+        },
+        {
+          "customer": "Do you ship to Ireland?",
+          "answer": "Yes, we ship to both the UK and Ireland.",
+          "tools": [],
+          "inputTokens": 755,
+          "outputTokens": 20,
+          "iterations": 1
+        },
+        {
+          "customer": "Before I go, please confirm everything you have on my case: my customer ID, both order numbers with their dates, totals and status, the return reference, the restocking fee, the net refund, the refund date, and the card it goes to.",
+          "answer": "Here is what I have.\n\n**Customer ID:** I don't have it.\n\n**Order #8891**\n- Item: Aurora X2 blender\n- Date: 2024-03-03\n- Total: $247.83\n- Status: Return started. The order lookup doesn't show a status field, so this comes from my case notes.\n\n**Order #8917**\n- Item: Replacement jug for Aurora X2\n- Date: 2024-03-19\n- Total: $64.19\n- Status: No action taken, and you haven't decided yet. It's still eligible for return.\n\n**Return**\n- Reference: RMA-55210\n- Refund amount: $235.33\n- Refund due date: 2024-03-29\n- Card: Visa ending 4417. The refund to this card is not confirmed. It needs a payments follow-up.\n\n**Restocking fee and net refund:** I don't have a restocking fee figure, and I don't have a separate net refund figure. The $235.33 is the only refund amount I have. It is $12.50 less than the order total. I can't tell you from my records whether that difference is a restocking fee.",
+          "tools": [
+            "lookup_order",
+            "lookup_order"
+          ],
+          "inputTokens": 2114,
+          "outputTokens": 717,
+          "iterations": 2
+        }
+      ],
+      "answer": "Here is what I have.\n\n**Customer ID:** I don't have it.\n\n**Order #8891**\n- Item: Aurora X2 blender\n- Date: 2024-03-03\n- Total: $247.83\n- Status: Return started. The order lookup doesn't show a status field, so this comes from my case notes.\n\n**Order #8917**\n- Item: Replacement jug for Aurora X2\n- Date: 2024-03-19\n- Total: $64.19\n- Status: No action taken, and you haven't decided yet. It's still eligible for return.\n\n**Return**\n- Reference: RMA-55210\n- Refund amount: $235.33\n- Refund due date: 2024-03-29\n- Card: Visa ending 4417. The refund to this card is not confirmed. It needs a payments follow-up.\n\n**Restocking fee and net refund:** I don't have a restocking fee figure, and I don't have a separate net refund figure. The $235.33 is the only refund amount I have. It is $12.50 less than the order total. I can't tell you from my records whether that difference is a restocking fee.",
+      "score": {
+        "survived": [
+          "order number #8891",
+          "order date 2024-03-03",
+          "total $247.83",
+          "order number #8917",
+          "order date 2024-03-19",
+          "total $64.19",
+          "return RMA-55210",
+          "restocking fee $12.50",
+          "net refund $235.33",
+          "refund date 2024-03-29",
+          "Visa ending 4417"
+        ],
+        "lost": [
+          "customer ID",
+          "status delivered"
+        ],
+        "inventedAmounts": []
+      },
+      "relookups": 2,
+      "usage": {
+        "input_tokens": 7527,
+        "output_tokens": 1901
+      },
+      "finalMessages": [
+        {
+          "role": "user",
+          "content": "Do you ship to Ireland?"
+        },
+        {
+          "role": "assistant",
+          "content": [
+            {
+              "type": "text",
+              "text": "Yes, we ship to both the UK and Ireland."
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "content": "Before I go, please confirm everything you have on my case: my customer ID, both order numbers with their dates, totals and status, the return reference, the restocking fee, the net refund, the refund date, and the card it goes to."
+        },
+        {
+          "role": "assistant",
+          "content": [
+            {
+              "type": "thinking",
+              "thinking": "",
+              "signature": "CAQSsQcKEAgTGAI4AUIIdGhpbmtpbmcSDDLosmfMiB3FZlX4QBoM22fItC71gS4pr1dwIjALOsxsp57zX48OHaRGJV0dKIOUUTvzo1ZTPiJLkWrKy3IcpRzvjyoo3eOMXNH2nIIqzgYLgEIk5sI9c7AilP6XZ434IFsGWo71tK2/ZSfaU9Nrw5jtlxLbRmZtNZdvlfmTjrEDCtNXDh6h21/kEDnQfYL3j/g14MebBB7v7STwC/Ew4nSKNGT32tCR1JedPwYjREg48C4Q9bK7FFYf2R7Z2+51wdXkOWiPfp1KBpIFt/PKb+hgMNyYwqYSwdR2I5Bx2UP/GFdKA8sMql4MJ5t1dfuM+BGlRbk++nGlNPBaV+oj4y2vpwmwXYJRGquJkaNZyeJsg6wHzmIytc43ihLdVZjjLJZBdYadG6E9ylHv+pZri0jCt8FS2hc5vvOQ0h7kTjyFGmZhyw68IQnboF/ZcnfrS12q56s/GT4P/ySZyCBox6qISeU6RAu9Cq4Ti921O3LkYHMIQo6dPKt1OCEJID8f08ERHOgCXiBeu/SfluBvZ03Mk7owmxspWvE3dY6lmKrjQXW4PaefL4K4pOUbySnAaA0KSrC30mSG64Z02aFDKWxrsUDndPvBLc7e9azFuvEGhAKpTsSHByVgVCH7CbB9TQ8vbzBidqoNBbFNVig/IeCDA9aLRSFdLOrnW+ZprXp78TYF/z+/GBbvSP4VTvoP0sC/FUH+RFOcnp8rbAzh9YXTNWwdqRfK6HSCsYBxKjE6DeBIDw3TP12sDEB4XUVho8kQBABIvKjnriOcaD32Gnx/hzJtGG0my014Rt4ejCV9ttpyNtqRtwdI4N6BMbXfBS+KIDmC8v3hEmso3Dy2fuhavvEW2zPvPArF2/bJa9kSQSje3GiQ1eWgVbwdM2Q8pqEqGZpSycwWxk0VWpy0xwZB6LVifa/V2/q13dnB94fLUMEWhNv3rNX/2yvCqmISE4da1Vackro2M0J73M9N4FVhICacwnh1AFd0RTIxO8Vr63bBaogDUMoH07vlWdsNOntfaZkrdL7XB5bsDnvPQK2m4IKYei0PgN2IoJozler2BQpCADDX6r46LNmDn73IxdZUaXXJlmwhY8cbrcHNYObONxf1PCZL29XBxnq8c6aE0HZtuogYOEqvsLF4utTexY/c1AoZmoYSN6RDNGH/KXeQJBI/RhZDpLfyMcLRnwuUqN68dX7mvNTbAxEkcZrIt844pcE7aC97GzbIUh8YAQ=="
+            },
+            {
+              "type": "text",
+              "text": "I'll pull both orders now so I can check the details."
+            },
+            {
+              "type": "tool_use",
+              "id": "toolu_01Ui7int5snjVnQf5CsKqYqC",
+              "name": "lookup_order",
+              "input": {
+                "order_id": "8891"
+              },
+              "caller": {
+                "type": "direct"
+              }
+            },
+            {
+              "type": "tool_use",
+              "id": "toolu_01QLN3WZYjyBdVcGZfsTN2Z2",
+              "name": "lookup_order",
+              "input": {
+                "order_id": "8917"
+              },
+              "caller": {
+                "type": "direct"
+              }
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "content": [
+            {
+              "type": "tool_result",
+              "tool_use_id": "toolu_01Ui7int5snjVnQf5CsKqYqC",
+              "content": "{\"order_id\":\"#8891\",\"order_date\":\"2024-03-03\",\"total_amount\":247.83,\"return_eligible\":true,\"item_description\":\"Aurora X2 blender\"}"
+            },
+            {
+              "type": "tool_result",
+              "tool_use_id": "toolu_01QLN3WZYjyBdVcGZfsTN2Z2",
+              "content": "{\"order_id\":\"#8917\",\"order_date\":\"2024-03-19\",\"total_amount\":64.19,\"return_eligible\":true,\"item_description\":\"Replacement jug for Aurora X2\"}"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "content": [
+            {
+              "type": "thinking",
+              "thinking": "",
+              "signature": "CAQSiQgKEAgTGAI4AUIIdGhpbmtpbmcSDGyr4cAXFFg/jyr5zxoMYkyJO7yQDbHYMtVjIjChIEbq7GbBVlBr9InXbfPR9hOPkyKQfwUqB0H89bAdJBs6zclShDCAXYb7Us2SSBcqpgeRHMP91/Fue2H+KwvuRSOUuufW0iHWjBXo3nRdXC9npqP32A/+30zew1+kI7TZxQPQlO3FWmtHVA7A+gw6Ep3OLdHRcGpaXK2MBMkIqhwDT1npUeKmReiHnOPehvzu9vyASOsUMfzib6J+ACM2peL+u11HLZrQrfBILg4tahu/vKDXR8i0lQKBvC0J5togGMWJCuseFvzm7DIkes+i7vDbBNudzwLV11GwmaPmiwhmQT8o6QP5vj/NijSdlKR8BMHEvQ/lAjoZi9jGBX0ylLFEOZOeI2JTg7NcsYpO4i1lLGCLbSbh7uUM/JDYNTWdNrrlktMmBIVW0yGaHJE9HSqmzR2t6/3JDO0rbPrCekj2BC/x2WQfnGCuosAD2MHL6+JWq1YIzgwFgrQWcGhRUYXb+evFLKCd8FznaFm/1i/7e6Zn0NTWQmy6113f6R3H4jfhvJ3kS4aQI6fvnvL7t/FSUdJw6wvKcYxtscGq0PWVWV3QAfroFzk2OYH8+8IZJbkplowm8t8Acjekldat8OTHcRVgZKGejr4RmCAeNS7FiQ6kYnR/ldi6TFzXSKbhMngoc1uXSKhDs7nvRY+14qmCVaSg0k/2Eh2T/qHV1OvPyegpAdfywe4sV5iNzP1dxgVG0HxGx0dU3Gin+krhY62fEBmTtwVDpnqGQBYWMwcHXNzbfA2UDNOE8QNEGSrEnMc6mX/Gxw1j+wlU6t7aPBAxAvep4e5EIIuTgknVZHnVCZ/rfJTHxXzB26o0RSnOqhAG/8QIgz3iJBwJ8W56LHwqg+UKpK8Fwkls0GpHnQXDodYhPVbYsOsK6DhRdqUGjjN/W3uIgkh4STLAuSTE7rQY9veFQhrQgsVtHp6n7+e0D2PXQY6fdgDjzDj5Ue3KCK3V+vghEuJnVoeeYg1X1Iza7Sva6LUXUgFyNCKoHakHXV4Agi9hrDPnPt7E21luXrwIdyQPrKezEg9MPy0FruGgwoI+7jJFrBg+9aEWTog29fnjpJZxMDtvdC84RQxLss6IqZQvzrz+uDwCFI1OKYVTuen+8cWSVaj9rdDaKOrysm1NyINe/+iCqbGC0wbdWjK3VukXQp24h5V5uSURUSHDpFsVVzxliikvKAPr/ajFDYcOUNFFxO3mDkJxGBxQVBuF0gROPOZgk/D249o9puTH111NNPgzUxKmqKy7NUfu9Sq3OYEDRG6BTxFTU28HPGbA5vS+8aPqWzx/EKt0JSbnBhydZOdkGAE="
+            },
+            {
+              "type": "text",
+              "text": "Here is what I have.\n\n**Customer ID:** I don't have it.\n\n**Order #8891**\n- Item: Aurora X2 blender\n- Date: 2024-03-03\n- Total: $247.83\n- Status: Return started. The order lookup doesn't show a status field, so this comes from my case notes.\n\n**Order #8917**\n- Item: Replacement jug for Aurora X2\n- Date: 2024-03-19\n- Total: $64.19\n- Status: No action taken, and you haven't decided yet. It's still eligible for return.\n\n**Return**\n- Reference: RMA-55210\n- Refund amount: $235.33\n- Refund due date: 2024-03-29\n- Card: Visa ending 4417. The refund to this card is not confirmed. It needs a payments follow-up.\n\n**Restocking fee and net refund:** I don't have a restocking fee figure, and I don't have a separate net refund figure. The $235.33 is the only refund amount I have. It is $12.50 less than the order total. I can't tell you from my records whether that difference is a restocking fee."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tight-block",
+      "label": "40-word summary after turns 4, 6, 8, plus case facts block",
+      "summariseAfter": [
+        4,
+        6,
+        8
+      ],
+      "style": "tight",
+      "useBlock": true,
+      "facts": {
+        "customerId": "C-4471",
+        "issues": [
+          {
+            "orderId": "#8891",
+            "orderDate": "2024-03-03",
+            "orderTotal": 247.83,
+            "status": "delivered",
+            "itemDescription": "Aurora X2 blender",
+            "rmaId": "RMA-55210",
+            "restockingFee": 12.5,
+            "netRefund": 235.33,
+            "refundDueDate": "2024-03-29"
+          },
+          {
+            "orderId": "#8917",
+            "orderDate": "2024-03-19",
+            "orderTotal": 64.19,
+            "status": "delivered",
+            "itemDescription": "Replacement jug for Aurora X2"
+          }
+        ]
+      },
+      "summaries": [
+        {
+          "afterTurn": 4,
+          "style": "tight",
+          "text": "Customer's Aurora X2 blender (order #8891) broke; return started, RMA-55210, net refund $235.33 due 2024-03-29. Jug order #8917 left untouched. Customer wants refund to Visa ending 4417, not store card; unconfirmed, no tool available. Refer to payments team.",
+          "survived": [
+            "order number #8891",
+            "order number #8917",
+            "return RMA-55210",
+            "net refund $235.33",
+            "refund date 2024-03-29",
+            "Visa ending 4417"
+          ],
+          "lost": [
+            "customer ID",
+            "order date 2024-03-03",
+            "total $247.83",
+            "status delivered",
+            "order date 2024-03-19",
+            "total $64.19",
+            "restocking fee $12.50"
+          ],
+          "inventedAmounts": []
+        },
+        {
+          "afterTurn": 6,
+          "style": "tight",
+          "text": "Aurora X2 blender (order #8891) is broken; return RMA-55210 started, net refund $235.33 due 2024-03-29. Jug order #8917 untouched. Customer wants refund to Visa ending 4417, not store card; unconfirmed, refer to payments team. Also asked loyalty (1 point/$, 100 points = $1) and weekend hours (10:00–16:00); both answered.",
+          "survived": [
+            "order number #8891",
+            "order number #8917",
+            "return RMA-55210",
+            "net refund $235.33",
+            "refund date 2024-03-29",
+            "Visa ending 4417"
+          ],
+          "lost": [
+            "customer ID",
+            "order date 2024-03-03",
+            "total $247.83",
+            "status delivered",
+            "order date 2024-03-19",
+            "total $64.19",
+            "restocking fee $12.50"
+          ],
+          "inventedAmounts": []
+        },
+        {
+          "afterTurn": 8,
+          "style": "tight",
+          "text": "Blender (#8891) return RMA-55210; refund $235.33 due 2024-03-29. Visa 4417 refund unconfirmed, so refer to payments team. Jug order #8917 untouched. No replacement blender exists. Told customer warranty follows gifted items, and her neighbour with a failed blender should contact us herself. Loyalty/hours answered.",
+          "survived": [
+            "order number #8891",
+            "order number #8917",
+            "return RMA-55210",
+            "net refund $235.33",
+            "refund date 2024-03-29",
+            "Visa ending 4417"
+          ],
+          "lost": [
+            "customer ID",
+            "order date 2024-03-03",
+            "total $247.83",
+            "status delivered",
+            "order date 2024-03-19",
+            "total $64.19",
+            "restocking fee $12.50"
+          ],
+          "inventedAmounts": []
+        }
+      ],
+      "turns": [
+        {
+          "customer": "Unrelated: how does your loyalty programme work?",
+          "answer": "You earn 1 point for every dollar you spend, and 100 points are worth $1.",
+          "tools": [],
+          "inputTokens": 1025,
+          "outputTokens": 29,
+          "iterations": 1
+        },
+        {
+          "customer": "What are your weekend opening hours?",
+          "answer": "Our stores are open 10:00 to 16:00 at weekends.",
+          "tools": [],
+          "inputTokens": 1067,
+          "outputTokens": 24,
+          "iterations": 1
+        },
+        {
+          "customer": "If I give the replacement blender away as a gift, does the warranty go with it?",
+          "answer": "Yes. Warranties stay with the product when it's gifted, so the warranty would go with the item to the new owner.\n\nI don't have a replacement blender in this case. Order #8917 is a replacement jug for the Aurora X2, and the blender from order #8891 is being returned under RMA-55210. If you meant the jug or a different order, tell me and I'll look into it.",
+          "tools": [],
+          "inputTokens": 1064,
+          "outputTokens": 246,
+          "iterations": 1
+        },
+        {
+          "customer": "My neighbour has the same blender and it failed too. Should she contact you?",
+          "answer": "Yes, she should contact us herself about her blender. I can only see your case, so I can't check her order or warranty. If she has her order number, that will speed things up.\n\nIf the blender was a gift to her, the warranty still applies, because it stays with the product.",
+          "tools": [],
+          "inputTokens": 1337,
+          "outputTokens": 208,
+          "iterations": 1
+        },
+        {
+          "customer": "Do you ship to Ireland?",
+          "answer": "Yes, we ship to both the UK and Ireland.",
+          "tools": [],
+          "inputTokens": 1037,
+          "outputTokens": 20,
+          "iterations": 1
+        },
+        {
+          "customer": "Before I go, please confirm everything you have on my case: my customer ID, both order numbers with their dates, totals and status, the return reference, the restocking fee, the net refund, the refund date, and the card it goes to.",
+          "answer": "Here's what I have on your case:\n\n- **Customer ID:** C-4471\n- **Order #8891:** placed 2024-03-03, total $247.83, status delivered (Aurora X2 blender)\n- **Order #8917:** placed 2024-03-19, total $64.19, status delivered (replacement jug for Aurora X2). This order is untouched.\n- **Return reference:** RMA-55210 (for #8891)\n- **Restocking fee:** $12.50\n- **Net refund:** $235.33\n- **Refund due date:** 2024-03-29\n\n**Card:** My notes mention a Visa ending 4417. I can't confirm that the refund goes to that card. Please check with our payments team to confirm.",
+          "tools": [],
+          "inputTokens": 1127,
+          "outputTokens": 384,
+          "iterations": 1
+        }
+      ],
+      "answer": "Here's what I have on your case:\n\n- **Customer ID:** C-4471\n- **Order #8891:** placed 2024-03-03, total $247.83, status delivered (Aurora X2 blender)\n- **Order #8917:** placed 2024-03-19, total $64.19, status delivered (replacement jug for Aurora X2). This order is untouched.\n- **Return reference:** RMA-55210 (for #8891)\n- **Restocking fee:** $12.50\n- **Net refund:** $235.33\n- **Refund due date:** 2024-03-29\n\n**Card:** My notes mention a Visa ending 4417. I can't confirm that the refund goes to that card. Please check with our payments team to confirm.",
+      "score": {
+        "survived": [
+          "customer ID",
+          "order number #8891",
+          "order date 2024-03-03",
+          "total $247.83",
+          "status delivered",
+          "order number #8917",
+          "order date 2024-03-19",
+          "total $64.19",
+          "return RMA-55210",
+          "restocking fee $12.50",
+          "net refund $235.33",
+          "refund date 2024-03-29",
+          "Visa ending 4417"
+        ],
+        "lost": [],
+        "inventedAmounts": []
+      },
+      "relookups": 0,
+      "usage": {
+        "input_tokens": 8179,
+        "output_tokens": 1760
+      },
+      "finalMessages": [
+        {
+          "role": "user",
+          "content": "Do you ship to Ireland?"
+        },
+        {
+          "role": "assistant",
+          "content": [
+            {
+              "type": "text",
+              "text": "Yes, we ship to both the UK and Ireland."
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "content": "Before I go, please confirm everything you have on my case: my customer ID, both order numbers with their dates, totals and status, the return reference, the restocking fee, the net refund, the refund date, and the card it goes to."
+        },
+        {
+          "role": "assistant",
+          "content": [
+            {
+              "type": "thinking",
+              "thinking": "",
+              "signature": "CAQSlggKEAgTGAI4AUIIdGhpbmtpbmcSDHCaa1AoTSfsYNy9qBoM8xGC3XivPFzogXlcIjBIClKOlvolbtIW7Ufy8XA0RmK9ItFOlWndqz0KOhMYnzYxE5mV8Wki0E8fTFXPwEkqswfKBZFry7TMy6MQyreYIb382jO43eNOzjIv79KFOaENTI61jX2eDIN2p9emE3gHxihHCY50J5qO5YpbXGQsA2wCLGU+60bU0ysogk9riahpc51EZRIgw2ASrOQyJ2yV0PErd4hNDXkAKHDYS/BAcP0m0jKstllTT0EiUE8cdmmMvj5SpGAs+sh4xdec/rd38MOtNN7x/Za2ohUNTgRL+LDFGuUyHQWd37CBH+ETXWXDJglaWTg0v/TLDhxI4aZ+ryS9abEP1caMxQmduptoIqYGpQshKlwmJA+KaKimKe1sHH2E/EpM6GjpiFq8dSNECimrDMO97/o7HKrmRG+iovVgQHS9Q/5JDhqbv9rDfh061EtC1f7++Zvf2u78R42tYK/VdvLPvGzgzGxNLj/jF/jE9f+3ZeKhk/zSUoxHSx2qrNTCF4o/zwEgWTAihO9QGDWwMcJNmIXBV36RQ9rXwaREuyqGac5Tey+vg1MReaGC+cjICw2bVcgQ94YJv3WnS+jWz0uEPPNYmgFIA9/u2G0rA3QBGynM8UWiLqSbU080SqWlNeeTSctXeRb+qrwj0+AMV3/hLO/FG9Qa3ivij2aglzyw4eS249CFu4jOZaSXKoLXjhhadCGPzEBIu8cL1dOBFEehq/DkyWxFDX2HeH21sce6SCxw6elyyLBSDbcvZNrOVKKBtarx9FTQLKca4YqiTwU4laEpLsrw74fACbAu0mGT5Ca5T7+isyV5+AKh3HR7jaY7GFx7rwSeUJTaaEcq7F5SVKgx0TR+0HoIo3/JWTEt42b890q5lltnD/y03Di0W9Z6f2v5CQa0z3Wj+QOOP5dj1B9zDnhgry+zlnS4qQ+0w6RZLsEzmmImkbMxdC4+C6axtfFmoMSU4q0GwJVa4LXbh5kZFUyHw9UMAe5L7bR/eOVq4/VDE5Y3GuUY+FnvZCzyaU5B35WEja8fGqVsYVMrJWqeQ9F7vof9V06w14y0nrPKSMEiYntqV1NxO1lUQHG1L6J9r1D+9k7CpLmBI9i6w9SOhj5YxQeyqViIdktvJhmeUcQgZgiwA5888WdPZczQ9/BIE9gXqit8jxiw0L64BQf9PDvzc/v/6cbuxsquX8slGnofSdzlrGUmDJ+4ILLAGc2qK9fXWahDDD8IfB2EabumQ0ON7wC9+CEv3cQl9wuV7OQtlQtQCpmdKXpyGA5e+BHplZwKyQ2w+5o7ksYwFoa9BZ30mriCms2Jn62Z0mG0EofZWuzT3a9G+dUOHhgB"
+            },
+            {
+              "type": "text",
+              "text": "Here's what I have on your case:\n\n- **Customer ID:** C-4471\n- **Order #8891:** placed 2024-03-03, total $247.83, status delivered (Aurora X2 blender)\n- **Order #8917:** placed 2024-03-19, total $64.19, status delivered (replacement jug for Aurora X2). This order is untouched.\n- **Return reference:** RMA-55210 (for #8891)\n- **Restocking fee:** $12.50\n- **Net refund:** $235.33\n- **Refund due date:** 2024-03-29\n\n**Card:** My notes mention a Visa ending 4417. I can't confirm that the refund goes to that card. Please check with our payments team to confirm."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "forced": {
+    "summary": "Customer wants a refund for a recent order",
+    "with": "Here's what I have on file:\n\n- **Order:** #8891\n- **Order date:** 3 March 2024\n- **Refund amount:** $247.83\n\nI don't have the refund status, the payment method, or the expected timing, so I can't confirm those. Would you like me to look into them?",
+    "without": "I can't confirm any refund details yet. All I have is a note that you want a refund for a recent order. I don't have the order number, item, amount, or refund status, and I shouldn't have implied I had the full history.\n\nCould you send me the order number, or the email used for the order? Then I can look it up and confirm the details.",
+    "usage": {
+      "input_tokens": 456,
+      "output_tokens": 429
+    }
+  }
+}

@@ -1,0 +1,11 @@
+Fenwick Legal LLP, VAT GB444555666
+Invoice FL-2291
+Invoice date: 2024-06-20
+Due date: 2024-05-20
+Terms: Net 30
+Client PO: PO-1207
+
+| Matter               | GBP      |
+|----------------------|----------|
+| Contract review fee  | 1,500.00 |
+| Total                | 1,500.00 |

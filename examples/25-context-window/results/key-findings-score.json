@@ -1,0 +1,24 @@
+{
+  "expected": [
+    "Alder Foods",
+    "Mistral Grain",
+    "Osprey Dairy",
+    "Yarrow Oils",
+    "Nimbus Packaging"
+  ],
+  "flat": [
+    "Alder Foods",
+    "Mistral Grain",
+    "Osprey Dairy",
+    "Yarrow Oils",
+    "Nimbus Packaging"
+  ],
+  "keyFirst": [
+    "Alder Foods",
+    "Mistral Grain",
+    "Osprey Dairy",
+    "Yarrow Oils",
+    "Nimbus Packaging"
+  ],
+  "inputTokens": 20999
+}

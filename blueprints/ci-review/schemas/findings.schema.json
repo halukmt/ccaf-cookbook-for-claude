@@ -1,0 +1,24 @@
+{
+  "type": "object",
+  "properties": {
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "file": { "type": "string" },
+          "line": { "type": "integer", "minimum": 1 },
+          "severity": { "type": "string", "enum": ["critical", "major", "minor"] },
+          "message": { "type": "string" },
+          "evidence": { "type": "string" },
+          "previous_id": { "type": ["string", "null"] }
+        },
+        "required": ["file", "line", "severity", "message", "evidence", "previous_id"],
+        "additionalProperties": false
+      }
+    },
+    "resolved_ids": { "type": "array", "items": { "type": "string" } }
+  },
+  "required": ["findings", "resolved_ids"],
+  "additionalProperties": false
+}

@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>21 Structured output</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<main>
+  <a class="back" href="/">← Dashboard</a>
+  <h1>21 Structured output</h1>
+  <p class="lede">
+    Three <code>tool_choice</code> modes, nullable against required fields, and what the newest models need instead of forcing.
+    <strong>Look at <code>stop_reason</code> and at the tools really called.</strong>
+  </p>
+  <div id="example"></div>
+</main>
+<script type="module">
+import { mountExamplePage } from "/assets/example-page.js";
+
+mountExamplePage({
+  api: "/api/21-structured-output/run",
+  runLabel: "Show it",
+  fields: [
+    { name: "mode", label: "What to run", options: [["saved", "Saved results: no cost"], ["live", "Live, one call: at most about $0.005"]] },
+    { name: "arm", label: "Setting, for a live run", options: [
+      ["auto", "auto, Haiku 5.5"],
+      ["any", "any with three tools, Haiku 5.5"],
+      ["named", "named tool, Haiku 5.5"],
+      ["required", "all fields required, Haiku 5.5"],
+      ["strict", "strict with auto, Sonnet 5.5"],
+      ["format", "output_config.format, Sonnet 5.5"],
+    ] },
+    { name: "doc", label: "Document, for a live run", value: "d14", options: [
+      ["d14", "Fragment, nearly nothing in it"],
+      ["d13", "One-line invoice, many gaps"],
+      ["d03", "Receipt, no terms or PO"],
+      ["d01", "Complete invoice"],
+      ["d15", "Contract"],
+    ] },
+  ],
+  presets: [
+    { label: "Saved results", values: { mode: "saved" } },
+    { label: "auto answers in text?", values: { mode: "live", arm: "auto", doc: "d14" } },
+    { label: "Required invents?", values: { mode: "live", arm: "required", doc: "d13" } },
+  ],
+  hint: "Forced tool_choice is rejected on Sonnet 5.5, Opus 5.5 and Fable 5.1, so the forced settings run on Haiku 5.5.",
+});
+</script>
+</body>
+</html>

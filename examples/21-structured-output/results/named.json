@@ -1,0 +1,113 @@
+[
+  {
+    "docId": "d01",
+    "model": "claude-haiku-5-5",
+    "stopReason": "tool_use",
+    "blockTypes": [
+      "tool_use",
+      "tool_use"
+    ],
+    "toolName": "extract_metadata",
+    "toolNames": [
+      "extract_metadata",
+      "extract_detail"
+    ],
+    "input": {
+      "category": "invoice",
+      "document_date": "2024-03-15"
+    },
+    "text": "",
+    "usage": {
+      "input_tokens": 897,
+      "output_tokens": 226
+    }
+  },
+  {
+    "docId": "d03",
+    "model": "claude-haiku-5-5",
+    "stopReason": "tool_use",
+    "blockTypes": [
+      "tool_use",
+      "tool_use"
+    ],
+    "toolName": "extract_metadata",
+    "toolNames": [
+      "extract_metadata",
+      "extract_detail"
+    ],
+    "input": {
+      "category": "receipt",
+      "document_date": "2024-06-11"
+    },
+    "text": "",
+    "usage": {
+      "input_tokens": 803,
+      "output_tokens": 194
+    }
+  },
+  {
+    "docId": "d15",
+    "model": "claude-haiku-5-5",
+    "stopReason": "tool_use",
+    "blockTypes": [
+      "tool_use"
+    ],
+    "toolName": "extract_metadata",
+    "toolNames": [
+      "extract_metadata"
+    ],
+    "input": {
+      "category": "contract",
+      "document_date": "2024-02-01"
+    },
+    "text": "",
+    "usage": {
+      "input_tokens": 802,
+      "output_tokens": 61
+    }
+  },
+  {
+    "docId": "d14",
+    "model": "claude-haiku-5-5",
+    "stopReason": "tool_use",
+    "blockTypes": [
+      "tool_use"
+    ],
+    "toolName": "extract_metadata",
+    "toolNames": [
+      "extract_metadata"
+    ],
+    "input": {
+      "category": "other",
+      "document_date": null
+    },
+    "text": "",
+    "usage": {
+      "input_tokens": 732,
+      "output_tokens": 55
+    }
+  },
+  {
+    "docId": "d13",
+    "model": "claude-haiku-5-5",
+    "stopReason": "tool_use",
+    "blockTypes": [
+      "tool_use",
+      "tool_use"
+    ],
+    "toolName": "extract_metadata",
+    "toolNames": [
+      "extract_metadata",
+      "extract_detail"
+    ],
+    "input": {
+      "category": "invoice",
+      "document_date": "2024-03-15"
+    },
+    "text": "",
+    "usage": {
+      "input_tokens": 723,
+      "output_tokens": 170
+    }
+  }
+]

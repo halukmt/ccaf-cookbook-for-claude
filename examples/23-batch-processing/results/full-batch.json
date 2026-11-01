@@ -1,0 +1,2349 @@
+{
+  "id": "msgbatch_01JP64yVpV1EptiWmrVy5H78",
+  "createdAt": "2026-10-31T22:20:18.988673+00:00",
+  "submittedAt": "2026-10-31T22:20:18.909Z",
+  "failingRequest": "forced tool_choice on Sonnet 5.5",
+  "rejectedAtCreate": [],
+  "requests": [
+    {
+      "custom_id": "doc-invoice-000-d01",
+      "params": {
+        "model": "claude-haiku-5-5",
+        "max_tokens": 2000,
+        "system": "Extract this document's data with the tool. payment_terms means when payment is due, such as Net 30, and never how a payment was made. Read currency from symbols as well as codes: $ is USD, £ is GBP, € is EUR.",
+        "tools": [
+          {
+            "name": "extract_document",
+            "description": "Record the data of one document. Use null for anything it does not state.",
+            "input_schema": {
+              "type": "object",
+              "properties": {
+                "invoice_number": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "vendor_name": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "document_date": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "ISO 8601, YYYY-MM-DD"
+                },
+                "due_date": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "ISO 8601, YYYY-MM-DD"
+                },
+                "payment_terms": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "purchase_order": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "tax_id": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "currency": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "ISO 4217 code"
+                },
+                "total_amount": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "line_items": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "description": {
+                        "type": "string"
+                      },
+                      "amount": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "description",
+                      "amount"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "invoice_number",
+                "vendor_name",
+                "document_date",
+                "due_date",
+                "payment_terms",
+                "purchase_order",
+                "tax_id",
+                "currency",
+                "total_amount",
+                "line_items"
+              ]
+            }
+          }
+        ],
+        "tool_choice": {
+          "type": "tool",
+          "name": "extract_document",
+          "disable_parallel_tool_use": true
+        },
+        "messages": [
+          {
+            "role": "user",
+            "content": "NORTHWIND OFFICE SUPPLIES GMBH\nHafenstrasse 12, 20457 Hamburg\nVAT ID: DE811907980\n\nInvoice no.:     INV-2024-1041\nInvoice date:    2024-03-15\nDue date:        2024-04-14\nPayment terms:   Net 30\nYour PO:         PO-7781\n\n| Description      | Amount (EUR) |\n|------------------|--------------|\n| Copy paper       |       120.00 |\n| Toner cartridges |       240.00 |\n| VAT 19%          |        68.40 |\n| Total            |       428.40 |\n"
+          }
+        ]
+      }
+    },
+    {
+      "custom_id": "doc-invoice-001-d02",
+      "params": {
+        "model": "claude-sonnet-5-5",
+        "max_tokens": 2000,
+        "system": "Extract this document's data with the tool. payment_terms means when payment is due, such as Net 30, and never how a payment was made. Read currency from symbols as well as codes: $ is USD, £ is GBP, € is EUR.",
+        "tools": [
+          {
+            "name": "extract_document",
+            "description": "Record the data of one document. Use null for anything it does not state.",
+            "input_schema": {
+              "type": "object",
+              "properties": {
+                "invoice_number": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "vendor_name": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "document_date": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "ISO 8601, YYYY-MM-DD"
+                },
+                "due_date": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "ISO 8601, YYYY-MM-DD"
+                },
+                "payment_terms": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "purchase_order": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "tax_id": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "currency": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "ISO 4217 code"
+                },
+                "total_amount": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "line_items": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "description": {
+                        "type": "string"
+                      },
+                      "amount": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "description",
+                      "amount"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "invoice_number",
+                "vendor_name",
+                "document_date",
+                "due_date",
+                "payment_terms",
+                "purchase_order",
+                "tax_id",
+                "currency",
+                "total_amount",
+                "line_items"
+              ]
+            }
+          }
+        ],
+        "tool_choice": {
+          "type": "tool",
+          "name": "extract_document",
+          "disable_parallel_tool_use": true
+        },
+        "messages": [
+          {
+            "role": "user",
+            "content": "Harbor Freight Logistics Ltd\nVAT Reg. GB123456789\n\nINVOICE HFL-5520\nIssued: 2 May 2024 | Due: 16 May 2024 | Terms: Net 14 | Purchase order: PO-3310\n\n| Service            | GBP      |\n|--------------------|----------|\n| Container handling |   850.00 |\n| Customs clearance  |   175.50 |\n| TOTAL DUE          | 1,025.50 |\n"
+          }
+        ]
+      }
+    },
+    {
+      "custom_id": "doc-receipt-002-d03",
+      "params": {
+        "model": "claude-haiku-5-5",
+        "max_tokens": 2000,
+        "system": "Extract this document's data with the tool. payment_terms means when payment is due, such as Net 30, and never how a payment was made. Read currency from symbols as well as codes: $ is USD, £ is GBP, € is EUR.",
+        "tools": [
+          {
+            "name": "extract_document",
+            "description": "Record the data of one document. Use null for anything it does not state.",
+            "input_schema": {
+              "type": "object",
+              "properties": {
+                "invoice_number": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "vendor_name": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "document_date": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "ISO 8601, YYYY-MM-DD"
+                },
+                "due_date": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "ISO 8601, YYYY-MM-DD"
+                },
+                "payment_terms": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "purchase_order": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "tax_id": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "currency": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "ISO 4217 code"
+                },
+                "total_amount": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "line_items": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "description": {
+                        "type": "string"
+                      },
+                      "amount": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "description",
+                      "amount"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "invoice_number",
+                "vendor_name",
+                "document_date",
+                "due_date",
+                "payment_terms",
+                "purchase_order",
+                "tax_id",
+                "currency",
+                "total_amount",
+                "line_items"
+              ]
+            }
+          }
+        ],
+        "tool_choice": {
+          "type": "tool",
+          "name": "extract_document",
+          "disable_parallel_tool_use": true
+        },
+        "messages": [
+          {
+            "role": "user",
+            "content": "Cafe Lindner\nUSt-IdNr. DE298765432\n\nReceipt R-88213\nDate: 2024-06-11\n\n| Item     | EUR   |\n|----------|-------|\n| Coffee   |  7.80 |\n| Sandwich |  9.50 |\n| Total    | 17.30 |\n\nPaid by card. Thank you!\n"
+          }
+        ]
+      }
+    },
+    {
+      "custom_id": "doc-report-003-d04",
+      "params": {
+        "model": "claude-haiku-5-5",
+        "max_tokens": 2000,
+        "system": "Extract this document's data with the tool. payment_terms means when payment is due, such as Net 30, and never how a payment was made. Read currency from symbols as well as codes: $ is USD, £ is GBP, € is EUR.",
+        "tools": [
+          {
+            "name": "extract_document",
+            "description": "Record the data of one document. Use null for anything it does not state.",
+            "input_schema": {
+              "type": "object",
+              "properties": {
+                "invoice_number": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "vendor_name": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "document_date": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "ISO 8601, YYYY-MM-DD"
+                },
+                "due_date": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "ISO 8601, YYYY-MM-DD"
+                },
+                "payment_terms": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "purchase_order": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "tax_id": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "currency": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "ISO 4217 code"
+                },
+                "total_amount": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "line_items": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "description": {
+                        "type": "string"
+                      },
+                      "amount": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "description",
+                      "amount"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "invoice_number",
+                "vendor_name",
+                "document_date",
+                "due_date",
+                "payment_terms",
+                "purchase_order",
+                "tax_id",
+                "currency",
+                "total_amount",
+                "line_items"
+              ]
+            }
+          }
+        ],
+        "tool_choice": {
+          "type": "tool",
+          "name": "extract_document",
+          "disable_parallel_tool_use": true
+        },
+        "messages": [
+          {
+            "role": "user",
+            "content": "Meridian Facilities Services\nQ1 Facilities Spend Report\nReport date: 2024-04-05\n\n| Category | USD       |\n|----------|-----------|\n| Cleaning |  3,200.00 |\n| Security |  5,400.00 |\n| Energy   |  2,150.50 |\n| Total    | 10,750.50 |\n"
+          }
+        ]
+      }
+    },
+    {
+      "custom_id": "doc-invoice-004-d05",
+      "params": {
+        "model": "claude-haiku-5-5",
+        "max_tokens": 30,
+        "system": "Extract this document's data with the tool. payment_terms means when payment is due, such as Net 30, and never how a payment was made. Read currency from symbols as well as codes: $ is USD, £ is GBP, € is EUR.",
+        "tools": [
+          {
+            "name": "extract_document",
+            "description": "Record the data of one document. Use null for anything it does not state.",
+            "input_schema": {
+              "type": "object",
+              "properties": {
+                "invoice_number": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "vendor_name": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "document_date": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "ISO 8601, YYYY-MM-DD"
+                },
+                "due_date": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "ISO 8601, YYYY-MM-DD"
+                },
+                "payment_terms": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "purchase_order": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "tax_id": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "currency": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "ISO 4217 code"
+                },
+                "total_amount": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "line_items": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "description": {
+                        "type": "string"
+                      },
+                      "amount": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "description",
+                      "amount"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "invoice_number",
+                "vendor_name",
+                "document_date",
+                "due_date",
+                "payment_terms",
+                "purchase_order",
+                "tax_id",
+                "currency",
+                "total_amount",
+                "line_items"
+              ]
+            }
+          }
+        ],
+        "tool_choice": {
+          "type": "tool",
+          "name": "extract_document",
+          "disable_parallel_tool_use": true
+        },
+        "messages": [
+          {
+            "role": "user",
+            "content": "Dear Ms Keller,\n\nThank you for working with Elm Street Consulting. This letter is our invoice, reference ES-204, for the\nwork delivered on the third of March 2024. We ran two workshops at twelve hundred euros each, and travel\ncame to three hundred and forty euros on top. That brings the total to two thousand seven hundred and\nforty euros. We ask for payment within thirty days.\n\nKind regards,\nTom Elm\n"
+          }
+        ]
+      }
+    },
+    {
+      "custom_id": "doc-receipt-005-d06",
+      "params": {
+        "model": "claude-haiku-5-5",
+        "max_tokens": 2000,
+        "system": "Extract this document's data with the tool. payment_terms means when payment is due, such as Net 30, and never how a payment was made. Read currency from symbols as well as codes: $ is USD, £ is GBP, € is EUR.",
+        "tools": [
+          {
+            "name": "extract_document",
+            "description": "Record the data of one document. Use null for anything it does not state.",
+            "input_schema": {
+              "type": "object",
+              "properties": {
+                "invoice_number": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "vendor_name": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "document_date": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "ISO 8601, YYYY-MM-DD"
+                },
+                "due_date": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "ISO 8601, YYYY-MM-DD"
+                },
+                "payment_terms": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "purchase_order": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "tax_id": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "currency": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "ISO 4217 code"
+                },
+                "total_amount": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "line_items": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "description": {
+                        "type": "string"
+                      },
+                      "amount": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "description",
+                      "amount"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "invoice_number",
+                "vendor_name",
+                "document_date",
+                "due_date",
+                "payment_terms",
+                "purchase_order",
+                "tax_id",
+                "currency",
+                "total_amount",
+                "line_items"
+              ]
+            }
+          }
+        ],
+        "tool_choice": {
+          "type": "tool",
+          "name": "extract_document",
+          "disable_parallel_tool_use": true
+        },
+        "messages": [
+          {
+            "role": "user",
+            "content": "We purchased fifty widgets at ten pounds each on 14 February 2024, paid by card at the trade counter.\nThe widgets were collected the same day. Keep this note with the quarter's expenses.\n"
+          }
+        ]
+      }
+    },
+    {
+      "custom_id": "doc-report-006-d07",
+      "params": {
+        "model": "claude-haiku-5-5",
+        "max_tokens": 2000,
+        "system": "Extract this document's data with the tool. payment_terms means when payment is due, such as Net 30, and never how a payment was made. Read currency from symbols as well as codes: $ is USD, £ is GBP, € is EUR.",
+        "tools": [
+          {
+            "name": "extract_document",
+            "description": "Record the data of one document. Use null for anything it does not state.",
+            "input_schema": {
+              "type": "object",
+              "properties": {
+                "invoice_number": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "vendor_name": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "document_date": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "ISO 8601, YYYY-MM-DD"
+                },
+                "due_date": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "ISO 8601, YYYY-MM-DD"
+                },
+                "payment_terms": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "purchase_order": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "tax_id": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "currency": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "ISO 4217 code"
+                },
+                "total_amount": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "line_items": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "description": {
+                        "type": "string"
+                      },
+                      "amount": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "description",
+                      "amount"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "invoice_number",
+                "vendor_name",
+                "document_date",
+                "due_date",
+                "payment_terms",
+                "purchase_order",
+                "tax_id",
+                "currency",
+                "total_amount",
+                "line_items"
+              ]
+            }
+          }
+        ],
+        "tool_choice": {
+          "type": "tool",
+          "name": "extract_document",
+          "disable_parallel_tool_use": true
+        },
+        "messages": [
+          {
+            "role": "user",
+            "content": "Monthly field report from Dana Ortiz of Bluepeak Surveying, written on April 30, 2024. Over the month I spent\n$312.40 on fuel and $890.00 on lodging near the site, and the county charged us $150 for the site permit. All\ntold the month came to $1,352.40.\n"
+          }
+        ]
+      }
+    },
+    {
+      "custom_id": "doc-invoice-007-d08",
+      "params": {
+        "model": "claude-haiku-5-5",
+        "max_tokens": 2000,
+        "system": "Extract this document's data with the tool. payment_terms means when payment is due, such as Net 30, and never how a payment was made. Read currency from symbols as well as codes: $ is USD, £ is GBP, € is EUR.",
+        "tools": [
+          {
+            "name": "extract_document",
+            "description": "Record the data of one document. Use null for anything it does not state.",
+            "input_schema": {
+              "type": "object",
+              "properties": {
+                "invoice_number": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "vendor_name": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "document_date": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "ISO 8601, YYYY-MM-DD"
+                },
+                "due_date": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "ISO 8601, YYYY-MM-DD"
+                },
+                "payment_terms": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "purchase_order": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "tax_id": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "currency": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "ISO 4217 code"
+                },
+                "total_amount": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "line_items": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "description": {
+                        "type": "string"
+                      },
+                      "amount": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "description",
+                      "amount"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "invoice_number",
+                "vendor_name",
+                "document_date",
+                "due_date",
+                "payment_terms",
+                "purchase_order",
+                "tax_id",
+                "currency",
+                "total_amount",
+                "line_items"
+              ]
+            }
+          }
+        ],
+        "tool_choice": {
+          "type": "tool",
+          "name": "extract_document",
+          "disable_parallel_tool_use": true
+        },
+        "messages": [
+          {
+            "role": "user",
+            "content": "Alpine Tooling AG, Industrieweg 4, 6300 Zug\nMWST-Nr.: CHE-123.456.789\n\nRechnung Nr. AT-99017\nDatum: 19. Juli 2024\nIhre Bestellung: 4500123\nZahlbar innert 30 Tagen\n\nPos.  Bezeichnung        CHF\n1     Milling cutters    1'250.00\n2     Regrinding service   430.00\n\nShipping, as agreed by phone, adds CHF 45.00.\n\nRechnungsbetrag: CHF 1'725.00\n"
+          }
+        ]
+      }
+    },
+    {
+      "custom_id": "doc-invoice-008-d09",
+      "params": {
+        "model": "claude-haiku-5-5",
+        "max_tokens": 2000,
+        "system": "Extract this document's data with the tool. payment_terms means when payment is due, such as Net 30, and never how a payment was made. Read currency from symbols as well as codes: $ is USD, £ is GBP, € is EUR.",
+        "tools": [
+          {
+            "name": "extract_document",
+            "description": "Record the data of one document. Use null for anything it does not state.",
+            "input_schema": {
+              "type": "object",
+              "properties": {
+                "invoice_number": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "vendor_name": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "document_date": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "ISO 8601, YYYY-MM-DD"
+                },
+                "due_date": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "ISO 8601, YYYY-MM-DD"
+                },
+                "payment_terms": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "purchase_order": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "tax_id": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "currency": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "ISO 4217 code"
+                },
+                "total_amount": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "line_items": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "description": {
+                        "type": "string"
+                      },
+                      "amount": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "description",
+                      "amount"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "invoice_number",
+                "vendor_name",
+                "document_date",
+                "due_date",
+                "payment_terms",
+                "purchase_order",
+                "tax_id",
+                "currency",
+                "total_amount",
+                "line_items"
+              ]
+            }
+          }
+        ],
+        "tool_choice": {
+          "type": "tool",
+          "name": "extract_document",
+          "disable_parallel_tool_use": true
+        },
+        "messages": [
+          {
+            "role": "user",
+            "content": "Societe Lumiere SARL\nTVA intracommunautaire : FR40303265045\n\nFACTURE FA-2024-311\nParis, le 12 septembre 2024\nEcheance : 12 octobre 2024 (30 jours)\n\nEclairage LED ........ 1.234,50 EUR\nInstallation ........... 300,00 EUR\nTVA 20 % ............... 306,90 EUR\n\nTotal TTC : 1.841,40 EUR\n"
+          }
+        ]
+      }
+    },
+    {
+      "custom_id": "doc-invoice-009-d10",
+      "params": {
+        "model": "claude-haiku-5-5",
+        "max_tokens": 2000,
+        "system": "Extract this document's data with the tool. payment_terms means when payment is due, such as Net 30, and never how a payment was made. Read currency from symbols as well as codes: $ is USD, £ is GBP, € is EUR.",
+        "tools": [
+          {
+            "name": "extract_document",
+            "description": "Record the data of one document. Use null for anything it does not state.",
+            "input_schema": {
+              "type": "object",
+              "properties": {
+                "invoice_number": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "vendor_name": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "document_date": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "ISO 8601, YYYY-MM-DD"
+                },
+                "due_date": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "ISO 8601, YYYY-MM-DD"
+                },
+                "payment_terms": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "purchase_order": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "tax_id": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "currency": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "ISO 4217 code"
+                },
+                "total_amount": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "line_items": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "description": {
+                        "type": "string"
+                      },
+                      "amount": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "description",
+                      "amount"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "invoice_number",
+                "vendor_name",
+                "document_date",
+                "due_date",
+                "payment_terms",
+                "purchase_order",
+                "tax_id",
+                "currency",
+                "total_amount",
+                "line_items"
+              ]
+            }
+          }
+        ],
+        "tool_choice": {
+          "type": "tool",
+          "name": "extract_document",
+          "disable_parallel_tool_use": true
+        },
+        "messages": [
+          {
+            "role": "user",
+            "content": "Greenline Print Co. (EIN 12-3456789)\nInvoice GP-7741, January 22, 2024. Payment due February 21, 2024 (Net 30). Customer PO: PO-5502.\n\nItems as discussed with your marketing team:\n\n| Item      | USD    |\n|-----------|--------|\n| Brochures | 600.00 |\n| Posters   | 200.00 |\n| Subtotal  | 800.00 |\n\nA loyalty discount of 10% (-80.00) applies to the subtotal, and sales tax of 57.60 was charged on the discounted amount.\n\nAmount due: USD 777.60\n"
+          }
+        ]
+      }
+    },
+    {
+      "custom_id": "doc-invoice-010-d11",
+      "params": {
+        "model": "claude-haiku-5-5",
+        "max_tokens": 2000,
+        "system": "Extract this document's data with the tool. payment_terms means when payment is due, such as Net 30, and never how a payment was made. Read currency from symbols as well as codes: $ is USD, £ is GBP, € is EUR.",
+        "tools": [
+          {
+            "name": "extract_document",
+            "description": "Record the data of one document. Use null for anything it does not state.",
+            "input_schema": {
+              "type": "object",
+              "properties": {
+                "invoice_number": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "vendor_name": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "document_date": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "ISO 8601, YYYY-MM-DD"
+                },
+                "due_date": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "ISO 8601, YYYY-MM-DD"
+                },
+                "payment_terms": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "purchase_order": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "tax_id": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "currency": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "ISO 4217 code"
+                },
+                "total_amount": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "line_items": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "description": {
+                        "type": "string"
+                      },
+                      "amount": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "description",
+                      "amount"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "invoice_number",
+                "vendor_name",
+                "document_date",
+                "due_date",
+                "payment_terms",
+                "purchase_order",
+                "tax_id",
+                "currency",
+                "total_amount",
+                "line_items"
+              ]
+            }
+          }
+        ],
+        "tool_choice": {
+          "type": "tool",
+          "name": "extract_document",
+          "disable_parallel_tool_use": true
+        },
+        "messages": [
+          {
+            "role": "user",
+            "content": "[scanned document, OCR output]\nBr1ghtway Electr1cal Ltd\nlNVOICE N0. 3381       8 Nov 2O24\n\nRew1ring ......... GBP 1,2OO.OO\nParts ............ GBP   345.5O\nT0TAL ............ GBP 1,545.5O\n"
+          }
+        ]
+      }
+    },
+    {
+      "custom_id": "doc-receipt-011-d12",
+      "params": {
+        "model": "claude-haiku-5-5",
+        "max_tokens": 2000,
+        "system": "Extract this document's data with the tool. payment_terms means when payment is due, such as Net 30, and never how a payment was made. Read currency from symbols as well as codes: $ is USD, £ is GBP, € is EUR.",
+        "tools": [
+          {
+            "name": "extract_document",
+            "description": "Record the data of one document. Use null for anything it does not state.",
+            "input_schema": {
+              "type": "object",
+              "properties": {
+                "invoice_number": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "vendor_name": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "document_date": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "ISO 8601, YYYY-MM-DD"
+                },
+                "due_date": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "ISO 8601, YYYY-MM-DD"
+                },
+                "payment_terms": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "purchase_order": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "tax_id": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "currency": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "ISO 4217 code"
+                },
+                "total_amount": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "line_items": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "description": {
+                        "type": "string"
+                      },
+                      "amount": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "description",
+                      "amount"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "invoice_number",
+                "vendor_name",
+                "document_date",
+                "due_date",
+                "payment_terms",
+                "purchase_order",
+                "tax_id",
+                "currency",
+                "total_amount",
+                "line_items"
+              ]
+            }
+          }
+        ],
+        "tool_choice": {
+          "type": "tool",
+          "name": "extract_document",
+          "disable_parallel_tool_use": true
+        },
+        "messages": [
+          {
+            "role": "user",
+            "content": "[handwritten receipt, transcribed]\nJoe's Hardware\n3 hinges @ 4.50 ea, 1 box screws 6.00\ntot $19.50 cash, Feb 14\n"
+          }
+        ]
+      }
+    },
+    {
+      "custom_id": "doc-invoice-012-d13",
+      "params": {
+        "model": "claude-haiku-5-5",
+        "max_tokens": 2000,
+        "system": "Extract this document's data with the tool. payment_terms means when payment is due, such as Net 30, and never how a payment was made. Read currency from symbols as well as codes: $ is USD, £ is GBP, € is EUR.",
+        "tools": [
+          {
+            "name": "extract_document",
+            "description": "Record the data of one document. Use null for anything it does not state.",
+            "input_schema": {
+              "type": "object",
+              "properties": {
+                "invoice_number": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "vendor_name": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "document_date": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "ISO 8601, YYYY-MM-DD"
+                },
+                "due_date": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "ISO 8601, YYYY-MM-DD"
+                },
+                "payment_terms": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "purchase_order": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "tax_id": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "currency": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "ISO 4217 code"
+                },
+                "total_amount": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "line_items": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "description": {
+                        "type": "string"
+                      },
+                      "amount": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "description",
+                      "amount"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "invoice_number",
+                "vendor_name",
+                "document_date",
+                "due_date",
+                "payment_terms",
+                "purchase_order",
+                "tax_id",
+                "currency",
+                "total_amount",
+                "line_items"
+              ]
+            }
+          }
+        ],
+        "tool_choice": {
+          "type": "tool",
+          "name": "extract_document",
+          "disable_parallel_tool_use": true
+        },
+        "messages": [
+          {
+            "role": "user",
+            "content": "Invoice #1234 from Acme Corp, dated 2024-03-15. Total: $500.00\n"
+          }
+        ]
+      }
+    },
+    {
+      "custom_id": "doc-fragment-013-d14",
+      "params": {
+        "model": "claude-haiku-5-5",
+        "max_tokens": 2000,
+        "system": "Extract this document's data with the tool. payment_terms means when payment is due, such as Net 30, and never how a payment was made. Read currency from symbols as well as codes: $ is USD, £ is GBP, € is EUR.",
+        "tools": [
+          {
+            "name": "extract_document",
+            "description": "Record the data of one document. Use null for anything it does not state.",
+            "input_schema": {
+              "type": "object",
+              "properties": {
+                "invoice_number": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "vendor_name": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "document_date": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "ISO 8601, YYYY-MM-DD"
+                },
+                "due_date": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "ISO 8601, YYYY-MM-DD"
+                },
+                "payment_terms": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "purchase_order": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "tax_id": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "currency": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "ISO 4217 code"
+                },
+                "total_amount": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "line_items": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "description": {
+                        "type": "string"
+                      },
+                      "amount": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "description",
+                      "amount"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "invoice_number",
+                "vendor_name",
+                "document_date",
+                "due_date",
+                "payment_terms",
+                "purchase_order",
+                "tax_id",
+                "currency",
+                "total_amount",
+                "line_items"
+              ]
+            }
+          }
+        ],
+        "tool_choice": {
+          "type": "tool",
+          "name": "extract_document",
+          "disable_parallel_tool_use": true
+        },
+        "messages": [
+          {
+            "role": "user",
+            "content": "Thanks for getting in touch. Your payment of 120 has been noted. Please keep this message for your records.\n\nRegards, accounts\n"
+          }
+        ]
+      }
+    },
+    {
+      "custom_id": "doc-contract-014-d15",
+      "params": {
+        "model": "claude-haiku-5-5",
+        "max_tokens": 2000,
+        "system": "Extract this document's data with the tool. payment_terms means when payment is due, such as Net 30, and never how a payment was made. Read currency from symbols as well as codes: $ is USD, £ is GBP, € is EUR.",
+        "tools": [
+          {
+            "name": "extract_document",
+            "description": "Record the data of one document. Use null for anything it does not state.",
+            "input_schema": {
+              "type": "object",
+              "properties": {
+                "invoice_number": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "vendor_name": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "document_date": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "ISO 8601, YYYY-MM-DD"
+                },
+                "due_date": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "ISO 8601, YYYY-MM-DD"
+                },
+                "payment_terms": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "purchase_order": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "tax_id": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "currency": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "ISO 4217 code"
+                },
+                "total_amount": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "line_items": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "description": {
+                        "type": "string"
+                      },
+                      "amount": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "description",
+                      "amount"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "invoice_number",
+                "vendor_name",
+                "document_date",
+                "due_date",
+                "payment_terms",
+                "purchase_order",
+                "tax_id",
+                "currency",
+                "total_amount",
+                "line_items"
+              ]
+            }
+          }
+        ],
+        "tool_choice": {
+          "type": "tool",
+          "name": "extract_document",
+          "disable_parallel_tool_use": true
+        },
+        "messages": [
+          {
+            "role": "user",
+            "content": "SERVICE AGREEMENT\n\nThis agreement is made on 1 February 2024 between Rhein Cloud Hosting GmbH (the provider) and the customer.\nThe provider supplies managed hosting for 12 months. The fee is EUR 450.00 per month, payable monthly in advance.\nEither party may terminate with three months' notice.\n"
+          }
+        ]
+      }
+    },
+    {
+      "custom_id": "doc-invoice-015-d16",
+      "params": {
+        "model": "claude-haiku-5-5",
+        "max_tokens": 2000,
+        "system": "Extract this document's data with the tool. payment_terms means when payment is due, such as Net 30, and never how a payment was made. Read currency from symbols as well as codes: $ is USD, £ is GBP, € is EUR.",
+        "tools": [
+          {
+            "name": "extract_document",
+            "description": "Record the data of one document. Use null for anything it does not state.",
+            "input_schema": {
+              "type": "object",
+              "properties": {
+                "invoice_number": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "vendor_name": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "document_date": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "ISO 8601, YYYY-MM-DD"
+                },
+                "due_date": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "ISO 8601, YYYY-MM-DD"
+                },
+                "payment_terms": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "purchase_order": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "tax_id": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "currency": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "ISO 4217 code"
+                },
+                "total_amount": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "line_items": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "description": {
+                        "type": "string"
+                      },
+                      "amount": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "description",
+                      "amount"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "invoice_number",
+                "vendor_name",
+                "document_date",
+                "due_date",
+                "payment_terms",
+                "purchase_order",
+                "tax_id",
+                "currency",
+                "total_amount",
+                "line_items"
+              ]
+            }
+          }
+        ],
+        "tool_choice": {
+          "type": "tool",
+          "name": "extract_document",
+          "disable_parallel_tool_use": true
+        },
+        "messages": [
+          {
+            "role": "user",
+            "content": "Castlegate Plumbing Ltd, VAT GB987654321\nInvoice CP-1180\nDate: 2024-08-05    Due: 2024-09-04    Terms: Net 30    PO: PO-8801\n\n| Work               | GBP    |\n|--------------------|--------|\n| Boiler service     | 180.00 |\n| Valve replacement  |  95.00 |\n| Call-out charge    |  60.00 |\n| Total              | 355.00 |\n"
+          }
+        ]
+      }
+    },
+    {
+      "custom_id": "doc-invoice-016-d17",
+      "params": {
+        "model": "claude-haiku-5-5",
+        "max_tokens": 2000,
+        "system": "Extract this document's data with the tool. payment_terms means when payment is due, such as Net 30, and never how a payment was made. Read currency from symbols as well as codes: $ is USD, £ is GBP, € is EUR.",
+        "tools": [
+          {
+            "name": "extract_document",
+            "description": "Record the data of one document. Use null for anything it does not state.",
+            "input_schema": {
+              "type": "object",
+              "properties": {
+                "invoice_number": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "vendor_name": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "document_date": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "ISO 8601, YYYY-MM-DD"
+                },
+                "due_date": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "ISO 8601, YYYY-MM-DD"
+                },
+                "payment_terms": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "purchase_order": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "tax_id": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "currency": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "ISO 4217 code"
+                },
+                "total_amount": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "line_items": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "description": {
+                        "type": "string"
+                      },
+                      "amount": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "description",
+                      "amount"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "invoice_number",
+                "vendor_name",
+                "document_date",
+                "due_date",
+                "payment_terms",
+                "purchase_order",
+                "tax_id",
+                "currency",
+                "total_amount",
+                "line_items"
+              ]
+            }
+          }
+        ],
+        "tool_choice": {
+          "type": "tool",
+          "name": "extract_document",
+          "disable_parallel_tool_use": true
+        },
+        "messages": [
+          {
+            "role": "user",
+            "content": "Fenwick Legal LLP, VAT GB444555666\nInvoice FL-2291\nInvoice date: 2024-06-20\nDue date: 2024-05-20\nTerms: Net 30\nClient PO: PO-1207\n\n| Matter               | GBP      |\n|----------------------|----------|\n| Contract review fee  | 1,500.00 |\n| Total                | 1,500.00 |\n"
+          }
+        ]
+      }
+    },
+    {
+      "custom_id": "doc-invoice-017-d18",
+      "params": {
+        "model": "claude-haiku-5-5",
+        "max_tokens": 2000,
+        "system": "Extract this document's data with the tool. payment_terms means when payment is due, such as Net 30, and never how a payment was made. Read currency from symbols as well as codes: $ is USD, £ is GBP, € is EUR.",
+        "tools": [
+          {
+            "name": "extract_document",
+            "description": "Record the data of one document. Use null for anything it does not state.",
+            "input_schema": {
+              "type": "object",
+              "properties": {
+                "invoice_number": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "vendor_name": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "document_date": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "ISO 8601, YYYY-MM-DD"
+                },
+                "due_date": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "ISO 8601, YYYY-MM-DD"
+                },
+                "payment_terms": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "purchase_order": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "tax_id": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "currency": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "ISO 4217 code"
+                },
+                "total_amount": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "line_items": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "description": {
+                        "type": "string"
+                      },
+                      "amount": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "description",
+                      "amount"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "invoice_number",
+                "vendor_name",
+                "document_date",
+                "due_date",
+                "payment_terms",
+                "purchase_order",
+                "tax_id",
+                "currency",
+                "total_amount",
+                "line_items"
+              ]
+            }
+          }
+        ],
+        "tool_choice": {
+          "type": "tool",
+          "name": "extract_document",
+          "disable_parallel_tool_use": true
+        },
+        "messages": [
+          {
+            "role": "user",
+            "content": "Orion Lab Supplies Inc., Tax ID 98-7654321\nOrder ref 20240912 | Doc no. OL-20240912-7 | 12 Sep 2024 | Due 12 Oct 2024 | Net 30 | PO-6620\n\n| Line total | Qty | Unit price | Item     |\n|------------|-----|------------|----------|\n|     125.00 |  10 |      12.50 | Pipettes |\n|      36.00 |   4 |       9.00 | Gloves   |\n\nBalance payable (USD): 161.00\n"
+          }
+        ]
+      }
+    },
+    {
+      "custom_id": "doc-report-018-d19",
+      "params": {
+        "model": "claude-haiku-5-5",
+        "max_tokens": 2000,
+        "system": "Extract this document's data with the tool. payment_terms means when payment is due, such as Net 30, and never how a payment was made. Read currency from symbols as well as codes: $ is USD, £ is GBP, € is EUR.",
+        "tools": [
+          {
+            "name": "extract_document",
+            "description": "Record the data of one document. Use null for anything it does not state.",
+            "input_schema": {
+              "type": "object",
+              "properties": {
+                "invoice_number": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "vendor_name": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "document_date": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "ISO 8601, YYYY-MM-DD"
+                },
+                "due_date": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "ISO 8601, YYYY-MM-DD"
+                },
+                "payment_terms": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "purchase_order": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "tax_id": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "currency": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "ISO 4217 code"
+                },
+                "total_amount": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "line_items": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "description": {
+                        "type": "string"
+                      },
+                      "amount": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "description",
+                      "amount"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "invoice_number",
+                "vendor_name",
+                "document_date",
+                "due_date",
+                "payment_terms",
+                "purchase_order",
+                "tax_id",
+                "currency",
+                "total_amount",
+                "line_items"
+              ]
+            }
+          }
+        ],
+        "tool_choice": {
+          "type": "tool",
+          "name": "extract_document",
+          "disable_parallel_tool_use": true
+        },
+        "messages": [
+          {
+            "role": "user",
+            "content": "Kestrel Aviation Consulting\nTravel spend summary, second quarter\n\nFlights came to EUR 2,310.00 and hotels to EUR 1,480.00.\n\n| Total | EUR 3,790.00 |\n"
+          }
+        ]
+      }
+    },
+    {
+      "custom_id": "doc-receipt-019-d20",
+      "params": {
+        "model": "claude-haiku-5-5",
+        "max_tokens": 2000,
+        "system": "Extract this document's data with the tool. payment_terms means when payment is due, such as Net 30, and never how a payment was made. Read currency from symbols as well as codes: $ is USD, £ is GBP, € is EUR.",
+        "tools": [
+          {
+            "name": "extract_document",
+            "description": "Record the data of one document. Use null for anything it does not state.",
+            "input_schema": {
+              "type": "object",
+              "properties": {
+                "invoice_number": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "vendor_name": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "document_date": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "ISO 8601, YYYY-MM-DD"
+                },
+                "due_date": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "ISO 8601, YYYY-MM-DD"
+                },
+                "payment_terms": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "purchase_order": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "tax_id": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "currency": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "ISO 4217 code"
+                },
+                "total_amount": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "line_items": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "description": {
+                        "type": "string"
+                      },
+                      "amount": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "description",
+                      "amount"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "invoice_number",
+                "vendor_name",
+                "document_date",
+                "due_date",
+                "payment_terms",
+                "purchase_order",
+                "tax_id",
+                "currency",
+                "total_amount",
+                "line_items"
+              ]
+            }
+          }
+        ],
+        "tool_choice": {
+          "type": "tool",
+          "name": "extract_document",
+          "disable_parallel_tool_use": true
+        },
+        "messages": [
+          {
+            "role": "user",
+            "content": "FreshMart Store 221            VAT No GB555666777\nReceipt 00917                  2024-09-30\n\nGroceries      43.20\nHousehold      12.80\n---------------------\nTOTAL GBP      56.00\n"
+          }
+        ]
+      }
+    }
+  ]
+}

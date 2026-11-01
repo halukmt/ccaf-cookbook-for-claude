@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>09 Structured tool errors</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<main>
+  <a class="back" href="/">← Dashboard</a>
+  <h1>09 Structured tool errors</h1>
+  <p class="lede">
+    A failed call says what kind of failure it was, and <strong>code picks the recovery from that</strong>: retry, fix the
+    input, escalate or ask for credentials. A search that found nothing is not a failure at all.
+  </p>
+  <div id="example"></div>
+</main>
+<script type="module">
+import { mountExamplePage } from "/assets/example-page.js";
+
+mountExamplePage({
+  api: "/api/09-structured-tool-errors/run",
+  runLabel: "Run",
+  fields: [{
+    name: "scenario", label: "Scenario", value: "responses",
+    options: [
+      ["responses", "All raw responses (no model, free)"],
+      ["success", "Customer found"],
+      ["empty", "Valid empty result"],
+      ["transient", "Two timeouts, then success"],
+      ["exhausted", "Timeouts until retries run out"],
+      ["validation", "Bad input format, model fixes it"],
+      ["business", "Business rule, escalate"],
+      ["permission", "No permission, request credentials"],
+      ["unclassified", "Crash with no metadata"],
+    ],
+  }],
+  hint: "Each agent scenario is a real run on the fast model through a real stdio MCP server. Retries wait for real: up to 7 seconds.",
+});
+</script>
+</body>
+</html>

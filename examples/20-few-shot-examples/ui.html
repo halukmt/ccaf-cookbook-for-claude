@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>20 Few-shot examples</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<main>
+  <a class="back" href="/">← Dashboard</a>
+  <h1>20 Few-shot examples</h1>
+  <p class="lede">
+    The same extraction instructions with and without three worked examples, scored against an answer key.
+    <strong>The useful result is which problems examples did not change.</strong>
+  </p>
+  <div id="example"></div>
+</main>
+<script type="module">
+import { mountExamplePage } from "/assets/example-page.js";
+
+mountExamplePage({
+  api: "/api/20-few-shot-examples/run",
+  runLabel: "Show it",
+  fields: [
+    { name: "mode", label: "What to run", options: [["saved", "Saved comparison: no cost"], ["live", "Live, one document, both prompts: under $0.001"]] },
+    { name: "doc", label: "Document, for a live run", value: "d12", options: [
+      ["d12", "Handwritten, date with no year"],
+      ["d05", "Narrative, amounts in words"],
+      ["d06", "Narrative, no vendor"],
+      ["d10", "Mixed, subtotal and discount"],
+      ["d11", "Scanned, OCR noise"],
+      ["d01", "Plain table"],
+    ] },
+  ],
+  presets: [
+    { label: "Comparison", values: { mode: "saved" } },
+    { label: "Live: missing year", values: { mode: "live", doc: "d12" } },
+    { label: "Live: amounts in words", values: { mode: "live", doc: "d05" } },
+  ],
+  hint: "Documents and the key are in _fixtures/documents/ and _fixtures/documents-answers.js.",
+});
+</script>
+</body>
+</html>

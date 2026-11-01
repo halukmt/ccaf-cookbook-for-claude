@@ -1,0 +1,273 @@
+{
+  "batchId": "msgbatch_01NhuG5XNtYYyU3iEwmFWb6T",
+  "prompt": "Extract this document's data with the tool.",
+  "version": "v1",
+  "submittedAt": "2026-10-31T22:15:35.972Z",
+  "endedAt": "2026-10-31T22:17:32.826233+00:00",
+  "createdAt": "2026-10-31T22:15:35.978379+00:00",
+  "receivedOrder": [
+    "doc-invoice-002-d09",
+    "doc-receipt-003-d12",
+    "doc-invoice-004-d16",
+    "doc-invoice-000-d01",
+    "doc-receipt-001-d06"
+  ],
+  "requestOrder": [
+    "doc-invoice-000-d01",
+    "doc-receipt-001-d06",
+    "doc-invoice-002-d09",
+    "doc-receipt-003-d12",
+    "doc-invoice-004-d16"
+  ],
+  "byId": {
+    "doc-invoice-002-d09": {
+      "usable": true,
+      "input": {
+        "invoice_number": "FA-2024-311",
+        "vendor_name": "Societe Lumiere SARL",
+        "document_date": "2024-09-12",
+        "due_date": "2024-10-12",
+        "payment_terms": "30 jours",
+        "purchase_order": null,
+        "tax_id": "FR40303265045",
+        "currency": "EUR",
+        "total_amount": 1841.4,
+        "line_items": [
+          {
+            "description": "Eclairage LED",
+            "amount": 1234.5
+          },
+          {
+            "description": "Installation",
+            "amount": 300
+          },
+          {
+            "description": "TVA 20 %",
+            "amount": 306.9
+          }
+        ]
+      },
+      "type": "succeeded",
+      "usage": {
+        "input_tokens": 1018,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 353,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "batch",
+        "inference_geo": "global",
+        "speed": "standard"
+      },
+      "model": "claude-haiku-5-5"
+    },
+    "doc-receipt-003-d12": {
+      "usable": true,
+      "input": {
+        "invoice_number": null,
+        "vendor_name": "Joe's Hardware",
+        "document_date": null,
+        "due_date": null,
+        "payment_terms": null,
+        "purchase_order": null,
+        "tax_id": null,
+        "currency": null,
+        "total_amount": 19.5,
+        "line_items": [
+          {
+            "description": "3 hinges @ 4.50 ea",
+            "amount": 13.5
+          },
+          {
+            "description": "1 box screws",
+            "amount": 6
+          }
+        ]
+      },
+      "type": "succeeded",
+      "usage": {
+        "input_tokens": 932,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 308,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "batch",
+        "inference_geo": "global",
+        "speed": "standard"
+      },
+      "model": "claude-haiku-5-5"
+    },
+    "doc-invoice-004-d16": {
+      "usable": true,
+      "input": {
+        "invoice_number": "CP-1180",
+        "vendor_name": "Castlegate Plumbing Ltd",
+        "document_date": "2024-08-05",
+        "due_date": "2024-09-04",
+        "payment_terms": "Net 30",
+        "purchase_order": "PO-8801",
+        "tax_id": "GB987654321",
+        "currency": "GBP",
+        "total_amount": 355,
+        "line_items": [
+          {
+            "description": "Boiler service",
+            "amount": 180
+          },
+          {
+            "description": "Valve replacement",
+            "amount": 95
+          },
+          {
+            "description": "Call-out charge",
+            "amount": 60
+          }
+        ]
+      },
+      "type": "succeeded",
+      "usage": {
+        "input_tokens": 1020,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 355,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "batch",
+        "inference_geo": "global",
+        "speed": "standard"
+      },
+      "model": "claude-haiku-5-5"
+    },
+    "doc-invoice-000-d01": {
+      "usable": true,
+      "input": {
+        "invoice_number": "INV-2024-1041",
+        "vendor_name": "NORTHWIND OFFICE SUPPLIES GMBH",
+        "document_date": "2024-03-15",
+        "due_date": "2024-04-14",
+        "payment_terms": "Net 30",
+        "purchase_order": "PO-7781",
+        "tax_id": "DE811907980",
+        "currency": "EUR",
+        "total_amount": 428.4,
+        "line_items": [
+          {
+            "description": "Copy paper",
+            "amount": 120
+          },
+          {
+            "description": "Toner cartridges",
+            "amount": 240
+          },
+          {
+            "description": "VAT 19%",
+            "amount": 68.4
+          }
+        ]
+      },
+      "type": "succeeded",
+      "usage": {
+        "input_tokens": 1074,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 368,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "batch",
+        "inference_geo": "global",
+        "speed": "standard"
+      },
+      "model": "claude-haiku-5-5"
+    },
+    "doc-receipt-001-d06": {
+      "usable": true,
+      "input": {
+        "invoice_number": null,
+        "vendor_name": null,
+        "document_date": "2024-02-14",
+        "due_date": null,
+        "payment_terms": "Paid by card at trade counter",
+        "purchase_order": null,
+        "tax_id": null,
+        "currency": "GBP",
+        "total_amount": 500,
+        "line_items": [
+          {
+            "description": "Widgets, 50 units at £10 each (collected same day)",
+            "amount": 500
+          }
+        ]
+      },
+      "type": "succeeded",
+      "usage": {
+        "input_tokens": 931,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 298,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "batch",
+        "inference_geo": "global",
+        "speed": "standard"
+      },
+      "model": "claude-haiku-5-5"
+    }
+  },
+  "accuracy": 0.96,
+  "tally": {
+    "fields": 50,
+    "correct": 36,
+    "correct_null": 12,
+    "wrong": 0,
+    "empty": 1,
+    "fabricated": 1,
+    "present": 37,
+    "absent": 13
+  },
+  "docsRight": 3,
+  "docs": 5,
+  "wrongFields": [
+    {
+      "doc": "d12",
+      "field": "currency",
+      "outcome": "empty",
+      "got": "null"
+    },
+    {
+      "doc": "d06",
+      "field": "payment_terms",
+      "outcome": "fabricated",
+      "got": "\"Paid by card at trade counter\""
+    }
+  ],
+  "usage": {
+    "input_tokens": 4975,
+    "output_tokens": 1682
+  }
+}

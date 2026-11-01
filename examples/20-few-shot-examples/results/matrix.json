@@ -1,0 +1,59 @@
+{
+  "matrix": [
+    {
+      "problem": "Blank fields when the text is prose",
+      "technique": "Few-shot examples",
+      "baseline": "0 of 114",
+      "fewShot": "0 of 114",
+      "verdict": "Could not be tested: the baseline had none"
+    },
+    {
+      "problem": "Judgement differing between runs",
+      "technique": "Few-shot examples",
+      "baseline": "2 of 10 docs",
+      "fewShot": "1 of 10 docs",
+      "verdict": "Too few to conclude"
+    },
+    {
+      "problem": "Invented partial date",
+      "technique": "Few-shot example, nullable field",
+      "baseline": "1 of 6",
+      "fewShot": "0 of 6",
+      "verdict": "Improved by one case in six"
+    },
+    {
+      "problem": "Fabrication on sparse documents",
+      "technique": "Nullable schema fields",
+      "baseline": "7 of 12",
+      "fewShot": "5 of 12",
+      "verdict": "Measured, see notes"
+    },
+    {
+      "problem": "Reply wrapped in a code fence",
+      "technique": "tool_use or structured output",
+      "baseline": "30 of 30",
+      "fewShot": "30 of 30",
+      "verdict": "Examples did not fix it"
+    },
+    {
+      "problem": "Line items disagree with the total",
+      "technique": "Validation-retry loop",
+      "baseline": "2 of 3 kept the gap, 1 invented a line to close it",
+      "fewShot": "3 of 3 kept the gap, 0 invented a line to close it",
+      "verdict": "Examples cannot flag it"
+    },
+    {
+      "problem": "Wrong tool selected",
+      "technique": "Better tool descriptions",
+      "baseline": "not applicable",
+      "fewShot": "not applicable",
+      "verdict": "Not tested here, no tools in this prompt"
+    }
+  ],
+  "before": {
+    "accuracy": 0.9916666666666667
+  },
+  "after": {
+    "accuracy": 1
+  }
+}

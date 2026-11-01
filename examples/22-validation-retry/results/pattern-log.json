@@ -1,0 +1,636 @@
+{
+  "d01": {
+    "result": {
+      "vendor_name": "NORTHWIND OFFICE SUPPLIES GMBH",
+      "invoice_number": "INV-2024-1041",
+      "invoice_date": "2024-03-15",
+      "due_date": "2024-04-14",
+      "tax_id": "DE811907980",
+      "category": "invoice",
+      "line_items": [
+        {
+          "description": "Copy paper",
+          "amount": 120,
+          "detected_pattern": "table_row"
+        },
+        {
+          "description": "Toner cartridges",
+          "amount": 240,
+          "detected_pattern": "table_row"
+        },
+        {
+          "description": "VAT 19%",
+          "amount": 68.4,
+          "detected_pattern": "tax_line"
+        }
+      ],
+      "calculated_total": 428.4,
+      "stated_total": 428.4,
+      "total_discrepancy": false,
+      "conflict_detected": false
+    },
+    "stopReason": "tool_use",
+    "usage": {
+      "input_tokens": 1316,
+      "output_tokens": 435
+    }
+  },
+  "d02": {
+    "result": {
+      "vendor_name": "Harbor Freight Logistics Ltd",
+      "invoice_number": "HFL-5520",
+      "invoice_date": "2024-05-02",
+      "due_date": "2024-05-16",
+      "tax_id": "GB123456789",
+      "category": "invoice",
+      "line_items": [
+        {
+          "description": "Container handling",
+          "amount": 850,
+          "detected_pattern": "table_row"
+        },
+        {
+          "description": "Customs clearance",
+          "amount": 175.5,
+          "detected_pattern": "table_row"
+        }
+      ],
+      "calculated_total": 1025.5,
+      "stated_total": 1025.5,
+      "total_discrepancy": false,
+      "conflict_detected": false
+    },
+    "stopReason": "tool_use",
+    "usage": {
+      "input_tokens": 1266,
+      "output_tokens": 388
+    }
+  },
+  "d03": {
+    "result": {
+      "vendor_name": "Cafe Lindner",
+      "invoice_number": "R-88213",
+      "invoice_date": "2024-06-11",
+      "due_date": null,
+      "tax_id": "DE298765432",
+      "category": "receipt",
+      "line_items": [
+        {
+          "description": "Coffee",
+          "amount": 7.8,
+          "detected_pattern": "table_row"
+        },
+        {
+          "description": "Sandwich",
+          "amount": 9.5,
+          "detected_pattern": "table_row"
+        }
+      ],
+      "calculated_total": 17.3,
+      "stated_total": 17.3,
+      "total_discrepancy": false,
+      "conflict_detected": false
+    },
+    "stopReason": "tool_use",
+    "usage": {
+      "input_tokens": 1222,
+      "output_tokens": 371
+    }
+  },
+  "d04": {
+    "result": {
+      "vendor_name": "Meridian Facilities Services",
+      "invoice_number": null,
+      "invoice_date": "2024-04-05",
+      "due_date": null,
+      "tax_id": null,
+      "category": "report",
+      "line_items": [
+        {
+          "description": "Cleaning",
+          "amount": 3200,
+          "detected_pattern": "table_row"
+        },
+        {
+          "description": "Security",
+          "amount": 5400,
+          "detected_pattern": "table_row"
+        },
+        {
+          "description": "Energy",
+          "amount": 2150.5,
+          "detected_pattern": "table_row"
+        }
+      ],
+      "calculated_total": 10750.5,
+      "stated_total": 10750.5,
+      "total_discrepancy": false,
+      "conflict_detected": false
+    },
+    "stopReason": "tool_use",
+    "usage": {
+      "input_tokens": 1221,
+      "output_tokens": 400
+    }
+  },
+  "d05": {
+    "result": {
+      "vendor_name": "Elm Street Consulting",
+      "invoice_number": "ES-204",
+      "invoice_date": "2024-03-03",
+      "due_date": null,
+      "tax_id": null,
+      "category": "invoice",
+      "line_items": [
+        {
+          "description": "Workshop 1",
+          "amount": 1200,
+          "detected_pattern": "prose_sentence"
+        },
+        {
+          "description": "Workshop 2",
+          "amount": 1200,
+          "detected_pattern": "prose_sentence"
+        },
+        {
+          "description": "Travel",
+          "amount": 340,
+          "detected_pattern": "prose_sentence"
+        }
+      ],
+      "calculated_total": 2740,
+      "stated_total": 2740,
+      "total_discrepancy": false,
+      "conflict_detected": false
+    },
+    "stopReason": "tool_use",
+    "usage": {
+      "input_tokens": 1253,
+      "output_tokens": 407
+    }
+  },
+  "d06": {
+    "result": {
+      "vendor_name": null,
+      "invoice_number": null,
+      "invoice_date": "2024-02-14",
+      "due_date": null,
+      "tax_id": null,
+      "category": "receipt",
+      "line_items": [
+        {
+          "description": "Widgets, 50 units at £10 each",
+          "amount": 500,
+          "detected_pattern": "quantity_times_price"
+        }
+      ],
+      "calculated_total": 500,
+      "stated_total": null,
+      "total_discrepancy": false,
+      "conflict_detected": false
+    },
+    "stopReason": "tool_use",
+    "usage": {
+      "input_tokens": 1173,
+      "output_tokens": 330
+    }
+  },
+  "d07": {
+    "result": {
+      "vendor_name": "Bluepeak Surveying",
+      "invoice_number": null,
+      "invoice_date": "2024-04-30",
+      "due_date": null,
+      "tax_id": null,
+      "category": "report",
+      "line_items": [
+        {
+          "description": "Fuel",
+          "amount": 312.4,
+          "detected_pattern": "prose_sentence"
+        },
+        {
+          "description": "Lodging near the site",
+          "amount": 890,
+          "detected_pattern": "prose_sentence"
+        },
+        {
+          "description": "County site permit",
+          "amount": 150,
+          "detected_pattern": "prose_sentence"
+        }
+      ],
+      "calculated_total": 1352.4,
+      "stated_total": 1352.4,
+      "total_discrepancy": false,
+      "conflict_detected": false
+    },
+    "stopReason": "tool_use",
+    "usage": {
+      "input_tokens": 1206,
+      "output_tokens": 411
+    }
+  },
+  "d08": {
+    "result": {
+      "vendor_name": "Alpine Tooling AG",
+      "invoice_number": "AT-99017",
+      "invoice_date": "2024-07-19",
+      "due_date": null,
+      "tax_id": "CHE-123.456.789",
+      "category": "invoice",
+      "line_items": [
+        {
+          "description": "Milling cutters",
+          "amount": 1250,
+          "detected_pattern": "table_row"
+        },
+        {
+          "description": "Regrinding service",
+          "amount": 430,
+          "detected_pattern": "table_row"
+        },
+        {
+          "description": "Shipping, as agreed by phone",
+          "amount": 45,
+          "detected_pattern": "shipping_or_fee"
+        }
+      ],
+      "calculated_total": 1725,
+      "stated_total": 1725,
+      "total_discrepancy": false,
+      "conflict_detected": false
+    },
+    "stopReason": "tool_use",
+    "usage": {
+      "input_tokens": 1305,
+      "output_tokens": 431
+    }
+  },
+  "d09": {
+    "result": {
+      "vendor_name": "Societe Lumiere SARL",
+      "invoice_number": "FA-2024-311",
+      "invoice_date": "2024-09-12",
+      "due_date": "2024-10-12",
+      "tax_id": "FR40303265045",
+      "category": "invoice",
+      "line_items": [
+        {
+          "description": "Eclairage LED",
+          "amount": 1234.5,
+          "detected_pattern": "prose_sentence"
+        },
+        {
+          "description": "Installation",
+          "amount": 300,
+          "detected_pattern": "prose_sentence"
+        },
+        {
+          "description": "TVA 20 %",
+          "amount": 306.9,
+          "detected_pattern": "tax_line"
+        }
+      ],
+      "calculated_total": 1841.4,
+      "stated_total": 1841.4,
+      "total_discrepancy": false,
+      "conflict_detected": false
+    },
+    "stopReason": "tool_use",
+    "usage": {
+      "input_tokens": 1260,
+      "output_tokens": 431
+    }
+  },
+  "d10": {
+    "result": {
+      "vendor_name": "Greenline Print Co.",
+      "invoice_number": "GP-7741",
+      "invoice_date": "2024-01-22",
+      "due_date": "2024-02-21",
+      "tax_id": "12-3456789",
+      "category": "invoice",
+      "line_items": [
+        {
+          "description": "Brochures",
+          "amount": 600,
+          "detected_pattern": "table_row"
+        },
+        {
+          "description": "Posters",
+          "amount": 200,
+          "detected_pattern": "table_row"
+        },
+        {
+          "description": "Loyalty discount 10% on subtotal",
+          "amount": -80,
+          "detected_pattern": "discount"
+        },
+        {
+          "description": "Sales tax on discounted amount",
+          "amount": 57.6,
+          "detected_pattern": "tax_line"
+        }
+      ],
+      "calculated_total": 777.6,
+      "stated_total": 777.6,
+      "total_discrepancy": false,
+      "conflict_detected": false
+    },
+    "stopReason": "tool_use",
+    "usage": {
+      "input_tokens": 1313,
+      "output_tokens": 462
+    }
+  },
+  "d11": {
+    "result": {
+      "vendor_name": "Brightway Electrical Ltd",
+      "invoice_number": "3381",
+      "invoice_date": "2024-11-08",
+      "due_date": null,
+      "tax_id": null,
+      "category": "invoice",
+      "line_items": [
+        {
+          "description": "Rewiring",
+          "amount": 1200,
+          "detected_pattern": "ocr_text"
+        },
+        {
+          "description": "Parts",
+          "amount": 345.5,
+          "detected_pattern": "ocr_text"
+        }
+      ],
+      "calculated_total": 1545.5,
+      "stated_total": 1545.5,
+      "total_discrepancy": false,
+      "conflict_detected": false
+    },
+    "stopReason": "tool_use",
+    "usage": {
+      "input_tokens": 1217,
+      "output_tokens": 375
+    }
+  },
+  "d12": {
+    "result": {
+      "vendor_name": "Joe's Hardware",
+      "invoice_number": null,
+      "invoice_date": null,
+      "due_date": null,
+      "tax_id": null,
+      "category": "receipt",
+      "line_items": [
+        {
+          "description": "Hinges (3 @ 4.50 each)",
+          "amount": 13.5,
+          "detected_pattern": "quantity_times_price"
+        },
+        {
+          "description": "Box of screws",
+          "amount": 6,
+          "detected_pattern": "table_row"
+        }
+      ],
+      "calculated_total": 19.5,
+      "stated_total": 19.5,
+      "total_discrepancy": false,
+      "conflict_detected": false
+    },
+    "stopReason": "tool_use",
+    "usage": {
+      "input_tokens": 1174,
+      "output_tokens": 375
+    }
+  },
+  "d13": {
+    "result": {
+      "vendor_name": "Acme Corp",
+      "invoice_number": "1234",
+      "invoice_date": "2024-03-15",
+      "due_date": null,
+      "tax_id": null,
+      "category": "invoice",
+      "line_items": [],
+      "calculated_total": 0,
+      "stated_total": 500,
+      "total_discrepancy": true,
+      "conflict_detected": false
+    },
+    "stopReason": "tool_use",
+    "usage": {
+      "input_tokens": 1142,
+      "output_tokens": 293
+    }
+  },
+  "d14": {
+    "result": {
+      "vendor_name": "accounts",
+      "invoice_number": null,
+      "invoice_date": null,
+      "due_date": null,
+      "tax_id": null,
+      "category": "receipt",
+      "line_items": [
+        {
+          "description": "Payment noted by accounts (amount 120)",
+          "amount": 120,
+          "detected_pattern": "prose_sentence"
+        }
+      ],
+      "calculated_total": 120,
+      "stated_total": 120,
+      "total_discrepancy": false,
+      "conflict_detected": false
+    },
+    "stopReason": "tool_use",
+    "usage": {
+      "input_tokens": 1151,
+      "output_tokens": 327
+    }
+  },
+  "d15": {
+    "result": {
+      "vendor_name": "Rhein Cloud Hosting GmbH",
+      "invoice_number": null,
+      "invoice_date": "2024-02-01",
+      "due_date": null,
+      "tax_id": null,
+      "category": "contract",
+      "line_items": [
+        {
+          "description": "Managed hosting fee, per month, payable monthly in advance (12 months)",
+          "amount": 450,
+          "detected_pattern": "prose_sentence"
+        }
+      ],
+      "calculated_total": 450,
+      "stated_total": null,
+      "total_discrepancy": false,
+      "conflict_detected": false
+    },
+    "stopReason": "tool_use",
+    "usage": {
+      "input_tokens": 1221,
+      "output_tokens": 358
+    }
+  },
+  "d16": {
+    "result": {
+      "vendor_name": "Castlegate Plumbing Ltd",
+      "invoice_number": "CP-1180",
+      "invoice_date": "2024-08-05",
+      "due_date": "2024-09-04",
+      "tax_id": "GB987654321",
+      "category": "invoice",
+      "line_items": [
+        {
+          "description": "Boiler service",
+          "amount": 180,
+          "detected_pattern": "table_row"
+        },
+        {
+          "description": "Valve replacement",
+          "amount": 95,
+          "detected_pattern": "table_row"
+        },
+        {
+          "description": "Call-out charge",
+          "amount": 60,
+          "detected_pattern": "table_row"
+        }
+      ],
+      "calculated_total": 335,
+      "stated_total": 355,
+      "total_discrepancy": true,
+      "conflict_detected": true
+    },
+    "stopReason": "tool_use",
+    "usage": {
+      "input_tokens": 1262,
+      "output_tokens": 421
+    }
+  },
+  "d17": {
+    "result": {
+      "vendor_name": "Fenwick Legal LLP",
+      "invoice_number": "FL-2291",
+      "invoice_date": "2024-06-20",
+      "due_date": "2024-05-20",
+      "tax_id": "GB444555666",
+      "category": "invoice",
+      "line_items": [
+        {
+          "description": "Contract review fee",
+          "amount": 1500,
+          "detected_pattern": "table_row"
+        }
+      ],
+      "calculated_total": 1500,
+      "stated_total": 1500,
+      "total_discrepancy": false,
+      "conflict_detected": true
+    },
+    "stopReason": "tool_use",
+    "usage": {
+      "input_tokens": 1239,
+      "output_tokens": 350
+    }
+  },
+  "d18": {
+    "result": {
+      "vendor_name": "Orion Lab Supplies Inc.",
+      "invoice_number": "OL-20240912-7",
+      "invoice_date": "2024-09-12",
+      "due_date": "2024-10-12",
+      "tax_id": "98-7654321",
+      "category": "invoice",
+      "line_items": [
+        {
+          "description": "Pipettes (10 x 12.50)",
+          "amount": 125,
+          "detected_pattern": "quantity_times_price"
+        },
+        {
+          "description": "Gloves (4 x 9.00)",
+          "amount": 36,
+          "detected_pattern": "quantity_times_price"
+        }
+      ],
+      "calculated_total": 161,
+      "stated_total": 161,
+      "total_discrepancy": false,
+      "conflict_detected": false
+    },
+    "stopReason": "tool_use",
+    "usage": {
+      "input_tokens": 1290,
+      "output_tokens": 412
+    }
+  },
+  "d19": {
+    "result": {
+      "vendor_name": "Kestrel Aviation Consulting",
+      "invoice_number": null,
+      "invoice_date": null,
+      "due_date": null,
+      "tax_id": null,
+      "category": "report",
+      "line_items": [
+        {
+          "description": "Flights",
+          "amount": 2310,
+          "detected_pattern": "prose_sentence"
+        },
+        {
+          "description": "Hotels",
+          "amount": 1480,
+          "detected_pattern": "prose_sentence"
+        }
+      ],
+      "calculated_total": 3790,
+      "stated_total": 3790,
+      "total_discrepancy": false,
+      "conflict_detected": false
+    },
+    "stopReason": "tool_use",
+    "usage": {
+      "input_tokens": 1182,
+      "output_tokens": 370
+    }
+  },
+  "d20": {
+    "result": {
+      "vendor_name": "FreshMart Store 221",
+      "invoice_number": "00917",
+      "invoice_date": "2024-09-30",
+      "due_date": null,
+      "tax_id": "GB555666777",
+      "category": "receipt",
+      "line_items": [
+        {
+          "description": "Groceries",
+          "amount": 43.2,
+          "detected_pattern": "table_row"
+        },
+        {
+          "description": "Household",
+          "amount": 12.8,
+          "detected_pattern": "table_row"
+        }
+      ],
+      "calculated_total": 56,
+      "stated_total": 56,
+      "total_discrepancy": false,
+      "conflict_detected": false
+    },
+    "stopReason": "tool_use",
+    "usage": {
+      "input_tokens": 1178,
+      "output_tokens": 367
+    }
+  }
+}

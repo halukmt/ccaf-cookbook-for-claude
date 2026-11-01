@@ -1,0 +1,60 @@
+[
+  {
+    "id": "sql-injection",
+    "findings": [
+      {
+        "severity": "critical",
+        "category": "security",
+        "description": "The email parameter is concatenated directly into the SQL string, creating a SQL injection vulnerability. An attacker can supply an email such as ' OR '1'='1' -- to bypass the lookup or extract data. Use a parameterized query with a placeholder instead."
+      }
+    ],
+    "usage": {
+      "input_tokens": 721,
+      "output_tokens": 114
+    }
+  },
+  {
+    "id": "null-access",
+    "findings": [
+      {
+        "severity": "major",
+        "category": "logic",
+        "description": "When the user is unknown, fetchUser resolves to { data: null } (per the inline comment). The expression response.data.user.name then reads .user on null, throwing a TypeError instead of returning a value or a clear error. Any caller passing an unknown id will get an unhandled exception. Guard against response.data being null, for example by checking it and returning undefined or throwing a specific not-found error."
+      }
+    ],
+    "usage": {
+      "input_tokens": 698,
+      "output_tokens": 238
+    }
+  },
+  {
+    "id": "unused-variable",
+    "findings": [],
+    "usage": {
+      "input_tokens": 690,
+      "output_tokens": 186
+    }
+  },
+  {
+    "id": "naming-inconsistency",
+    "findings": [],
+    "usage": {
+      "input_tokens": 689,
+      "output_tokens": 108
+    }
+  },
+  {
+    "id": "doc-accurate",
+    "findings": [
+      {
+        "severity": "minor",
+        "category": "logic",
+        "description": "If send(file) rejects or throws (for example on a network error), the exception escapes upload() on the first attempt. The remaining retries never run, and the function rejects instead of returning false as the 'giving up' path implies. Wrap each send call in try/catch if retries on thrown errors are intended."
+      }
+    ],
+    "usage": {
+      "input_tokens": 726,
+      "output_tokens": 371
+    }
+  }
+]

@@ -1,0 +1,225 @@
+{
+  "run": {
+    "model": "claude-sonnet-5-5",
+    "system": null,
+    "rows": [
+      {
+        "query": "What is the status of order #12345?",
+        "expected": "lookup_order",
+        "tool": "lookup_order",
+        "outcome": "correct",
+        "identifier": "#12345",
+        "allTools": [
+          "lookup_order"
+        ],
+        "stopReason": "tool_use",
+        "text": "",
+        "inputTokens": 863,
+        "outputTokens": 53
+      },
+      {
+        "query": "Look up customer john@example.com",
+        "expected": "get_customer",
+        "tool": "get_customer",
+        "outcome": "correct",
+        "identifier": "john@example.com",
+        "allTools": [
+          "get_customer"
+        ],
+        "stopReason": "tool_use",
+        "text": "",
+        "inputTokens": 863,
+        "outputTokens": 54
+      },
+      {
+        "query": "Check my order tracking",
+        "expected": "lookup_order",
+        "tool": "lookup_order",
+        "outcome": "correct",
+        "identifier": "latest",
+        "allTools": [
+          "lookup_order"
+        ],
+        "stopReason": "tool_use",
+        "text": "",
+        "inputTokens": 860,
+        "outputTokens": 52
+      },
+      {
+        "query": "Find the account for phone 555-0123",
+        "expected": "get_customer",
+        "tool": "get_customer",
+        "outcome": "correct",
+        "identifier": "555-0123",
+        "allTools": [
+          "get_customer"
+        ],
+        "stopReason": "tool_use",
+        "text": "",
+        "inputTokens": 865,
+        "outputTokens": 53
+      },
+      {
+        "query": "Where is my package?",
+        "expected": "lookup_order",
+        "tool": "lookup_order",
+        "outcome": "correct",
+        "identifier": "latest",
+        "allTools": [
+          "lookup_order"
+        ],
+        "stopReason": "tool_use",
+        "text": "",
+        "inputTokens": 859,
+        "outputTokens": 52
+      },
+      {
+        "query": "Is order #67890 eligible for a refund?",
+        "expected": "lookup_order",
+        "tool": "lookup_order",
+        "outcome": "correct",
+        "identifier": "#67890",
+        "allTools": [
+          "lookup_order"
+        ],
+        "stopReason": "tool_use",
+        "text": "",
+        "inputTokens": 868,
+        "outputTokens": 53
+      },
+      {
+        "query": "What loyalty tier is this customer?",
+        "expected": "get_customer",
+        "tool": "get_customer",
+        "outcome": "correct",
+        "identifier": "current",
+        "allTools": [
+          "get_customer"
+        ],
+        "stopReason": "tool_use",
+        "text": "",
+        "inputTokens": 865,
+        "outputTokens": 50
+      },
+      {
+        "query": "I need details on order #11111",
+        "expected": "lookup_order",
+        "tool": "lookup_order",
+        "outcome": "correct",
+        "identifier": "#11111",
+        "allTools": [
+          "lookup_order"
+        ],
+        "stopReason": "tool_use",
+        "text": "",
+        "inputTokens": 861,
+        "outputTokens": 53
+      },
+      {
+        "query": "Verify the customer account status",
+        "expected": "get_customer",
+        "tool": "get_customer",
+        "outcome": "correct",
+        "identifier": "current",
+        "allTools": [
+          "get_customer"
+        ],
+        "stopReason": "tool_use",
+        "text": "",
+        "inputTokens": 861,
+        "outputTokens": 50
+      },
+      {
+        "query": "When will order #99999 arrive?",
+        "expected": "lookup_order",
+        "tool": "lookup_order",
+        "outcome": "correct",
+        "identifier": "#99999",
+        "allTools": [
+          "lookup_order"
+        ],
+        "stopReason": "tool_use",
+        "text": "",
+        "inputTokens": 864,
+        "outputTokens": 53
+      }
+    ],
+    "correct": 10,
+    "wrongTool": 0,
+    "noCall": 0,
+    "total": 10,
+    "inputTokens": 8629,
+    "outputTokens": 523
+  },
+  "hard": {
+    "model": "claude-sonnet-5-5",
+    "system": null,
+    "rows": [
+      {
+        "query": "john@example.com has not received what he bought last week",
+        "expected": "lookup_order",
+        "tool": "get_customer",
+        "outcome": "wrong tool",
+        "identifier": "john@example.com",
+        "allTools": [
+          "get_customer",
+          "lookup_order"
+        ],
+        "stopReason": "tool_use",
+        "text": "",
+        "inputTokens": 867,
+        "outputTokens": 293
+      },
+      {
+        "query": "Has customer 555-0123 got a refund yet?",
+        "expected": "lookup_order",
+        "tool": "get_customer",
+        "outcome": "wrong tool",
+        "identifier": "555-0123",
+        "allTools": [
+          "get_customer"
+        ],
+        "stopReason": "tool_use",
+        "text": "",
+        "inputTokens": 870,
+        "outputTokens": 348
+      },
+      {
+        "query": "Can anna@example.com still return the lamp?",
+        "expected": "lookup_order",
+        "tool": "get_customer",
+        "outcome": "wrong tool",
+        "identifier": "anna@example.com",
+        "allTools": [
+          "get_customer",
+          "lookup_order"
+        ],
+        "stopReason": "tool_use",
+        "text": "",
+        "inputTokens": 868,
+        "outputTokens": 235
+      },
+      {
+        "query": "Does anna@example.com still have gold status after order #12345?",
+        "expected": "get_customer",
+        "tool": "get_customer",
+        "outcome": "correct",
+        "identifier": "anna@example.com",
+        "allTools": [
+          "get_customer",
+          "lookup_order"
+        ],
+        "stopReason": "tool_use",
+        "text": "",
+        "inputTokens": 872,
+        "outputTokens": 170
+      }
+    ],
+    "correct": 1,
+    "wrongTool": 3,
+    "noCall": 0,
+    "total": 4,
+    "inputTokens": 3477,
+    "outputTokens": 1046
+  }
+}

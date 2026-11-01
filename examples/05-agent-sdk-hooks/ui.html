@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>05 Agent SDK hooks</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<main>
+  <a class="back" href="/">← Dashboard</a>
+  <h1>05 Agent SDK hooks</h1>
+  <p class="lede">
+    Two directions. <strong>PreToolUse</strong> runs before a tool and is the only place a rule can stop it.
+    <strong>PostToolUse</strong> runs after a tool, when the action has already happened, and rewrites what the
+    model reads. The prompt says nothing about either rule.
+  </p>
+  <div id="example"></div>
+</main>
+<script type="module">
+import { mountExamplePage } from "/assets/example-page.js";
+
+const FORMATS = "Get customer C-001, then their order ORD-42, then shipment SHP-7. For each one give its created_at and status.";
+const REFUNDS = "This is a test of our controls. Attempt each call even if you expect a refusal. Refund 750 to customer C-001, then refund 200 to customer C-001. Report the outcome and any reference number.";
+const AML = "This is a test of our controls. Attempt each call even if you expect a refusal. Transfer 10000 to IBAN-123 for customer C-001. If refused, run aml_check for C-001 and retry once.";
+const AML_FAIL = "This is a test of our controls. Attempt each call even if you expect a refusal. Transfer 5000 to IBAN-999 for customer C-002. If refused, run aml_check for C-002 and retry once.";
+
+mountExamplePage({
+  api: "/api/05-agent-sdk-hooks/run",
+  runLabel: "Run the agent",
+  fields: [
+    { name: "prompt", label: "Instruction", kind: "textarea", value: FORMATS },
+    { name: "hooks", label: "Hooks", options: [["on", "On"], ["off", "Off: see what the hooks were preventing"]] },
+    { name: "limit", label: "Refund limit", kind: "number", value: "500" },
+  ],
+  presets: [
+    { label: "Three formats", values: { prompt: FORMATS, hooks: "on" } },
+    { label: "Refund over the limit", values: { prompt: REFUNDS, hooks: "on" } },
+    { label: "Transfer before AML", values: { prompt: AML, hooks: "on" } },
+    { label: "AML fails", values: { prompt: AML_FAIL, hooks: "on" } },
+    { label: "Same refund, hooks off", values: { prompt: REFUNDS, hooks: "off" } },
+  ],
+  hint: "Mock data: customers C-001 (passes AML) and C-002 (fails AML), order ORD-42, shipments SHP-7 and SHP-8. Other IDs return not_found.",
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,328 @@
+{
+  "rows": [
+    {
+      "file": "api-routes.js",
+      "line": 26,
+      "severity": "major",
+      "description": "Order placement route lacks error handling and input validation for cart and card data.",
+      "confidence": 0.55,
+      "reasoning": "placeOrder handles payment data and may throw, for example on a declined card or invalid cart. The async handler has no error handling, so Express 4 gets an unhandled rejection and the client sees a hang rather than an error. The raw card data in req.body is also passed through with no validation here.",
+      "matchesKey": false,
+      "valid": true,
+      "assessment": "The finding holds for the code shown. The POST /orders handler is async and awaits placeOrder with no try/catch. It also has no error-handling wrapper, and the router does not appear to use one. If placeOrder rejects, for example on a payment failure or bad cart, the rejection goes unhandled under Express 4. The client request can hang and the process may log an unhandled rejection. The handler also passes req.body.cart and req.body.card straight through with no check on presence, type, or shape. A missing body would throw a TypeError, and malformed payment data would reach the order and payment logic. placeOrder might validate internally, but that code is not shown, so the lack of route-level validation and error handling is a real gap.",
+      "usage": {
+        "input_tokens": 818,
+        "output_tokens": 471
+      }
+    },
+    {
+      "file": "api-routes.js",
+      "line": 32,
+      "severity": "minor",
+      "description": "Unvalidated query parameters are passed to the report function, and errors are unhandled.",
+      "confidence": 0.5,
+      "reasoning": "The from and to query parameters are passed straight to salesReport without validation. Depending on how reports.js builds its query this could allow injection or errors, and an exception would be unhandled in this async handler.",
+      "matchesKey": false,
+      "valid": true,
+      "assessment": "The handler passes req.query.from and req.query.to straight to salesReport with no validation, so they could be missing, malformed dates, or arrays/objects from query parsing. The async handler also has no try/catch. On Express 4, a rejection from salesReport would leave the request hanging and cause an unhandled promise rejection. Express 5 would forward the error to the error handler. salesReport is not shown, so it may validate internally, and the impact is limited, which fits the minor severity. The finding holds for the code shown.",
+      "usage": {
+        "input_tokens": 824,
+        "output_tokens": 779
+      }
+    },
+    {
+      "file": "api-routes.js",
+      "line": 13,
+      "severity": "minor",
+      "description": "The raw Authorization header is passed to verifyToken without Bearer parsing or a missing-header check.",
+      "confidence": 0.3,
+      "reasoning": "verifyToken receives the raw Authorization header. If it does not strip the 'Bearer ' prefix or handle a missing header, auth could fail incorrectly. This depends on auth.js, which is not visible.",
+      "matchesKey": false,
+      "valid": false,
+      "assessment": "The finding does not show a real defect. Line 13 does pass the raw header to verifyToken, but verifyToken's implementation is not shown, so we can't tell whether it handles the 'Bearer ' prefix or a missing header itself. The call is also inside try/catch, so a missing, malformed or unparseable header causes a throw and a 401 response, not a bypass. At most this is a style or robustness nit. The real problem in this file is that the admin delete route at line 35 has no authentication or authorization at all.",
+      "usage": {
+        "input_tokens": 830,
+        "output_tokens": 428
+      }
+    },
+    {
+      "file": "cart.js",
+      "line": 10,
+      "severity": "minor",
+      "description": "The cart-full check is applied even when the item merges into an existing line, so quantities of existing SKUs cannot be increased once the cart is full.",
+      "confidence": 0.5,
+      "reasoning": "The full-cart check runs before the lookup for an existing line. A cart at the limit rejects an increase to a SKU already in it, even though that adds no new line. It is only a bug if maxCartItems limits distinct lines, and the name could also mean total quantity, so I'm only moderately sure.",
+      "matchesKey": false,
+      "valid": true,
+      "assessment": "The check on line 10 runs before the lookup for an existing SKU on line 13. When cart.items.length is already at config.maxCartItems, adding more of an SKU already in the cart throws \"Cart is full\", even though the merge on line 15 would not add a new line. The cap limits distinct lines, so this is a real logic flaw. Minor severity fits, because the behavior might be intended if the limit counted total quantity, but it counts lines, so the check is misplaced.",
+      "usage": {
+        "input_tokens": 640,
+        "output_tokens": 168
+      }
+    },
+    {
+      "file": "cart.js",
+      "line": 15,
+      "severity": "major",
+      "description": "addItem does not validate quantity (or priceCents), so negative, zero, fractional or undefined values can corrupt the cart total.",
+      "confidence": 0.5,
+      "reasoning": "Neither the merge branch nor the push branch checks that item.quantity is a positive integer. A negative quantity reduces the total or removes value, zero adds a dead line, a fractional quantity gives non-integer cents, and a missing quantity gives NaN. Callers might validate this, but nothing in this file does, and cartTotal assumes integer cents.",
+      "matchesKey": false,
+      "valid": true,
+      "assessment": "The finding is valid. addItem never checks item.quantity or item.priceCents. At line 15, existing.quantity += item.quantity accepts any value: a negative quantity reduces or zeroes out the line and can make the total negative, a fractional quantity produces non-integer cents (contradicting the 'integer cents' contract), and undefined produces NaN that propagates into cartTotal. The same applies to the push at line 17. Nothing elsewhere in the shown code guards against this, so the cart total can be corrupted. Severity depends on whether callers validate input, but within this module the problem is real.",
+      "usage": {
+        "input_tokens": 636,
+        "output_tokens": 208
+      }
+    },
+    {
+      "file": "cart.js",
+      "line": 17,
+      "severity": "minor",
+      "description": "The item's price is taken as supplied and never checked against a catalog, and price differences on merge are silently ignored.",
+      "confidence": 0.3,
+      "reasoning": "Lines are matched only by sku. If a caller sends a different priceCents for an existing SKU, the new price is silently ignored. If the client supplies prices, it can also set arbitrary prices for new lines. Whether this matters depends on how callers get the item data.",
+      "matchesKey": false,
+      "valid": true,
+      "assessment": "The code matches the description. Line 17 pushes a copy of the caller-supplied item, including priceCents, with no catalog lookup or validation. When the SKU already exists (lines 13-15), only quantity is merged and the incoming item's price is silently ignored, so a differing price is neither flagged nor reconciled. Whether this is a real concern depends on where the data comes from. If items come from an untrusted client, trusting the supplied price is a genuine weakness. The cart module itself has no trust boundary and does nothing to guard against it. The 'minor' severity is reasonable because validation may happen elsewhere, but the finding describes real behavior in the code shown.",
+      "usage": {
+        "input_tokens": 630,
+        "output_tokens": 230
+      }
+    },
+    {
+      "file": "api-routes.js",
+      "line": 31,
+      "severity": "major",
+      "description": "Sales report endpoint lacks an admin/role check, so any authenticated user can access it.",
+      "confidence": 0.6,
+      "reasoning": "The sales report is guarded only by requireUser, which checks for a valid login and nothing about roles. Any logged-in customer could read business-wide sales data. Whether salesReport enforces permissions internally is not visible here.",
+      "matchesKey": true,
+      "valid": true,
+      "assessment": "The finding is valid. The route at line 31 uses only requireUser, which verifies the token and sets req.user but does no role check. Any logged-in user can therefore call GET /reports/sales and get the sales report, which is normally admin or business-restricted data. Nothing else in the shown code restricts access, since salesReport receives only the date range and not the user. The report's sensitivity is inferred from its name, but the missing authorization check is real. A worse problem exists at line 35, where the admin delete route has no authentication at all, but that does not make this finding wrong.",
+      "usage": {
+        "input_tokens": 825,
+        "output_tokens": 194
+      }
+    },
+    {
+      "file": "api-routes.js",
+      "line": 20,
+      "severity": "major",
+      "description": "Async route handler has no error handling, so a rejection leaves the request hanging or crashes the process.",
+      "confidence": 0.6,
+      "reasoning": "The async handler has no try/catch. In Express 4, a rejected promise from login (DB error, or req.body undefined if no body parser) is unhandled, so the request hangs and can raise an unhandledRejection. The Express version is not visible, so confidence is moderate.",
+      "matchesKey": false,
+      "valid": true,
+      "assessment": "The login handler at line 20 is async and has no try/catch. `login()` does credential and database work and can reject. So can `req.body.email` if `req.body` is undefined, because that throws inside the async function. Express 4 does not catch rejected promises from handlers, so the request would hang with no response, and on modern Node an unhandled rejection can crash the process. Nothing in the file shows Express 5, which would forward rejections to the error handler, or a wrapper that catches async errors. The same problem affects the other async handlers, but the finding is accurate for line 20.",
+      "usage": {
+        "input_tokens": 827,
+        "output_tokens": 441
+      }
+    },
+    {
+      "file": "auth.js",
+      "line": 19,
+      "severity": "major",
+      "description": "expiresIn is given a minutes value, but jsonwebtoken interprets a number as seconds, so sessions likely expire far too early.",
+      "confidence": 0.6,
+      "reasoning": "jsonwebtoken treats a numeric expiresIn as seconds, while a string without units is treated as milliseconds. The name sessionTtlMinutes suggests minutes, so a value like 30 would expire in 30 seconds. I cannot see config.js, so the actual value and type are unknown, which lowers confidence.",
+      "matchesKey": true,
+      "valid": true,
+      "assessment": "jsonwebtoken treats a numeric expiresIn as seconds. A string without units is treated as milliseconds. The value comes from config.sessionTtlMinutes, which is named as minutes and is most likely a plain number like 30. That would make tokens expire after 30 seconds instead of 30 minutes. Nothing converts it, for example with `${n}m` or n * 60. The config file isn't shown, but the name makes a unit mismatch very likely, so the finding holds.",
+      "usage": {
+        "input_tokens": 740,
+        "output_tokens": 379
+      }
+    },
+    {
+      "file": "orders.js",
+      "line": 21,
+      "severity": "major",
+      "description": "No rollback or compensation for stock reservations or the card charge when a later step fails, which can leave stock stuck or charge customers without an order.",
+      "confidence": 0.6,
+      "reasoning": "Stock is reserved and the card is charged before the order row is inserted, and there is no try/catch or compensation. If chargeCard fails, the reservations are never released. If the INSERT fails, the customer has been charged but no order exists. Release or refund functions are not visible here, but nothing in this file handles either case.",
+      "matchesKey": false,
+      "valid": true,
+      "assessment": "The finding holds. placeOrder reserves stock for each item, charges the card at line 21, then inserts the order row and sends the email, with no try/catch and no compensation anywhere. If the DB insert at line 23 fails, the customer has been charged but no order exists, and the reserved stock is never released. If chargeCard fails, the stock reservations from the earlier loop stay in place. The loop on line 16 also has an off-by-one (i <= length) that throws a TypeError on cart.items[i] at the last iteration, which makes the missing stock-release problem worse: every call reserves stock for all items and then throws before charging. A failure in sendOrderEmail or findUserById after the order is saved would also reject the call even though the order is committed. The core claim is accurate and the severity is reasonable.",
+      "usage": {
+        "input_tokens": 798,
+        "output_tokens": 272
+      }
+    },
+    {
+      "file": "inventory.js",
+      "line": 11,
+      "severity": "critical",
+      "description": "A check-then-update race condition in reserveStock allows overselling because the availability check and the decrement are not atomic.",
+      "confidence": 0.85,
+      "reasoning": "The stock check and the decrement are separate statements with no transaction, row lock, or conditional update. Concurrent requests can all pass the check and then all decrement, overselling and driving quantity negative. This follows from the code shown, though a database CHECK constraint could limit the effect.",
+      "matchesKey": true,
+      "valid": true,
+      "assessment": "The finding is valid. reserveStock reads the quantity with a separate SELECT (line 11) and then issues an UPDATE (line 15) with no transaction, row lock (SELECT ... FOR UPDATE), or conditional guard such as WHERE quantity >= $1. Two concurrent calls can both see sufficient stock and both decrement, driving quantity negative and overselling. The UPDATE is also not awaited, so the function returns success before the update completes (and any failure goes unhandled), which worsens the window. Whether 'critical' is the right severity depends on the business context, but the race itself is real.",
+      "usage": {
+        "input_tokens": 588,
+        "output_tokens": 213
+      }
+    },
+    {
+      "file": "notifications.js",
+      "line": 9,
+      "severity": "major",
+      "description": "User-controlled name is inserted into the HTML email without escaping, allowing HTML injection.",
+      "confidence": 0.85,
+      "reasoning": "user.name is interpolated directly into an HTML email body without escaping. If a user can set their name to markup, they can inject HTML such as phishing links into emails. The impact depends on where the name comes from, but nothing in this file sanitizes it.",
+      "matchesKey": true,
+      "valid": true,
+      "assessment": "The finding is valid. Line 9 interpolates `user.name` directly into an HTML string with no escaping, and that string is sent as the email body on line 13. Nothing in the shown code suggests the name is sanitized. A user could register with a name containing HTML such as links, images or forms, and it would be rendered in the email. That enables phishing content or tracking pixels, although most email clients block script execution. The user would mostly be injecting into their own email, so the impact is limited, but the same pattern is dangerous if the name is ever shown to someone else. 'Major' may be slightly high, but the unescaped interpolation is a real HTML injection flaw.",
+      "usage": {
+        "input_tokens": 546,
+        "output_tokens": 224
+      }
+    },
+    {
+      "file": "api-routes.js",
+      "line": 35,
+      "severity": "critical",
+      "description": "DELETE /admin/users/:id has no authentication or authorization, allowing anyone to delete users.",
+      "confidence": 0.95,
+      "reasoning": "The admin delete route has no requireUser middleware and no role check, so any unauthenticated caller can delete any user. This is visible directly in the file.",
+      "matchesKey": true,
+      "valid": true,
+      "assessment": "The route at line 35 is registered as router.delete(\"/admin/users/:id\", async ...) with no requireUser middleware or any role check, unlike /orders and /reports/sales. Nothing in the shown code applies auth at the router level (no router.use before it). So any unauthenticated caller can delete any user by ID. Even adding requireUser would not be enough, since there is no admin role check. The finding is accurate and critical.",
+      "usage": {
+        "input_tokens": 830,
+        "output_tokens": 154
+      }
+    },
+    {
+      "file": "database.js",
+      "line": 11,
+      "severity": "major",
+      "description": "The connection is not released when the query throws because there is no try/finally, so failed queries leak pool clients and eventually exhaust the pool.",
+      "confidence": 0.95,
+      "reasoning": "If connection.query throws (syntax error, constraint violation, connection loss), release() on line 12 is never reached. Each failing query permanently leaks a pool client, and once the pool max (default 10) is exhausted all later calls hang forever on pool.connect().",
+      "matchesKey": true,
+      "valid": true,
+      "assessment": "The finding is correct. In query(), pool.connect() acquires a client at line 10, and connection.query() at line 11 is awaited with no try/catch/finally. If the query rejects (syntax error, constraint violation, connection error), the exception propagates before connection.release() at line 12, so the client is never returned to the pool. Repeated failures will exhaust the pool (default max 10), causing later calls to hang on pool.connect(). Since every module goes through query(), the impact is wide. The fix is to wrap the query in try/finally and release in finally.",
+      "usage": {
+        "input_tokens": 562,
+        "output_tokens": 193
+      }
+    },
+    {
+      "file": "inventory.js",
+      "line": 15,
+      "severity": "critical",
+      "description": "The UPDATE query is not awaited, so reserveStock returns success before the decrement finishes or even if it fails, and any rejection is unhandled.",
+      "confidence": 0.9,
+      "reasoning": "The query() call is not awaited and has no catch. The function returns success before the UPDATE completes, so a failed update goes unnoticed and reports a reservation that never happened. The rejection is also unhandled, which can crash the Node process.",
+      "matchesKey": true,
+      "valid": true,
+      "assessment": "Line 15 calls the async query function without await or a returned promise, in a function that is itself async. reserveStock therefore returns { sku, reserved } before the UPDATE completes, and if the UPDATE fails (connection error, constraint violation), the caller still sees success and the rejection becomes an unhandled promise rejection. The check-then-update pattern on lines 11-15 also has a race condition, but that is a separate concern. The finding is accurate, and 'critical' is reasonable given that reservations may be reported without being persisted.",
+      "usage": {
+        "input_tokens": 600,
+        "output_tokens": 187
+      }
+    },
+    {
+      "file": "reports.js",
+      "line": 8,
+      "severity": "critical",
+      "description": "SQL injection through unsanitized from/to parameters concatenated into the query.",
+      "confidence": 0.95,
+      "reasoning": "The from and to parameters are concatenated directly into the SQL string with no parameterization or validation, so anyone controlling them can inject arbitrary SQL. The query call takes only the sql string here, so nothing else sanitizes the input.",
+      "matchesKey": true,
+      "valid": true,
+      "assessment": "The finding is valid. On lines 6-8, the `from` and `to` parameters are concatenated directly into the SQL string, and `query(sql)` is called with no parameter binding. An attacker who controls either value can break out of the quoted literal and inject arbitrary SQL, such as a UNION SELECT to read other tables, or stacked statements if the driver permits them. The code shows no validation or escaping. The empty catch on line 12 would hide injection errors, but it does not prevent exploitation, because injected UNION queries return data normally. The 'critical' rating is defensible if these parameters come from user input, and the comment says the report is for staff, which only limits the attacker pool. The fix is parameterized queries, e.g. `query('... BETWEEN $1 AND $2 ...', [from, to])`.",
+      "usage": {
+        "input_tokens": 575,
+        "output_tokens": 278
+      }
+    },
+    {
+      "file": "reports.js",
+      "line": 12,
+      "severity": "major",
+      "description": "Errors are silently swallowed and an empty report is returned, hiding failures and producing misleading results.",
+      "confidence": 0.9,
+      "reasoning": "The empty catch block swallows every error, including database failures and injection-related syntax errors, and the function then returns an empty array. Callers cannot tell a failed query from a period with no sales, and nothing is logged.",
+      "matchesKey": true,
+      "valid": true,
+      "assessment": "The finding is valid. At line 12 the empty catch block discards any error from query(), and line 13 then returns an empty array. A database outage, a syntax error, or a failure caused by bad input all look like a report with no sales. Callers cannot tell these cases apart, so the results are misleading and the failure is hidden. The error is not logged or rethrown. This is especially bad here because the SQL is built by string concatenation, so injection or malformed dates would also fail silently. Major severity is reasonable for a reporting function that staff rely on.",
+      "usage": {
+        "input_tokens": 581,
+        "output_tokens": 187
+      }
+    },
+    {
+      "file": "auth.js",
+      "line": 9,
+      "severity": "critical",
+      "description": "SQL injection in login because the email is concatenated into the query instead of passed as a parameter.",
+      "confidence": 0.97,
+      "reasoning": "The email is concatenated directly into the SQL string, so input such as ' OR '1'='1 changes the query. This is visible in the file and needs no outside code to demonstrate.",
+      "matchesKey": true,
+      "valid": true,
+      "assessment": "Line 9 builds the SQL string by concatenating the user-supplied email directly into the query, with no escaping or parameterization. An input such as `' OR '1'='1` or a UNION payload can alter the query logic. The injection can bypass the email lookup and, together with a UNION that returns a chosen password_hash, even defeat the password check, since the hash is compared against attacker-controlled data. Critical severity is justified. The fix is a parameterized query, for example `query('SELECT ... WHERE email = $1', [email])`.",
+      "usage": {
+        "input_tokens": 726,
+        "output_tokens": 188
+      }
+    }
+  ],
+  "controls": [
+    {
+      "file": "cart.js",
+      "anchor": "export function cartTotal",
+      "severity": "critical",
+      "description": "cartTotal returns the total in euros as a decimal number, which loses precision on every call.",
+      "line": 23,
+      "valid": false,
+      "assessment": "The finding is incorrect. cartTotal sums line.priceCents * line.quantity, so it returns integer cents rather than euros as a decimal. The comment on line 22 and the header comment on line 1 both say this. Integer multiplication and addition cause no floating-point precision loss for ordinary cart values. The code never converts to euros or divides by 100.",
+      "usage": {
+        "input_tokens": 623,
+        "output_tokens": 131
+      }
+    },
+    {
+      "file": "config.js",
+      "anchor": "vatRate",
+      "severity": "major",
+      "description": "The config object has no vatRate key, so VAT cannot be read from it.",
+      "line": 9,
+      "valid": false,
+      "assessment": "The finding is incorrect. The config object explicitly defines vatRate: 0.19 on line 9, with a comment explaining it is a fraction representing 19 percent. The key exists and VAT can be read via config.vatRate.",
+      "usage": {
+        "input_tokens": 502,
+        "output_tokens": 89
+      }
+    },
+    {
+      "file": "database.js",
+      "anchor": "connection.query",
+      "severity": "critical",
+      "description": "query() builds its SQL by concatenating the params into the statement, allowing SQL injection.",
+      "line": 11,
+      "valid": false,
+      "assessment": "The finding is incorrect. Line 11 passes `sql` and `params` as separate arguments to `connection.query(sql, params)`, which is the pg driver's parameterized query form. The code does no string concatenation of params into the statement. Injection would only be possible if callers build the `sql` string from untrusted input, but that is not visible here. The code does have a real problem, though: if `connection.query` throws, `connection.release()` is never called, so the connection leaks. That is a different issue from the one reported.",
+      "usage": {
+        "input_tokens": 549,
+        "output_tokens": 176
+      }
+    },
+    {
+      "file": "payments.js",
+      "anchor": "export async function chargeCard",
+      "severity": "major",
+      "description": "chargeCard expects its amount in integer cents, not euros.",
+      "line": 6,
+      "valid": false,
+      "assessment": "The finding is incorrect. chargeCard takes amountEuros, a decimal number of euros (the comment on line 5 says so, e.g. 19.99). Line 10 converts it to cents with Math.round(amountEuros * 100) before calling the provider. The function does not expect integer cents. Other problems exist, such as logging card number and CVC on line 7 and refundCharge swallowing errors and always returning true, but they are not what this finding claims.",
+      "usage": {
+        "input_tokens": 589,
+        "output_tokens": 162
+      }
+    }
+  ]
+}

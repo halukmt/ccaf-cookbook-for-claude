@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>11 MCP server configuration</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<main>
+  <a class="back" href="/">← Dashboard</a>
+  <h1>11 MCP server configuration</h1>
+  <p class="lede">
+    Runs the real Claude Code CLI in a throwaway project and config. <strong>See which scope wins, what happens to a
+    <code>${VAR}</code>, and whether a resource or a better description changes what the model does.</strong>
+  </p>
+  <div id="example"></div>
+</main>
+<script type="module">
+import { mountExamplePage } from "/assets/example-page.js";
+
+mountExamplePage({
+  api: "/api/11-mcp-configuration/run",
+  runLabel: "Run",
+  fields: [{
+    name: "mode", label: "Experiment", value: "scopes",
+    options: [
+      ["scopes", "Scopes and variable expansion (free)"],
+      ["resource-none", "Schema question: no resource"],
+      ["resource-published", "Schema question: resource published, nothing else"],
+      ["resource-hint", "Schema question: resource, plus a hint in the tool description"],
+      ["description-sparse", "Code question: MCP search with a sparse description"],
+      ["description-enhanced", "Code question: MCP search with an enhanced description"],
+    ],
+  }],
+  hint: "Dummy values only. Your real ~/.claude.json is not touched. Each paid run costs about 5 to 15 cents on the fast model. Single runs vary.",
+});
+</script>
+</body>
+</html>

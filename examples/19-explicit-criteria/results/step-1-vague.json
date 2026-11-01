@@ -1,0 +1,76 @@
+[
+  {
+    "id": "sql-injection",
+    "findings": [
+      {
+        "severity": "critical",
+        "category": "security",
+        "description": "SQL injection: the email value is concatenated directly into the SQL string without parameterization or escaping. An attacker can supply an email such as ' OR '1'='1' -- to bypass lookup or extract data. Use a parameterized query (e.g., query('SELECT id, password_hash FROM users WHERE email = $1', [email])) instead."
+      },
+      {
+        "severity": "major",
+        "category": "logic",
+        "description": "The function accepts a password parameter but never uses it in the visible code; the password is not compared against password_hash, so the snippet as written cannot authenticate the user. (The rest of the function may handle this, but the visible portion is incomplete.)"
+      }
+    ],
+    "usage": {
+      "input_tokens": 490,
+      "output_tokens": 234
+    }
+  },
+  {
+    "id": "null-access",
+    "findings": [
+      {
+        "severity": "major",
+        "category": "logic",
+        "description": "The comment says fetchUser resolves to { data: null } for unknown users, but the return line reads response.data.user.name. When data is null, accessing .user throws a TypeError instead of handling the unknown-user case. The function also throws if data is present but user is missing. Add a null check on response.data and response.data.user, and decide what to return (for example undefined or null) or throw a descriptive error."
+      }
+    ],
+    "usage": {
+      "input_tokens": 467,
+      "output_tokens": 266
+    }
+  },
+  {
+    "id": "unused-variable",
+    "findings": [
+      {
+        "severity": "minor",
+        "category": "unused_code",
+        "description": "The variable 'unused_var' is declared with a constant value of 42 but is never used anywhere in the function. It should be removed."
+      }
+    ],
+    "usage": {
+      "input_tokens": 459,
+      "output_tokens": 71
+    }
+  },
+  {
+    "id": "naming-inconsistency",
+    "findings": [
+      {
+        "severity": "minor",
+        "category": "style",
+        "description": "The variable 'user_name' is a redundant alias of 'userName' with inconsistent naming (camelCase and snake_case mixed in the same function). It could be removed by using 'userName' directly in the template literal."
+      },
+      {
+        "severity": "minor",
+        "category": "other",
+        "description": "The function calls 'getUser()', which is not defined in the snippet. If it is undefined in the calling scope, this will throw a ReferenceError at runtime. This may be defined elsewhere, so it is noted only for verification."
+      }
+    ],
+    "usage": {
+      "input_tokens": 458,
+      "output_tokens": 186
+    }
+  },
+  {
+    "id": "doc-accurate",
+    "findings": [],
+    "usage": {
+      "input_tokens": 495,
+      "output_tokens": 181
+    }
+  }
+]

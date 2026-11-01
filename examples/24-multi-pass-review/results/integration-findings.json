@@ -1,0 +1,164 @@
+{
+  "contracts": false,
+  "issues": [
+    {
+      "files": [
+        "api-routes.js",
+        "orders.js",
+        "cart.js"
+      ],
+      "category": "data_flow",
+      "severity": "high",
+      "description": "Client-supplied cart data, including priceCents and quantity, passes from the api-routes order handler through orders.js and cart.js without validation or a server-side price lookup, so the charged total can be tampered with."
+    },
+    {
+      "files": [
+        "api-routes.js",
+        "orders.js",
+        "payments.js"
+      ],
+      "category": "data_flow",
+      "severity": "critical",
+      "description": "Raw card data from the request body flows through api-routes and orders into payments.js, which logs the full card number and CVC in plaintext, a PCI violation."
+    },
+    {
+      "files": [
+        "api-routes.js",
+        "reports.js"
+      ],
+      "category": "data_flow",
+      "severity": "critical",
+      "description": "Unvalidated from/to query parameters from api-routes are concatenated into SQL in reports.js, giving a directly reachable SQL injection."
+    },
+    {
+      "files": [
+        "api-routes.js",
+        "reports.js"
+      ],
+      "category": "api_contract",
+      "severity": "high",
+      "description": "reports.js is meant for staff-only reporting but does no authorization itself, and the api-routes sales report endpoint requires only a logged-in user, so any customer can read sales data."
+    },
+    {
+      "files": [
+        "orders.js",
+        "inventory.js"
+      ],
+      "category": "data_flow",
+      "severity": "high",
+      "description": "inventory.js reserve does not await its UPDATE and is not atomic, so orders.js proceeds to charge and save the order believing stock is reserved when it may not be, and it cannot roll back reservations on later failure."
+    },
+    {
+      "files": [
+        "orders.js",
+        "payments.js"
+      ],
+      "category": "api_contract",
+      "severity": "high",
+      "description": "orders.js has no refund path when the order insert fails after the charge, and payments.refundCharge returns true even when the refund fails, so any compensation would be unreliable."
+    },
+    {
+      "files": [
+        "orders.js",
+        "payments.js",
+        "cart.js"
+      ],
+      "category": "data_flow",
+      "severity": "medium",
+      "description": "Cart totals are integer cents but chargeCard takes euros and multiplies by 100 again, so the cents-to-euros-to-cents conversion risks float rounding and unit mismatch; tax is also returned but not included in the charged amount."
+    },
+    {
+      "files": [
+        "orders.js",
+        "notifications.js"
+      ],
+      "category": "contradictory_finding",
+      "severity": "medium",
+      "description": "notifications.js swallows send failures in an empty catch, while orders.js is flagged because email or user lookup failures after charging would throw and make a successful order look failed, so error handling for the same step is inconsistent."
+    },
+    {
+      "files": [
+        "orders.js",
+        "notifications.js"
+      ],
+      "category": "data_flow",
+      "severity": "low",
+      "description": "notifications.js hard-codes EUR instead of using the order's currency, so the email may not match what orders.js charged."
+    },
+    {
+      "files": [
+        "database.js",
+        "reports.js",
+        "auth.js"
+      ],
+      "category": "api_contract",
+      "severity": "medium",
+      "description": "database.query accepts raw SQL strings with no parameterization guard, and both reports.js and auth.js concatenate user input into queries, which gives SQL injection."
+    },
+    {
+      "files": [
+        "api-routes.js",
+        "orders.js",
+        "inventory.js",
+        "payments.js"
+      ],
+      "category": "api_contract",
+      "severity": "high",
+      "description": "Downstream services such as orders, inventory and payments throw on failure, but the async api-routes handlers have no try/catch, so these errors become unhandled rejections and hung requests."
+    },
+    {
+      "files": [
+        "cart.js",
+        "inventory.js",
+        "orders.js"
+      ],
+      "category": "data_flow",
+      "severity": "medium",
+      "description": "None of cart.js, inventory.js or orders.js validates that quantity is a positive integer, so a negative or fractional quantity can reduce totals or increase stock."
+    },
+    {
+      "files": [
+        "reports.js",
+        "orders.js",
+        "notifications.js"
+      ],
+      "category": "contradictory_finding",
+      "severity": "medium",
+      "description": "reports.js swallows DB errors and returns an empty array, and notifications.js swallows send errors, while orders.js and inventory.js propagate errors, so failure handling is inconsistent across modules."
+    },
+    {
+      "files": [
+        "auth.js",
+        "api-routes.js"
+      ],
+      "category": "api_contract",
+      "severity": "low",
+      "description": "api-routes passes the raw Authorization header to auth.verifyToken without handling a Bearer prefix or a missing header, but verifyToken's expected format is undefined, so the token contract between them is fragile."
+    },
+    {
+      "files": [
+        "auth.js",
+        "api-routes.js"
+      ],
+      "category": "api_contract",
+      "severity": "medium",
+      "description": "auth.js signs tokens with expiresIn as a bare number, interpreted as seconds although the config is named sessionTtlMinutes, so sessions that api-routes relies on expire far sooner than intended."
+    },
+    {
+      "files": [
+        "database.js",
+        "inventory.js",
+        "reports.js"
+      ],
+      "category": "data_flow",
+      "severity": "low",
+      "description": "database.query leaks pooled clients when a query throws, and inventory.js and reports.js trigger such failures through unawaited or unhandled queries, so repeated errors can exhaust the pool."
+    }
+  ],
+  "brokenLines": 0,
+  "stopReason": "end_turn",
+  "usage": {
+    "input_tokens": 4418,
+    "output_tokens": 2583
+  }
+}

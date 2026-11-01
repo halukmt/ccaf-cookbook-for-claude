@@ -1,0 +1,11 @@
+{
+  "name": "ccaf-cookbook",
+  "owner": { "name": "halukmt" },
+  "plugins": [
+    {
+      "name": "ccaf-cookbook-for-claude",
+      "source": "./",
+      "description": "Reviews projects that use Claude agents and recommends tested patterns. Unofficial."
+    }
+  ]
+}

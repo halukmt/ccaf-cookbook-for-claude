@@ -1,0 +1,241 @@
+{
+  "id": "msgbatch_01FTUSEZdkNaXQyspyheMzMk",
+  "createdAt": "2026-10-31T22:22:42.651590+00:00",
+  "submittedAt": "2026-10-31T22:22:42.567Z",
+  "requests": [
+    {
+      "custom_id": "doc-invoice-004-d05-retry-1",
+      "params": {
+        "model": "claude-haiku-5-5",
+        "max_tokens": 2000,
+        "system": "Extract this document's data with the tool. payment_terms means when payment is due, such as Net 30, and never how a payment was made. Read currency from symbols as well as codes: $ is USD, £ is GBP, € is EUR.",
+        "tools": [
+          {
+            "name": "extract_document",
+            "description": "Record the data of one document. Use null for anything it does not state.",
+            "input_schema": {
+              "type": "object",
+              "properties": {
+                "invoice_number": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "vendor_name": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "document_date": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "ISO 8601, YYYY-MM-DD"
+                },
+                "due_date": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "ISO 8601, YYYY-MM-DD"
+                },
+                "payment_terms": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "purchase_order": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "tax_id": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "currency": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "ISO 4217 code"
+                },
+                "total_amount": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "line_items": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "description": {
+                        "type": "string"
+                      },
+                      "amount": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "description",
+                      "amount"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "invoice_number",
+                "vendor_name",
+                "document_date",
+                "due_date",
+                "payment_terms",
+                "purchase_order",
+                "tax_id",
+                "currency",
+                "total_amount",
+                "line_items"
+              ]
+            }
+          }
+        ],
+        "tool_choice": {
+          "type": "tool",
+          "name": "extract_document",
+          "disable_parallel_tool_use": true
+        },
+        "messages": [
+          {
+            "role": "user",
+            "content": "Dear Ms Keller,\n\nThank you for working with Elm Street Consulting. This letter is our invoice, reference ES-204, for the\nwork delivered on the third of March 2024. We ran two workshops at twelve hundred euros each, and travel\ncame to three hundred and forty euros on top. That brings the total to two thousand seven hundred and\nforty euros. We ask for payment within thirty days.\n\nKind regards,\nTom Elm\n"
+          }
+        ]
+      }
+    },
+    {
+      "custom_id": "doc-invoice-001-d02-retry-1",
+      "params": {
+        "model": "claude-haiku-5-5",
+        "max_tokens": 2000,
+        "system": "Extract this document's data with the tool. payment_terms means when payment is due, such as Net 30, and never how a payment was made. Read currency from symbols as well as codes: $ is USD, £ is GBP, € is EUR.",
+        "tools": [
+          {
+            "name": "extract_document",
+            "description": "Record the data of one document. Use null for anything it does not state.",
+            "input_schema": {
+              "type": "object",
+              "properties": {
+                "invoice_number": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "vendor_name": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "document_date": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "ISO 8601, YYYY-MM-DD"
+                },
+                "due_date": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "ISO 8601, YYYY-MM-DD"
+                },
+                "payment_terms": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "purchase_order": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "tax_id": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "currency": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "ISO 4217 code"
+                },
+                "total_amount": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "line_items": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "description": {
+                        "type": "string"
+                      },
+                      "amount": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "description",
+                      "amount"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "invoice_number",
+                "vendor_name",
+                "document_date",
+                "due_date",
+                "payment_terms",
+                "purchase_order",
+                "tax_id",
+                "currency",
+                "total_amount",
+                "line_items"
+              ]
+            }
+          }
+        ],
+        "tool_choice": {
+          "type": "tool",
+          "name": "extract_document",
+          "disable_parallel_tool_use": true
+        },
+        "messages": [
+          {
+            "role": "user",
+            "content": "Harbor Freight Logistics Ltd\nVAT Reg. GB123456789\n\nINVOICE HFL-5520\nIssued: 2 May 2024 | Due: 16 May 2024 | Terms: Net 14 | Purchase order: PO-3310\n\n| Service            | GBP      |\n|--------------------|----------|\n| Container handling |   850.00 |\n| Customs clearance  |   175.50 |\n| TOTAL DUE          | 1,025.50 |\n"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,443 @@
+{
+  "baseline": [
+    [
+      {
+        "id": "d13",
+        "text": "```json\n{\n  \"vendor_name\": \"Acme Corp\",\n  \"document_date\": \"2024-03-15\",\n  \"total_amount\": 500.00,\n  \"line_items\": [\n    {\n      \"description\": \"Invoice #1234 (no itemization provided)\",\n      \"amount\": 500.00\n    }\n  ]\n}\n```\n\nThe document doesn't itemize its charges, so the line item is a single entry covering the full total.",
+        "stopReason": "end_turn",
+        "output": {
+          "vendor_name": "Acme Corp",
+          "document_date": "2024-03-15",
+          "total_amount": 500,
+          "line_items": [
+            {
+              "description": "Invoice #1234 (no itemization provided)",
+              "amount": 500
+            }
+          ]
+        },
+        "bare": false,
+        "usage": {
+          "input_tokens": 279,
+          "output_tokens": 350
+        }
+      },
+      {
+        "id": "d14",
+        "text": "```json\n{\n  \"vendor_name\": \"accounts\",\n  \"document_date\": null,\n  \"total_amount\": 120.00,\n  \"line_items\": [\n    {\n      \"description\": \"Payment received\",\n      \"amount\": 120.00\n    }\n  ]\n}\n```\n\nThe document doesn't state a company name or a date. The only signature is \"accounts,\" so I used that for vendor_name. I set document_date to null because none appears in the message. The message refers to a payment of 120 but gives no currency, so I treated it as 120.00.",
+        "stopReason": "end_turn",
+        "output": {
+          "vendor_name": "accounts",
+          "document_date": null,
+          "total_amount": 120,
+          "line_items": [
+            {
+              "description": "Payment received",
+              "amount": 120
+            }
+          ]
+        },
+        "bare": false,
+        "usage": {
+          "input_tokens": 288,
+          "output_tokens": 353
+        }
+      },
+      {
+        "id": "d16",
+        "text": "```json\n{\n  \"vendor_name\": \"Castlegate Plumbing Ltd\",\n  \"document_date\": \"2024-08-05\",\n  \"total_amount\": 355.00,\n  \"line_items\": [\n    {\"description\": \"Boiler service\", \"amount\": 180.00},\n    {\"description\": \"Valve replacement\", \"amount\": 95.00},\n    {\"description\": \"Call-out charge\", \"amount\": 60.00}\n  ]\n}\n```\n\nNote: The three line items sum to 335.00, but the stated total is 355.00. The document doesn't describe the remaining 20.00, so I have not added an extra line item for it. Please check the invoice for a missing charge, tax, or a typo in the total.",
+        "stopReason": "end_turn",
+        "output": {
+          "vendor_name": "Castlegate Plumbing Ltd",
+          "document_date": "2024-08-05",
+          "total_amount": 355,
+          "line_items": [
+            {
+              "description": "Boiler service",
+              "amount": 180
+            },
+            {
+              "description": "Valve replacement",
+              "amount": 95
+            },
+            {
+              "description": "Call-out charge",
+              "amount": 60
+            }
+          ]
+        },
+        "bare": false,
+        "usage": {
+          "input_tokens": 399,
+          "output_tokens": 518
+        }
+      }
+    ],
+    [
+      {
+        "id": "d13",
+        "text": "```json\n{\n  \"vendor_name\": \"Acme Corp\",\n  \"document_date\": \"2024-03-15\",\n  \"total_amount\": 500.00,\n  \"line_items\": [\n    {\n      \"description\": \"Invoice #1234 (no itemized breakdown provided)\",\n      \"amount\": 500.00\n    }\n  ]\n}\n```\n\nThe document gives only a total, so the single line item represents the full amount. No itemized charges, tax, or discounts were provided.",
+        "stopReason": "end_turn",
+        "output": {
+          "vendor_name": "Acme Corp",
+          "document_date": "2024-03-15",
+          "total_amount": 500,
+          "line_items": [
+            {
+              "description": "Invoice #1234 (no itemized breakdown provided)",
+              "amount": 500
+            }
+          ]
+        },
+        "bare": false,
+        "usage": {
+          "input_tokens": 279,
+          "output_tokens": 395
+        }
+      },
+      {
+        "id": "d14",
+        "text": "```json\n{\n  \"vendor_name\": null,\n  \"document_date\": null,\n  \"total_amount\": 120,\n  \"line_items\": [\n    {\n      \"description\": \"Payment received\",\n      \"amount\": 120\n    }\n  ]\n}\n```\n\nThe document does not name a company or person beyond the signature \"accounts,\" and it has no date, so I left those fields null rather than guessing. The only amount is the payment of 120, which I recorded as the single line item.",
+        "stopReason": "end_turn",
+        "output": {
+          "vendor_name": null,
+          "document_date": null,
+          "total_amount": 120,
+          "line_items": [
+            {
+              "description": "Payment received",
+              "amount": 120
+            }
+          ]
+        },
+        "bare": false,
+        "usage": {
+          "input_tokens": 288,
+          "output_tokens": 423
+        }
+      },
+      {
+        "id": "d16",
+        "text": "```json\n{\n  \"vendor_name\": \"Castlegate Plumbing Ltd\",\n  \"document_date\": \"2024-08-05\",\n  \"total_amount\": 355.00,\n  \"line_items\": [\n    {\"description\": \"Boiler service\", \"amount\": 180.00},\n    {\"description\": \"Valve replacement\", \"amount\": 95.00},\n    {\"description\": \"Call-out charge\", \"amount\": 60.00}\n  ]\n}\n```\n\nThe listed items sum to 335.00, but the stated total is 355.00. The document does not show a tax, fee, or other line that accounts for the 20.00 difference, so I have not added one. The total is extracted as printed.",
+        "stopReason": "end_turn",
+        "output": {
+          "vendor_name": "Castlegate Plumbing Ltd",
+          "document_date": "2024-08-05",
+          "total_amount": 355,
+          "line_items": [
+            {
+              "description": "Boiler service",
+              "amount": 180
+            },
+            {
+              "description": "Valve replacement",
+              "amount": 95
+            },
+            {
+              "description": "Call-out charge",
+              "amount": 60
+            }
+          ]
+        },
+        "bare": false,
+        "usage": {
+          "input_tokens": 399,
+          "output_tokens": 555
+        }
+      }
+    ],
+    [
+      {
+        "id": "d13",
+        "text": "```json\n{\n  \"vendor_name\": \"Acme Corp\",\n  \"document_date\": \"2024-03-15\",\n  \"total_amount\": 500.00,\n  \"line_items\": [\n    {\n      \"description\": \"Invoice #1234 (total; no individual line items provided)\",\n      \"amount\": 500.00\n    }\n  ]\n}\n```",
+        "stopReason": "end_turn",
+        "output": {
+          "vendor_name": "Acme Corp",
+          "document_date": "2024-03-15",
+          "total_amount": 500,
+          "line_items": [
+            {
+              "description": "Invoice #1234 (total; no individual line items provided)",
+              "amount": 500
+            }
+          ]
+        },
+        "bare": false,
+        "usage": {
+          "input_tokens": 279,
+          "output_tokens": 329
+        }
+      },
+      {
+        "id": "d14",
+        "text": "```json\n{\n  \"vendor_name\": null,\n  \"document_date\": null,\n  \"total_amount\": 120.00,\n  \"line_items\": [\n    {\n      \"description\": \"Payment noted\",\n      \"amount\": 120.00\n    }\n  ]\n}\n```\n\nThe document doesn't identify the issuer (it's signed only \"accounts\") and contains no date, so those fields are null. The only amount is the 120 payment, and the message gives no breakdown, so the single line item reflects that stated amount.",
+        "stopReason": "end_turn",
+        "output": {
+          "vendor_name": null,
+          "document_date": null,
+          "total_amount": 120,
+          "line_items": [
+            {
+              "description": "Payment noted",
+              "amount": 120
+            }
+          ]
+        },
+        "bare": false,
+        "usage": {
+          "input_tokens": 288,
+          "output_tokens": 417
+        }
+      },
+      {
+        "id": "d16",
+        "text": "```json\n{\n  \"vendor_name\": \"Castlegate Plumbing Ltd\",\n  \"document_date\": \"2024-08-05\",\n  \"total_amount\": 355.00,\n  \"line_items\": [\n    {\"description\": \"Boiler service\", \"amount\": 180.00},\n    {\"description\": \"Valve replacement\", \"amount\": 95.00},\n    {\"description\": \"Call-out charge\", \"amount\": 60.00},\n    {\"description\": \"Unexplained difference (not itemized in document)\", \"amount\": 20.00}\n  ]\n}\n```\n\nNote: The listed charges sum to 335.00, but the document's total is 355.00. The 20.00 difference is not itemized in the document, so I added it as a separate line item to reconcile to the total. You may want to verify this against the original invoice.",
+        "stopReason": "end_turn",
+        "output": {
+          "vendor_name": "Castlegate Plumbing Ltd",
+          "document_date": "2024-08-05",
+          "total_amount": 355,
+          "line_items": [
+            {
+              "description": "Boiler service",
+              "amount": 180
+            },
+            {
+              "description": "Valve replacement",
+              "amount": 95
+            },
+            {
+              "description": "Call-out charge",
+              "amount": 60
+            },
+            {
+              "description": "Unexplained difference (not itemized in document)",
+              "amount": 20
+            }
+          ]
+        },
+        "bare": false,
+        "usage": {
+          "input_tokens": 399,
+          "output_tokens": 552
+        }
+      }
+    ]
+  ],
+  "fewShot": [
+    [
+      {
+        "id": "d13",
+        "text": "```json\n{\"vendor_name\":\"Acme Corp\",\"document_date\":\"2024-03-15\",\"total_amount\":500.00,\"line_items\":[{\"description\":\"Invoice #1234\",\"amount\":500.00}]}\n```\n\nThe document states no individual charges, so the line item is the invoice total itself. Only that total is given, so the item may not reflect the actual breakdown.",
+        "stopReason": "end_turn",
+        "output": {
+          "vendor_name": "Acme Corp",
+          "document_date": "2024-03-15",
+          "total_amount": 500,
+          "line_items": [
+            {
+              "description": "Invoice #1234",
+              "amount": 500
+            }
+          ]
+        },
+        "bare": false,
+        "usage": {
+          "input_tokens": 1068,
+          "output_tokens": 348
+        }
+      },
+      {
+        "id": "d14",
+        "text": "```json\n{\"vendor_name\":null,\"document_date\":null,\"total_amount\":120,\"line_items\":[{\"description\":\"Payment received\",\"amount\":120}]}\n```",
+        "stopReason": "end_turn",
+        "output": {
+          "vendor_name": null,
+          "document_date": null,
+          "total_amount": 120,
+          "line_items": [
+            {
+              "description": "Payment received",
+              "amount": 120
+            }
+          ]
+        },
+        "bare": false,
+        "usage": {
+          "input_tokens": 1077,
+          "output_tokens": 193
+        }
+      },
+      {
+        "id": "d16",
+        "text": "```json\n{\"vendor_name\":\"Castlegate Plumbing Ltd\",\"document_date\":\"2024-08-05\",\"total_amount\":355,\"line_items\":[{\"description\":\"Boiler service\",\"amount\":180},{\"description\":\"Valve replacement\",\"amount\":95},{\"description\":\"Call-out charge\",\"amount\":60}]}\n```\n\nThe listed charges sum to 335.00, but the stated total is 355.00. The difference of 20.00 is not explained by any line in the document, so I did not invent a line item for it. The total is taken as stated, and the line items are the three charges shown.",
+        "stopReason": "end_turn",
+        "output": {
+          "vendor_name": "Castlegate Plumbing Ltd",
+          "document_date": "2024-08-05",
+          "total_amount": 355,
+          "line_items": [
+            {
+              "description": "Boiler service",
+              "amount": 180
+            },
+            {
+              "description": "Valve replacement",
+              "amount": 95
+            },
+            {
+              "description": "Call-out charge",
+              "amount": 60
+            }
+          ]
+        },
+        "bare": false,
+        "usage": {
+          "input_tokens": 1188,
+          "output_tokens": 447
+        }
+      }
+    ],
+    [
+      {
+        "id": "d13",
+        "text": "```json\n{\"vendor_name\":\"Acme Corp\",\"document_date\":\"2024-03-15\",\"total_amount\":500,\"line_items\":[{\"description\":\"Invoice #1234\",\"amount\":500}]}\n```",
+        "stopReason": "end_turn",
+        "output": {
+          "vendor_name": "Acme Corp",
+          "document_date": "2024-03-15",
+          "total_amount": 500,
+          "line_items": [
+            {
+              "description": "Invoice #1234",
+              "amount": 500
+            }
+          ]
+        },
+        "bare": false,
+        "usage": {
+          "input_tokens": 1068,
+          "output_tokens": 313
+        }
+      },
+      {
+        "id": "d14",
+        "text": "{\"vendor_name\":null,\"document_date\":null,\"total_amount\":120,\"line_items\":[{\"description\":\"Payment noted\",\"amount\":120}]}",
+        "stopReason": "end_turn",
+        "output": {
+          "vendor_name": null,
+          "document_date": null,
+          "total_amount": 120,
+          "line_items": [
+            {
+              "description": "Payment noted",
+              "amount": 120
+            }
+          ]
+        },
+        "bare": true,
+        "usage": {
+          "input_tokens": 1077,
+          "output_tokens": 339
+        }
+      },
+      {
+        "id": "d16",
+        "text": "```json\n{\"vendor_name\":\"Castlegate Plumbing Ltd\",\"document_date\":\"2024-08-05\",\"total_amount\":355,\"line_items\":[{\"description\":\"Boiler service\",\"amount\":180},{\"description\":\"Valve replacement\",\"amount\":95},{\"description\":\"Call-out charge\",\"amount\":60}]}\n```\n\nThe listed charges sum to 335.00, but the document states a total of 355.00. The 20.00 difference isn't explained by any line item, so I've kept the stated total and not invented a line to fill the gap. The document may be missing a charge, such as tax or an extra item, that should be checked against the original.",
+        "stopReason": "end_turn",
+        "output": {
+          "vendor_name": "Castlegate Plumbing Ltd",
+          "document_date": "2024-08-05",
+          "total_amount": 355,
+          "line_items": [
+            {
+              "description": "Boiler service",
+              "amount": 180
+            },
+            {
+              "description": "Valve replacement",
+              "amount": 95
+            },
+            {
+              "description": "Call-out charge",
+              "amount": 60
+            }
+          ]
+        },
+        "bare": false,
+        "usage": {
+          "input_tokens": 1188,
+          "output_tokens": 514
+        }
+      }
+    ],
+    [
+      {
+        "id": "d13",
+        "text": "```json\n{\"vendor_name\":\"Acme Corp\",\"document_date\":\"2024-03-15\",\"total_amount\":500.00,\"line_items\":[{\"description\":\"Invoice #1234\",\"amount\":500.00}]}\n```",
+        "stopReason": "end_turn",
+        "output": {
+          "vendor_name": "Acme Corp",
+          "document_date": "2024-03-15",
+          "total_amount": 500,
+          "line_items": [
+            {
+              "description": "Invoice #1234",
+              "amount": 500
+            }
+          ]
+        },
+        "bare": false,
+        "usage": {
+          "input_tokens": 1068,
+          "output_tokens": 343
+        }
+      },
+      {
+        "id": "d14",
+        "text": "{\"vendor_name\":null,\"document_date\":null,\"total_amount\":120,\"line_items\":[]}\n\nThe message acknowledges a payment of 120 but describes no charges, so the line items are empty. It is signed only \"accounts\", which names a department rather than a company, so vendor_name is null. No date appears, so document_date is null.",
+        "stopReason": "end_turn",
+        "output": {
+          "vendor_name": null,
+          "document_date": null,
+          "total_amount": 120,
+          "line_items": []
+        },
+        "bare": false,
+        "usage": {
+          "input_tokens": 1077,
+          "output_tokens": 439
+        }
+      },
+      {
+        "id": "d16",
+        "text": "```json\n{\"vendor_name\":\"Castlegate Plumbing Ltd\",\"document_date\":\"2024-08-05\",\"total_amount\":355,\"line_items\":[{\"description\":\"Boiler service\",\"amount\":180},{\"description\":\"Valve replacement\",\"amount\":95},{\"description\":\"Call-out charge\",\"amount\":60}]}\n```\n\nThe line items add up to 335, but the stated total is 355. The document shows no tax, discount, or other charge that accounts for the 20 difference, so I have not added a line item to force a match. The VAT number (GB987654321) identifies the vendor's registration but does not show a VAT charge. The date is the invoice date (2024-08-05), not the due date.",
+        "stopReason": "end_turn",
+        "output": {
+          "vendor_name": "Castlegate Plumbing Ltd",
+          "document_date": "2024-08-05",
+          "total_amount": 355,
+          "line_items": [
+            {
+              "description": "Boiler service",
+              "amount": 180
+            },
+            {
+              "description": "Valve replacement",
+              "amount": 95
+            },
+            {
+              "description": "Call-out charge",
+              "amount": 60
+            }
+          ]
+        },
+        "bare": false,
+        "usage": {
+          "input_tokens": 1188,
+          "output_tokens": 547
+        }
+      }
+    ]
+  ]
+}

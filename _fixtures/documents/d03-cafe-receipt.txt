@@ -1,0 +1,13 @@
+Cafe Lindner
+USt-IdNr. DE298765432
+
+Receipt R-88213
+Date: 2024-06-11
+
+| Item     | EUR   |
+|----------|-------|
+| Coffee   |  7.80 |
+| Sandwich |  9.50 |
+| Total    | 17.30 |
+
+Paid by card. Thank you!

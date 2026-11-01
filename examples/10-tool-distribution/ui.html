@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>10 Tool sets and tool choice</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<main>
+  <a class="back" href="/">← Dashboard</a>
+  <h1>10 Tool sets and tool choice</h1>
+  <p class="lede">
+    Three agents, each with only the tools of its role. <strong>The document agent must start with
+    <code>extract_metadata</code></strong>, and it can load documents only from approved addresses.
+  </p>
+  <div id="example"></div>
+</main>
+<script type="module">
+import { mountExamplePage } from "/assets/example-page.js";
+
+const QUERY = "Research the most recent changes to the MCP specification and write a summary report.";
+
+mountExamplePage({
+  api: "/api/10-tool-distribution/run",
+  runLabel: "Run",
+  fields: [
+    { name: "mode", label: "What to run", value: "agents", options: [["agents", "All three agents (paid)"], ["url", "URL validator only (free)"]] },
+    { name: "query", label: "Query, for the agents", kind: "textarea", value: QUERY },
+    { name: "url", label: "URL, for the validator", value: "https://docs.internal.com/mcp/spec-changes.md" },
+  ],
+  presets: [
+    { label: "Full run", values: { mode: "agents", query: QUERY } },
+    { label: "Valid document", values: { mode: "url", url: "https://docs.internal.com/mcp/spec-changes.md" } },
+    { label: "Untrusted domain", values: { mode: "url", url: "https://evil.example.com/report.pdf" } },
+    { label: "Not a document", values: { mode: "url", url: "https://docs.internal.com/admin/delete-all" } },
+    { label: "Metadata service", values: { mode: "url", url: "http://169.254.169.254/latest/meta-data" } },
+    { label: "Lookalike domain", values: { mode: "url", url: "https://docs.internal.com.evil.example/a.pdf" } },
+  ],
+  hint: "Search results and documents are invented mock data, so other queries find the same sources. Agents use the fast model.",
+});
+</script>
+</body>
+</html>

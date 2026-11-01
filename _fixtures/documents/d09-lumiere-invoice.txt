@@ -1,0 +1,12 @@
+Societe Lumiere SARL
+TVA intracommunautaire : FR40303265045
+
+FACTURE FA-2024-311
+Paris, le 12 septembre 2024
+Echeance : 12 octobre 2024 (30 jours)
+
+Eclairage LED ........ 1.234,50 EUR
+Installation ........... 300,00 EUR
+TVA 20 % ............... 306,90 EUR
+
+Total TTC : 1.841,40 EUR

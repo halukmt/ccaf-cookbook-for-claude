@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>01 Agentic loops</title>
+<link rel="stylesheet" href="/assets/style.css">
+<style>
+  .examples { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .9rem; }
+
+  .iter { border-left: 2px solid var(--border); padding: 0 0 .2rem 1rem; margin-left: .4rem; }
+  .iter-head { display: flex; align-items: center; gap: .6rem; margin: 0 0 .35rem; }
+  .iter-head .n { font-weight: 700; font-size: .9rem; }
+  .blocks { font-size: .75rem; color: var(--muted); margin-bottom: .5rem; }
+
+  .tool-call { background: var(--code-bg); border-radius: 6px; padding: .6rem .75rem; margin: .4rem 0; }
+  .tool-call .name { font-size: .82rem; font-weight: 700; color: var(--tool); word-break: break-word; }
+  .tool-call.err .name { color: var(--warn); }
+  .tool-call pre {
+    margin: .35rem 0 0; font-size: .76rem; white-space: pre-wrap;
+    word-break: break-word; color: var(--muted);
+  }
+
+  .answer { border-left: 3px solid var(--done); }
+  .answer h2 { font-size: .78rem; text-transform: uppercase; letter-spacing: .06em; color: var(--done); margin: 0 0 .5rem; }
+  .answer .text { white-space: pre-wrap; }
+
+  .notice { border-left: 3px solid var(--warn); }
+  .notice h2 { font-size: .78rem; text-transform: uppercase; letter-spacing: .06em; color: var(--warn); margin: 0 0 .4rem; }
+  .notice p { margin: 0; }
+
+  .summary { display: flex; gap: 1.5rem; flex-wrap: wrap; font-size: .85rem; }
+  .summary b { display: block; font-size: 1.3rem; font-weight: 700; }
+  .summary span { color: var(--muted); font-size: .75rem; }
+
+  table.history { width: 100%; border-collapse: collapse; font-size: .8rem; margin-top: .75rem; }
+  table.history td { padding: .28rem .5rem; border-bottom: 1px solid var(--border); }
+  table.history td:first-child { color: var(--muted); width: 2.5rem; }
+  table.history td:nth-child(2) { font-weight: 600; width: 6rem; }
+  table.history td:last-child { color: var(--muted); font-family: ui-monospace, monospace; }
+</style>
+</head>
+<body>
+<main>
+  <a class="back" href="/">← Dashboard</a>
+
+  <h1>01 Agentic loops</h1>
+  <p class="lede">
+    Every card below is one turn of the loop. The badge is <strong>stop_reason</strong> — the only
+    signal that decides whether the loop keeps running or ends. Watch the <em>content blocks</em>
+    printed under each badge: run the same prompt twice and that list changes while the badge does
+    not. That is the whole argument for never branching on block types.
+  </p>
+
+  <div class="panel">
+    <label for="prompt">Prompt</label>
+    <textarea id="prompt">Look up the population of Germany, then calculate how many people 12% of that is.</textarea>
+
+    <div class="row">
+      <button id="run">Run the loop</button>
+      <div>
+        <label for="cap">Safety cap</label>
+        <input type="number" id="cap" value="20" min="1" max="20">
+      </div>
+    </div>
+
+    <div class="examples" id="examples"></div>
+    <p class="hint">
+      Set the safety cap to 1 and run a chained example to force the guard rail. The search tool is
+      a stub knowing only three topics: Germany's population, Berlin rents and EV battery prices.
+      Anything else returns zero results — a valid result, not an error.
+    </p>
+  </div>
+
+  <div id="output"><p class="empty">No run yet.</p></div>
+</main>
+
+<script>
+const API = "/api/01-agentic-loops/run";
+
+const EXAMPLES = [
+  ["One tool", "What is 17 * 23?"],
+  ["No tool at all", "Say hello in exactly one word."],
+  ["Chained tools", "Look up the population of Germany, then calculate how many people 12% of that is."],
+  ["Chained tools #2", "What is the average rent in Berlin? Work out the monthly cost for 65 square metres."],
+  ["Nothing found", "What is the population of Iceland?"],
+];
+
+const el = (tag, className, text) => {
+  const node = document.createElement(tag);
+  if (className) node.className = className;
+  if (text !== undefined) node.textContent = text;
+  return node;
+};
+
+const promptEl = document.getElementById("prompt");
+const capEl = document.getElementById("cap");
+const runBtn = document.getElementById("run");
+const output = document.getElementById("output");
+
+for (const [label, text] of EXAMPLES) {
+  const b = el("button", "ghost", label);
+  b.title = text;
+  b.onclick = () => { promptEl.value = text; };
+  document.getElementById("examples").append(b);
+}
+
+let currentIteration = null;
+
+function panel(className) {
+  const p = el("div", "panel " + className);
+  output.append(p);
+  return p;
+}
+
+runBtn.onclick = () => {
+  const prompt = promptEl.value.trim();
+  if (!prompt) return;
+
+  output.replaceChildren();
+  currentIteration = null;
+  runBtn.disabled = true;
+  runBtn.textContent = "Running…";
+
+  const stream = new EventSource(
+    `${API}?prompt=${encodeURIComponent(prompt)}&maxIterations=${capEl.value}`
+  );
+
+  const finish = () => {
+    stream.close();
+    runBtn.disabled = false;
+    runBtn.textContent = "Run the loop";
+  };
+
+  stream.onmessage = (message) => {
+    const event = JSON.parse(message.data);
+
+    if (event.type === "iteration") {
+      const wrap = panel("");
+      const head = el("div", "iter-head");
+      head.append(el("span", "n", `Iteration ${event.n}`));
+      const known = event.stopReason === "tool_use" || event.stopReason === "end_turn";
+      head.append(el("span", "badge " + (known ? event.stopReason : "other"), event.stopReason));
+      wrap.append(head);
+      wrap.append(el("div", "blocks", `content blocks: [${event.blockTypes.join(", ")}]`));
+      currentIteration = el("div", "iter");
+      wrap.append(currentIteration);
+    }
+
+    if (event.type === "tool") {
+      const box = el("div", "tool-call" + (event.isError ? " err" : ""));
+      box.append(el("div", "name", `${event.name}(${JSON.stringify(event.input)})`));
+      box.append(el("pre", "", typeof event.result === "string"
+        ? event.result
+        : JSON.stringify(event.result, null, 2)));
+      (currentIteration ?? output).append(box);
+    }
+
+    if (event.type === "answer") {
+      const p = panel("answer");
+      p.append(el("h2", "", "Final answer — returned on end_turn"));
+      p.append(el("div", "text", event.text));
+    }
+
+    if (event.type === "cap") {
+      const p = panel("notice");
+      p.append(el("h2", "", "Safety cap reached"));
+      p.append(el("p", "", `Aborted after ${event.maxIterations} iterations. This is not a normal `
+        + "exit — a healthy run ends on end_turn. No answer is returned on purpose: a partial "
+        + "result would hide the failure."));
+    }
+
+    if (event.type === "unhandled") {
+      const p = panel("notice");
+      p.append(el("h2", "", `Unhandled stop_reason: ${event.stopReason}`));
+      p.append(el("p", "", "Neither tool_use nor end_turn, so it does not mean success. "
+        + "max_tokens means the answer was cut off mid-sentence; refusal means the model declined."));
+    }
+
+    if (event.type === "error") {
+      const p = panel("notice");
+      p.append(el("h2", "", "Request failed"));
+      p.append(el("p", "", event.message));
+      finish();
+    }
+
+    if (event.type === "done") {
+      const p = panel("");
+      const sum = el("div", "summary");
+      for (const [value, label] of [
+        [event.iterations, "iterations"],
+        [event.toolCalls, "tool calls"],
+        [event.history.length, "messages in history"],
+      ]) {
+        const cell = el("div");
+        cell.append(el("b", "", String(value)));
+        cell.append(el("span", "", label));
+        sum.append(cell);
+      }
+      p.append(sum);
+
+      const table = el("table", "history");
+      event.history.forEach((message, i) => {
+        const tr = el("tr");
+        tr.append(el("td", "", `[${i}]`));
+        tr.append(el("td", "", message.role));
+        tr.append(el("td", "", message.blocks.join(", ")));
+        table.append(tr);
+      });
+      p.append(table);
+      // Not finishing here: the server still writes the run recording after `done`, and closing
+      // the stream now would cut off the `runSaved` event that follows.
+    }
+
+    if (event.type === "runSaved") {
+      output.append(el("p", "hint", `Run recorded as _runs/${event.runId}.json`));
+      finish();
+    }
+  };
+
+  stream.onerror = () => finish();
+};
+</script>
+</body>
+</html>

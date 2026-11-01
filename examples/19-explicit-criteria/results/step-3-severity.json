@@ -1,0 +1,60 @@
+[
+  {
+    "id": "sql-injection",
+    "findings": [
+      {
+        "severity": "critical",
+        "category": "security",
+        "description": "The login function builds the SQL query by concatenating the untrusted `email` parameter directly into the string, creating a SQL injection vulnerability. An attacker can supply an email such as `' OR '1'='1' --` to bypass authentication or read arbitrary data. The query should use a parameterised statement (e.g. `query('SELECT id, password_hash FROM users WHERE email = $1', [email])`)."
+      }
+    ],
+    "usage": {
+      "input_tokens": 950,
+      "output_tokens": 161
+    }
+  },
+  {
+    "id": "null-access",
+    "findings": [
+      {
+        "severity": "major",
+        "category": "logic",
+        "description": "userName accesses response.data.user.name without a null check. The comment states fetchUser resolves to { data: null } for an unknown user, so response.data is null and the expression response.data.user throws a TypeError instead of handling the unknown user case."
+      }
+    ],
+    "usage": {
+      "input_tokens": 927,
+      "output_tokens": 104
+    }
+  },
+  {
+    "id": "unused-variable",
+    "findings": [],
+    "usage": {
+      "input_tokens": 919,
+      "output_tokens": 10
+    }
+  },
+  {
+    "id": "naming-inconsistency",
+    "findings": [
+      {
+        "severity": "minor",
+        "category": "style",
+        "description": "The variable user_name is a redundant alias of userName, introduced only to change naming convention; this is a style choice and not a defect, so it is noted only as a minor style concern. The function otherwise behaves correctly, with no logic error, security issue, or contradictory comment."
+      }
+    ],
+    "usage": {
+      "input_tokens": 918,
+      "output_tokens": 113
+    }
+  },
+  {
+    "id": "doc-accurate",
+    "findings": [],
+    "usage": {
+      "input_tokens": 955,
+      "output_tokens": 174
+    }
+  }
+]

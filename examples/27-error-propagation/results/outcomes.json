@@ -1,0 +1,296 @@
+{
+  "subagentResults": [
+    {
+      "topic": "session tokens",
+      "attempts": 1,
+      "delays": [],
+      "status": "success",
+      "results": [
+        {
+          "title": "Specification changes, spring release",
+          "source": "https://docs.internal.com/mcp/spec-changes.md",
+          "excerpt": "The spring release adds session tokens for stateful servers. Batch requests are retired. Servers must declare their supported versions. The change takes effect on 2031-06-01.",
+          "retrieved": true
+        }
+      ],
+      "shouldRetry": false,
+      "message": "Query executed. 1 sources found.",
+      "recovery": []
+    },
+    {
+      "topic": "rollout speed",
+      "attempts": 3,
+      "delays": [
+        1000,
+        2000
+      ],
+      "status": "success",
+      "results": [
+        {
+          "title": "Rollout notes for the spring release",
+          "source": "https://wiki.company.com/mcp/rollout-notes.md",
+          "excerpt": "Teams migrated within six weeks. Two gateways needed patches because they relied on batch requests. No customer outage was recorded. The session token rollout finished before 2031-06-01.",
+          "retrieved": true
+        }
+      ],
+      "shouldRetry": false,
+      "message": "Query executed. 1 sources found.",
+      "recovery": []
+    },
+    {
+      "topic": "gateway patches",
+      "attempts": 4,
+      "delays": [
+        1000,
+        2000,
+        4000
+      ],
+      "status": "partial_failure",
+      "failureType": "transient",
+      "shouldRetry": true,
+      "message": "Failed after 4 attempts: Connection refused",
+      "attemptedAction": {
+        "tool": "search_database",
+        "query": "gateway patches",
+        "parameters": {
+          "dateRange": "2031-01-01/2031-12-31",
+          "source": "primary"
+        }
+      },
+      "partialResults": [
+        {
+          "title": "gateway patches report 1",
+          "source": "https://kb.example.com/gateway-patches/1",
+          "excerpt": "Gateway team 1 patched its batch handling during the spring rollout.",
+          "retrieved": true
+        },
+        {
+          "title": "gateway patches report 2",
+          "source": "https://kb.example.com/gateway-patches/2",
+          "excerpt": "Gateway team 2 patched its batch handling during the spring rollout.",
+          "retrieved": true
+        },
+        {
+          "title": "gateway patches report 3",
+          "source": "https://kb.example.com/gateway-patches/3",
+          "excerpt": "Gateway team 3 patched its batch handling during the spring rollout.",
+          "retrieved": true
+        }
+      ],
+      "alternativeApproaches": [
+        "Try alternative data source",
+        "Retry with narrower date range"
+      ],
+      "recovery": [
+        {
+          "action": "proceed_partial",
+          "failureType": "transient",
+          "message": "Failed after 4 attempts: Connection refused"
+        }
+      ]
+    },
+    {
+      "topic": "customer outages",
+      "attempts": 1,
+      "delays": [],
+      "status": "success",
+      "results": [],
+      "shouldRetry": false,
+      "message": "Query executed successfully. No matching records found.",
+      "recovery": []
+    },
+    {
+      "topic": "vendor pricing",
+      "attempts": 1,
+      "delays": [],
+      "status": "success",
+      "results": [
+        {
+          "title": "vendor pricing report 1",
+          "source": "https://kb.example.com/vendor-pricing/1",
+          "excerpt": "Vendor support contracts rose by about 4 percent after the release.",
+          "retrieved": true
+        }
+      ],
+      "shouldRetry": false,
+      "message": "Query executed. 1 sources found.",
+      "recovery": [
+        {
+          "action": "try_alternative",
+          "failureType": "transient",
+          "message": "Failed after 4 attempts: Connection timeout after 30s"
+        }
+      ]
+    },
+    {
+      "topic": "regional rollout",
+      "attempts": 4,
+      "delays": [
+        1000,
+        2000,
+        4000
+      ],
+      "status": "error",
+      "failureType": "transient",
+      "shouldRetry": true,
+      "message": "Failed after 4 attempts: Connection timeout after 30s",
+      "attemptedAction": {
+        "tool": "search_database",
+        "query": "regional rollout",
+        "parameters": {
+          "dateRange": "2031-05-01/2031-06-30",
+          "source": "primary"
+        }
+      },
+      "partialResults": [],
+      "alternativeApproaches": [
+        "Try alternative data source",
+        "Retry with narrower date range"
+      ],
+      "recovery": [
+        {
+          "action": "try_alternative",
+          "failureType": "transient",
+          "message": "Failed after 4 attempts: Connection timeout after 30s"
+        },
+        {
+          "action": "retry_modified",
+          "failureType": "transient",
+          "message": "Failed after 4 attempts: Connection timeout after 30s"
+        },
+        {
+          "action": "proceed_with_gap",
+          "failureType": "transient",
+          "message": "Failed after 4 attempts: Connection timeout after 30s"
+        }
+      ]
+    },
+    {
+      "topic": "migration dates",
+      "attempts": 1,
+      "delays": [],
+      "status": "success",
+      "results": [
+        {
+          "title": "migration dates report 1",
+          "source": "https://kb.example.com/migration-dates/1",
+          "excerpt": "Most teams migrated in the eight weeks before 2031-06-01.",
+          "retrieved": true
+        }
+      ],
+      "shouldRetry": false,
+      "message": "Query executed. 1 sources found.",
+      "recovery": [
+        {
+          "action": "fix_query",
+          "failureType": "validation",
+          "message": "dateRange \"Q2\" is not an ISO date range"
+        }
+      ]
+    },
+    {
+      "topic": "security audit",
+      "attempts": 1,
+      "delays": [],
+      "status": "error",
+      "failureType": "permission",
+      "shouldRetry": false,
+      "message": "403: this index needs the compliance role",
+      "attemptedAction": {
+        "tool": "search_database",
+        "query": "security audit",
+        "parameters": {
+          "dateRange": "2031-01-01/2031-12-31",
+          "source": "primary"
+        }
+      },
+      "partialResults": [],
+      "alternativeApproaches": [
+        "Ask an administrator for access"
+      ],
+      "recovery": [
+        {
+          "action": "alert_admin",
+          "failureType": "permission",
+          "message": "403: this index needs the compliance role"
+        }
+      ]
+    },
+    {
+      "topic": "legal exemption",
+      "attempts": 1,
+      "delays": [],
+      "status": "error",
+      "failureType": "business",
+      "shouldRetry": false,
+      "message": "Data sharing for this topic is on hold pending contract review",
+      "attemptedAction": {
+        "tool": "search_database",
+        "query": "legal exemption",
+        "parameters": {
+          "dateRange": "2031-01-01/2031-12-31",
+          "source": "primary"
+        }
+      },
+      "partialResults": [],
+      "alternativeApproaches": [
+        "Ask a person to decide"
+      ],
+      "recovery": [
+        {
+          "action": "escalate_human",
+          "failureType": "business",
+          "message": "Data sharing for this topic is on hold pending contract review"
+        }
+      ]
+    }
+  ],
+  "log": [
+    {
+      "topic": "gateway patches",
+      "action": "proceed_partial",
+      "data": 3
+    },
+    {
+      "topic": "vendor pricing",
+      "action": "try_alternative",
+      "approach": "Try alternative data source"
+    },
+    {
+      "topic": "regional rollout",
+      "action": "try_alternative",
+      "approach": "Try alternative data source"
+    },
+    {
+      "topic": "regional rollout",
+      "action": "retry_modified",
+      "modification": "narrower date range"
+    },
+    {
+      "topic": "regional rollout",
+      "action": "proceed_with_gap",
+      "details": "Failed after 4 attempts: Connection timeout after 30s"
+    },
+    {
+      "topic": "migration dates",
+      "action": "fix_query",
+      "details": "dateRange \"Q2\" is not an ISO date range"
+    },
+    {
+      "topic": "security audit",
+      "action": "alert_admin",
+      "details": {
+        "tool": "search_database",
+        "query": "security audit",
+        "parameters": {
+          "dateRange": "2031-01-01/2031-12-31",
+          "source": "primary"
+        }
+      }
+    },
+    {
+      "topic": "legal exemption",
+      "action": "escalate_human"
+    }
+  ]
+}

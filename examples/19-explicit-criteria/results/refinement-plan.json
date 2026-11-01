@@ -1,0 +1,23 @@
+{
+  "threshold": 0.25,
+  "plan": [
+    {
+      "category": "style",
+      "measuredRate": 1,
+      "measuredSample": 2,
+      "refinement": {
+        "issue": "Two names for one value were reported as style although style is on the skip list.",
+        "fix": "Skip examples for a naming mismatch and a redundant alias.",
+        "examples": [
+          "const orderId = getId();\nconst order_id = orderId; // skip: same value, naming only",
+          "let total_price = 0;\nlet totalTax = 0; // skip: mixed naming in one function",
+          "const result = compute();\nreturn result; // skip: a redundant variable"
+        ]
+      },
+      "targetRate": 0.15,
+      "refinedRate": 0,
+      "refinedSample": 0,
+      "decision": "may be re-enabled, on a fresh test set"
+    }
+  ]
+}

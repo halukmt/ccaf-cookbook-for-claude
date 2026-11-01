@@ -1,0 +1,126 @@
+{
+  "mode": "summaries",
+  "issues": [
+    {
+      "files": [
+        "api-routes.js",
+        "orders.js",
+        "payments.js"
+      ],
+      "severity": "critical",
+      "description": "Raw card number and CVC flow from the request body through placeOrder into chargeCard, which logs them in plaintext, so card data ends up in logs and the server is in PCI scope instead of using a provider token."
+    },
+    {
+      "files": [
+        "auth.js",
+        "users.js",
+        "reports.js",
+        "database.js"
+      ],
+      "severity": "critical",
+      "description": "auth.js, users.js and reports.js each build SQL by string concatenation even though database.query supports parameters, so the same injection flaw is repeated and the shared query helper has no guard against it."
+    },
+    {
+      "files": [
+        "api-routes.js",
+        "users.js"
+      ],
+      "severity": "critical",
+      "description": "DELETE /admin/users/:id has no auth middleware in the route and users.deleteUser does no authorization itself, so nothing anywhere enforces who may delete users."
+    },
+    {
+      "files": [
+        "api-routes.js",
+        "reports.js"
+      ],
+      "severity": "high",
+      "description": "The sales report route checks only for a logged-in user and reports.salesReport does no authorization, so any customer can read staff-only sales data."
+    },
+    {
+      "files": [
+        "orders.js",
+        "inventory.js"
+      ],
+      "severity": "high",
+      "description": "orders.js reserves stock sequentially without rollback, and inventory.reserve does not await its UPDATE and has a check-then-update race, so orders can proceed on reservations that haven't been applied, fail silently, or oversell, and failed orders never release stock."
+    },
+    {
+      "files": [
+        "orders.js",
+        "payments.js"
+      ],
+      "severity": "high",
+      "description": "orders.js passes an amount to chargeCard, which expects euros and multiplies by 100, while the cart totals are in cents, so the unit contract is inconsistent and may cause a 100x charge error; the total also omits tax."
+    },
+    {
+      "files": [
+        "orders.js",
+        "payments.js"
+      ],
+      "severity": "high",
+      "description": "Neither orders.js nor payments.js uses an idempotency key, and refundCharge returns true even when the refund fails, so a charge followed by a failed DB insert cannot be reliably compensated and retries can double-charge."
+    },
+    {
+      "files": [
+        "api-routes.js",
+        "cart.js",
+        "orders.js"
+      ],
+      "severity": "high",
+      "description": "The client-supplied cart passes unvalidated from the route through cart.js (which accepts any price or quantity) into orders.js, which totals and charges it, allowing price and quantity tampering."
+    },
+    {
+      "files": [
+        "api-routes.js",
+        "orders.js",
+        "payments.js",
+        "reports.js"
+      ],
+      "severity": "medium",
+      "description": "Error handling is inconsistent across layers: reports and refunds swallow errors (returning [] or true), orders and payments let rejections propagate, and the route handlers have no try/catch, so callers cannot tell failures from success and requests hang."
+    },
+    {
+      "files": [
+        "orders.js",
+        "notifications.js"
+      ],
+      "severity": "medium",
+      "description": "Email notification is awaited inside placeOrder after charge and save, and notifications.js swallows send errors silently, so notification failures are either hidden or, via user lookup, can make placeOrder reject after the customer has been charged."
+    },
+    {
+      "files": [
+        "api-routes.js",
+        "auth.js"
+      ],
+      "severity": "medium",
+      "description": "The route passes the raw Authorization header to verifyToken without stripping the 'Bearer ' prefix or checking presence, relying on undocumented behavior in auth.js."
+    },
+    {
+      "files": [
+        "auth.js",
+        "config.js"
+      ],
+      "severity": "medium",
+      "description": "auth.js passes config's session TTL in minutes as a numeric expiresIn, which jsonwebtoken treats as seconds, so tokens expire far sooner than configured."
+    },
+    {
+      "files": [
+        "notifications.js",
+        "utils.js",
+        "orders.js"
+      ],
+      "severity": "low",
+      "description": "notifications.js hardcodes EUR when formatting amounts via utils.formatCurrency (which assumes cents and 2 decimals) instead of using the order's currency, so the email may not match what orders.js charged."
+    }
+  ],
+  "blockTypes": [
+    "thinking",
+    "text"
+  ],
+  "stopReason": "end_turn",
+  "brokenLines": 0,
+  "usage": {
+    "input_tokens": 3728,
+    "output_tokens": 2295
+  }
+}

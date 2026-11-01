@@ -1,0 +1,16 @@
+{
+  "ranAt": "2026-11-01T00:12:36.430Z",
+  "costUsd": 0.10408645,
+  "nameById": {
+    "toolu_01VGDr8P49dzZHBuxK8anLae": "web-search",
+    "toolu_01M5XQCUginmaftCFP6DQs4F": "doc-analysis"
+  },
+  "toolsById": {
+    "toolu_01VGDr8P49dzZHBuxK8anLae": [
+      "WebSearch"
+    ],
+    "toolu_01M5XQCUginmaftCFP6DQs4F": [
+      "Read"
+    ]
+  }
+}

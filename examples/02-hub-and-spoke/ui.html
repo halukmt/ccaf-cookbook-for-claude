@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>02 Hub-and-spoke orchestration</title>
+<link rel="stylesheet" href="/assets/style.css">
+<style>
+  .examples { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .9rem; }
+
+  /* The hub-and-spoke pipeline. Stages light up as the run fills them in. */
+  ol.pipeline { list-style: none; margin: 0; padding: 0; display: grid; gap: .5rem; }
+  ol.pipeline li {
+    display: flex; align-items: center; gap: .7rem;
+    padding: .55rem .75rem; border: 1px solid var(--border); border-radius: 8px;
+    background: var(--code-bg); opacity: .45;
+  }
+  ol.pipeline li.done, ol.pipeline li.running { opacity: 1; }
+  ol.pipeline li.done { border-color: var(--done); }
+  ol.pipeline li.running { border-color: var(--accent); }
+  .stage-name { font-weight: 600; flex: 1; }
+  .stage-when { font-size: .75rem; color: var(--muted); }
+  .dot { width: .55rem; height: .55rem; border-radius: 50%; background: var(--muted); flex: none; }
+  li.done .dot { background: var(--done); }
+  li.running .dot { background: var(--accent); }
+
+  .roster li { display: flex; gap: .6rem; padding: .3rem 0; border-bottom: 1px solid var(--border); }
+  .roster li:last-child { border-bottom: 0; }
+  .roster ul { list-style: none; margin: .4rem 0 0; padding: 0; }
+  .roster .agent { font-weight: 600; font-family: ui-monospace, monospace; font-size: .82rem; flex: none; }
+  .roster .what { color: var(--muted); font-size: .85rem; }
+
+  .brief { border-left: 3px solid var(--accent); }
+  .brief h2 { font-size: .78rem; text-transform: uppercase; letter-spacing: .06em; color: var(--accent); margin: 0 0 .6rem; }
+  .brief dt { font-size: .75rem; color: var(--muted); margin-top: .5rem; }
+  .brief dd { margin: .1rem 0 0; }
+
+  .cats { color: var(--muted); font-size: .85rem; margin: .5rem 0 0; }
+  .added { border-left: 3px solid var(--tool); }
+  .added h2 { font-size: .78rem; text-transform: uppercase; letter-spacing: .06em; color: var(--tool); margin: 0 0 .4rem; }
+  ul.gap-list { margin: .5rem 0 0; padding-left: 1.1rem; font-size: .85rem; }
+  ul.gap-list li { margin-bottom: .3rem; }
+
+  ol.subtopics { margin: .6rem 0 0; padding-left: 1.3rem; }
+  ol.subtopics li { margin-bottom: .55rem; }
+  .sub-title { font-weight: 600; }
+  .sub-scope { color: var(--muted); font-size: .85rem; }
+  .omit-head { font-size: .75rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin: 1rem 0 .2rem; }
+  .omit { color: var(--muted); font-size: .85rem; margin: 0; }
+
+  .agentrun { border-left: 3px solid var(--done); }
+  .agentrun h2 { font-size: .8rem; font-family: ui-monospace, monospace; color: var(--done); margin: 0 0 .5rem; }
+  .agentrun details { margin-bottom: .7rem; }
+  .agentrun summary { cursor: pointer; font-size: .8rem; color: var(--muted); }
+  pre.brief-text {
+    background: var(--code-bg); border-radius: 6px; padding: .8rem; margin: .5rem 0 0;
+    font-size: .75rem; white-space: pre-wrap; color: var(--ink);
+  }
+  ul.findings { list-style: none; margin: 0; padding: 0; }
+  ul.findings li { padding: .5rem 0; border-bottom: 1px solid var(--border); }
+  ul.findings li:last-child { border-bottom: 0; }
+  .claim-row { display: flex; gap: .6rem; align-items: baseline; }
+  .claim { font-weight: 500; flex: 1; }
+  .conf {
+    flex: none; font-family: ui-monospace, monospace; font-size: .72rem;
+    color: var(--muted); border: 1px solid var(--border); border-radius: 4px; padding: 0 .3rem;
+  }
+  .conf.low { color: var(--warn); border-color: var(--warn); }
+  .detail { color: var(--muted); font-size: .85rem; margin-top: .15rem; }
+  .src { color: var(--muted); font-size: .75rem; font-style: italic; margin-top: .15rem; }
+
+  .cov-bar { display: flex; height: .7rem; border-radius: 4px; overflow: hidden; margin: .7rem 0 .4rem; }
+  .cov-bar .seg { font-size: 0; }
+  .cov-bar .c { background: var(--done); }
+  .cov-bar .p { background: var(--tool); }
+  .cov-bar .m { background: var(--warn); }
+  .cov-key { font-size: .8rem; color: var(--muted); margin: 0; }
+
+  .answer { border-left: 3px solid var(--done); }
+  .answer h2 { font-size: .78rem; text-transform: uppercase; letter-spacing: .06em; color: var(--done); margin: 0 0 .5rem; }
+  .answer .text { white-space: pre-wrap; }
+
+  pre.report {
+    background: var(--code-bg); border-radius: 6px; padding: .8rem;
+    font-size: .78rem; overflow-x: auto; margin: 0;
+  }
+  .notice { border-left: 3px solid var(--warn); }
+  .notice h2 { font-size: .78rem; text-transform: uppercase; letter-spacing: .06em; color: var(--warn); margin: 0 0 .4rem; }
+  .notice p { margin: 0; }
+</style>
+</head>
+<body>
+<main>
+  <a class="back" href="/">← Dashboard</a>
+
+  <h1>02 Hub-and-spoke orchestration</h1>
+  <p class="lede">
+    Hub-and-spoke: every message passes through the <strong>coordinator</strong>. Subagents never
+    talk to each other, share no memory, and know only what the coordinator puts in their prompt.
+    The pipeline below is the coordinator's job list — it fills in as the run progresses.
+  </p>
+
+  <div class="panel">
+    <label for="topic">Research topic</label>
+    <textarea id="topic">renewable energy technologies</textarea>
+
+    <div class="row">
+      <button id="run">Run the coordinator</button>
+      <div>
+        <label for="budget">Subtopics to delegate</label>
+        <input type="number" id="budget" value="2" min="1" max="8">
+      </div>
+      <div>
+        <label for="rounds">Refinement rounds</label>
+        <input type="number" id="rounds" value="2" min="0" max="5">
+      </div>
+    </div>
+
+    <div class="examples" id="examples"></div>
+    <p class="hint">
+      Deliberately broad topics. Narrow decomposition is the failure this example is built around:
+      a coordinator that assigns only solar and wind misses entire categories, and the fault lies
+      with the coordinator, never with the subagents.
+    </p>
+  </div>
+
+  <div class="panel">
+    <ol class="pipeline" id="pipeline"></ol>
+  </div>
+
+  <div id="output"><p class="empty">No run yet.</p></div>
+</main>
+
+<script>
+const API = "/api/02-hub-and-spoke/run";
+
+const STAGES = [
+  ["brief",     "Frame the task",        "step 1"],
+  ["decompose", "Decompose into subtopics", "step 2"],
+  ["delegate",  "Brief and spawn subagents", "step 3"],
+  ["aggregate", "Aggregate and assess coverage", "step 4"],
+  ["refine",    "Re-delegate for gaps",  "step 5"],
+  ["write",     "Write the final report", "step 6"],
+];
+
+const EXAMPLES = [
+  ["Renewable energy", "renewable energy technologies"],
+  ["Urban mobility", "urban mobility in European cities"],
+  ["Food preservation", "methods of food preservation"],
+];
+
+const el = (tag, className, text) => {
+  const node = document.createElement(tag);
+  if (className) node.className = className;
+  if (text !== undefined) node.textContent = text;
+  return node;
+};
+
+const topicEl = document.getElementById("topic");
+const runBtn = document.getElementById("run");
+const output = document.getElementById("output");
+const pipelineEl = document.getElementById("pipeline");
+
+for (const [label, text] of EXAMPLES) {
+  const b = el("button", "ghost", label);
+  b.title = text;
+  b.onclick = () => { topicEl.value = text; };
+  document.getElementById("examples").append(b);
+}
+
+function drawPipeline(states = {}) {
+  pipelineEl.replaceChildren();
+  for (const [id, name, when] of STAGES) {
+    const li = el("li", states[id] ?? "");
+    li.append(el("span", "dot"));
+    li.append(el("span", "stage-name", name));
+    li.append(el("span", "stage-when", states[id] === "done" ? "done" : when));
+    pipelineEl.append(li);
+  }
+}
+drawPipeline();
+
+function panel(className) {
+  const p = el("div", "panel " + className);
+  output.append(p);
+  return p;
+}
+
+runBtn.onclick = () => {
+  const topic = topicEl.value.trim();
+  if (!topic) return;
+
+  output.replaceChildren();
+  runBtn.disabled = true;
+  runBtn.textContent = "Running…";
+
+  const states = {};
+  drawPipeline(states);
+
+  const stream = new EventSource(
+    `${API}?topic=${encodeURIComponent(topic)}` +
+      `&maxDelegations=${document.getElementById("budget").value}` +
+      `&rounds=${document.getElementById("rounds").value}`
+  );
+
+  const finish = () => {
+    stream.close();
+    runBtn.disabled = false;
+    runBtn.textContent = "Run the coordinator";
+  };
+
+  stream.onmessage = (message) => {
+    const event = JSON.parse(message.data);
+
+    if (event.type === "stage") {
+      states[event.id] = event.status === "pending" ? "" : event.status;
+      drawPipeline(states);
+    }
+
+    if (event.type === "subagents") {
+      const p = panel("roster");
+      p.append(el("h2", "", "Registered subagents — the spokes"));
+      p.append(el("p", "hint", "Declared in the setup, not invented later: the coordinator can "
+        + "only select from what it knows exists. Each carries its own system prompt, because a "
+        + "subagent inherits nothing."));
+      const ul = el("ul");
+      for (const agent of event.subagents) {
+        const li = el("li");
+        li.append(el("span", "agent", agent.name));
+        li.append(el("span", "what", agent.description));
+        ul.append(li);
+      }
+      p.append(ul);
+    }
+
+    if (event.type === "brief") {
+      const p = panel("brief");
+      p.append(el("h2", "", "The hub's framing — before any delegation"));
+      const dl = el("dl");
+      dl.append(el("dt", "", "Goal"));
+      dl.append(el("dd", "", event.goal));
+      dl.append(el("dt", "", "Where the breadth lies"));
+      dl.append(el("dd", "", event.breadthNote));
+      p.append(dl);
+    }
+
+    if (event.type === "categories") {
+      const p = panel("");
+      p.append(el("h2", "", `Phase A — first pass, ${event.categories.length} categories`));
+      p.append(el("p", "hint", "Enumeration only. The next call asks the opposite question."));
+      p.append(el("p", "cats", event.categories.join(" · ")));
+    }
+
+    if (event.type === "decomposition") {
+      if (event.missingFromFirstPass?.length) {
+        const q = panel("added");
+        q.append(el("h2", "", `Phase B — validation found ${event.missingFromFirstPass.length} gaps`));
+        q.append(el("p", "hint", "Areas the first pass missed. Reviewing a list for what is NOT "
+          + "on it is a different search from producing the list — and it is the search that "
+          + "surfaces contested and adjacent categories."));
+        const ul = el("ul", "gap-list");
+        for (const gap of event.missingFromFirstPass) ul.append(el("li", "", gap));
+        q.append(ul);
+      }
+    }
+
+    if (event.type === "decomposition") {
+      const p = panel(event.tooFew ? "notice" : "");
+      p.append(el("h2", "", `Decomposition — ${event.subtopics.length} subtopics`
+        + (event.tooFew ? ` (below the minimum of ${event.minimum})` : "")));
+      p.append(el("p", "hint", "Whatever is missing here can never reach the final report: no "
+        + "subagent is ever asked about it. Incomplete output traces back to this list, not to "
+        + "the subagents."));
+
+      const ol = el("ol", "subtopics");
+      for (const sub of event.subtopics) {
+        const li = el("li");
+        li.append(el("div", "sub-title", sub.title));
+        li.append(el("div", "sub-scope", sub.scope));
+        ol.append(li);
+      }
+      p.append(ol);
+
+      if (event.omittedOnPurpose) {
+        p.append(el("h3", "omit-head", "Left out on purpose"));
+        p.append(el("p", "omit", event.omittedOnPurpose));
+      }
+    }
+
+    if (event.type === "delegationPlan") {
+      const p = panel(event.notDelegated.length ? "notice" : "");
+      p.append(el("h2", "", `Delegation budget — ${event.delegated.length} of ${event.total} subtopics`));
+
+      const ul = el("ul", "gap-list");
+      for (const d of event.delegated) ul.append(el("li", "", `${d.subtopic} → ${d.agent}`));
+      p.append(ul);
+
+      if (event.notDelegated.length) {
+        p.append(el("p", "hint", `${event.notDelegated.length} subtopics are NOT covered by this `
+          + "run. One subagent call per subtopic gets expensive fast, so the budget is small by "
+          + "default — but a cap that is not stated reads as full coverage, which is worse than "
+          + "no answer. Raise it above, or let step 5's refinement loop close the gap."));
+        const details = el("details");
+        details.append(el("summary", "", `Show the ${event.notDelegated.length} uncovered subtopics`));
+        const ol = el("ol", "gap-list");
+        for (const title of event.notDelegated) ol.append(el("li", "", title));
+        details.append(ol);
+        p.append(details);
+      }
+    }
+
+    if (event.type === "subagentResult") {
+      const p = panel("agentrun");
+      p.append(el("h2", "", `${event.agent} → ${event.subtopic}`));
+
+      const details = el("details");
+      details.append(el("summary", "", "The exact brief this subagent received — its entire world"));
+      details.append(el("pre", "brief-text", event.brief));
+      p.append(details);
+
+      const ul = el("ul", "findings");
+      for (const f of event.findings) {
+        const li = el("li");
+        const head = el("div", "claim-row");
+        head.append(el("span", "claim", f.claim));
+        if (typeof f.confidence === "number") {
+          const low = f.confidence < 0.7;
+          head.append(el("span", "conf" + (low ? " low" : ""), f.confidence.toFixed(2)));
+        }
+        li.append(head);
+        li.append(el("div", "detail", f.detail));
+        if (f.source) li.append(el("div", "src", f.source));
+        ul.append(li);
+      }
+      p.append(ul);
+
+      if (event.outOfScopeNoted) {
+        p.append(el("h3", "omit-head", "Noted as out of scope, for the coordinator to route"));
+        p.append(el("p", "omit", event.outOfScopeNoted));
+      }
+    }
+
+    if (event.type === "coverage") {
+      const pct = Math.round(event.completeness * 100);
+      const p = panel(pct >= 90 ? "" : "notice");
+      p.append(el("h2", "", event.round === 0
+        ? `Coverage assessment — ${pct} %`
+        : `Coverage after refinement round ${event.round} — ${pct} %`));
+      p.append(el("p", "hint", "Counted in code, not judged by a model: \"which subtopics have "
+        + "substantive findings\" is a counting question. Partial coverage does not count as "
+        + "covered — a subtopic with one thin finding is a gap with something in it."));
+
+      const bar = el("div", "cov-bar");
+      for (const [cls, n] of [["c", event.covered.length], ["p", event.partial.length], ["m", event.missing.length]]) {
+        if (!n) continue;
+        const seg = el("span", "seg " + cls, String(n));
+        seg.style.flexGrow = String(n);
+        bar.append(seg);
+      }
+      p.append(bar);
+      p.append(el("p", "cov-key", `${event.covered.length} covered · ${event.partial.length} partial · ${event.missing.length} missing`));
+    }
+
+    if (event.type === "refinementRound") {
+      const p = panel("added");
+      p.append(el("h2", "", `Refinement round ${event.round}`));
+      p.append(el("p", "hint", "Only the gaps are re-delegated — never the subtopics already "
+        + "covered. Re-running covered work is what separates a refinement loop from a retry."));
+      const ul = el("ul", "gap-list");
+      for (const t of event.targeting) ul.append(el("li", "", t));
+      p.append(ul);
+    }
+
+    if (event.type === "refinementStopped") {
+      output.append(el("p", "hint", `Refinement stopped after ${event.rounds} round(s): ${event.reason}.`));
+    }
+
+    if (event.type === "finalReport") {
+      const p = panel("answer");
+      p.append(el("h2", "", "Final report"));
+      p.append(el("div", "text", event.text));
+    }
+
+    if (event.type === "report") {
+      const p = panel("");
+      p.append(el("h2", "", "The report object"));
+      p.append(el("p", "hint", "Empty fields are not oversights — "
+        + "each later step fills one of them."));
+      p.append(el("pre", "report", JSON.stringify(event.report, null, 2)));
+    }
+
+    if (event.type === "error") {
+      const p = panel("notice");
+      p.append(el("h2", "", "Request failed"));
+      p.append(el("p", "", event.message));
+      finish();
+    }
+
+    // `done` is the coordinator's last event, but the server still has to write the run recording
+    // afterwards. Closing the stream here would cut off `runSaved`, so the stream is left open
+    // and finished either by that event or by the server closing the connection.
+    if (event.type === "runSaved") {
+      output.append(el("p", "hint", `Run recorded as _runs/${event.runId}.json`));
+      finish();
+    }
+  };
+
+  stream.onerror = () => finish();
+};
+</script>
+</body>
+</html>

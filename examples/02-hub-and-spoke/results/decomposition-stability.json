@@ -1,0 +1,667 @@
+[
+  {
+    "categories": [
+      "Solar photovoltaic",
+      "Concentrated solar power",
+      "Solar thermal heating",
+      "Onshore wind",
+      "Offshore wind",
+      "Airborne and high-altitude wind energy",
+      "Hydroelectric (conventional reservoir)",
+      "Run-of-river hydro",
+      "Pumped storage hydro",
+      "Tidal range",
+      "Tidal stream",
+      "Ocean wave energy",
+      "Ocean thermal energy conversion",
+      "Salinity gradient (osmotic) energy",
+      "Geothermal (hydrothermal)",
+      "Enhanced geothermal systems",
+      "Geothermal heat pumps",
+      "Biomass combustion",
+      "Biogas and anaerobic digestion",
+      "Liquid biofuels",
+      "Advanced and algae biofuels",
+      "Municipal solid waste energy",
+      "Nuclear fission (conventional reactors)",
+      "Small modular and advanced fission reactors",
+      "Nuclear fusion (magnetic confinement)",
+      "Nuclear fusion (inertial confinement)",
+      "Hydrogen production (electrolysis)",
+      "Hydrogen production (thermochemical and nuclear-assisted)",
+      "Natural (geologic) hydrogen",
+      "Space-based solar power",
+      "Hydrokinetic and river current energy",
+      "Thermal energy storage",
+      "Battery energy storage",
+      "Hydrogen storage and fuel cells",
+      "Compressed air and gravity storage",
+      "Smart grids and power electronics",
+      "Grid integration and transmission",
+      "Demand response and virtual power plants",
+      "Microgrids",
+      "Carbon capture for bioenergy (BECCS)",
+      "Wave-powered and marine hybrid systems",
+      "Low-head and micro hydro"
+    ],
+    "subtopics": [
+      {
+        "title": "Solar photovoltaic",
+        "scope": "Crystalline silicon, thin-film, perovskite and tandem PV cells and modules, their efficiency, manufacturing, costs, degradation, and deployment at utility and rooftop scale (perovskite and tandem cells are pre-commercial/early-commercial; durability is still contested)."
+      },
+      {
+        "title": "Concentrated solar power and solar thermal",
+        "scope": "Parabolic trough, power tower, Fresnel and dish systems, with molten-salt and other heat storage, plus solar thermal heating for water and space heating (CSP cost competitiveness versus PV is disputed)."
+      },
+      {
+        "title": "Wind energy (onshore, offshore, airborne and high-altitude)",
+        "scope": "Horizontal and vertical axis turbines, floating and fixed offshore foundations, and airborne/high-altitude wind systems (kite and tethered-aircraft designs are pre-commercial and their grid-scale viability is contested)."
+      },
+      {
+        "title": "Conventional and run-of-river hydropower, including low-head, micro and pumped storage",
+        "scope": "Reservoir dams, run-of-river, low-head and micro hydro, and pumped storage hydro, covering ecological and social impacts and capacity factors."
+      },
+      {
+        "title": "Marine energy: tidal range, tidal stream, wave, and wave-powered and marine hybrids",
+        "scope": "Tidal barrages and lagoons, tidal turbines, oscillating-body and oscillating-water-column wave devices, and wave-wind-aquaculture hybrids (most are pre-commercial; tidal lagoon viability is disputed)."
+      },
+      {
+        "title": "Ocean thermal, salinity gradient and hydrokinetic/river current energy",
+        "scope": "OTEC (closed, open and hybrid cycles), pressure-retarded and reverse-electrodialysis osmotic power, and river and hydrokinetic turbines (OTEC and osmotic power are pre-commercial and contested on economics)."
+      },
+      {
+        "title": "Geothermal energy (hydrothermal, enhanced and heat pumps)",
+        "scope": "Hydrothermal flash and binary plants, enhanced geothermal systems including closed-loop and superhot rock concepts (EGS is pre-commercial; induced seismicity is disputed), and ground-source heat pumps."
+      },
+      {
+        "title": "Bioenergy: biomass, biogas, liquid biofuels, algae and municipal waste",
+        "scope": "Biomass combustion and co-firing, anaerobic digestion and biogas, first- and second-generation liquid biofuels, advanced and algae biofuels (algae at scale is pre-commercial), and waste-to-energy from municipal solid waste, including land-use and sustainability debates."
+      },
+      {
+        "title": "Bioenergy with carbon capture and storage (BECCS) and carbon-negative bioenergy",
+        "scope": "Capture of CO2 from biomass combustion, fermentation and biogas upgrading, transport and storage, with life-cycle carbon accounting and feasibility debates (largely pre-commercial at scale)."
+      },
+      {
+        "title": "Nuclear fission: conventional, small modular and advanced reactors",
+        "scope": "Light-water and heavy-water reactors, SMRs, molten salt, fast breeder, and thorium-cycle designs, covering safety, waste, fuel supply and cost; advanced designs are pre-commercial and their classification as renewable is contested."
+      },
+      {
+        "title": "Nuclear fusion: magnetic and inertial confinement",
+        "scope": "Tokamaks, stellarators, laser inertial fusion and magnetised target fusion, covering scientific and engineering milestones and the commercial timeline (all pre-commercial and speculative as energy sources)."
+      },
+      {
+        "title": "Hydrogen production pathways",
+        "scope": "Electrolysis (alkaline, PEM, solid oxide), thermochemical water splitting, nuclear-assisted high-temperature electrolysis, and photocatalytic or biological hydrogen (several are pre-commercial)."
+      },
+      {
+        "title": "Natural (geologic/white) hydrogen",
+        "scope": "Subsurface hydrogen accumulations and serpentinization-driven production, exploration status, extraction feasibility, and whether it qualifies as a primary energy source (speculative and contested)."
+      },
+      {
+        "title": "Energy storage: batteries, thermal, hydrogen and mechanical",
+        "scope": "Lithium-ion and flow batteries, thermal energy storage, hydrogen storage and fuel cells, compressed air and gravity storage, covering duration, cost and efficiency (gravity storage and advanced flow chemistries are pre-commercial)."
+      },
+      {
+        "title": "Space-based solar power",
+        "scope": "Orbital solar collection and microwave or laser power beaming to Earth, covering technical feasibility, launch cost dependencies and demonstrations (pre-commercial and speculative)."
+      },
+      {
+        "title": "Grid integration, smart grids and power electronics",
+        "scope": "Transmission and HVDC, grid-scale power electronics, inverters, smart grid control, forecasting and curtailment management, covering the integration of variable renewables."
+      },
+      {
+        "title": "Demand response, virtual power plants and microgrids",
+        "scope": "Demand-side flexibility, aggregated distributed resources operating as virtual power plants, and islanded or community microgrids, covering market design and reliability."
+      },
+      {
+        "title": "Cross-cutting: lifecycle, materials, land use and policy",
+        "scope": "Life-cycle emissions, material criticality, recycling and decommissioning, land and ocean-use conflicts, and cost and policy frameworks that apply across technologies (added as a missing cross-cutting area)."
+      }
+    ],
+    "omittedOnPurpose": "Nothing deliberately excluded. Debated or pre-commercial candidates (airborne wind, tidal lagoons, OTEC, osmotic power, EGS, superhot rock, natural hydrogen, space-based solar, fusion, advanced fission, algae biofuels, BECCS, gravity storage, perovskite PV) are included with caveats in their scopes. Cross-cutting policy and lifecycle topics are included as a separate subtopic rather than omitted.",
+    "usage": {
+      "input_tokens": 3114,
+      "output_tokens": 2919
+    }
+  },
+  {
+    "categories": [
+      "Solar photovoltaic",
+      "Concentrated solar power",
+      "Solar thermal heating",
+      "Onshore wind",
+      "Offshore wind",
+      "Airborne and high-altitude wind",
+      "Hydroelectric (conventional reservoir)",
+      "Run-of-river hydro",
+      "Pumped storage hydro",
+      "Tidal stream",
+      "Tidal range",
+      "Wave energy",
+      "Ocean thermal energy conversion",
+      "Salinity gradient (osmotic) energy",
+      "Geothermal (hydrothermal)",
+      "Enhanced geothermal systems",
+      "Biomass combustion",
+      "Biogas and anaerobic digestion",
+      "Liquid biofuels",
+      "Advanced and algal biofuels",
+      "Municipal and waste-to-energy",
+      "Hydrogen production (green and low-carbon)",
+      "Hydrogen fuel cells",
+      "Nuclear fission (conventional reactors)",
+      "Small modular and advanced fission reactors",
+      "Nuclear fusion (magnetic and inertial confinement)",
+      "Space-based solar power",
+      "Enabling systems: electricity storage (batteries)",
+      "Enabling systems: grid integration and transmission",
+      "Enabling systems: smart grids and demand response",
+      "Enabling systems: carbon capture and storage for bioenergy",
+      "Enabling systems: thermal energy storage",
+      "Enabling systems: power-to-X and synthetic fuels",
+      "Enabling systems: long-duration storage (compressed air, flow batteries, gravity)",
+      "Speculative and contested: orbital and other unconventional sources"
+    ],
+    "subtopics": [
+      {
+        "title": "Solar photovoltaic",
+        "scope": "Covers crystalline silicon, thin-film, and emerging PV cell technologies (perovskite, tandem, organic, quantum dot), their efficiency, cost, degradation, and deployment at utility and rooftop scale."
+      },
+      {
+        "title": "Concentrated solar power",
+        "scope": "Covers parabolic trough, power tower, linear Fresnel and dish systems, their thermal storage integration, and their deployment economics."
+      },
+      {
+        "title": "Solar thermal heating",
+        "scope": "Covers flat-plate and evacuated-tube collectors for water and space heating, plus solar process heat for industry."
+      },
+      {
+        "title": "Onshore and offshore wind",
+        "scope": "Covers turbine design, fixed-bottom and floating offshore wind, wind resource assessment, and grid-scale deployment. Airborne and high-altitude wind (kites, tethered systems, balloons) is a pre-commercial sub-case included with the caveat that it is not yet commercially deployed at scale."
+      },
+      {
+        "title": "Hydroelectric power (conventional, run-of-river, pumped storage)",
+        "scope": "Covers reservoir dams, run-of-river schemes, pumped-storage hydro as both generation and storage, and their environmental and sediment impacts."
+      },
+      {
+        "title": "Marine energy: tidal stream, tidal range, wave",
+        "scope": "Covers tidal stream turbines, tidal barrage and lagoon schemes, and wave energy converters, including their pre-commercial status and grid connection challenges."
+      },
+      {
+        "title": "Ocean thermal, salinity gradient, and other ocean-derived sources",
+        "scope": "Covers OTEC (closed, open, hybrid cycles) and salinity-gradient (pressure-retarded and reverse-electrodialysis osmosis) energy, with caveat that both are pre-commercial with few or no full-scale plants. Also covers ocean current and marine biomass proposals where relevant, flagged as speculative."
+      },
+      {
+        "title": "Geothermal energy",
+        "scope": "Covers hydrothermal flash and binary plants, enhanced geothermal systems (EGS), direct-use heat, and induced seismicity risks; EGS is flagged as partly pre-commercial."
+      },
+      {
+        "title": "Bioenergy: solid biomass, biogas, and waste-to-energy",
+        "scope": "Covers biomass combustion and co-firing, anaerobic digestion and biogas upgrading, landfill gas, and municipal solid waste incineration, including sustainability and land-use debates over whether these are truly renewable or long-term sustainable."
+      },
+      {
+        "title": "Liquid biofuels (first and advanced generation)",
+        "scope": "Covers ethanol, biodiesel, HVO, sustainable aviation fuel, and advanced cellulosic and algal biofuels, with the caveat that algal biofuels remain largely pre-commercial and food-versus-fuel debates apply."
+      },
+      {
+        "title": "Hydrogen production and fuel cells",
+        "scope": "Covers green hydrogen by electrolysis, low-carbon hydrogen from natural gas with CCS and methane pyrolysis, hydrogen storage, and fuel cell technologies (PEM, SOFC, etc.); note hydrogen is an energy carrier rather than a primary source, a point of dispute."
+      },
+      {
+        "title": "Nuclear fission: conventional, SMR and advanced reactors",
+        "scope": "Covers Gen III/III+ light-water reactors, small modular reactors, and advanced fission (fast reactors, molten salt, high-temperature gas, thorium cycles); SMR and advanced designs flagged as pre-commercial and contested under renewable definitions."
+      },
+      {
+        "title": "Nuclear fusion",
+        "scope": "Covers magnetic confinement (tokamaks, stellarators) and inertial confinement (laser ignition, NIF) approaches, and private-sector fusion programs; flagged as not yet demonstrated for net electricity production and contested as a renewable or sustainable source."
+      },
+      {
+        "title": "Space-based solar power and other speculative sources",
+        "scope": "Covers orbital solar collection with microwave or laser transmission to Earth, and lunar or other unconventional proposals; flagged as speculative and pre-commercial with no operational demonstration at utility scale."
+      },
+      {
+        "title": "Electricity storage: batteries and long-duration storage",
+        "scope": "Covers lithium-ion, sodium-ion, flow batteries, compressed air (CAES and advanced adiabatic), gravity storage, and hydrogen-based storage for multi-day or seasonal balancing."
+      },
+      {
+        "title": "Thermal energy storage",
+        "scope": "Covers molten salt, phase-change materials, packed bed, and underground thermal storage used with CSP, district heating, and buildings."
+      },
+      {
+        "title": "Grid integration, transmission, and smart grids",
+        "scope": "Covers HVDC and HVAC transmission, interconnectors, grid-forming inverters, forecasting, curtailment, smart meters, and demand response and virtual power plants."
+      },
+      {
+        "title": "Power-to-X and synthetic fuels",
+        "scope": "Covers e-fuels such as e-methane, e-methanol, e-ammonia, and Fischer-Tropsch synthetic fuels produced from renewable electricity plus captured CO2, and their role in hard-to-electrify sectors."
+      },
+      {
+        "title": "Carbon capture and storage for bioenergy (BECCS) and direct air capture linkage",
+        "scope": "Covers BECCS and biomass-with-CCS as negative-emission pathways, and the CCS infrastructure they depend on; flagged as contested because it depends on sustainable biomass supply."
+      },
+      {
+        "title": "Cross-cutting: lifecycle, materials, and resource constraints",
+        "scope": "Covers lifecycle emissions, land use, critical minerals, recycling of panels and blades, and resource-availability limits across all technologies; this is a missing cross-cutting area that the first pass did not cover."
+      }
+    ],
+    "omittedOnPurpose": "Not omitted: all debated items are kept as subtopics with caveats. Strictly excluded: general fossil fuel technologies and fossil-with-CCS, which fall outside the requester's scope. Economic policy, subsidies, and market design are not technologies and are left to be handled outside this decomposition unless the requester asks for them.",
+    "usage": {
+      "input_tokens": 3064,
+      "output_tokens": 2975
+    }
+  },
+  {
+    "categories": [
+      "Solar photovoltaic",
+      "Concentrated solar power",
+      "Solar thermal heating",
+      "Onshore wind",
+      "Offshore wind",
+      "Airborne and high-altitude wind energy",
+      "Hydroelectric (conventional dam and reservoir)",
+      "Run-of-river and small hydro",
+      "Pumped-storage hydro",
+      "Tidal range",
+      "Tidal stream and marine current",
+      "Wave energy",
+      "Ocean thermal energy conversion",
+      "Salinity gradient (osmotic) energy",
+      "Geothermal (hydrothermal)",
+      "Enhanced geothermal systems",
+      "Geothermal heat pumps",
+      "Biomass combustion and co-firing",
+      "Biogas and anaerobic digestion",
+      "Liquid biofuels (ethanol, biodiesel, advanced/SAF)",
+      "Solid biomass and waste-to-energy",
+      "Hydrogen production (electrolysis, green/blue)",
+      "Fuel cells",
+      "Nuclear fission (conventional reactors)",
+      "Small modular reactors and advanced fission",
+      "Nuclear fusion (magnetic and inertial confinement)",
+      "Thorium and molten-salt reactors",
+      "Space-based solar power",
+      "Hot dry rock and superhot geothermal",
+      "Artificial photosynthesis and solar fuels",
+      "Kite and tethered wind systems",
+      "Ocean current and deep-water renewables",
+      "Floating solar and offshore PV",
+      "Energy storage (batteries, compressed air, thermal, flywheels)",
+      "Grid integration and smart grids",
+      "Power electronics and inverters",
+      "Transmission and HVDC interconnection",
+      "Demand response and virtual power plants",
+      "Green hydrogen storage and transport",
+      "Carbon capture integration with bioenergy (BECCS)",
+      "Direct air capture linked energy systems",
+      "Electrification and heat pumps",
+      "Policy, siting, and lifecycle/material supply chains"
+    ],
+    "subtopics": [
+      {
+        "title": "Solar photovoltaic",
+        "scope": "Covers crystalline silicon, thin-film and emerging PV cell technologies, module manufacturing, efficiency limits, degradation, and deployment economics, with caveat that perovskite and tandem cells are pre-commercial at scale."
+      },
+      {
+        "title": "Concentrated solar power and solar thermal heating",
+        "scope": "Covers parabolic trough, power tower, Fresnel and dish systems with thermal storage, plus flat-plate and evacuated-tube solar thermal for heating, with caveat that some high-temperature CSP designs remain pre-commercial."
+      },
+      {
+        "title": "Wind energy (onshore, offshore, airborne and kite/tethered systems)",
+        "scope": "Covers conventional horizontal-axis turbines onshore and offshore (fixed and floating), plus airborne wind energy and kite/tethered systems, with caveat that airborne and kite systems are pre-commercial and unproven at grid scale."
+      },
+      {
+        "title": "Hydropower (conventional, run-of-river, small hydro, pumped storage)",
+        "scope": "Covers reservoir dams, run-of-river and small hydro, and pumped-storage hydro as both generation and storage, including ecological and displacement impacts."
+      },
+      {
+        "title": "Marine energy (tidal range, tidal stream, wave, ocean current and deep-water)",
+        "scope": "Covers tidal barrages and lagoons, tidal stream and marine current turbines, wave energy converters, and ocean current and deep-water renewables, with caveat that most wave and deep-water concepts are pre-commercial."
+      },
+      {
+        "title": "Ocean thermal energy conversion and salinity gradient energy",
+        "scope": "Covers OTEC (closed, open and hybrid cycles) and osmotic/pressure-retarded osmosis and reverse electrodialysis, with caveat that both are pre-commercial and OTEC economics are contested."
+      },
+      {
+        "title": "Geothermal energy (hydrothermal, EGS, hot dry rock, superhot, heat pumps)",
+        "scope": "Covers hydrothermal resources, enhanced geothermal systems, hot dry rock and superhot rock concepts, and ground-source heat pumps, with caveat that EGS and superhot rock are pre-commercial and induced seismicity is disputed."
+      },
+      {
+        "title": "Bioenergy (biomass combustion, biogas, liquid biofuels, solid biomass and waste-to-energy)",
+        "scope": "Covers biomass co-firing and dedicated combustion, anaerobic digestion and biogas/biomethane, ethanol, biodiesel, advanced biofuels and SAF, and municipal solid waste incineration, including land-use and sustainability disputes."
+      },
+      {
+        "title": "Hydrogen production, storage, transport and fuel cells",
+        "scope": "Covers electrolysis, green, blue and other hydrogen routes, hydrogen storage and transport, and fuel cell technologies, with caveat that the efficiency and emissions status of blue hydrogen is contested."
+      },
+      {
+        "title": "Nuclear fission (conventional, SMRs and advanced reactors)",
+        "scope": "Covers current light-water and heavy-water reactors, small modular reactors, Generation IV designs, and their safety, waste and cost debates; caveat that SMRs and advanced designs are largely pre-commercial and whether nuclear counts as renewable is disputed."
+      },
+      {
+        "title": "Thorium and molten-salt reactors",
+        "scope": "Covers thorium fuel cycles, liquid fluoride and other molten-salt reactor designs, with caveat that these are pre-commercial, have few operating prototypes, and their classification as renewable or sustainable is disputed."
+      },
+      {
+        "title": "Nuclear fusion (magnetic and inertial confinement)",
+        "scope": "Covers tokamaks, stellarators, laser inertial confinement and magneto-inertial approaches and their path to net energy, with caveat that fusion is speculative as a commercial source and its inclusion as renewable is disputed."
+      },
+      {
+        "title": "Space-based solar power",
+        "scope": "Covers orbital solar collection, wireless power beaming, and ground reception, with caveat that the technology is speculative and pre-commercial with unresolved cost and transmission feasibility."
+      },
+      {
+        "title": "Artificial photosynthesis and solar fuels",
+        "scope": "Covers photoelectrochemical and biological-hybrid routes producing fuels directly from sunlight, CO2 and water, with caveat that these are laboratory-stage and pre-commercial."
+      },
+      {
+        "title": "Floating solar and offshore PV",
+        "scope": "Covers floating PV on reservoirs and lakes, and offshore PV installations, with caveat that offshore PV is pre-commercial at scale."
+      },
+      {
+        "title": "Energy storage (batteries, compressed air, thermal, flywheels, hydrogen carriers)",
+        "scope": "Covers electrochemical batteries, compressed air energy storage, thermal storage, flywheels, and long-duration storage technologies."
+      },
+      {
+        "title": "Grid integration, power electronics, transmission and HVDC",
+        "scope": "Covers smart grids, grid-following and grid-forming inverters, power electronics, transmission expansion and HVDC interconnection, and grid stability with high variable renewable shares."
+      },
+      {
+        "title": "Demand response, virtual power plants and electrification",
+        "scope": "Covers demand-side flexibility, aggregated virtual power plants, electrification of transport and heat, and heat pump deployment at building and district scale."
+      },
+      {
+        "title": "Carbon capture linked to energy systems (BECCS and direct air capture)",
+        "scope": "Covers bioenergy with carbon capture and storage and direct air capture coupled to energy systems, with caveat that these are pre-commercial at scale and their net-negative potential is disputed."
+      },
+      {
+        "title": "Policy, siting, lifecycle and material supply chains",
+        "scope": "Covers renewable policy instruments, land and marine siting and permitting, lifecycle emissions, critical minerals and recycling, and labor and supply-chain issues across all technologies."
+      }
+    ],
+    "omittedOnPurpose": "Fossil fuel-based technologies, including fossil with CCS, are excluded by the scope. Ambient micro-harvesting is noted as missing but is not given a separate subtopic beyond the policy/lifecycle coverage, because it does not function as a long-term primary energy source at grid scale; it can be added if the requester wants it.",
+    "usage": {
+      "input_tokens": 3193,
+      "output_tokens": 3295
+    }
+  },
+  {
+    "categories": [
+      "Solar photovoltaic",
+      "Concentrated solar power",
+      "Solar thermal heating",
+      "Onshore wind",
+      "Offshore wind",
+      "Hydroelectric (conventional dams)",
+      "Run-of-river and small hydro",
+      "Pumped storage hydro",
+      "Ocean tidal energy",
+      "Ocean wave energy",
+      "Ocean thermal energy conversion",
+      "Salinity gradient (osmotic) energy",
+      "Geothermal (hydrothermal)",
+      "Enhanced geothermal systems",
+      "Biomass and bioenergy",
+      "Biofuels (liquid and gaseous)",
+      "Biogas and anaerobic digestion",
+      "Waste-to-energy",
+      "Nuclear fission (conventional reactors)",
+      "Small modular and advanced fission reactors",
+      "Nuclear fusion (pre-commercial)",
+      "Hydrogen production (electrolysis and other routes)",
+      "Hydrogen fuel cells",
+      "Space-based solar power (pre-commercial)",
+      "Airborne and high-altitude wind energy (pre-commercial)",
+      "Natural hydrogen (geologic) extraction (exploratory)",
+      "Advanced geothermal and deep drilling (exploratory)",
+      "Energy storage: batteries",
+      "Energy storage: thermal storage",
+      "Energy storage: compressed air and gravity storage",
+      "Energy storage: hydrogen and power-to-gas",
+      "Smart grids and transmission",
+      "Demand response and energy management",
+      "Power electronics and inverters",
+      "Microgrids and distributed generation",
+      "Grid integration and forecasting",
+      "Carbon capture and storage for bioenergy (BECCS)",
+      "Direct air capture linked energy systems",
+      "Ammonia as energy carrier",
+      "Synthetic fuels (e-fuels)",
+      "Renewable heat pumps",
+      "Passive and building-integrated energy systems",
+      "Lifecycle, materials, and recycling of energy technologies",
+      "Policy, financing, and grid economics"
+    ],
+    "subtopics": [
+      {
+        "title": "Solar photovoltaic",
+        "scope": "Cell and module technologies (crystalline silicon, thin-film, perovskite and tandem cells), performance, costs, degradation, and deployment at utility and rooftop scale."
+      },
+      {
+        "title": "Concentrated solar power",
+        "scope": "Parabolic trough, solar tower, dish and linear Fresnel systems, thermal storage integration, and dispatchable CSP economics."
+      },
+      {
+        "title": "Solar thermal heating",
+        "scope": "Flat-plate and evacuated-tube collectors for water and space heating, and industrial process heat applications."
+      },
+      {
+        "title": "Onshore and offshore wind",
+        "scope": "Turbine design, siting, fixed-bottom and floating offshore wind, capacity factors, wake effects, and repowering, with caveat that floating offshore is still early commercial."
+      },
+      {
+        "title": "Hydroelectric power (conventional, run-of-river, small hydro, pumped storage)",
+        "scope": "Large dams, reservoir impacts, run-of-river and small hydro designs, and pumped storage hydro as a bulk storage asset."
+      },
+      {
+        "title": "Ocean energy: tidal, wave, OTEC, and salinity gradient",
+        "scope": "Tidal stream and barrage systems, wave energy converters, ocean thermal energy conversion, and osmotic power; caveat that wave, OTEC and salinity gradient are pre-commercial or demonstration-stage and contested in cost and viability."
+      },
+      {
+        "title": "Geothermal energy (hydrothermal, enhanced geothermal, advanced/deep drilling)",
+        "scope": "Hydrothermal resources, enhanced geothermal systems, and superhot/deep drilling concepts; caveat that EGS and superhot rock are demonstration-stage and deep drilling is exploratory."
+      },
+      {
+        "title": "Bioenergy: biomass, biofuels, biogas, waste-to-energy",
+        "scope": "Solid biomass combustion and co-firing, liquid and gaseous biofuels, anaerobic digestion, and municipal and industrial waste-to-energy, with sustainability and land-use debate noted."
+      },
+      {
+        "title": "Bioenergy with carbon capture (BECCS) and direct air capture energy linkages",
+        "scope": "BECCS as a negative-emissions pathway and the energy demands of direct air capture; caveat that both are pre-commercial at scale and their net-negative status is contested."
+      },
+      {
+        "title": "Nuclear fission: conventional and SMR/advanced reactors",
+        "scope": "Light-water and advanced fission designs, small modular reactors, Generation IV concepts, fuel cycle, and safety/waste debate; caveat on whether nuclear is classed as renewable."
+      },
+      {
+        "title": "Nuclear fusion",
+        "scope": "Magnetic and inertial confinement approaches, tokamaks and stellarators, current demonstration milestones and commercialisation timelines; caveat that it is pre-commercial and speculative as a primary source."
+      },
+      {
+        "title": "Space-based solar power",
+        "scope": "Concepts for orbital collection and microwave or laser transmission to Earth, technical feasibility, launch costs, and demonstration missions; caveat that it is pre-commercial and speculative."
+      },
+      {
+        "title": "Airborne and high-altitude wind energy",
+        "scope": "Kite and tethered aircraft systems, airborne wind energy and high-altitude wind power concepts; caveat that they are pre-commercial and regulatory/technical risk remains."
+      },
+      {
+        "title": "Hydrogen as energy source: production, natural (geologic) hydrogen, and fuel cells",
+        "scope": "Electrolysis, steam methane reforming with capture, pyrolysis and other routes, fuel cell technologies, and natural/white hydrogen exploration; caveat that natural hydrogen is exploratory and colour-coded production classes are contested."
+      },
+      {
+        "title": "Ammonia and e-fuels as energy carriers",
+        "scope": "Ammonia synthesis and combustion or cracking as carrier, synthetic fuels (e-methanol, e-kerosene) from renewable hydrogen and CO2, and efficiency losses."
+      },
+      {
+        "title": "Energy storage: batteries, thermal, mechanical, and hydrogen",
+        "scope": "Lithium-ion and emerging battery chemistries, molten salt and other thermal storage, compressed air and gravity storage, and hydrogen and power-to-gas storage; caveat that gravity and some long-duration concepts are pre-commercial."
+      },
+      {
+        "title": "Smart grids, transmission, and grid integration",
+        "scope": "HVDC and transmission expansion, smart grid controls, power electronics and inverters, grid-forming inverters, forecasting, and integration of variable generation."
+      },
+      {
+        "title": "Demand response, microgrids, and distributed generation",
+        "scope": "Demand-side flexibility, energy management systems, islanded and community microgrids, and distributed generation planning."
+      },
+      {
+        "title": "Renewable heat, heat pumps, and building-integrated systems",
+        "scope": "Ground-source, air-source and water heat pumps, district heating, passive design, and building-integrated photovoltaics and solar envelopes."
+      },
+      {
+        "title": "Lifecycle, materials, and recycling",
+        "scope": "Life-cycle assessment and embodied emissions, critical minerals and supply chains, end-of-life recycling of PV, batteries, turbine blades, and decommissioning."
+      },
+      {
+        "title": "Policy, financing, and grid economics",
+        "scope": "Subsidies, carbon pricing, auctions, levelised cost comparisons, power market design, and financing models for renewable and other low-carbon sources."
+      },
+      {
+        "title": "Other proposed non-fossil primary sources (speculative)",
+        "scope": "Any remaining proposed long-term primary sources not covered elsewhere, such as ocean-current and river-current energy, fusion-adjacent or exotic concepts, and crowd-sourced or speculative proposals; each to be listed with an explicit pre-commercial or contested caveat."
+      }
+    ],
+    "omittedOnPurpose": "\"Nothing deliberately excluded. Fossil-fuel-based sources are out of scope per requester. Fission and bioenergy are retained despite contested renewable status; the caveat is recorded in each scope rather than excluding them. Overlap between grid storage and hydrogen storage is resolved by assigning power-to-gas to the storage subtopic and hydrogen production to the hydrogen subtopic.\"",
+    "usage": {
+      "input_tokens": 3208,
+      "output_tokens": 3158
+    }
+  },
+  {
+    "categories": [
+      "Solar photovoltaic",
+      "Concentrated solar power",
+      "Solar thermal (heating and cooling)",
+      "Solar fuels and photosynthetic conversion",
+      "Onshore wind",
+      "Offshore wind",
+      "Airborne and high-altitude wind energy",
+      "Hydroelectric (conventional and run-of-river)",
+      "Pumped storage hydro (as enabling system)",
+      "Tidal stream and tidal range",
+      "Wave energy",
+      "Ocean thermal energy conversion",
+      "Salinity gradient (osmotic) power",
+      "Geothermal (hydrothermal and conventional)",
+      "Enhanced geothermal systems",
+      "Superhot rock geothermal",
+      "Biomass and bioenergy (solid, liquid, gaseous)",
+      "Biofuels (first, second, third generation)",
+      "Biogas and anaerobic digestion",
+      "Waste-to-energy",
+      "Algae-based energy",
+      "Nuclear fission (conventional reactors)",
+      "Small modular and advanced fission reactors",
+      "Nuclear fusion (magnetic and inertial confinement)",
+      "Hydrogen production (electrolysis, thermochemical, natural gas with carbon capture)",
+      "Hydrogen as energy carrier and fuel cells",
+      "Natural hydrogen (geologic hydrogen)",
+      "Ambient-energy harvesting (e.g., piezoelectric, thermoelectric, triboelectric)",
+      "Space-based solar power",
+      "Radioisotope and nuclear battery sources",
+      "Energy storage: batteries (lithium-ion, flow, solid-state, sodium-ion)",
+      "Energy storage: thermal storage",
+      "Energy storage: compressed air and gravity storage",
+      "Energy storage: hydrogen and power-to-gas",
+      "Superconducting and flywheel storage",
+      "Grid integration: smart grids and transmission",
+      "Grid integration: demand response and virtual power plants",
+      "Grid integration: sector coupling and power-to-X",
+      "Carbon capture and storage paired with bioenergy (BECCS)",
+      "Ocean and marine energy hybrid systems",
+      "Energy from ocean currents and marine biomass",
+      "Metal-fuel and other contested chemical energy candidates"
+    ],
+    "subtopics": [
+      {
+        "title": "Solar photovoltaic",
+        "scope": "Crystalline silicon, thin-film (CdTe, CIGS), perovskite and tandem, organic PV and building-integrated PV; efficiency, cost, deployment, and degradation. Caveat: perovskite and tandem cells are pre-commercial with stability issues."
+      },
+      {
+        "title": "Concentrated solar power and solar thermal (heating and cooling)",
+        "scope": "Parabolic trough, power tower, dish systems with thermal storage; solar water heating, solar space heating, solar cooling and desalination-linked thermal uses. Caveat: CSP has a contested cost position versus PV and batteries."
+      },
+      {
+        "title": "Solar fuels and photosynthetic conversion",
+        "scope": "Artificial photosynthesis, photoelectrochemical water splitting, solar-driven CO2 reduction, and natural photosynthesis harvested for fuel. Caveat: almost entirely pre-commercial, low efficiency and durability."
+      },
+      {
+        "title": "Wind energy: onshore, offshore, and airborne/high-altitude",
+        "scope": "Turbine design, floating offshore wind, and airborne wind energy systems (kites, tethered drones, high-altitude wind power). Caveat: airborne and high-altitude wind energy are pre-commercial with few full-scale deployments."
+      },
+      {
+        "title": "Hydropower: conventional, run-of-river, and pumped storage",
+        "scope": "Reservoir and run-of-river hydro, and pumped storage hydro as an enabling storage system; environmental and ecological impacts included. Caveat: sustainability as renewable is disputed due to methane emissions from reservoirs and ecological harm."
+      },
+      {
+        "title": "Ocean and marine energy: tidal, wave, OTEC, osmotic, currents, marine biomass and hybrids",
+        "scope": "Tidal stream and tidal range, wave energy converters, ocean thermal energy conversion, salinity gradient (osmotic/PRO/RED) power, ocean current turbines, marine biomass, and ocean/marine hybrid systems. Caveat: tidal range, OTEC, osmotic power, and wave energy are mostly pre-commercial or demonstration-stage."
+      },
+      {
+        "title": "Geothermal energy: hydrothermal, enhanced geothermal, superhot rock",
+        "scope": "Conventional hydrothermal, enhanced geothermal systems (EGS), closed-loop geothermal, and superhot rock (supercritical) geothermal; drilling and induced seismicity. Caveat: EGS and superhot rock are pre-commercial; induced seismicity is a contested risk."
+      },
+      {
+        "title": "Bioenergy: biomass, biofuels, biogas, anaerobic digestion, and waste-to-energy",
+        "scope": "Solid biomass combustion and co-firing, first/second/third-generation biofuels, biogas and anaerobic digestion, and municipal and industrial waste-to-energy incineration and gasification. Caveat: biomass carbon neutrality and land-use impacts are disputed; waste-to-energy classification as renewable varies by jurisdiction."
+      },
+      {
+        "title": "Algae-based energy",
+        "scope": "Microalgae biofuels, algal biogas, and algal biomass for energy; cultivation economics and scale-up. Caveat: pre-commercial; commercial viability is contested."
+      },
+      {
+        "title": "Bioenergy with carbon capture and storage (BECCS)",
+        "scope": "Combining biomass energy or biofuel production with carbon capture and geological storage to create net negative emissions. Caveat: speculative at scale; dependent on biomass sustainability and storage assumptions."
+      },
+      {
+        "title": "Nuclear fission: conventional, small modular, and advanced reactors",
+        "scope": "Light-water reactors, SMRs, molten-salt, fast reactors, thorium fuel cycles, and fuel supply. Caveat: whether fission counts as renewable is contested; its inclusion here follows the requester's scope."
+      },
+      {
+        "title": "Nuclear fusion",
+        "scope": "Magnetic confinement (tokamaks, stellarators) and inertial confinement (laser ignition), plus fusion-fuel cycles and commercialization outlook. Caveat: fully pre-commercial; net energy gain at commercial scale is unproven."
+      },
+      {
+        "title": "Hydrogen: production, carriers, and fuel cells",
+        "scope": "Electrolysis, thermochemical and photothermal water splitting, natural gas reforming with carbon capture (blue hydrogen), storage, transport, and fuel cell applications. Caveat: blue hydrogen is fossil-based and contested as a non-fossil source; hydrogen is a carrier, not a primary source."
+      },
+      {
+        "title": "Natural (geologic) hydrogen",
+        "scope": "Hydrogen accumulations from subsurface serpentinization and radiolysis; exploration, extraction, and resource estimates. Caveat: highly speculative; commercial resource existence is unproven."
+      },
+      {
+        "title": "Ambient energy harvesting",
+        "scope": "Piezoelectric, thermoelectric, triboelectric, pyroelectric, RF and vibration harvesting for low-power devices. Caveat: micro-scale only; not a meaningful primary energy source at grid scale and may be contested as an energy source."
+      },
+      {
+        "title": "Space-based solar power",
+        "scope": "Orbital solar collection and microwave or laser power beaming to Earth; launch economics and demonstrations. Caveat: pre-commercial and speculative."
+      },
+      {
+        "title": "Radioisotope and nuclear battery sources",
+        "scope": "Radioisotope thermoelectric generators, betavoltaics, and tritium-based nuclear batteries. Caveat: niche, low-power, and contested as a 'renewable' or primary energy source."
+      },
+      {
+        "title": "Energy storage: electrochemical, thermal, mechanical, and hydrogen",
+        "scope": "Lithium-ion, flow, solid-state, and sodium-ion batteries; thermal storage (sensible, latent, thermochemical); compressed air (CAES), gravity storage, and hydrogen/power-to-gas storage; superconducting magnetic and flywheel storage. Caveat: storage is an enabling system, not a primary source; solid-state and gravity storage are pre-commercial."
+      },
+      {
+        "title": "Grid integration: smart grids, transmission, demand response, and sector coupling",
+        "scope": "Smart grid and HVDC transmission, demand response and virtual power plants, sector coupling and power-to-X pathways. Caveat: enabling infrastructure rather than a primary source; included under the broad scope."
+      },
+      {
+        "title": "Metal fuels and other contested chemical energy candidates",
+        "scope": "Metal-fuel energy (iron, aluminium, zinc, silicon-based fuels) and other proposed chemical energy carriers or sources not covered elsewhere. Caveat: speculative and largely at laboratory or concept stage."
+      },
+      {
+        "title": "Hydrogen-free and other alternative primary sources: cross-cutting assessment",
+        "scope": "Cross-cutting comparison of lifecycle emissions, land and material footprints, levelized costs, and policy classification (renewable vs. low-carbon vs. sustainable) across all technologies in this decomposition. Caveat: meta-level; draws on other subtopics' outputs."
+      }
+    ],
+    "omittedOnPurpose": "Nothing deliberately omitted. Debated items (fission, blue hydrogen, biomass, large hydro, waste-to-energy, natural hydrogen, metal fuels, space solar, nuclear batteries, ambient harvesting, airborne wind, osmotic power, OTEC, superhot rock geothermal, algae, BECCS) are retained with caveats per requester scope. Non-energy-source items such as storage and grid integration are retained as enabling systems, not primary sources.",
+    "usage": {
+      "input_tokens": 3285,
+      "output_tokens": 3781
+    }
+  }
+]

@@ -1,0 +1,7 @@
+{
+  "name": "ccaf-cookbook-for-claude",
+  "version": "1.0.0",
+  "description": "Reviews projects that use Claude agents and recommends tested patterns. Unofficial.",
+  "license": "MIT",
+  "keywords": ["agents", "patterns", "mcp", "review"]
+}

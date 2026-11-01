@@ -1,0 +1,10 @@
+Castlegate Plumbing Ltd, VAT GB987654321
+Invoice CP-1180
+Date: 2024-08-05    Due: 2024-09-04    Terms: Net 30    PO: PO-8801
+
+| Work               | GBP    |
+|--------------------|--------|
+| Boiler service     | 180.00 |
+| Valve replacement  |  95.00 |
+| Call-out charge    |  60.00 |
+| Total              | 355.00 |

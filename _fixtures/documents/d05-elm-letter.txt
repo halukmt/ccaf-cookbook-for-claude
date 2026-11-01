@@ -1,0 +1,9 @@
+Dear Ms Keller,
+
+Thank you for working with Elm Street Consulting. This letter is our invoice, reference ES-204, for the
+work delivered on the third of March 2024. We ran two workshops at twelve hundred euros each, and travel
+came to three hundred and forty euros on top. That brings the total to two thousand seven hundred and
+forty euros. We ask for payment within thirty days.
+
+Kind regards,
+Tom Elm

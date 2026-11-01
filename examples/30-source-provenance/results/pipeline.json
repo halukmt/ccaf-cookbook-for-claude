@@ -1,0 +1,230 @@
+{
+  "subagents": [
+    {
+      "subagent": "market",
+      "findings": [
+        {
+          "claim": "The spring release adds session tokens for stateful servers.",
+          "sourceUrl": "https://docs.internal.com/mcp/spec-changes.md",
+          "documentName": "Specification changes, spring release",
+          "relevantExcerpt": "The spring release adds session tokens for stateful servers.",
+          "publicationDate": "2031-03-14",
+          "measure": "none",
+          "value": null
+        },
+        {
+          "claim": "Batch requests are retired in the spring release.",
+          "sourceUrl": "https://docs.internal.com/mcp/spec-changes.md",
+          "documentName": "Specification changes, spring release",
+          "relevantExcerpt": "Batch requests are retired.",
+          "publicationDate": "2031-03-14",
+          "measure": "none",
+          "value": null
+        },
+        {
+          "claim": "Servers must declare their supported versions under the spring release.",
+          "sourceUrl": "https://docs.internal.com/mcp/spec-changes.md",
+          "documentName": "Specification changes, spring release",
+          "relevantExcerpt": "Servers must declare their supported versions.",
+          "publicationDate": "2031-03-14",
+          "measure": "none",
+          "value": null
+        },
+        {
+          "claim": "The spring release change takes effect on 2031-06-01.",
+          "sourceUrl": "https://docs.internal.com/mcp/spec-changes.md",
+          "documentName": "Specification changes, spring release",
+          "relevantExcerpt": "The change takes effect on 2031-06-01.",
+          "publicationDate": "2031-03-14",
+          "measure": "none",
+          "value": null
+        },
+        {
+          "claim": "Of 412 organisations surveyed in April, 38% had adopted session tokens.",
+          "sourceUrl": "https://survey.example.org/spring-adoption-q2.html",
+          "documentName": "Adoption survey, second quarter",
+          "relevantExcerpt": "Of 412 organisations surveyed in April, 38% had adopted session tokens.",
+          "publicationDate": "2031-04-20",
+          "measure": "adoption_rate",
+          "value": "38%"
+        },
+        {
+          "claim": "The median migration budget was $120,000, counting licences and contractor fees only.",
+          "sourceUrl": "https://survey.example.org/spring-adoption-q2.html",
+          "documentName": "Adoption survey, second quarter",
+          "relevantExcerpt": "The median budget for the migration was $120,000, counting licences and contractor fees only.",
+          "publicationDate": "2031-04-20",
+          "measure": "migration_budget",
+          "value": "$120,000"
+        },
+        {
+          "claim": "Of 430 organisations surveyed in August, 61% had adopted session tokens.",
+          "sourceUrl": "https://survey.example.org/spring-adoption-q3.html",
+          "documentName": "Adoption survey, third quarter",
+          "relevantExcerpt": "Of 430 organisations surveyed in August, 61% had adopted session tokens.",
+          "publicationDate": "2031-08-18",
+          "measure": "adoption_rate",
+          "value": "61%"
+        },
+        {
+          "claim": "Respondents named gateway compatibility as the main remaining blocker to adoption.",
+          "sourceUrl": "https://survey.example.org/spring-adoption-q3.html",
+          "documentName": "Adoption survey, third quarter",
+          "relevantExcerpt": "Respondents named gateway compatibility as the main remaining blocker.",
+          "publicationDate": "2031-08-18",
+          "measure": "none",
+          "value": null
+        }
+      ],
+      "usage": {
+        "input_tokens": 1327,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 1139,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard",
+        "inference_geo": "global",
+        "speed": "standard"
+      }
+    },
+    {
+      "subagent": "operations",
+      "findings": [
+        {
+          "claim": "Teams migrated within six weeks in the spring release rollout.",
+          "sourceUrl": "https://wiki.company.com/mcp/rollout-notes.md",
+          "documentName": "Rollout notes for the spring release",
+          "relevantExcerpt": "Teams migrated within six weeks.",
+          "publicationDate": "2031-05-02",
+          "measure": "migration_duration",
+          "value": "six weeks"
+        },
+        {
+          "claim": "Two gateways needed patches because they relied on batch requests.",
+          "sourceUrl": "https://wiki.company.com/mcp/rollout-notes.md",
+          "documentName": "Rollout notes for the spring release",
+          "relevantExcerpt": "Two gateways needed patches because they relied on batch requests.",
+          "publicationDate": "2031-05-02",
+          "measure": "gateways_patched",
+          "value": "Two"
+        },
+        {
+          "claim": "No customer outage was recorded during the spring release rollout.",
+          "sourceUrl": "https://wiki.company.com/mcp/rollout-notes.md",
+          "documentName": "Rollout notes for the spring release",
+          "relevantExcerpt": "No customer outage was recorded.",
+          "publicationDate": "2031-05-02",
+          "measure": "none",
+          "value": null
+        },
+        {
+          "claim": "The session token rollout finished before 2031-06-01.",
+          "sourceUrl": "https://wiki.company.com/mcp/rollout-notes.md",
+          "documentName": "Rollout notes for the spring release",
+          "relevantExcerpt": "The session token rollout finished before 2031-06-01.",
+          "publicationDate": "2031-05-02",
+          "measure": "none",
+          "value": null
+        },
+        {
+          "claim": "The median migration budget is estimated at $210,000 once staff time is counted alongside licences and contractors.",
+          "sourceUrl": "https://analyst.example.net/spring-migration-costs",
+          "documentName": "What the spring migration really costs",
+          "relevantExcerpt": "We estimate the median migration budget at $210,000 once staff time is counted alongside licences and contractors.",
+          "publicationDate": "2031-04-28",
+          "measure": "migration_budget",
+          "value": "$210,000"
+        },
+        {
+          "claim": "Most teams needed ten weeks from start to finish to migrate.",
+          "sourceUrl": "https://analyst.example.net/spring-migration-costs",
+          "documentName": "What the spring migration really costs",
+          "relevantExcerpt": "Most teams needed ten weeks from start to finish.",
+          "publicationDate": "2031-04-28",
+          "measure": "migration_duration",
+          "value": "ten weeks"
+        },
+        {
+          "claim": "Two major gateway vendors shipped emergency patches in May after customers reported dropped sessions.",
+          "sourceUrl": "https://news.example.com/gateway-vendors-patch",
+          "documentName": "Gateway vendors race to patch before the deadline",
+          "relevantExcerpt": "Two major gateway vendors shipped emergency patches in May, after customers reported dropped sessions.",
+          "publicationDate": "2031-05-20",
+          "measure": "gateways_patched",
+          "value": "Two"
+        },
+        {
+          "claim": "The working group declined to delay the June deadline.",
+          "sourceUrl": "https://news.example.com/gateway-vendors-patch",
+          "documentName": "Gateway vendors race to patch before the deadline",
+          "relevantExcerpt": "The working group declined to delay the June deadline.",
+          "publicationDate": "2031-05-20",
+          "measure": "none",
+          "value": null
+        }
+      ],
+      "usage": {
+        "input_tokens": 1336,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 1170,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard",
+        "inference_geo": "global",
+        "speed": "standard"
+      }
+    }
+  ],
+  "plain": {
+    "report": "**The change.** The spring release, published 14 March 2031, adds session tokens for stateful servers, retires batch requests, and requires servers to declare their supported versions. It took effect on 1 June 2031, and the working group declined to delay that deadline.\n\n**Adoption.** Survey results suggest uptake grew over the period. In April, 38% of 412 organisations surveyed had adopted session tokens. In August, 61% of 430 organisations had. The two surveys sampled different groups of a similar size, so the rise is indicative rather than a strict like-for-like change. Respondents named gateway compatibility as the main remaining blocker. This fits reports that two gateways needed patches because they relied on batch requests, and that two major gateway vendors shipped emergency patches in May after customers reported dropped sessions. The findings do not say whether these are the same two gateways.\n\n**Cost and duration.** The sources differ on these points, partly because they measure different things. The adoption survey put the median migration budget at $120,000, counting only licences and contractor fees. A separate analysis estimated $210,000 once staff time is included. These figures are not necessarily in conflict, since they use different scopes. On duration, the rollout notes say teams migrated within six weeks, while another source says most teams needed ten weeks from start to finish. The findings do not explain the gap, though it may reflect different definitions of \"start to finish\" or different groups of teams.\n\n**Impact.** The rollout notes record no customer outage and say the rollout finished before 1 June. However, customers reportedly saw dropped sessions that prompted the vendors' May patches. Whether that counts as an outage depends on definitions the findings do not give. The rollout notes (2 May) also predate the vendor patches (20 May), so they may not reflect later problems.",
+    "usage": {
+      "input_tokens": 1651,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 0,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 965,
+      "output_tokens_details": {
+        "thinking_tokens": 384
+      },
+      "service_tier": "standard",
+      "inference_geo": "global",
+      "speed": "standard"
+    },
+    "stopReason": "end_turn"
+  },
+  "attributed": {
+    "report": "**The change.** The spring release adds session tokens for stateful servers [1]. It retires batch requests [2] and requires servers to declare their supported versions [3]. The change takes effect on 2031-06-01 [4], and the working group declined to delay that June deadline [16].\n\n**Adoption.** In the April survey of 412 organisations, 38% had adopted session tokens [5]. In the August survey of 430 organisations, the figure was 61% [7]. Respondents named gateway compatibility as the main remaining blocker to adoption [8].\n\n**Migration cost.** The April 20 adoption survey put the median migration budget at $120,000, counting licences and contractor fees only [6]. A piece published on April 28 estimated the median at $210,000 once staff time is counted alongside licences and contractors [13]. The two figures use different cost definitions [6][13].\n\n**Migration time and rollout.** The rollout notes of May 2 report that teams migrated within six weeks [9]. The April 28 cost analysis reports that most teams needed ten weeks from start to finish [14]. The rollout notes also record that no customer outage occurred [11] and that the session token rollout finished before 2031-06-01 [12].\n\n**Gateways.** The rollout notes say two gateways needed patches because they relied on batch requests [10]. A May 20 report says two major gateway vendors shipped emergency patches in May after customers reported dropped sessions [15].",
+    "usage": {
+      "input_tokens": 1743,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 0,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 972,
+      "output_tokens_details": {
+        "thinking_tokens": 504
+      },
+      "service_tier": "standard",
+      "inference_geo": "global",
+      "speed": "standard"
+    },
+    "stopReason": "end_turn"
+  }
+}

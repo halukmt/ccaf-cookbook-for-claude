@@ -1,0 +1,107 @@
+[
+  {
+    "docId": "d01",
+    "model": "claude-haiku-5-5",
+    "stopReason": "tool_use",
+    "blockTypes": [
+      "tool_use"
+    ],
+    "toolName": "extract_metadata",
+    "toolNames": [
+      "extract_metadata"
+    ],
+    "input": {
+      "category": "invoice",
+      "document_date": "2024-03-15"
+    },
+    "text": "",
+    "usage": {
+      "input_tokens": 900,
+      "output_tokens": 60
+    }
+  },
+  {
+    "docId": "d03",
+    "model": "claude-haiku-5-5",
+    "stopReason": "tool_use",
+    "blockTypes": [
+      "tool_use"
+    ],
+    "toolName": "extract_metadata",
+    "toolNames": [
+      "extract_metadata"
+    ],
+    "input": {
+      "category": "receipt",
+      "document_date": "2024-06-11"
+    },
+    "text": "",
+    "usage": {
+      "input_tokens": 806,
+      "output_tokens": 60
+    }
+  },
+  {
+    "docId": "d15",
+    "model": "claude-haiku-5-5",
+    "stopReason": "tool_use",
+    "blockTypes": [
+      "tool_use"
+    ],
+    "toolName": "extract_metadata",
+    "toolNames": [
+      "extract_metadata"
+    ],
+    "input": {
+      "category": "contract",
+      "document_date": "2024-02-01"
+    },
+    "text": "",
+    "usage": {
+      "input_tokens": 805,
+      "output_tokens": 59
+    }
+  },
+  {
+    "docId": "d14",
+    "model": "claude-haiku-5-5",
+    "stopReason": "tool_use",
+    "blockTypes": [
+      "tool_use"
+    ],
+    "toolName": "extract_metadata",
+    "toolNames": [
+      "extract_metadata"
+    ],
+    "input": {
+      "category": "unclear",
+      "document_date": null
+    },
+    "text": "",
+    "usage": {
+      "input_tokens": 735,
+      "output_tokens": 55
+    }
+  },
+  {
+    "docId": "d13",
+    "model": "claude-haiku-5-5",
+    "stopReason": "tool_use",
+    "blockTypes": [
+      "tool_use"
+    ],
+    "toolName": "extract_metadata",
+    "toolNames": [
+      "extract_metadata"
+    ],
+    "input": {
+      "category": "invoice",
+      "document_date": "2024-03-15"
+    },
+    "text": "",
+    "usage": {
+      "input_tokens": 726,
+      "output_tokens": 60
+    }
+  }
+]

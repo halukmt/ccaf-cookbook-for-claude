@@ -1,0 +1,818 @@
+[
+  [
+    {
+      "id": "d01",
+      "text": "```json\n{\n  \"vendor_name\": \"Northwind Office Supplies GmbH\",\n  \"document_date\": \"2024-03-15\",\n  \"total_amount\": 428.40,\n  \"line_items\": [\n    {\"description\": \"Copy paper\", \"amount\": 120.00},\n    {\"description\": \"Toner cartridges\", \"amount\": 240.00},\n    {\"description\": \"VAT 19%\", \"amount\": 68.40}\n  ]\n}\n```",
+      "stopReason": "end_turn",
+      "output": {
+        "vendor_name": "Northwind Office Supplies GmbH",
+        "document_date": "2024-03-15",
+        "total_amount": 428.4,
+        "line_items": [
+          {
+            "description": "Copy paper",
+            "amount": 120
+          },
+          {
+            "description": "Toner cartridges",
+            "amount": 240
+          },
+          {
+            "description": "VAT 19%",
+            "amount": 68.4
+          }
+        ]
+      },
+      "bare": false,
+      "usage": {
+        "input_tokens": 453,
+        "output_tokens": 252
+      }
+    },
+    {
+      "id": "d02",
+      "text": "```json\n{\n  \"vendor_name\": \"Harbor Freight Logistics Ltd\",\n  \"document_date\": \"2024-05-02\",\n  \"total_amount\": 1025.50,\n  \"line_items\": [\n    {\n      \"description\": \"Container handling\",\n      \"amount\": 850.00\n    },\n    {\n      \"description\": \"Customs clearance\",\n      \"amount\": 175.50\n    }\n  ]\n}\n```",
+      "stopReason": "end_turn",
+      "output": {
+        "vendor_name": "Harbor Freight Logistics Ltd",
+        "document_date": "2024-05-02",
+        "total_amount": 1025.5,
+        "line_items": [
+          {
+            "description": "Container handling",
+            "amount": 850
+          },
+          {
+            "description": "Customs clearance",
+            "amount": 175.5
+          }
+        ]
+      },
+      "bare": false,
+      "usage": {
+        "input_tokens": 403,
+        "output_tokens": 225
+      }
+    },
+    {
+      "id": "d03",
+      "text": "```json\n{\n  \"vendor_name\": \"Cafe Lindner\",\n  \"document_date\": \"2024-06-11\",\n  \"total_amount\": 17.30,\n  \"line_items\": [\n    {\n      \"description\": \"Coffee\",\n      \"amount\": 7.80\n    },\n    {\n      \"description\": \"Sandwich\",\n      \"amount\": 9.50\n    }\n  ]\n}\n```",
+      "stopReason": "end_turn",
+      "output": {
+        "vendor_name": "Cafe Lindner",
+        "document_date": "2024-06-11",
+        "total_amount": 17.3,
+        "line_items": [
+          {
+            "description": "Coffee",
+            "amount": 7.8
+          },
+          {
+            "description": "Sandwich",
+            "amount": 9.5
+          }
+        ]
+      },
+      "bare": false,
+      "usage": {
+        "input_tokens": 359,
+        "output_tokens": 211
+      }
+    },
+    {
+      "id": "d05",
+      "text": "```json\n{\n  \"vendor_name\": \"Elm Street Consulting\",\n  \"document_date\": \"2024-03-03\",\n  \"total_amount\": 2740.00,\n  \"line_items\": [\n    {\"description\": \"Workshop 1\", \"amount\": 1200.00},\n    {\"description\": \"Workshop 2\", \"amount\": 1200.00},\n    {\"description\": \"Travel\", \"amount\": 340.00}\n  ]\n}\n```",
+      "stopReason": "end_turn",
+      "output": {
+        "vendor_name": "Elm Street Consulting",
+        "document_date": "2024-03-03",
+        "total_amount": 2740,
+        "line_items": [
+          {
+            "description": "Workshop 1",
+            "amount": 1200
+          },
+          {
+            "description": "Workshop 2",
+            "amount": 1200
+          },
+          {
+            "description": "Travel",
+            "amount": 340
+          }
+        ]
+      },
+      "bare": false,
+      "usage": {
+        "input_tokens": 390,
+        "output_tokens": 312
+      }
+    },
+    {
+      "id": "d06",
+      "text": "```json\n{\n  \"vendor_name\": null,\n  \"document_date\": \"2024-02-14\",\n  \"total_amount\": 500.00,\n  \"line_items\": [\n    {\n      \"description\": \"Widgets, 50 units at £10 each\",\n      \"amount\": 500.00\n    }\n  ]\n}\n```\n\nThe document does not name the vendor, so `vendor_name` is null. The date is taken from the text, and the total is 50 × £10.",
+      "stopReason": "end_turn",
+      "output": {
+        "vendor_name": null,
+        "document_date": "2024-02-14",
+        "total_amount": 500,
+        "line_items": [
+          {
+            "description": "Widgets, 50 units at £10 each",
+            "amount": 500
+          }
+        ]
+      },
+      "bare": false,
+      "usage": {
+        "input_tokens": 310,
+        "output_tokens": 357
+      }
+    },
+    {
+      "id": "d07",
+      "text": "```json\n{\n  \"vendor_name\": \"Bluepeak Surveying\",\n  \"document_date\": \"2024-04-30\",\n  \"total_amount\": 1352.40,\n  \"line_items\": [\n    {\"description\": \"Fuel\", \"amount\": 312.40},\n    {\"description\": \"Lodging near the site\", \"amount\": 890.00},\n    {\"description\": \"County site permit\", \"amount\": 150.00}\n  ]\n}\n```",
+      "stopReason": "end_turn",
+      "output": {
+        "vendor_name": "Bluepeak Surveying",
+        "document_date": "2024-04-30",
+        "total_amount": 1352.4,
+        "line_items": [
+          {
+            "description": "Fuel",
+            "amount": 312.4
+          },
+          {
+            "description": "Lodging near the site",
+            "amount": 890
+          },
+          {
+            "description": "County site permit",
+            "amount": 150
+          }
+        ]
+      },
+      "bare": false,
+      "usage": {
+        "input_tokens": 343,
+        "output_tokens": 309
+      }
+    },
+    {
+      "id": "d08",
+      "text": "```json\n{\n  \"vendor_name\": \"Alpine Tooling AG\",\n  \"document_date\": \"2024-07-19\",\n  \"total_amount\": 1725.00,\n  \"line_items\": [\n    {\"description\": \"Milling cutters\", \"amount\": 1250.00},\n    {\"description\": \"Regrinding service\", \"amount\": 430.00},\n    {\"description\": \"Shipping\", \"amount\": 45.00}\n  ]\n}\n```",
+      "stopReason": "end_turn",
+      "output": {
+        "vendor_name": "Alpine Tooling AG",
+        "document_date": "2024-07-19",
+        "total_amount": 1725,
+        "line_items": [
+          {
+            "description": "Milling cutters",
+            "amount": 1250
+          },
+          {
+            "description": "Regrinding service",
+            "amount": 430
+          },
+          {
+            "description": "Shipping",
+            "amount": 45
+          }
+        ]
+      },
+      "bare": false,
+      "usage": {
+        "input_tokens": 442,
+        "output_tokens": 262
+      }
+    },
+    {
+      "id": "d10",
+      "text": "```json\n{\n  \"vendor_name\": \"Greenline Print Co.\",\n  \"document_date\": \"2024-01-22\",\n  \"total_amount\": 777.60,\n  \"line_items\": [\n    {\"description\": \"Brochures\", \"amount\": 600.00},\n    {\"description\": \"Posters\", \"amount\": 200.00},\n    {\"description\": \"Loyalty discount (10%)\", \"amount\": -80.00},\n    {\"description\": \"Sales tax\", \"amount\": 57.60}\n  ]\n}\n```",
+      "stopReason": "end_turn",
+      "output": {
+        "vendor_name": "Greenline Print Co.",
+        "document_date": "2024-01-22",
+        "total_amount": 777.6,
+        "line_items": [
+          {
+            "description": "Brochures",
+            "amount": 600
+          },
+          {
+            "description": "Posters",
+            "amount": 200
+          },
+          {
+            "description": "Loyalty discount (10%)",
+            "amount": -80
+          },
+          {
+            "description": "Sales tax",
+            "amount": 57.6
+          }
+        ]
+      },
+      "bare": false,
+      "usage": {
+        "input_tokens": 450,
+        "output_tokens": 296
+      }
+    },
+    {
+      "id": "d11",
+      "text": "```json\n{\n  \"vendor_name\": \"Brightway Electrical Ltd\",\n  \"document_date\": \"2024-11-08\",\n  \"total_amount\": 1545.50,\n  \"line_items\": [\n    {\n      \"description\": \"Rewiring\",\n      \"amount\": 1200.00\n    },\n    {\n      \"description\": \"Parts\",\n      \"amount\": 345.50\n    }\n  ]\n}\n```\n\nI corrected several OCR character errors: \"Br1ghtway\" and \"Electr1cal\" were read as \"Brightway\" and \"Electrical\", and \"2O24\" as \"2024\". The line items sum to the total (1,200.00 + 345.50 = 1,545.50), so no tax, shipping, or discount lines were needed.",
+      "stopReason": "end_turn",
+      "output": {
+        "vendor_name": "Brightway Electrical Ltd",
+        "document_date": "2024-11-08",
+        "total_amount": 1545.5,
+        "line_items": [
+          {
+            "description": "Rewiring",
+            "amount": 1200
+          },
+          {
+            "description": "Parts",
+            "amount": 345.5
+          }
+        ]
+      },
+      "bare": false,
+      "usage": {
+        "input_tokens": 354,
+        "output_tokens": 401
+      }
+    },
+    {
+      "id": "d12",
+      "text": "```json\n{\n  \"vendor_name\": \"Joe's Hardware\",\n  \"document_date\": null,\n  \"total_amount\": 19.50,\n  \"line_items\": [\n    {\"description\": \"3 hinges @ 4.50 each\", \"amount\": 13.50},\n    {\"description\": \"1 box screws\", \"amount\": 6.00}\n  ]\n}\n```\n\nThe receipt gives the date as \"Feb 14\" with no year, so I couldn't produce a full ISO 8601 date and left `document_date` as null. The line items sum to the total (13.50 + 6.00 = 19.50), and no tax, shipping, or discount appears on the receipt.",
+      "stopReason": "end_turn",
+      "output": {
+        "vendor_name": "Joe's Hardware",
+        "document_date": null,
+        "total_amount": 19.5,
+        "line_items": [
+          {
+            "description": "3 hinges @ 4.50 each",
+            "amount": 13.5
+          },
+          {
+            "description": "1 box screws",
+            "amount": 6
+          }
+        ]
+      },
+      "bare": false,
+      "usage": {
+        "input_tokens": 311,
+        "output_tokens": 539
+      }
+    }
+  ],
+  [
+    {
+      "id": "d01",
+      "text": "```json\n{\n  \"vendor_name\": \"NORTHWIND OFFICE SUPPLIES GMBH\",\n  \"document_date\": \"2024-03-15\",\n  \"total_amount\": 428.40,\n  \"line_items\": [\n    {\"description\": \"Copy paper\", \"amount\": 120.00},\n    {\"description\": \"Toner cartridges\", \"amount\": 240.00},\n    {\"description\": \"VAT 19%\", \"amount\": 68.40}\n  ]\n}\n```",
+      "stopReason": "end_turn",
+      "output": {
+        "vendor_name": "NORTHWIND OFFICE SUPPLIES GMBH",
+        "document_date": "2024-03-15",
+        "total_amount": 428.4,
+        "line_items": [
+          {
+            "description": "Copy paper",
+            "amount": 120
+          },
+          {
+            "description": "Toner cartridges",
+            "amount": 240
+          },
+          {
+            "description": "VAT 19%",
+            "amount": 68.4
+          }
+        ]
+      },
+      "bare": false,
+      "usage": {
+        "input_tokens": 453,
+        "output_tokens": 290
+      }
+    },
+    {
+      "id": "d02",
+      "text": "```json\n{\n  \"vendor_name\": \"Harbor Freight Logistics Ltd\",\n  \"document_date\": \"2024-05-02\",\n  \"total_amount\": 1025.50,\n  \"line_items\": [\n    {\n      \"description\": \"Container handling\",\n      \"amount\": 850.00\n    },\n    {\n      \"description\": \"Customs clearance\",\n      \"amount\": 175.50\n    }\n  ]\n}\n```",
+      "stopReason": "end_turn",
+      "output": {
+        "vendor_name": "Harbor Freight Logistics Ltd",
+        "document_date": "2024-05-02",
+        "total_amount": 1025.5,
+        "line_items": [
+          {
+            "description": "Container handling",
+            "amount": 850
+          },
+          {
+            "description": "Customs clearance",
+            "amount": 175.5
+          }
+        ]
+      },
+      "bare": false,
+      "usage": {
+        "input_tokens": 403,
+        "output_tokens": 204
+      }
+    },
+    {
+      "id": "d03",
+      "text": "```json\n{\n  \"vendor_name\": \"Cafe Lindner\",\n  \"document_date\": \"2024-06-11\",\n  \"total_amount\": 17.30,\n  \"line_items\": [\n    {\n      \"description\": \"Coffee\",\n      \"amount\": 7.80\n    },\n    {\n      \"description\": \"Sandwich\",\n      \"amount\": 9.50\n    }\n  ]\n}\n```",
+      "stopReason": "end_turn",
+      "output": {
+        "vendor_name": "Cafe Lindner",
+        "document_date": "2024-06-11",
+        "total_amount": 17.3,
+        "line_items": [
+          {
+            "description": "Coffee",
+            "amount": 7.8
+          },
+          {
+            "description": "Sandwich",
+            "amount": 9.5
+          }
+        ]
+      },
+      "bare": false,
+      "usage": {
+        "input_tokens": 359,
+        "output_tokens": 207
+      }
+    },
+    {
+      "id": "d05",
+      "text": "```json\n{\n  \"vendor_name\": \"Elm Street Consulting\",\n  \"document_date\": \"2024-03-03\",\n  \"total_amount\": 2740.00,\n  \"line_items\": [\n    {\"description\": \"Workshop 1\", \"amount\": 1200.00},\n    {\"description\": \"Workshop 2\", \"amount\": 1200.00},\n    {\"description\": \"Travel\", \"amount\": 340.00}\n  ]\n}\n```\n\nThe letter has no explicit issue date, so `document_date` is the date of the work it describes (3 March 2024).",
+      "stopReason": "end_turn",
+      "output": {
+        "vendor_name": "Elm Street Consulting",
+        "document_date": "2024-03-03",
+        "total_amount": 2740,
+        "line_items": [
+          {
+            "description": "Workshop 1",
+            "amount": 1200
+          },
+          {
+            "description": "Workshop 2",
+            "amount": 1200
+          },
+          {
+            "description": "Travel",
+            "amount": 340
+          }
+        ]
+      },
+      "bare": false,
+      "usage": {
+        "input_tokens": 390,
+        "output_tokens": 432
+      }
+    },
+    {
+      "id": "d06",
+      "text": "```json\n{\n  \"vendor_name\": null,\n  \"document_date\": \"2024-02-14\",\n  \"total_amount\": 500.00,\n  \"line_items\": [\n    {\n      \"description\": \"Widgets (50 units at £10 each)\",\n      \"amount\": 500.00\n    }\n  ]\n}\n```\n\nThe document does not name the vendor or the issuer, so `vendor_name` is null. The other fields come from the note: the date is 14 February 2024, and 50 widgets at £10 each total £500.00.",
+      "stopReason": "end_turn",
+      "output": {
+        "vendor_name": null,
+        "document_date": "2024-02-14",
+        "total_amount": 500,
+        "line_items": [
+          {
+            "description": "Widgets (50 units at £10 each)",
+            "amount": 500
+          }
+        ]
+      },
+      "bare": false,
+      "usage": {
+        "input_tokens": 310,
+        "output_tokens": 415
+      }
+    },
+    {
+      "id": "d07",
+      "text": "```json\n{\n  \"vendor_name\": \"Bluepeak Surveying\",\n  \"document_date\": \"2024-04-30\",\n  \"total_amount\": 1352.40,\n  \"line_items\": [\n    {\"description\": \"Fuel\", \"amount\": 312.40},\n    {\"description\": \"Lodging near the site\", \"amount\": 890.00},\n    {\"description\": \"County site permit\", \"amount\": 150.00}\n  ]\n}\n```",
+      "stopReason": "end_turn",
+      "output": {
+        "vendor_name": "Bluepeak Surveying",
+        "document_date": "2024-04-30",
+        "total_amount": 1352.4,
+        "line_items": [
+          {
+            "description": "Fuel",
+            "amount": 312.4
+          },
+          {
+            "description": "Lodging near the site",
+            "amount": 890
+          },
+          {
+            "description": "County site permit",
+            "amount": 150
+          }
+        ]
+      },
+      "bare": false,
+      "usage": {
+        "input_tokens": 343,
+        "output_tokens": 312
+      }
+    },
+    {
+      "id": "d08",
+      "text": "```json\n{\n  \"vendor_name\": \"Alpine Tooling AG\",\n  \"document_date\": \"2024-07-19\",\n  \"total_amount\": 1725.00,\n  \"line_items\": [\n    {\"description\": \"Milling cutters\", \"amount\": 1250.00},\n    {\"description\": \"Regrinding service\", \"amount\": 430.00},\n    {\"description\": \"Shipping (as agreed by phone)\", \"amount\": 45.00}\n  ]\n}\n```",
+      "stopReason": "end_turn",
+      "output": {
+        "vendor_name": "Alpine Tooling AG",
+        "document_date": "2024-07-19",
+        "total_amount": 1725,
+        "line_items": [
+          {
+            "description": "Milling cutters",
+            "amount": 1250
+          },
+          {
+            "description": "Regrinding service",
+            "amount": 430
+          },
+          {
+            "description": "Shipping (as agreed by phone)",
+            "amount": 45
+          }
+        ]
+      },
+      "bare": false,
+      "usage": {
+        "input_tokens": 442,
+        "output_tokens": 298
+      }
+    },
+    {
+      "id": "d10",
+      "text": "```json\n{\n  \"vendor_name\": \"Greenline Print Co.\",\n  \"document_date\": \"2024-01-22\",\n  \"total_amount\": 777.60,\n  \"line_items\": [\n    {\"description\": \"Brochures\", \"amount\": 600.00},\n    {\"description\": \"Posters\", \"amount\": 200.00},\n    {\"description\": \"Loyalty discount (10%)\", \"amount\": -80.00},\n    {\"description\": \"Sales tax\", \"amount\": 57.60}\n  ]\n}\n```",
+      "stopReason": "end_turn",
+      "output": {
+        "vendor_name": "Greenline Print Co.",
+        "document_date": "2024-01-22",
+        "total_amount": 777.6,
+        "line_items": [
+          {
+            "description": "Brochures",
+            "amount": 600
+          },
+          {
+            "description": "Posters",
+            "amount": 200
+          },
+          {
+            "description": "Loyalty discount (10%)",
+            "amount": -80
+          },
+          {
+            "description": "Sales tax",
+            "amount": 57.6
+          }
+        ]
+      },
+      "bare": false,
+      "usage": {
+        "input_tokens": 450,
+        "output_tokens": 290
+      }
+    },
+    {
+      "id": "d11",
+      "text": "```json\n{\n  \"vendor_name\": \"Brightway Electrical Ltd\",\n  \"document_date\": \"2024-11-08\",\n  \"total_amount\": 1545.50,\n  \"line_items\": [\n    {\n      \"description\": \"Rewiring\",\n      \"amount\": 1200.00\n    },\n    {\n      \"description\": \"Parts\",\n      \"amount\": 345.50\n    }\n  ]\n}\n```\n\nI corrected several OCR errors: \"Br1ghtway\" and \"Electr1cal\" to Brightway and Electrical, and \"2O24\" to 2024. The line items sum to the total (1200.00 + 345.50 = 1545.50).",
+      "stopReason": "end_turn",
+      "output": {
+        "vendor_name": "Brightway Electrical Ltd",
+        "document_date": "2024-11-08",
+        "total_amount": 1545.5,
+        "line_items": [
+          {
+            "description": "Rewiring",
+            "amount": 1200
+          },
+          {
+            "description": "Parts",
+            "amount": 345.5
+          }
+        ]
+      },
+      "bare": false,
+      "usage": {
+        "input_tokens": 354,
+        "output_tokens": 429
+      }
+    },
+    {
+      "id": "d12",
+      "text": "```json\n{\n  \"vendor_name\": \"Joe's Hardware\",\n  \"document_date\": null,\n  \"total_amount\": 19.50,\n  \"line_items\": [\n    {\n      \"description\": \"3 hinges @ 4.50 each\",\n      \"amount\": 13.50\n    },\n    {\n      \"description\": \"1 box screws\",\n      \"amount\": 6.00\n    }\n  ]\n}\n```\n\nThe receipt gives the date only as \"Feb 14\" with no year, so I could not produce a full ISO 8601 date and left `document_date` as null. The line items sum to the total: 13.50 + 6.00 = 19.50.",
+      "stopReason": "end_turn",
+      "output": {
+        "vendor_name": "Joe's Hardware",
+        "document_date": null,
+        "total_amount": 19.5,
+        "line_items": [
+          {
+            "description": "3 hinges @ 4.50 each",
+            "amount": 13.5
+          },
+          {
+            "description": "1 box screws",
+            "amount": 6
+          }
+        ]
+      },
+      "bare": false,
+      "usage": {
+        "input_tokens": 311,
+        "output_tokens": 583
+      }
+    }
+  ],
+  [
+    {
+      "id": "d01",
+      "text": "```json\n{\n  \"vendor_name\": \"Northwind Office Supplies GmbH\",\n  \"document_date\": \"2024-03-15\",\n  \"total_amount\": 428.40,\n  \"line_items\": [\n    {\"description\": \"Copy paper\", \"amount\": 120.00},\n    {\"description\": \"Toner cartridges\", \"amount\": 240.00},\n    {\"description\": \"VAT 19%\", \"amount\": 68.40}\n  ]\n}\n```",
+      "stopReason": "end_turn",
+      "output": {
+        "vendor_name": "Northwind Office Supplies GmbH",
+        "document_date": "2024-03-15",
+        "total_amount": 428.4,
+        "line_items": [
+          {
+            "description": "Copy paper",
+            "amount": 120
+          },
+          {
+            "description": "Toner cartridges",
+            "amount": 240
+          },
+          {
+            "description": "VAT 19%",
+            "amount": 68.4
+          }
+        ]
+      },
+      "bare": false,
+      "usage": {
+        "input_tokens": 453,
+        "output_tokens": 268
+      }
+    },
+    {
+      "id": "d02",
+      "text": "```json\n{\n  \"vendor_name\": \"Harbor Freight Logistics Ltd\",\n  \"document_date\": \"2024-05-02\",\n  \"total_amount\": 1025.50,\n  \"line_items\": [\n    {\n      \"description\": \"Container handling\",\n      \"amount\": 850.00\n    },\n    {\n      \"description\": \"Customs clearance\",\n      \"amount\": 175.50\n    }\n  ]\n}\n```",
+      "stopReason": "end_turn",
+      "output": {
+        "vendor_name": "Harbor Freight Logistics Ltd",
+        "document_date": "2024-05-02",
+        "total_amount": 1025.5,
+        "line_items": [
+          {
+            "description": "Container handling",
+            "amount": 850
+          },
+          {
+            "description": "Customs clearance",
+            "amount": 175.5
+          }
+        ]
+      },
+      "bare": false,
+      "usage": {
+        "input_tokens": 403,
+        "output_tokens": 189
+      }
+    },
+    {
+      "id": "d03",
+      "text": "```json\n{\n  \"vendor_name\": \"Cafe Lindner\",\n  \"document_date\": \"2024-06-11\",\n  \"total_amount\": 17.30,\n  \"line_items\": [\n    {\"description\": \"Coffee\", \"amount\": 7.80},\n    {\"description\": \"Sandwich\", \"amount\": 9.50}\n  ]\n}\n```",
+      "stopReason": "end_turn",
+      "output": {
+        "vendor_name": "Cafe Lindner",
+        "document_date": "2024-06-11",
+        "total_amount": 17.3,
+        "line_items": [
+          {
+            "description": "Coffee",
+            "amount": 7.8
+          },
+          {
+            "description": "Sandwich",
+            "amount": 9.5
+          }
+        ]
+      },
+      "bare": false,
+      "usage": {
+        "input_tokens": 359,
+        "output_tokens": 169
+      }
+    },
+    {
+      "id": "d05",
+      "text": "```json\n{\n  \"vendor_name\": \"Elm Street Consulting\",\n  \"document_date\": \"2024-03-03\",\n  \"total_amount\": 2740.00,\n  \"line_items\": [\n    {\n      \"description\": \"Workshop 1 (work delivered 2024-03-03)\",\n      \"amount\": 1200.00\n    },\n    {\n      \"description\": \"Workshop 2 (work delivered 2024-03-03)\",\n      \"amount\": 1200.00\n    },\n    {\n      \"description\": \"Travel\",\n      \"amount\": 340.00\n    }\n  ]\n}\n```",
+      "stopReason": "end_turn",
+      "output": {
+        "vendor_name": "Elm Street Consulting",
+        "document_date": "2024-03-03",
+        "total_amount": 2740,
+        "line_items": [
+          {
+            "description": "Workshop 1 (work delivered 2024-03-03)",
+            "amount": 1200
+          },
+          {
+            "description": "Workshop 2 (work delivered 2024-03-03)",
+            "amount": 1200
+          },
+          {
+            "description": "Travel",
+            "amount": 340
+          }
+        ]
+      },
+      "bare": false,
+      "usage": {
+        "input_tokens": 390,
+        "output_tokens": 350
+      }
+    },
+    {
+      "id": "d06",
+      "text": "```json\n{\n  \"vendor_name\": null,\n  \"document_date\": \"2024-02-14\",\n  \"total_amount\": 500.00,\n  \"line_items\": [\n    {\n      \"description\": \"Widgets (50 at £10.00 each)\",\n      \"amount\": 500.00\n    }\n  ]\n}\n```\n\nThe document doesn't name the vendor or seller, so `vendor_name` is null. The total is 50 × £10.00 = £500.00, and the note describes no tax, shipping, or discounts.",
+      "stopReason": "end_turn",
+      "output": {
+        "vendor_name": null,
+        "document_date": "2024-02-14",
+        "total_amount": 500,
+        "line_items": [
+          {
+            "description": "Widgets (50 at £10.00 each)",
+            "amount": 500
+          }
+        ]
+      },
+      "bare": false,
+      "usage": {
+        "input_tokens": 310,
+        "output_tokens": 401
+      }
+    },
+    {
+      "id": "d07",
+      "text": "```json\n{\n  \"vendor_name\": \"Bluepeak Surveying\",\n  \"document_date\": \"2024-04-30\",\n  \"total_amount\": 1352.40,\n  \"line_items\": [\n    {\"description\": \"Fuel\", \"amount\": 312.40},\n    {\"description\": \"Lodging near the site\", \"amount\": 890.00},\n    {\"description\": \"County site permit\", \"amount\": 150.00}\n  ]\n}\n```",
+      "stopReason": "end_turn",
+      "output": {
+        "vendor_name": "Bluepeak Surveying",
+        "document_date": "2024-04-30",
+        "total_amount": 1352.4,
+        "line_items": [
+          {
+            "description": "Fuel",
+            "amount": 312.4
+          },
+          {
+            "description": "Lodging near the site",
+            "amount": 890
+          },
+          {
+            "description": "County site permit",
+            "amount": 150
+          }
+        ]
+      },
+      "bare": false,
+      "usage": {
+        "input_tokens": 343,
+        "output_tokens": 291
+      }
+    },
+    {
+      "id": "d08",
+      "text": "```json\n{\n  \"vendor_name\": \"Alpine Tooling AG\",\n  \"document_date\": \"2024-07-19\",\n  \"total_amount\": 1725.00,\n  \"line_items\": [\n    {\n      \"description\": \"Milling cutters\",\n      \"amount\": 1250.00\n    },\n    {\n      \"description\": \"Regrinding service\",\n      \"amount\": 430.00\n    },\n    {\n      \"description\": \"Shipping (as agreed by phone)\",\n      \"amount\": 45.00\n    }\n  ]\n}\n```",
+      "stopReason": "end_turn",
+      "output": {
+        "vendor_name": "Alpine Tooling AG",
+        "document_date": "2024-07-19",
+        "total_amount": 1725,
+        "line_items": [
+          {
+            "description": "Milling cutters",
+            "amount": 1250
+          },
+          {
+            "description": "Regrinding service",
+            "amount": 430
+          },
+          {
+            "description": "Shipping (as agreed by phone)",
+            "amount": 45
+          }
+        ]
+      },
+      "bare": false,
+      "usage": {
+        "input_tokens": 442,
+        "output_tokens": 267
+      }
+    },
+    {
+      "id": "d10",
+      "text": "```json\n{\n  \"vendor_name\": \"Greenline Print Co.\",\n  \"document_date\": \"2024-01-22\",\n  \"total_amount\": 777.60,\n  \"line_items\": [\n    {\"description\": \"Brochures\", \"amount\": 600.00},\n    {\"description\": \"Posters\", \"amount\": 200.00},\n    {\"description\": \"Loyalty discount (10%)\", \"amount\": -80.00},\n    {\"description\": \"Sales tax\", \"amount\": 57.60}\n  ]\n}\n```",
+      "stopReason": "end_turn",
+      "output": {
+        "vendor_name": "Greenline Print Co.",
+        "document_date": "2024-01-22",
+        "total_amount": 777.6,
+        "line_items": [
+          {
+            "description": "Brochures",
+            "amount": 600
+          },
+          {
+            "description": "Posters",
+            "amount": 200
+          },
+          {
+            "description": "Loyalty discount (10%)",
+            "amount": -80
+          },
+          {
+            "description": "Sales tax",
+            "amount": 57.6
+          }
+        ]
+      },
+      "bare": false,
+      "usage": {
+        "input_tokens": 450,
+        "output_tokens": 287
+      }
+    },
+    {
+      "id": "d11",
+      "text": "```json\n{\n  \"vendor_name\": \"Brightway Electrical Ltd\",\n  \"document_date\": \"2024-11-08\",\n  \"total_amount\": 1545.50,\n  \"line_items\": [\n    {\n      \"description\": \"Rewiring\",\n      \"amount\": 1200.00\n    },\n    {\n      \"description\": \"Parts\",\n      \"amount\": 345.50\n    }\n  ]\n}\n```",
+      "stopReason": "end_turn",
+      "output": {
+        "vendor_name": "Brightway Electrical Ltd",
+        "document_date": "2024-11-08",
+        "total_amount": 1545.5,
+        "line_items": [
+          {
+            "description": "Rewiring",
+            "amount": 1200
+          },
+          {
+            "description": "Parts",
+            "amount": 345.5
+          }
+        ]
+      },
+      "bare": false,
+      "usage": {
+        "input_tokens": 354,
+        "output_tokens": 353
+      }
+    },
+    {
+      "id": "d12",
+      "text": "```json\n{\n  \"vendor_name\": \"Joe's Hardware\",\n  \"document_date\": \"--02-14\",\n  \"total_amount\": 19.50,\n  \"line_items\": [\n    {\n      \"description\": \"3 hinges @ 4.50 each\",\n      \"amount\": 13.50\n    },\n    {\n      \"description\": \"1 box screws\",\n      \"amount\": 6.00\n    }\n  ]\n}\n```\n\nThe receipt doesn't include a year, so `document_date` is given as a partial ISO date (month and day only). The line items sum to the total (13.50 + 6.00 = 19.50), and no tax, shipping, or discount appears on the receipt.",
+      "stopReason": "end_turn",
+      "output": {
+        "vendor_name": "Joe's Hardware",
+        "document_date": "--02-14",
+        "total_amount": 19.5,
+        "line_items": [
+          {
+            "description": "3 hinges @ 4.50 each",
+            "amount": 13.5
+          },
+          {
+            "description": "1 box screws",
+            "amount": 6
+          }
+        ]
+      },
+      "bare": false,
+      "usage": {
+        "input_tokens": 311,
+        "output_tokens": 566
+      }
+    }
+  ]
+]

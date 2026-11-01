@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>24 Multi-pass review</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<main>
+  <a class="back" href="/">← Dashboard</a>
+  <h1>24 Multi-pass review</h1>
+  <p class="lede">
+    One review call, one per file, an integration pass, then fresh instances that judge the findings without seeing the reasoning.
+    <strong>Every approach is scored against planted defects, and the judge is tested with false claims.</strong>
+  </p>
+  <div id="example"></div>
+</main>
+<script type="module">
+import { mountExamplePage } from "/assets/example-page.js";
+
+mountExamplePage({
+  api: "/api/24-multi-pass-review/run",
+  runLabel: "Show it",
+  fields: [
+    { name: "mode", label: "What to run", options: [["saved", "Saved results: no cost"], ["verify", "Live, one fresh instance judges a false claim: about $0.01"]] },
+    { name: "control", label: "False claim, for a live run", options: [
+      ["0", "cart.js: returns euros"],
+      ["1", "config.js: has no vatRate"],
+      ["2", "database.js: concatenates SQL"],
+      ["3", "payments.js: expects cents"],
+    ] },
+  ],
+  presets: [
+    { label: "Saved results", values: { mode: "saved" } },
+    { label: "Live: test the judge", values: { mode: "verify", control: "2" } },
+  ],
+  hint: "A full review run costs about $0.10 and more, so this page does not offer one. The steps run from the terminal. Files are in _fixtures/codebase/.",
+});
+</script>
+</body>
+</html>

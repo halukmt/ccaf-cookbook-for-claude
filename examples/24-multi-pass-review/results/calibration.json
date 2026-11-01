@@ -1,0 +1,45 @@
+{
+  "curve": [
+    {
+      "band": "below 0.6",
+      "n": 6,
+      "confirmed": 5,
+      "confirmedRate": 0.8333333333333334,
+      "keyMatches": 0
+    },
+    {
+      "band": "0.6-0.7",
+      "n": 4,
+      "confirmed": 4,
+      "confirmedRate": 1,
+      "keyMatches": 2
+    },
+    {
+      "band": "0.7-0.8",
+      "n": 0,
+      "confirmed": 0,
+      "confirmedRate": null,
+      "keyMatches": 0
+    },
+    {
+      "band": "0.8-0.9",
+      "n": 2,
+      "confirmed": 2,
+      "confirmedRate": 1,
+      "keyMatches": 2
+    },
+    {
+      "band": "0.9-1.0",
+      "n": 6,
+      "confirmed": 6,
+      "confirmedRate": 1,
+      "keyMatches": 6
+    }
+  ],
+  "supported": [
+    "0.9-1.0"
+  ],
+  "overturned": 0,
+  "sampleSize": 18,
+  "population": 35
+}

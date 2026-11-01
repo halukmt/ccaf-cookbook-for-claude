@@ -1,0 +1,124 @@
+{
+  "mode": "contracts",
+  "issues": [
+    {
+      "files": [
+        "orders.js",
+        "config.js"
+      ],
+      "severity": "critical",
+      "description": "orders.js reads config.taxRate, but config.js only defines vatRate, so orderTax returns NaN."
+    },
+    {
+      "files": [
+        "inventory.js",
+        "database.js"
+      ],
+      "severity": "critical",
+      "description": "stockLevel/reserveStock destructure the result of query() as an array (`const [row] = await query(...)`), but database.query resolves to an object `{ rows, rowCount }`, so this throws a TypeError or yields undefined; it should use `rows[0]`."
+    },
+    {
+      "files": [
+        "notifications.js",
+        "utils.js"
+      ],
+      "severity": "high",
+      "description": "notifications.js calls formatCurrency(\"EUR\", order.total) but the signature is formatCurrency(amountCents, currency), so the arguments are swapped and the email shows a garbage amount."
+    },
+    {
+      "files": [
+        "orders.js",
+        "payments.js"
+      ],
+      "severity": "critical",
+      "description": "orders.js passes cartTotal (integer cents) to chargeCard, which expects euros and multiplies by 100 again, so customers are charged 100 times the correct amount."
+    },
+    {
+      "files": [
+        "auth.js",
+        "config.js"
+      ],
+      "severity": "high",
+      "description": "config.sessionTtlMinutes (30) is passed directly as jwt expiresIn, which is interpreted as seconds, so tokens expire after 30 seconds instead of 30 minutes."
+    },
+    {
+      "files": [
+        "api-routes.js",
+        "auth.js"
+      ],
+      "severity": "high",
+      "description": "verifyToken returns null for invalid or expired tokens rather than throwing, but api-routes.js assigns the result to req.user and relies on a catch block, so an invalid token leaves req.user null and later handlers throw on req.user.id (or the request proceeds unauthenticated)."
+    },
+    {
+      "files": [
+        "users.js",
+        "auth.js",
+        "reports.js",
+        "database.js"
+      ],
+      "severity": "high",
+      "description": "database.query supports parameterized queries and users.findUserById uses them, but findUserByEmail, auth.login and reports.salesReport build SQL by string concatenation, which is inconsistent and allows SQL injection."
+    },
+    {
+      "files": [
+        "orders.js",
+        "inventory.js"
+      ],
+      "severity": "high",
+      "description": "orders.js awaits reserveStock as if the reservation were committed, but reserveStock does not await its UPDATE, so stock may not be decremented (or the update may fail) after placeOrder proceeds to charge the card."
+    },
+    {
+      "files": [
+        "orders.js",
+        "payments.js",
+        "inventory.js"
+      ],
+      "severity": "medium",
+      "description": "placeOrder never calls refundCharge or releases reserved stock when a later step (DB insert, email) fails, so charges and reservations are left orphaned, and refundCharge's swallowed errors would hide a failed compensation anyway."
+    },
+    {
+      "files": [
+        "api-routes.js",
+        "orders.js",
+        "payments.js"
+      ],
+      "severity": "high",
+      "description": "Raw card data from req.body flows from the route through placeOrder into chargeCard, which logs the full card number and CVC, so sensitive card data is exposed in logs."
+    },
+    {
+      "files": [
+        "api-routes.js",
+        "orders.js",
+        "cart.js"
+      ],
+      "severity": "medium",
+      "description": "The route passes the client-supplied req.body.cart straight into placeOrder rather than a server-side cart built with cart.js addItem, so prices and quantities are never validated and cartTotal trusts tampered values."
+    },
+    {
+      "files": [
+        "api-routes.js",
+        "users.js"
+      ],
+      "severity": "high",
+      "description": "The DELETE /admin/users/:id route calls users.deleteUser without any auth check, and deleteUser does no authorization itself, so neither layer protects account deletion."
+    },
+    {
+      "files": [
+        "api-routes.js",
+        "reports.js"
+      ],
+      "severity": "medium",
+      "description": "The sales report route passes unvalidated from/to query values into salesReport, which concatenates them into SQL and swallows errors by returning an empty array, so injection is possible and failures look like empty reports."
+    }
+  ],
+  "blockTypes": [
+    "thinking",
+    "text"
+  ],
+  "stopReason": "end_turn",
+  "brokenLines": 0,
+  "usage": {
+    "input_tokens": 5357,
+    "output_tokens": 2314
+  }
+}

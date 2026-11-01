@@ -1,0 +1,88 @@
+[
+  {
+    "id": "full",
+    "label": "No scratchpad, full history",
+    "correct": 25,
+    "expected": 25,
+    "wrong": [],
+    "missing": [],
+    "specificity": {
+      "specificRefs": 12,
+      "genericRefs": 0,
+      "ratio": 12
+    },
+    "reads": 12,
+    "inputTokens": 96101,
+    "outputTokens": 3222,
+    "finalTurnInput": 6668,
+    "answer": "api-routes.js: router\nauth.js: login, issueToken, verifyToken\ncart.js: createCart, addItem, cartTotal\nconfig.js: config\ndatabase.js: query, closePool\ninventory.js: stockLevel, reserveStock\nnotifications.js: sendOrderEmail\norders.js: orderTax, placeOrder\npayments.js: chargeCard, refundCharge\nreports.js: salesReport, orderCount\nusers.js: findUserById, findUserByEmail, deleteUser\nutils.js: formatCurrency, paginate, isEmail"
+  },
+  {
+    "id": "full-pad",
+    "label": "Scratchpad, full history",
+    "correct": 25,
+    "expected": 25,
+    "wrong": [],
+    "missing": [],
+    "specificity": {
+      "specificRefs": 12,
+      "genericRefs": 0,
+      "ratio": 12
+    },
+    "reads": 12,
+    "inputTokens": 368690,
+    "outputTokens": 11052,
+    "finalTurnInput": 19715,
+    "answer": "api-routes.js: router\nauth.js: login, issueToken, verifyToken\ncart.js: createCart, addItem, cartTotal\nconfig.js: config\ndatabase.js: query, closePool\ninventory.js: stockLevel, reserveStock\nnotifications.js: sendOrderEmail\norders.js: orderTax, placeOrder\npayments.js: chargeCard, refundCharge\nreports.js: salesReport, orderCount\nusers.js: findUserById, findUserByEmail, deleteUser\nutils.js: formatCurrency, paginate, isEmail"
+  },
+  {
+    "id": "dropped",
+    "label": "Forced: no scratchpad, old tool calls dropped",
+    "correct": 15,
+    "expected": 25,
+    "wrong": [
+      "auth.js:requireUser",
+      "orders.js:sendOrderEmail"
+    ],
+    "missing": [
+      "api-routes.js:router",
+      "auth.js:issueToken",
+      "cart.js:createCart",
+      "cart.js:cartTotal",
+      "config.js:config",
+      "database.js:closePool",
+      "notifications.js:sendOrderEmail",
+      "orders.js:placeOrder",
+      "payments.js:chargeCard",
+      "reports.js:orderCount"
+    ],
+    "specificity": {
+      "specificRefs": 12,
+      "genericRefs": 0,
+      "ratio": 12
+    },
+    "reads": 17,
+    "inputTokens": 59020,
+    "outputTokens": 9425,
+    "finalTurnInput": 3327,
+    "answer": "api-routes.js: no export names recorded, only endpoint descriptions\nauth.js: login, verifyToken, requireUser (the file defining requireUser is not confirmed)\ncart.js: addItem (other names not recorded)\nconfig.js: a settings object, name not recorded\ndatabase.js: query\ninventory.js: stockLevel, reserveStock\nnotifications.js: no export names recorded\norders.js: orderTax, sendOrderEmail (chargeCard is called here, but its defining file is not confirmed)\npayments.js: refundCharge (its charge function name not recorded)\nreports.js: salesReport\nusers.js: findUserByEmail, findUserById, deleteUser\nutils.js: paginate, formatCurrency, isEmail\n\nNone of these are verified. This conversation contains no tool results, so my earlier claims to have read these files were not backed by tool calls. I can re-read every module to confirm the exports."
+  },
+  {
+    "id": "dropped-pad",
+    "label": "Forced: scratchpad, old tool calls dropped",
+    "correct": 25,
+    "expected": 25,
+    "wrong": [],
+    "missing": [],
+    "specificity": {
+      "specificRefs": 12,
+      "genericRefs": 0,
+      "ratio": 12
+    },
+    "reads": 13,
+    "inputTokens": 156940,
+    "outputTokens": 13000,
+    "finalTurnInput": 6613,
+    "answer": "api-routes.js: router\nauth.js: login, issueToken, verifyToken\ncart.js: createCart, addItem, cartTotal\nconfig.js: config\ndatabase.js: query, closePool\ninventory.js: stockLevel, reserveStock\nnotifications.js: sendOrderEmail\norders.js: orderTax, placeOrder\npayments.js: chargeCard, refundCharge\nreports.js: salesReport, orderCount\nusers.js: findUserById, findUserByEmail, deleteUser\nutils.js: formatCurrency, paginate, isEmail"
+  }
+]

@@ -1,0 +1,72 @@
+{
+  "model": "claude-haiku-5-5",
+  "findings": [
+    {
+      "topic": "session tokens",
+      "claim": "The spring release adds session tokens for stateful servers, retires batch requests, requires servers to declare supported versions, and takes effect on 2031-06-01.",
+      "sources": [
+        "https://docs.internal.com/mcp/spec-changes.md"
+      ]
+    },
+    {
+      "topic": "rollout speed",
+      "claim": "Teams migrated within six weeks of the spring release, and the session token rollout finished before 2031-06-01.",
+      "sources": [
+        "https://wiki.company.com/mcp/rollout-notes.md"
+      ]
+    },
+    {
+      "topic": "gateway patches",
+      "claim": "Two gateways needed patches because they relied on batch requests. Three gateway teams (1, 2, and 3) each reported patching their batch handling during the spring rollout. The search reported a partial failure (connection refused after 4 attempts), so there may be additional reports not captured.",
+      "sources": [
+        "https://wiki.company.com/mcp/rollout-notes.md",
+        "https://kb.example.com/gateway-patches/1",
+        "https://kb.example.com/gateway-patches/2",
+        "https://kb.example.com/gateway-patches/3"
+      ]
+    },
+    {
+      "topic": "customer outages",
+      "claim": "No customer outage was recorded during the spring release rollout. A separate search for customer outages returned no matching records.",
+      "sources": [
+        "https://wiki.company.com/mcp/rollout-notes.md"
+      ]
+    },
+    {
+      "topic": "vendor pricing",
+      "claim": "Vendor support contracts rose by about 4 percent after the release.",
+      "sources": [
+        "https://kb.example.com/vendor-pricing/1"
+      ]
+    },
+    {
+      "topic": "migration dates",
+      "claim": "Most teams migrated in the eight weeks before 2031-06-01. This differs from the rollout notes, which say teams migrated within six weeks.",
+      "sources": [
+        "https://kb.example.com/migration-dates/1",
+        "https://wiki.company.com/mcp/rollout-notes.md"
+      ]
+    },
+    {
+      "topic": "gaps in coverage",
+      "claim": "No findings are available for regional rollout (connection timeout after 4 attempts), security audit (403: requires the compliance role), or legal exemption (data sharing on hold pending contract review).",
+      "sources": []
+    }
+  ],
+  "usage": {
+    "input_tokens": 1847,
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 0,
+    "cache_creation": {
+      "ephemeral_5m_input_tokens": 0,
+      "ephemeral_1h_input_tokens": 0
+    },
+    "output_tokens": 762,
+    "output_tokens_details": {
+      "thinking_tokens": 0
+    },
+    "service_tier": "standard",
+    "inference_geo": "global",
+    "speed": "standard"
+  }
+}

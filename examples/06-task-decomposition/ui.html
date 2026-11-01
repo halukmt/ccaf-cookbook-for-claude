@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>06 Task decomposition</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<main>
+  <a class="back" href="/">← Dashboard</a>
+  <h1>06 Task decomposition</h1>
+  <p class="lede">
+    The same model reviews the same 12 files, split in different ways. Files were planted with 22 known defects,
+    so every approach is scored against an answer key. <strong>The result that matters is what each pass gets to see.</strong>
+  </p>
+  <div id="example"></div>
+</main>
+<script type="module">
+import { mountExamplePage } from "/assets/example-page.js";
+
+mountExamplePage({
+  api: "/api/06-task-decomposition/run",
+  runLabel: "Show it",
+  fields: [{
+    name: "mode", label: "What to run",
+    options: [
+      ["saved", "Saved comparison: no cost"],
+      ["single", "Live single pass: about $0.07"],
+      ["multi", "Live per-file plus integration: about $0.15"],
+    ],
+  }],
+  presets: [
+    { label: "Comparison", values: { mode: "saved" } },
+    { label: "Fresh single pass", values: { mode: "single" } },
+    { label: "Fresh multi-pass", values: { mode: "multi" } },
+  ],
+  hint: "The code under review is the fixture in _fixtures/codebase/. The answer key matches on file and wording, so it counts findings and does not judge their quality.",
+});
+</script>
+</body>
+</html>

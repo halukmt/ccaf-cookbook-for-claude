@@ -1,0 +1,9 @@
+Orion Lab Supplies Inc., Tax ID 98-7654321
+Order ref 20240912 | Doc no. OL-20240912-7 | 12 Sep 2024 | Due 12 Oct 2024 | Net 30 | PO-6620
+
+| Line total | Qty | Unit price | Item     |
+|------------|-----|------------|----------|
+|     125.00 |  10 |      12.50 | Pipettes |
+|      36.00 |   4 |       9.00 | Gloves   |
+
+Balance payable (USD): 161.00

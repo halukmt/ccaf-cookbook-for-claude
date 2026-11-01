@@ -1,0 +1,16 @@
+NORTHWIND OFFICE SUPPLIES GMBH
+Hafenstrasse 12, 20457 Hamburg
+VAT ID: DE811907980
+
+Invoice no.:     INV-2024-1041
+Invoice date:    2024-03-15
+Due date:        2024-04-14
+Payment terms:   Net 30
+Your PO:         PO-7781
+
+| Description      | Amount (EUR) |
+|------------------|--------------|
+| Copy paper       |       120.00 |
+| Toner cartridges |       240.00 |
+| VAT 19%          |        68.40 |
+| Total            |       428.40 |

@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CCA-F Cookbook</title>
+<link rel="stylesheet" href="/assets/style.css">
+<style>
+  .stats { display: flex; gap: 2rem; flex-wrap: wrap; }
+  .stats b { display: block; font-size: 1.6rem; font-weight: 700; line-height: 1.2; }
+  .stats span { color: var(--muted); font-size: .75rem; }
+
+  .section-head {
+    display: flex; align-items: baseline; gap: .6rem;
+    margin: 0 0 .2rem; font-size: 1rem;
+  }
+
+  ul.examples { list-style: none; margin: 0; padding: 0; }
+  ul.examples li {
+    display: flex; align-items: center; gap: .7rem;
+    padding: .45rem 0; border-bottom: 1px solid var(--border);
+  }
+  ul.examples li:last-child { border-bottom: 0; }
+  .num { color: var(--muted); font-size: .8rem; width: 2.2rem; flex: none; font-variant-numeric: tabular-nums; }
+  .title { flex: 1; min-width: 0; }
+  .title a { text-decoration: none; font-weight: 600; }
+  .title a:hover { text-decoration: underline; }
+  .title span.plain { color: var(--muted); }
+  .marks { display: flex; gap: .35rem; flex: none; }
+
+</style>
+</head>
+<body>
+<main>
+  <h1>CCA-F Cookbook</h1>
+  <p class="lede">
+    Thirty runnable examples of agent patterns for Claude, covering the topics of the
+    <strong>Claude Certified Architect Foundations</strong> certification.
+    Unofficial and not affiliated with Anthropic.
+  </p>
+
+  <div class="panel">
+    <div class="stats" id="stats"></div>
+  </div>
+
+  <div id="sections"><p class="empty">Loading…</p></div>
+</main>
+
+<script>
+const el = (tag, className, text) => {
+  const node = document.createElement(tag);
+  if (className) node.className = className;
+  if (text !== undefined) node.textContent = text;
+  return node;
+};
+
+const sectionsEl = document.getElementById("sections");
+
+fetch("/api/examples").then((r) => r.json()).then((sections) => {
+  const all = sections.flatMap((s) => s.examples);
+  const viewers = all.filter((e) => e.hasViewer).length;
+
+  const stats = document.getElementById("stats");
+  for (const [value, label] of [
+    [all.length, "examples"],
+    [viewers, "with a browser viewer"],
+    [sections.length, "topics"],
+  ]) {
+    const cell = el("div");
+    cell.append(el("b", "", String(value)));
+    cell.append(el("span", "", label));
+    stats.append(cell);
+  }
+
+  sectionsEl.replaceChildren();
+
+  for (const section of sections) {
+    const panel = el("div", "panel");
+
+    const head = el("h2", "section-head");
+    head.append(el("span", "", section.title));
+    panel.append(head);
+
+    const list = el("ul", "examples");
+    for (const example of section.examples) {
+      const li = el("li");
+      li.append(el("span", "num", example.id));
+
+      const title = el("div", "title");
+      if (example.hasViewer || example.hasNotes) {
+        const link = el("a", "", example.title);
+        link.href = `/example/${example.slug}`;
+        title.append(link);
+      } else {
+        title.append(el("span", "plain", example.title));
+      }
+      li.append(title);
+
+      const marks = el("div", "marks");
+      if (example.hasViewer) marks.append(el("span", "badge soft", "viewer"));
+      else if (example.hasNotes) marks.append(el("span", "badge soft", "notes"));
+      li.append(marks);
+
+      list.append(li);
+    }
+    panel.append(list);
+    sectionsEl.append(panel);
+  }
+});
+</script>
+</body>
+</html>

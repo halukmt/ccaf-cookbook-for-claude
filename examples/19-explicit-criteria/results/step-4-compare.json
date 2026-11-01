@@ -1,0 +1,1244 @@
+{
+  "model": "claude-haiku-5-5",
+  "vague": [
+    [
+      {
+        "id": "sql-injection",
+        "findings": [
+          {
+            "severity": "critical",
+            "category": "security",
+            "description": "SQL injection: the email value is concatenated directly into the SQL string without parameterization or escaping. An attacker can supply an email such as ' OR '1'='1 to alter the query, bypass authentication, or read/modify arbitrary data. Use a parameterized query (e.g., query('SELECT id, password_hash FROM users WHERE email = $1', [email])) instead."
+          }
+        ],
+        "usage": {
+          "input_tokens": 490,
+          "output_tokens": 151
+        }
+      },
+      {
+        "id": "sql-injection-python",
+        "findings": [
+          {
+            "severity": "critical",
+            "category": "security",
+            "description": "The query is built by interpolating user_input directly into an f-string, creating a SQL injection vulnerability. An attacker can supply crafted input to alter the query, read or modify arbitrary data. Use parameterized queries (e.g., db.execute('SELECT * FROM users WHERE id = ?', (user_input,)) or the driver's equivalent placeholder syntax)."
+          }
+        ],
+        "usage": {
+          "input_tokens": 461,
+          "output_tokens": 151
+        }
+      },
+      {
+        "id": "card-in-log",
+        "findings": [
+          {
+            "severity": "critical",
+            "category": "security",
+            "description": "The function logs the full card number and CVC to the console on every charge. Card data and CVC must never be written to logs, since this exposes PCI-sensitive data and violates card network rules. Remove these values from the log statement, or log only a masked identifier such as the last four digits."
+          }
+        ],
+        "usage": {
+          "input_tokens": 510,
+          "output_tokens": 243
+        }
+      },
+      {
+        "id": "null-access",
+        "findings": [
+          {
+            "severity": "major",
+            "category": "logic",
+            "description": "The comment states fetchUser resolves to { data: null } for unknown users. In that case, response.data.user evaluates null.user, which throws a TypeError instead of handling the missing user. The function should check for null data (and a missing user object) before accessing .name, or return a default such as undefined or throw a clear not-found error."
+          }
+        ],
+        "usage": {
+          "input_tokens": 467,
+          "output_tokens": 220
+        }
+      },
+      {
+        "id": "off-by-one",
+        "findings": [
+          {
+            "severity": "critical",
+            "category": "logic",
+            "description": "Off-by-one error in loop condition: `i <= cart.items.length` iterates one time past the last valid index. On the final iteration `cart.items[i]` is undefined, so accessing `.sku` throws a TypeError, causing placeOrder to fail after earlier stock reservations have already been made, leaving partial reservations. The condition should be `i < cart.items.length`."
+          },
+          {
+            "severity": "major",
+            "category": "logic",
+            "description": "The function is incomplete as shown: stock reservations are made but there is no rollback if reservation fails partway through, and no payment processing using `card` or order creation using `userId`. Parameters `userId` and `card` are unused in the visible code."
+          }
+        ],
+        "usage": {
+          "input_tokens": 491,
+          "output_tokens": 245
+        }
+      },
+      {
+        "id": "page-short",
+        "findings": [
+          {
+            "severity": "critical",
+            "category": "logic",
+            "description": "The slice end index is computed as start + pageSize - 1, which returns only pageSize - 1 items per page. The end index should be start + pageSize. For example, paginate([1,2,3,4], 1, 2) returns [1] instead of [1,2]. Also, the last item of every page is dropped."
+          }
+        ],
+        "usage": {
+          "input_tokens": 489,
+          "output_tokens": 125
+        }
+      },
+      {
+        "id": "doc-contradiction",
+        "findings": [
+          {
+            "severity": "major",
+            "category": "documentation_mismatch",
+            "description": "The comment says prices are sorted from highest to lowest, but the comparator (a, b) => a - b sorts in ascending order (lowest to highest). Either the comment or the comparator should be corrected; for descending order the comparator should be (a, b) => b - a."
+          }
+        ],
+        "usage": {
+          "input_tokens": 468,
+          "output_tokens": 118
+        }
+      },
+      {
+        "id": "doc-contradiction-retries",
+        "findings": [
+          {
+            "severity": "major",
+            "category": "documentation_mismatch",
+            "description": "The comment says the upload is tried three times before giving up, but the function calls send(file) once with no retry logic, so a failed upload is not retried."
+          }
+        ],
+        "usage": {
+          "input_tokens": 447,
+          "output_tokens": 79
+        }
+      },
+      {
+        "id": "unused-variable",
+        "findings": [
+          {
+            "severity": "minor",
+            "category": "unused_code",
+            "description": "The variable 'unused_var' is declared with a value of 42 but is never referenced anywhere in the function. It can be removed."
+          }
+        ],
+        "usage": {
+          "input_tokens": 459,
+          "output_tokens": 71
+        }
+      },
+      {
+        "id": "naming-inconsistency",
+        "findings": [
+          {
+            "severity": "minor",
+            "category": "style",
+            "description": "The variable 'user_name' is a redundant alias of 'userName' with inconsistent naming (camelCase vs snake_case mixed in the same function). It adds no value and could be removed by using 'userName' directly in the template literal."
+          },
+          {
+            "severity": "minor",
+            "category": "style",
+            "description": "The function mixes camelCase ('userName') and snake_case ('user_name') for variables representing the same value, which is inconsistent naming within a single scope."
+          }
+        ],
+        "usage": {
+          "input_tokens": 458,
+          "output_tokens": 169
+        }
+      },
+      {
+        "id": "formatting",
+        "findings": [
+          {
+            "severity": "minor",
+            "category": "style",
+            "description": "Inconsistent spacing in the parameter list: 'a,b' lacks a space after the comma and there is a space after '(' and before ')' that does not match the rest of the function's formatting. Consider 'function add(a, b) {' for consistency with common JavaScript conventions."
+          },
+          {
+            "severity": "minor",
+            "category": "style",
+            "description": "Missing semicolon after the return statement. Not a functional error due to ASI, but inconsistent if the project enforces semicolons."
+          }
+        ],
+        "usage": {
+          "input_tokens": 431,
+          "output_tokens": 177
+        }
+      },
+      {
+        "id": "unused-import",
+        "findings": [],
+        "usage": {
+          "input_tokens": 461,
+          "output_tokens": 10
+        }
+      },
+      {
+        "id": "doc-accurate",
+        "findings": [],
+        "usage": {
+          "input_tokens": 495,
+          "output_tokens": 122
+        }
+      },
+      {
+        "id": "doc-todo",
+        "findings": [
+          {
+            "severity": "minor",
+            "category": "other",
+            "description": "pageCount does not guard against non-numeric or negative total inputs; for NaN/undefined it returns NaN, and for negative totals it returns non-positive counts. Only report if callers can pass such values."
+          }
+        ],
+        "usage": {
+          "input_tokens": 475,
+          "output_tokens": 93
+        }
+      },
+      {
+        "id": "doc-vague-history",
+        "findings": [
+          {
+            "severity": "minor",
+            "category": "documentation_mismatch",
+            "description": "The comment says the function 'only adds the numbers up', which matches the code, but the comment's history note ('Used to call the old billing service') is stale context that does not describe current behavior and may mislead readers; consider removing or rewording it. The code itself has no high-confidence defects."
+          }
+        ],
+        "usage": {
+          "input_tokens": 482,
+          "output_tokens": 122
+        }
+      },
+      {
+        "id": "safe-sql",
+        "findings": [],
+        "usage": {
+          "input_tokens": 459,
+          "output_tokens": 9
+        }
+      }
+    ],
+    [
+      {
+        "id": "sql-injection",
+        "findings": [
+          {
+            "severity": "critical",
+            "category": "security",
+            "description": "SQL injection: the email value is concatenated directly into the SQL string without parameterization or escaping. An attacker can supply a crafted email (e.g., containing a quote character) to alter the query, bypass authentication, or read arbitrary data. Use a parameterized query (e.g., query('SELECT id, password_hash FROM users WHERE email = $1', [email])) instead."
+          }
+        ],
+        "usage": {
+          "input_tokens": 490,
+          "output_tokens": 151
+        }
+      },
+      {
+        "id": "sql-injection-python",
+        "findings": [
+          {
+            "severity": "critical",
+            "category": "security",
+            "description": "The user_input value is interpolated directly into the SQL query string via an f-string, enabling SQL injection. An attacker can supply crafted input to read, modify, or delete arbitrary data. Use a parameterized query (e.g., db.execute(\"SELECT * FROM users WHERE id = ?\", (user_input,)) or the driver's equivalent placeholder syntax) instead."
+          }
+        ],
+        "usage": {
+          "input_tokens": 461,
+          "output_tokens": 155
+        }
+      },
+      {
+        "id": "card-in-log",
+        "findings": [
+          {
+            "severity": "critical",
+            "category": "security",
+            "description": "The function logs the full card number and CVC in plaintext via console.log. Card data and CVC must never be written to logs (this violates PCI DSS). Remove the card number and CVC from the log statement, or log only a masked identifier such as the last four digits."
+          }
+        ],
+        "usage": {
+          "input_tokens": 510,
+          "output_tokens": 227
+        }
+      },
+      {
+        "id": "null-access",
+        "findings": [
+          {
+            "severity": "major",
+            "category": "logic",
+            "description": "When the user is unknown, fetchUser resolves to { data: null } (per the inline comment). Accessing response.data.user then throws a TypeError ('Cannot read properties of null'), so the function crashes instead of handling the missing-user case. The code should check for null data (and a missing user) before reading .name, or return undefined/throw a deliberate error."
+          }
+        ],
+        "usage": {
+          "input_tokens": 467,
+          "output_tokens": 243
+        }
+      },
+      {
+        "id": "off-by-one",
+        "findings": [
+          {
+            "severity": "major",
+            "category": "logic",
+            "description": "The loop condition `i <= cart.items.length` is off by one. On the final iteration, `i` equals `cart.items.length`, so `cart.items[i]` is undefined and accessing `.sku` throws a TypeError. Every call with a non-empty cart will fail after reserving the earlier items. The condition should be `i < cart.items.length`, or the loop should use `for...of`."
+          }
+        ],
+        "usage": {
+          "input_tokens": 491,
+          "output_tokens": 302
+        }
+      },
+      {
+        "id": "page-short",
+        "findings": [
+          {
+            "severity": "major",
+            "category": "logic",
+            "description": "The end index passed to slice is start + pageSize - 1, which returns only pageSize - 1 items per page. The end argument of Array.prototype.slice is exclusive, so it should be start + pageSize."
+          }
+        ],
+        "usage": {
+          "input_tokens": 489,
+          "output_tokens": 94
+        }
+      },
+      {
+        "id": "doc-contradiction",
+        "findings": [
+          {
+            "severity": "major",
+            "category": "documentation_mismatch",
+            "description": "The comment says prices are sorted from highest to lowest, but the comparator (a, b) => a - b sorts in ascending order (lowest to highest). Either the comment or the comparator is wrong; to match the comment, use (a, b) => b - a."
+          }
+        ],
+        "usage": {
+          "input_tokens": 468,
+          "output_tokens": 114
+        }
+      },
+      {
+        "id": "doc-contradiction-retries",
+        "findings": [
+          {
+            "severity": "major",
+            "category": "documentation_mismatch",
+            "description": "The comment says the upload is tried three times before giving up, but the function calls send(file) only once with no retry logic, so the documented behavior is not implemented."
+          }
+        ],
+        "usage": {
+          "input_tokens": 447,
+          "output_tokens": 82
+        }
+      },
+      {
+        "id": "unused-variable",
+        "findings": [
+          {
+            "severity": "minor",
+            "category": "unused_code",
+            "description": "The variable 'unused_var' is declared with the value 42 but is never used anywhere in the function and should be removed."
+          }
+        ],
+        "usage": {
+          "input_tokens": 459,
+          "output_tokens": 67
+        }
+      },
+      {
+        "id": "naming-inconsistency",
+        "findings": [
+          {
+            "severity": "minor",
+            "category": "style",
+            "description": "The variable 'user_name' is a redundant alias of 'userName' with inconsistent naming conventions (camelCase vs snake_case) within the same function. Consider using a single variable name, e.g., returning `Hello ${userName}` directly."
+          },
+          {
+            "severity": "minor",
+            "category": "unused_code",
+            "description": "The intermediate variable 'user_name' adds no value; it simply copies 'userName' and is only used once in the return statement."
+          }
+        ],
+        "usage": {
+          "input_tokens": 458,
+          "output_tokens": 167
+        }
+      },
+      {
+        "id": "formatting",
+        "findings": [
+          {
+            "severity": "minor",
+            "category": "style",
+            "description": "Inconsistent spacing in the parameter list: 'a,b' lacks a space after the comma and there is a space after the opening parenthesis, which is inconsistent with standard formatting (e.g., 'function add(a, b)')."
+          }
+        ],
+        "usage": {
+          "input_tokens": 431,
+          "output_tokens": 103
+        }
+      },
+      {
+        "id": "unused-import",
+        "findings": [],
+        "usage": {
+          "input_tokens": 461,
+          "output_tokens": 10
+        }
+      },
+      {
+        "id": "doc-accurate",
+        "findings": [],
+        "usage": {
+          "input_tokens": 495,
+          "output_tokens": 141
+        }
+      },
+      {
+        "id": "doc-todo",
+        "findings": [],
+        "usage": {
+          "input_tokens": 475,
+          "output_tokens": 9
+        }
+      },
+      {
+        "id": "doc-vague-history",
+        "findings": [
+          {
+            "severity": "minor",
+            "category": "documentation_mismatch",
+            "description": "The comment says the function 'now only adds the numbers up', which matches the code, but the comment's history note ('Used to call the old billing service') is stale and does not describe current behavior; it may mislead readers about dependencies or side effects. Consider removing the historical note or documenting the function's actual contract (e.g., expected line shape and whether amounts are in the same currency or units)."
+          }
+        ],
+        "usage": {
+          "input_tokens": 482,
+          "output_tokens": 154
+        }
+      },
+      {
+        "id": "safe-sql",
+        "findings": [],
+        "usage": {
+          "input_tokens": 459,
+          "output_tokens": 9
+        }
+      }
+    ],
+    [
+      {
+        "id": "sql-injection",
+        "findings": [
+          {
+            "severity": "critical",
+            "category": "security",
+            "description": "SQL injection: the email value is concatenated directly into the SQL string without parameterization or escaping. An attacker can supply a crafted email (e.g., containing a quote character) to alter the query, bypass authentication, or read arbitrary data. Use a parameterized query such as query('SELECT id, password_hash FROM users WHERE email = $1', [email])."
+          },
+          {
+            "severity": "major",
+            "category": "logic",
+            "description": "The function accepts a password parameter but never uses it in the visible code; it only fetches password_hash and returns null when no rows match. The password verification step (e.g., comparing against password_hash with a constant-time hash check) is missing from this snippet, so the function as shown cannot authenticate correctly. This may be an incomplete excerpt."
+          }
+        ],
+        "usage": {
+          "input_tokens": 490,
+          "output_tokens": 270
+        }
+      },
+      {
+        "id": "sql-injection-python",
+        "findings": [
+          {
+            "severity": "critical",
+            "category": "security",
+            "description": "The user_input value is interpolated directly into the SQL query string via an f-string, enabling SQL injection. An attacker can manipulate the query (e.g., input like '1 OR 1=1' or stacked statements) to read or modify arbitrary data. Use parameterized queries (e.g., db.execute('SELECT * FROM users WHERE id = ?', (user_input,)) or the driver's equivalent placeholder syntax)."
+          }
+        ],
+        "usage": {
+          "input_tokens": 461,
+          "output_tokens": 170
+        }
+      },
+      {
+        "id": "card-in-log",
+        "findings": [
+          {
+            "severity": "critical",
+            "category": "security",
+            "description": "The function logs the full card number and CVC in plaintext via console.log. This is sensitive payment data that must never be written to logs (PCI DSS violation) and exposes it to anyone with log access."
+          },
+          {
+            "severity": "major",
+            "category": "logic",
+            "description": "The comment says amountEuros is a decimal number of euros (e.g. 19.99), but the value is passed directly to provider.charge in the truncated code. If the provider expects integer cents, the amount will be off by a factor of 100; floating-point euros also risk rounding errors. Verify the unit expected by provider.charge and convert accordingly (e.g. Math.round(amountEuros * 100))."
+          }
+        ],
+        "usage": {
+          "input_tokens": 510,
+          "output_tokens": 238
+        }
+      },
+      {
+        "id": "null-access",
+        "findings": [
+          {
+            "severity": "major",
+            "category": "logic",
+            "description": "When the user is unknown, fetchUser resolves to { data: null }, so response.data is null and accessing response.data.user throws a TypeError instead of handling the missing user. The function should check for null data (for example, return null or undefined, or throw a descriptive error) before reading .user.name."
+          }
+        ],
+        "usage": {
+          "input_tokens": 467,
+          "output_tokens": 182
+        }
+      },
+      {
+        "id": "off-by-one",
+        "findings": [
+          {
+            "severity": "critical",
+            "category": "logic",
+            "description": "Off-by-one error in the loop condition: `i <= cart.items.length` runs one iteration past the last valid index. On the final iteration `cart.items[i]` is `undefined`, so `cart.items[i].sku` throws a TypeError, and the order fails after earlier stock reservations have already been made. The condition should be `i < cart.items.length`."
+          }
+        ],
+        "usage": {
+          "input_tokens": 491,
+          "output_tokens": 306
+        }
+      },
+      {
+        "id": "page-short",
+        "findings": [
+          {
+            "severity": "major",
+            "category": "logic",
+            "description": "The end index passed to slice is start + pageSize - 1, which returns only pageSize - 1 items per page. The end argument of Array.prototype.slice is exclusive, so it should be start + pageSize. As written, each page is one item short and the last item of every page is dropped."
+          }
+        ],
+        "usage": {
+          "input_tokens": 489,
+          "output_tokens": 115
+        }
+      },
+      {
+        "id": "doc-contradiction",
+        "findings": [
+          {
+            "severity": "major",
+            "category": "documentation_mismatch",
+            "description": "The comment says prices are sorted from highest to lowest, but the comparator (a, b) => a - b sorts in ascending order (lowest to highest). The comparator should be (a, b) => b - a for descending order, or the comment should be corrected."
+          }
+        ],
+        "usage": {
+          "input_tokens": 468,
+          "output_tokens": 112
+        }
+      },
+      {
+        "id": "doc-contradiction-retries",
+        "findings": [
+          {
+            "severity": "major",
+            "category": "documentation_mismatch",
+            "description": "The comment says the upload is tried three times before giving up, but upload() calls send(file) exactly once with no retry logic. A failed send is not retried, so the documented behavior is not implemented."
+          }
+        ],
+        "usage": {
+          "input_tokens": 447,
+          "output_tokens": 140
+        }
+      },
+      {
+        "id": "unused-variable",
+        "findings": [
+          {
+            "severity": "minor",
+            "category": "unused_code",
+            "description": "The variable 'unused_var' is declared with a constant value of 42 but is never used anywhere in the function. It should be removed."
+          }
+        ],
+        "usage": {
+          "input_tokens": 459,
+          "output_tokens": 71
+        }
+      },
+      {
+        "id": "naming-inconsistency",
+        "findings": [
+          {
+            "severity": "minor",
+            "category": "style",
+            "description": "The variable 'user_name' is a redundant alias of 'userName' with inconsistent naming (camelCase vs snake_case in the same scope). The intermediate variable adds no value and the naming mix is inconsistent; the function could directly use 'userName' in the template literal."
+          },
+          {
+            "severity": "minor",
+            "category": "unused_code",
+            "description": "The intermediate assignment 'const user_name = userName;' is unnecessary and does not change behavior."
+          }
+        ],
+        "usage": {
+          "input_tokens": 458,
+          "output_tokens": 170
+        }
+      },
+      {
+        "id": "formatting",
+        "findings": [
+          {
+            "severity": "minor",
+            "category": "style",
+            "description": "Inconsistent spacing in the parameter list: 'a,b' lacks a space after the comma and there is a space after '(' but not before ')', which deviates from the spacing used elsewhere in the snippet and common JavaScript conventions. Suggested form: function add(a, b) {"
+          },
+          {
+            "severity": "minor",
+            "category": "style",
+            "description": "Missing semicolon after the return statement, which is inconsistent with the common JavaScript style of terminating statements with semicolons. This is a stylistic preference and is not functionally incorrect due to automatic semicolon insertion."
+          }
+        ],
+        "usage": {
+          "input_tokens": 431,
+          "output_tokens": 211
+        }
+      },
+      {
+        "id": "unused-import",
+        "findings": [],
+        "usage": {
+          "input_tokens": 461,
+          "output_tokens": 10
+        }
+      },
+      {
+        "id": "doc-accurate",
+        "findings": [
+          {
+            "severity": "minor",
+            "category": "logic",
+            "description": "If send(file) rejects or throws (for example on a network error), the exception propagates out of upload() immediately and the remaining attempts are skipped. The comment says the upload is tried three times, so transient exceptions are not retried. Wrapping the send call in try/catch inside the loop would match the stated intent."
+          }
+        ],
+        "usage": {
+          "input_tokens": 495,
+          "output_tokens": 388
+        }
+      },
+      {
+        "id": "doc-todo",
+        "findings": [
+          {
+            "severity": "minor",
+            "category": "other",
+            "description": "pageCount does not guard against invalid input: if total is negative, NaN, or undefined, the result is NaN or a negative number rather than a sensible page count (e.g., 0). Being conservative, this is only a minor robustness concern depending on callers."
+          },
+          {
+            "severity": "minor",
+            "category": "documentation_mismatch",
+            "description": "The TODO comment says to move PAGE_SIZE to the config module, but the constant is defined here without any indication of the intended config location or ownership; this is a known deferred task rather than a code defect."
+          }
+        ],
+        "usage": {
+          "input_tokens": 475,
+          "output_tokens": 195
+        }
+      },
+      {
+        "id": "doc-vague-history",
+        "findings": [
+          {
+            "severity": "minor",
+            "category": "documentation_mismatch",
+            "description": "The comment says the function 'only adds the numbers up', which matches the implementation, but the comment's reference to the old billing service is historical context that may be stale or misleading for future readers. Consider removing or rewording the comment to describe current behavior only."
+          }
+        ],
+        "usage": {
+          "input_tokens": 482,
+          "output_tokens": 112
+        }
+      },
+      {
+        "id": "safe-sql",
+        "findings": [],
+        "usage": {
+          "input_tokens": 459,
+          "output_tokens": 10
+        }
+      }
+    ]
+  ],
+  "explicit": [
+    [
+      {
+        "id": "sql-injection",
+        "findings": [
+          {
+            "severity": "critical",
+            "category": "security",
+            "description": "The email parameter is concatenated directly into the SQL string without parameterisation or escaping, so an attacker can inject SQL (e.g. an email of x' OR '1'='1' --) to bypass authentication or read/modify arbitrary data. Use a parameterised query such as query('SELECT id, password_hash FROM users WHERE email = $1', [email])."
+          }
+        ],
+        "usage": {
+          "input_tokens": 950,
+          "output_tokens": 146
+        }
+      },
+      {
+        "id": "sql-injection-python",
+        "findings": [
+          {
+            "severity": "critical",
+            "category": "security",
+            "description": "The function builds a SQL query by interpolating user_input directly into an f-string and passes it to db.execute, so untrusted input can inject arbitrary SQL (e.g., \"1 OR 1=1\" or \"1; DROP TABLE users\"). A parameterised query should be used instead."
+          }
+        ],
+        "usage": {
+          "input_tokens": 921,
+          "output_tokens": 124
+        }
+      },
+      {
+        "id": "card-in-log",
+        "findings": [
+          {
+            "severity": "critical",
+            "category": "security",
+            "description": "The function logs the full card number and CVC via console.log. Card data written to logs is a PCI violation and exposes payment credentials to anyone with log access."
+          }
+        ],
+        "usage": {
+          "input_tokens": 970,
+          "output_tokens": 76
+        }
+      },
+      {
+        "id": "null-access",
+        "findings": [
+          {
+            "severity": "major",
+            "category": "logic",
+            "description": "In userName, the comment says fetchUser resolves to { data: null } for an unknown user. Then response.data is null and accessing response.data.user throws a TypeError. There is no null check, so an unknown id crashes the function instead of returning a sensible result."
+          }
+        ],
+        "usage": {
+          "input_tokens": 927,
+          "output_tokens": 109
+        }
+      },
+      {
+        "id": "off-by-one",
+        "findings": [
+          {
+            "severity": "critical",
+            "category": "logic",
+            "description": "The loop condition uses `i <= cart.items.length`, so on the last iteration `cart.items[i]` is undefined and accessing `.sku` throws a TypeError. Every call crashes after reserving stock for all valid items, leaving earlier reservations made with no order placed. The condition should be `i < cart.items.length`."
+          }
+        ],
+        "usage": {
+          "input_tokens": 951,
+          "output_tokens": 135
+        }
+      },
+      {
+        "id": "page-short",
+        "findings": [
+          {
+            "severity": "major",
+            "category": "logic",
+            "description": "In paginate, the slice end is computed as start + pageSize - 1 instead of start + pageSize, so each page returns only pageSize - 1 items and the last item of every page is dropped. For example, paginate([1,2,3,4,5,6], 1, 3) returns [1,2] instead of [1,2,3]."
+          }
+        ],
+        "usage": {
+          "input_tokens": 949,
+          "output_tokens": 232
+        }
+      },
+      {
+        "id": "doc-contradiction",
+        "findings": [
+          {
+            "severity": "major",
+            "category": "documentation_mismatch",
+            "description": "The comment says prices are sorted from highest to lowest, but the comparator (a, b) => a - b sorts ascending, lowest to highest. The comment contradicts the code's behaviour."
+          }
+        ],
+        "usage": {
+          "input_tokens": 928,
+          "output_tokens": 95
+        }
+      },
+      {
+        "id": "doc-contradiction-retries",
+        "findings": [
+          {
+            "severity": "major",
+            "category": "documentation_mismatch",
+            "description": "The comment says the upload is tried three times before giving up, but the function calls send(file) once with no retry loop, so a failed upload is not retried at all."
+          }
+        ],
+        "usage": {
+          "input_tokens": 907,
+          "output_tokens": 81
+        }
+      },
+      {
+        "id": "unused-variable",
+        "findings": [],
+        "usage": {
+          "input_tokens": 919,
+          "output_tokens": 10
+        }
+      },
+      {
+        "id": "naming-inconsistency",
+        "findings": [],
+        "usage": {
+          "input_tokens": 918,
+          "output_tokens": 69
+        }
+      },
+      {
+        "id": "formatting",
+        "findings": [],
+        "usage": {
+          "input_tokens": 891,
+          "output_tokens": 10
+        }
+      },
+      {
+        "id": "unused-import",
+        "findings": [],
+        "usage": {
+          "input_tokens": 921,
+          "output_tokens": 10
+        }
+      },
+      {
+        "id": "doc-accurate",
+        "findings": [],
+        "usage": {
+          "input_tokens": 955,
+          "output_tokens": 171
+        }
+      },
+      {
+        "id": "doc-todo",
+        "findings": [],
+        "usage": {
+          "input_tokens": 935,
+          "output_tokens": 9
+        }
+      },
+      {
+        "id": "doc-vague-history",
+        "findings": [],
+        "usage": {
+          "input_tokens": 942,
+          "output_tokens": 10
+        }
+      },
+      {
+        "id": "safe-sql",
+        "findings": [],
+        "usage": {
+          "input_tokens": 919,
+          "output_tokens": 9
+        }
+      }
+    ],
+    [
+      {
+        "id": "sql-injection",
+        "findings": [
+          {
+            "severity": "critical",
+            "category": "security",
+            "description": "The email parameter is concatenated directly into the SQL string with no escaping or parameterisation, so an attacker can inject SQL (for example an email value containing a quote followed by OR 1=1 or a UNION clause) to bypass authentication or read other data. The query should use a parameterised statement such as query(\"SELECT id, password_hash FROM users WHERE email = $1\", [email])."
+          }
+        ],
+        "usage": {
+          "input_tokens": 950,
+          "output_tokens": 155
+        }
+      },
+      {
+        "id": "sql-injection-python",
+        "findings": [
+          {
+            "severity": "critical",
+            "category": "security",
+            "description": "The function builds a SQL query by interpolating user_input directly into an f-string and passes it to db.execute, so untrusted input can inject arbitrary SQL (e.g. user_input of \"1 OR 1=1\" returns all users, or stacked statements could modify data). Use a parameterised query instead."
+          }
+        ],
+        "usage": {
+          "input_tokens": 921,
+          "output_tokens": 127
+        }
+      },
+      {
+        "id": "card-in-log",
+        "findings": [
+          {
+            "severity": "critical",
+            "category": "security",
+            "description": "The function logs the full card number and CVC via console.log. Card data written to logs is a PCI-DSS violation and exposes cardholder data to anyone with log access."
+          }
+        ],
+        "usage": {
+          "input_tokens": 970,
+          "output_tokens": 80
+        }
+      },
+      {
+        "id": "null-access",
+        "findings": [
+          {
+            "severity": "major",
+            "category": "logic",
+            "description": "userName accesses response.data.user.name without a null check. The comment states that response.data is null for an unknown user, so response.data.user throws a TypeError for any unknown id instead of returning a value or a controlled error."
+          }
+        ],
+        "usage": {
+          "input_tokens": 927,
+          "output_tokens": 95
+        }
+      },
+      {
+        "id": "off-by-one",
+        "findings": [
+          {
+            "severity": "critical",
+            "category": "logic",
+            "description": "The loop condition uses `i <= cart.items.length`, so on the final iteration `cart.items[i]` is undefined and accessing `.sku` throws a TypeError. The order placement crashes after reserving stock for all items, leaving earlier reservations made without completing the order. The condition should be `i < cart.items.length`."
+          }
+        ],
+        "usage": {
+          "input_tokens": 951,
+          "output_tokens": 134
+        }
+      },
+      {
+        "id": "page-short",
+        "findings": [
+          {
+            "severity": "major",
+            "category": "logic",
+            "description": "The slice end is start + pageSize - 1, so every page returns one item fewer than pageSize (e.g. paginate([1,2,3,4,5], 1, 2) returns [1] instead of [1,2]). Items at each page boundary are skipped entirely. The end index should be start + pageSize."
+          }
+        ],
+        "usage": {
+          "input_tokens": 949,
+          "output_tokens": 272
+        }
+      },
+      {
+        "id": "doc-contradiction",
+        "findings": [
+          {
+            "severity": "major",
+            "category": "documentation_mismatch",
+            "description": "The comment says prices are sorted from highest to lowest, but the comparator (a, b) => a - b sorts ascending, lowest to highest. The comment contradicts the code's behaviour."
+          }
+        ],
+        "usage": {
+          "input_tokens": 928,
+          "output_tokens": 95
+        }
+      },
+      {
+        "id": "doc-contradiction-retries",
+        "findings": [
+          {
+            "severity": "major",
+            "category": "documentation_mismatch",
+            "description": "The comment says the upload is tried three times before giving up, but upload() calls send(file) once with no retry loop, so a failed send is never retried."
+          }
+        ],
+        "usage": {
+          "input_tokens": 907,
+          "output_tokens": 121
+        }
+      },
+      {
+        "id": "unused-variable",
+        "findings": [],
+        "usage": {
+          "input_tokens": 919,
+          "output_tokens": 10
+        }
+      },
+      {
+        "id": "naming-inconsistency",
+        "findings": [
+          {
+            "severity": "minor",
+            "category": "style",
+            "description": "The variable user_name is a redundant alias of userName, and the two names differ only by casing and underscore convention, which is a local naming pattern rather than a defect. No functional bug is present; getUser() is not defined here, so null handling cannot be assessed from this snippet."
+          }
+        ],
+        "usage": {
+          "input_tokens": 918,
+          "output_tokens": 113
+        }
+      },
+      {
+        "id": "formatting",
+        "findings": [],
+        "usage": {
+          "input_tokens": 891,
+          "output_tokens": 10
+        }
+      },
+      {
+        "id": "unused-import",
+        "findings": [],
+        "usage": {
+          "input_tokens": 921,
+          "output_tokens": 10
+        }
+      },
+      {
+        "id": "doc-accurate",
+        "findings": [
+          {
+            "severity": "minor",
+            "category": "logic",
+            "description": "If send(file) rejects (for example on a network error) during an attempt, the exception propagates out of upload() immediately, so the remaining attempts never run. The comment says it tries three times before giving up, but a thrown error on the first attempt means only one try is made."
+          }
+        ],
+        "usage": {
+          "input_tokens": 955,
+          "output_tokens": 407
+        }
+      },
+      {
+        "id": "doc-todo",
+        "findings": [],
+        "usage": {
+          "input_tokens": 935,
+          "output_tokens": 10
+        }
+      },
+      {
+        "id": "doc-vague-history",
+        "findings": [],
+        "usage": {
+          "input_tokens": 942,
+          "output_tokens": 10
+        }
+      },
+      {
+        "id": "safe-sql",
+        "findings": [],
+        "usage": {
+          "input_tokens": 919,
+          "output_tokens": 10
+        }
+      }
+    ],
+    [
+      {
+        "id": "sql-injection",
+        "findings": [
+          {
+            "severity": "critical",
+            "category": "security",
+            "description": "The email parameter is concatenated directly into the SQL string with no escaping or parameter binding, so an attacker can inject SQL (e.g. email of ' OR '1'='1' -- ) to bypass authentication or read/modify arbitrary data. The query should use a parameterised statement such as query('SELECT id, password_hash FROM users WHERE email = $1', [email])."
+          }
+        ],
+        "usage": {
+          "input_tokens": 950,
+          "output_tokens": 151
+        }
+      },
+      {
+        "id": "sql-injection-python",
+        "findings": [
+          {
+            "severity": "critical",
+            "category": "security",
+            "description": "The function builds a SQL query by interpolating user_input directly into an f-string and passes it to db.execute, so untrusted input can inject arbitrary SQL (for example, a value like \"1 OR 1=1\" or \"1; DROP TABLE users\"). A parameterized query should be used instead."
+          }
+        ],
+        "usage": {
+          "input_tokens": 921,
+          "output_tokens": 126
+        }
+      },
+      {
+        "id": "card-in-log",
+        "findings": [
+          {
+            "severity": "critical",
+            "category": "security",
+            "description": "The function logs the full card number and CVC via console.log. Card data written to logs violates PCI requirements and exposes payment credentials to anyone with log access."
+          },
+          {
+            "severity": "major",
+            "category": "logic",
+            "description": "The code is truncated after the charge call, so the remaining handling is not visible. Within the shown code, amountEuros is passed through as a decimal euro value; if provider.charge expects integer cents, the amount will be charged incorrectly (e.g. 19.99 sent as 19 or 0.0199 units). The unit conversion cannot be verified from this snippet."
+          }
+        ],
+        "usage": {
+          "input_tokens": 970,
+          "output_tokens": 212
+        }
+      },
+      {
+        "id": "null-access",
+        "findings": [
+          {
+            "severity": "major",
+            "category": "logic",
+            "description": "userName accesses response.data.user.name without checking for null. The inline comment says response resolves to { data: null } for an unknown user, so response.data is null and reading .user on it throws a TypeError instead of handling the missing user."
+          }
+        ],
+        "usage": {
+          "input_tokens": 927,
+          "output_tokens": 99
+        }
+      },
+      {
+        "id": "off-by-one",
+        "findings": [
+          {
+            "severity": "critical",
+            "category": "logic",
+            "description": "Loop condition uses i <= cart.items.length, so on the final iteration i equals cart.items.length and cart.items[i] is undefined; accessing .sku throws a TypeError. Any non-empty cart will crash after reserving stock for earlier items, leaving partial reservations. Should be i < cart.items.length."
+          }
+        ],
+        "usage": {
+          "input_tokens": 951,
+          "output_tokens": 133
+        }
+      },
+      {
+        "id": "page-short",
+        "findings": [
+          {
+            "severity": "major",
+            "category": "logic",
+            "description": "paginate uses items.slice(start, start + pageSize - 1), so each page returns only pageSize - 1 items. For example, with pageSize 10 and page 1 the function returns items 0 through 8 and drops item 9, and every later page skips an item at its boundary. The end index should be start + pageSize."
+          },
+          {
+            "severity": "minor",
+            "category": "logic",
+            "description": "With page 0 (or any value below 1), start is negative. slice then counts from the end of the array, so paginate(items, 0, 10) returns items from the tail rather than an empty page or an error. The function does not validate page, although its comment says pages start at 1."
+          }
+        ],
+        "usage": {
+          "input_tokens": 949,
+          "output_tokens": 338
+        }
+      },
+      {
+        "id": "doc-contradiction",
+        "findings": [
+          {
+            "severity": "major",
+            "category": "documentation_mismatch",
+            "description": "The comment says prices are sorted from highest to lowest, but the comparator (a, b) => a - b sorts in ascending order (lowest to highest). The comment contradicts the code; the sort direction should be (a, b) => b - a if descending order is intended, or the comment should be corrected."
+          }
+        ],
+        "usage": {
+          "input_tokens": 928,
+          "output_tokens": 126
+        }
+      },
+      {
+        "id": "doc-contradiction-retries",
+        "findings": [
+          {
+            "severity": "major",
+            "category": "documentation_mismatch",
+            "description": "The comment says upload tries three times before giving up, but upload() calls send(file) once with no retry loop, so a failed send is not retried at all."
+          }
+        ],
+        "usage": {
+          "input_tokens": 907,
+          "output_tokens": 123
+        }
+      },
+      {
+        "id": "unused-variable",
+        "findings": [],
+        "usage": {
+          "input_tokens": 919,
+          "output_tokens": 10
+        }
+      },
+      {
+        "id": "naming-inconsistency",
+        "findings": [
+          {
+            "severity": "minor",
+            "category": "style",
+            "description": "The variable 'user_name' is a redundant alias of 'userName' and mixes camelCase with snake_case naming within the same function. This is a local naming inconsistency with no functional effect."
+          }
+        ],
+        "usage": {
+          "input_tokens": 918,
+          "output_tokens": 88
+        }
+      },
+      {
+        "id": "formatting",
+        "findings": [],
+        "usage": {
+          "input_tokens": 891,
+          "output_tokens": 10
+        }
+      },
+      {
+        "id": "unused-import",
+        "findings": [],
+        "usage": {
+          "input_tokens": 921,
+          "output_tokens": 10
+        }
+      },
+      {
+        "id": "doc-accurate",
+        "findings": [
+          {
+            "severity": "minor",
+            "category": "logic",
+            "description": "If send(file) throws or rejects (e.g. a network error on the first attempt), the exception propagates out of upload immediately, so the remaining attempts never run. The comment says the upload is tried three times before giving up, which only holds when send returns a falsy value rather than throwing."
+          }
+        ],
+        "usage": {
+          "input_tokens": 955,
+          "output_tokens": 436
+        }
+      },
+      {
+        "id": "doc-todo",
+        "findings": [],
+        "usage": {
+          "input_tokens": 935,
+          "output_tokens": 10
+        }
+      },
+      {
+        "id": "doc-vague-history",
+        "findings": [],
+        "usage": {
+          "input_tokens": 942,
+          "output_tokens": 10
+        }
+      },
+      {
+        "id": "safe-sql",
+        "findings": [],
+        "usage": {
+          "input_tokens": 919,
+          "output_tokens": 10
+        }
+      }
+    ]
+  ]
+}

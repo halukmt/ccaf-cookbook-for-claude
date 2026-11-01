@@ -1,0 +1,184 @@
+{
+  "issues": [
+    {
+      "file": "api-routes.js",
+      "line": 13,
+      "severity": "high",
+      "description": "verifyToken returns null on failure instead of throwing, so requireUser sets req.user = null and calls next(), letting unauthenticated requests through to handlers that then crash on req.user.id; the raw Authorization header, possibly with a 'Bearer ' prefix, is also passed to jwt.verify."
+    },
+    {
+      "file": "api-routes.js",
+      "line": 20,
+      "severity": "medium",
+      "description": "Async route handler has no error handling, so a rejection (for example a missing password or a DB error) becomes an unhandled promise rejection and the request hangs under Express 4."
+    },
+    {
+      "file": "api-routes.js",
+      "line": 27,
+      "severity": "critical",
+      "description": "The cart, including priceCents, is taken from the client request body and used to compute the charge, allowing price tampering, and there is no input validation."
+    },
+    {
+      "file": "api-routes.js",
+      "line": 31,
+      "severity": "high",
+      "description": "The sales report route requires only a logged-in user with no role check, so any customer can read staff sales data."
+    },
+    {
+      "file": "api-routes.js",
+      "line": 35,
+      "severity": "critical",
+      "description": "The admin user-deletion route has neither authentication nor an admin authorization check, so anyone can delete users."
+    },
+    {
+      "file": "auth.js",
+      "line": 9,
+      "severity": "critical",
+      "description": "SQL injection: the email is concatenated directly into the query string instead of using a parameter."
+    },
+    {
+      "file": "auth.js",
+      "line": 13,
+      "severity": "high",
+      "description": "Passwords are hashed with unsalted MD5, which is trivially crackable; use bcrypt, scrypt or argon2."
+    },
+    {
+      "file": "auth.js",
+      "line": 19,
+      "severity": "high",
+      "description": "expiresIn is given the number 30, which jsonwebtoken interprets as seconds, so tokens expire after 30 seconds instead of 30 minutes."
+    },
+    {
+      "file": "auth.js",
+      "line": 25,
+      "severity": "low",
+      "description": "jwt.verify does not restrict the accepted algorithms; pass an explicit algorithms option."
+    },
+    {
+      "file": "cart.js",
+      "line": 10,
+      "severity": "low",
+      "description": "The cart-full check runs before checking whether the SKU already exists, so adding to an existing line fails when the cart is full; quantity is also not validated (negative or non-integer values accepted)."
+    },
+    {
+      "file": "config.js",
+      "line": 5,
+      "severity": "low",
+      "description": "JWT_SECRET and DATABASE_URL are not validated at startup, so a missing secret only fails later at signing time."
+    },
+    {
+      "file": "database.js",
+      "line": 11,
+      "severity": "high",
+      "description": "The connection is released only on success; if connection.query throws, the client leaks and the pool will eventually be exhausted (use try/finally or pool.query)."
+    },
+    {
+      "file": "inventory.js",
+      "line": 6,
+      "severity": "high",
+      "description": "query() returns an object { rows, rowCount }, not an array, so array destructuring `const [row]` throws a TypeError; use `const { rows }`."
+    },
+    {
+      "file": "inventory.js",
+      "line": 11,
+      "severity": "high",
+      "description": "The check-then-update on stock is not atomic and not in a transaction, so concurrent orders can oversell; use a single conditional UPDATE."
+    },
+    {
+      "file": "inventory.js",
+      "line": 15,
+      "severity": "high",
+      "description": "The UPDATE query is not awaited, so the function returns before the stock is decremented and any error becomes an unhandled rejection."
+    },
+    {
+      "file": "notifications.js",
+      "line": 9,
+      "severity": "medium",
+      "description": "user.name is interpolated into HTML without escaping, allowing HTML injection in emails."
+    },
+    {
+      "file": "notifications.js",
+      "line": 10,
+      "severity": "medium",
+      "description": "formatCurrency arguments are swapped (currency first, amount second), producing a wrong string such as 'NaN 12345'."
+    },
+    {
+      "file": "notifications.js",
+      "line": 14,
+      "severity": "medium",
+      "description": "The empty catch block silently swallows email send failures with no logging."
+    },
+    {
+      "file": "orders.js",
+      "line": 12,
+      "severity": "high",
+      "description": "config.taxRate does not exist (config defines vatRate), so the tax is NaN."
+    },
+    {
+      "file": "orders.js",
+      "line": 16,
+      "severity": "critical",
+      "description": "Off-by-one loop condition `i <= cart.items.length` accesses an undefined item on the last iteration and throws a TypeError, so every order fails."
+    },
+    {
+      "file": "orders.js",
+      "line": 21,
+      "severity": "critical",
+      "description": "The total in integer cents is passed to chargeCard, which expects euros and multiplies by 100, so customers are charged 100 times the amount."
+    },
+    {
+      "file": "orders.js",
+      "line": 23,
+      "severity": "medium",
+      "description": "Stock reservation, charge and order insert are not transactional, so a failure after reserving or charging leaves stock reserved or the card charged with no order and no refund or rollback."
+    },
+    {
+      "file": "payments.js",
+      "line": 7,
+      "severity": "critical",
+      "description": "The full card number and CVC are written to the logs, a PCI-DSS violation and sensitive data exposure."
+    },
+    {
+      "file": "payments.js",
+      "line": 10,
+      "severity": "high",
+      "description": "The amount is treated as euros and multiplied by 100, which is inconsistent with the integer-cents convention used by the callers."
+    },
+    {
+      "file": "payments.js",
+      "line": 20,
+      "severity": "high",
+      "description": "refundCharge swallows all errors and returns true, so failed refunds are reported as successful."
+    },
+    {
+      "file": "reports.js",
+      "line": 8,
+      "severity": "critical",
+      "description": "SQL injection: the from and to query parameters are concatenated into the SQL string."
+    },
+    {
+      "file": "reports.js",
+      "line": 12,
+      "severity": "medium",
+      "description": "The empty catch hides database errors and returns an empty report, masking failures as no sales."
+    },
+    {
+      "file": "users.js",
+      "line": 11,
+      "severity": "critical",
+      "description": "SQL injection: the email is concatenated into the query instead of being passed as a parameter."
+    },
+    {
+      "file": "utils.js",
+      "line": 11,
+      "severity": "medium",
+      "description": "Off-by-one error: slice(start, start + pageSize - 1) returns only pageSize-1 items per page."
+    }
+  ],
+  "stopReason": "end_turn",
+  "brokenLines": 0,
+  "usage": {
+    "input_tokens": 3937,
+    "output_tokens": 3540
+  }
+}

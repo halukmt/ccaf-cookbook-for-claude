@@ -1,0 +1,25 @@
+{
+  "ranAt": "2026-11-01T00:13:25.742Z",
+  "inFirstResponse": [
+    {
+      "id": "toolu_01QyHuW5YvSXZ6Cq2AWFTTcn",
+      "agent": "web-search"
+    },
+    {
+      "id": "toolu_01Q41iviQMZmTSCtuTGNAvXK",
+      "agent": "doc-analysis"
+    }
+  ],
+  "spans": {
+    "toolu_01QyHuW5YvSXZ6Cq2AWFTTcn": {
+      "first": 3826,
+      "last": 13098
+    },
+    "toolu_01Q41iviQMZmTSCtuTGNAvXK": {
+      "first": 5137,
+      "last": 6684
+    }
+  },
+  "wallClockMs": 16383,
+  "costUsd": 0.22350094999999998
+}

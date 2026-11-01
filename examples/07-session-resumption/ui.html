@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>07 Sessions and resumption</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<main>
+  <a class="back" href="/">← Dashboard</a>
+  <h1>07 Sessions and resumption</h1>
+  <p class="lede">
+    A real CLI session reviews the code, then three files get fixed. Is it better to resume, or to start fresh with a summary?
+    <strong>The resumed session is not told anything changed,</strong> so watch what it concludes when the code no longer matches what it said.
+  </p>
+  <div id="example"></div>
+</main>
+<script type="module">
+import { mountExamplePage } from "/assets/example-page.js";
+
+mountExamplePage({
+  api: "/api/07-session-resumption/run",
+  runLabel: "Show it",
+  fields: [{
+    name: "mode", label: "What to run",
+    options: [
+      ["saved", "Saved run: no cost"],
+      ["live", "Live run of the whole sequence: about $0.50, a few minutes"],
+    ],
+  }],
+  presets: [
+    { label: "Saved run", values: { mode: "saved" } },
+    { label: "Live run", values: { mode: "live" } },
+  ],
+  hint: "Runs in a temporary directory with a temporary config, on a copy of the fixture. In the predictions list, FAIL means the prediction did not hold, not that something broke.",
+});
+</script>
+</body>
+</html>

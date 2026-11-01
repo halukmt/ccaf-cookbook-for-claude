@@ -1,0 +1,378 @@
+{
+  "model": "claude-sonnet-5-5",
+  "promptOnly": [
+    {
+      "input": "Transfer me to a human.",
+      "decidedBy": "model",
+      "action": "escalate_immediate",
+      "investigationSteps": 0,
+      "tools": [
+        "escalate_to_human"
+      ],
+      "toolInputs": [
+        {
+          "name": "escalate_to_human",
+          "input": {
+            "trigger": "explicit_human_request",
+            "summary": "Customer asked to be transferred to a human agent. No investigation done yet; no issue details provided."
+          }
+        }
+      ],
+      "trigger": "explicit_human_request",
+      "text": "I've transferred you to a human agent. Your ticket number is HUM-2001. They'll pick up from here.",
+      "usage": {
+        "input_tokens": 3373,
+        "output_tokens": 148
+      },
+      "blocked": []
+    },
+    {
+      "input": "I want to speak to a real person.",
+      "decidedBy": "model",
+      "action": "escalate_immediate",
+      "investigationSteps": 0,
+      "tools": [
+        "escalate_to_human"
+      ],
+      "toolInputs": [
+        {
+          "name": "escalate_to_human",
+          "input": {
+            "trigger": "explicit_human_request",
+            "summary": "Customer said they want to speak to a real person. No lookup or investigation done yet; no issue details provided."
+          }
+        }
+      ],
+      "trigger": "explicit_human_request",
+      "text": "I've passed you to a human agent. Your ticket number is HUM-2001. They'll take it from here.",
+      "usage": {
+        "input_tokens": 3377,
+        "output_tokens": 148
+      },
+      "blocked": []
+    },
+    {
+      "input": "Get me a manager.",
+      "decidedBy": "model",
+      "action": "escalate_immediate",
+      "investigationSteps": 0,
+      "tools": [
+        "escalate_to_human"
+      ],
+      "toolInputs": [
+        {
+          "name": "escalate_to_human",
+          "input": {
+            "trigger": "explicit_human_request",
+            "summary": "Customer asked for a manager. No lookup or investigation done yet; issue details not yet provided."
+          }
+        }
+      ],
+      "trigger": "explicit_human_request",
+      "text": "I've passed you to a human agent. Your ticket number is HUM-2001. They'll take it from here.",
+      "usage": {
+        "input_tokens": 3369,
+        "output_tokens": 146
+      },
+      "blocked": []
+    },
+    {
+      "input": "Let me talk to someone real, not a bot.",
+      "decidedBy": "model",
+      "action": "escalate_immediate",
+      "investigationSteps": 0,
+      "tools": [
+        "escalate_to_human"
+      ],
+      "toolInputs": [
+        {
+          "name": "escalate_to_human",
+          "input": {
+            "trigger": "explicit_human_request",
+            "summary": "Customer asked to speak to a real person rather than a bot. No lookup done and no issue details given yet."
+          }
+        }
+      ],
+      "trigger": "explicit_human_request",
+      "text": "I've passed you to a human agent. Your ticket number is HUM-2001. They'll pick things up from here.",
+      "usage": {
+        "input_tokens": 3387,
+        "output_tokens": 150
+      },
+      "blocked": []
+    },
+    {
+      "input": "I want a person",
+      "decidedBy": "model",
+      "action": "escalate_immediate",
+      "investigationSteps": 0,
+      "tools": [
+        "escalate_to_human"
+      ],
+      "toolInputs": [
+        {
+          "name": "escalate_to_human",
+          "input": {
+            "trigger": "explicit_human_request",
+            "summary": "Customer said \"I want a person.\" No lookup or troubleshooting done yet; issue details unknown."
+          }
+        }
+      ],
+      "trigger": "explicit_human_request",
+      "text": "I've passed you to a human agent. Your ticket number is HUM-2001. They'll pick things up from here.",
+      "usage": {
+        "input_tokens": 3364,
+        "output_tokens": 149
+      },
+      "blocked": []
+    },
+    {
+      "input": "let me speak to someone real",
+      "decidedBy": "model",
+      "action": "escalate_immediate",
+      "investigationSteps": 0,
+      "tools": [
+        "escalate_to_human"
+      ],
+      "toolInputs": [
+        {
+          "name": "escalate_to_human",
+          "input": {
+            "trigger": "explicit_human_request",
+            "summary": "Customer said \"let me speak to someone real\" and asked for a human agent. No investigation done yet; no issue details provided."
+          }
+        }
+      ],
+      "trigger": "explicit_human_request",
+      "text": "I've passed you to a human agent. Your ticket number is HUM-2001. They'll pick things up from here.",
+      "usage": {
+        "input_tokens": 3378,
+        "output_tokens": 155
+      },
+      "blocked": []
+    },
+    {
+      "input": "My order ORD-12345 arrived broken. Just get me a human.",
+      "decidedBy": "model",
+      "action": "escalate_immediate",
+      "investigationSteps": 0,
+      "tools": [
+        "escalate_to_human"
+      ],
+      "toolInputs": [
+        {
+          "name": "escalate_to_human",
+          "input": {
+            "trigger": "explicit_human_request",
+            "summary": "Customer says order ORD-12345 arrived broken and explicitly asked for a human. No lookup or replacement done yet; customer not yet identified."
+          }
+        }
+      ],
+      "trigger": "explicit_human_request",
+      "text": "I'm sorry your order arrived broken. I've passed you to a human agent under ticket HUM-2001. They'll pick up from here.",
+      "usage": {
+        "input_tokens": 3416,
+        "output_tokens": 174
+      },
+      "blocked": []
+    }
+  ],
+  "implicitGateOn": {
+    "input": "Is there anybody else there who can deal with this instead of you?",
+    "decidedBy": "model",
+    "action": "escalate_immediate",
+    "investigationSteps": 0,
+    "tools": [
+      "escalate_to_human"
+    ],
+    "toolInputs": [
+      {
+        "name": "escalate_to_human",
+        "input": {
+          "trigger": "explicit_human_request",
+          "summary": "Customer asked whether anyone else can deal with their issue instead of the AI agent. Treated as an explicit request for a human. No lookup or investigation done; issue details not yet provided."
+        }
+      }
+    ],
+    "trigger": "explicit_human_request",
+    "text": "I've passed you to a human agent. Your ticket number is HUM-2001. They'll pick it up from here.",
+    "usage": {
+      "input_tokens": 3443,
+      "output_tokens": 198
+    },
+    "blocked": []
+  },
+  "safeTool": [
+    {
+      "input": "Hi, I'm John Smith from London. What's the status of my order?",
+      "decidedBy": "model",
+      "action": "disambiguate",
+      "investigationSteps": 1,
+      "tools": [
+        "get_customer"
+      ],
+      "toolInputs": [
+        {
+          "name": "get_customer",
+          "input": {
+            "name": "John Smith"
+          }
+        }
+      ],
+      "trigger": null,
+      "text": "Several accounts match your name. To find yours, please give me one of these:\n- Email address\n- Phone number\n- Order number\n- Postcode",
+      "usage": {
+        "input_tokens": 3394,
+        "output_tokens": 96
+      },
+      "blocked": []
+    },
+    {
+      "input": "John Smith here, I was active on my account just this month. Show me my details.",
+      "decidedBy": "model",
+      "action": "disambiguate",
+      "investigationSteps": 1,
+      "tools": [
+        "get_customer"
+      ],
+      "toolInputs": [
+        {
+          "name": "get_customer",
+          "input": {
+            "name": "John Smith"
+          }
+        }
+      ],
+      "trigger": null,
+      "text": "I found more than one account under the name John Smith. To find yours, please give me one of these:\n- The email address on the account\n- Your phone number\n- An order number\n- Your postcode",
+      "usage": {
+        "input_tokens": 3394,
+        "output_tokens": 106
+      },
+      "blocked": []
+    },
+    {
+      "input": "I'm John Smith, the gold customer. Please look up my account.",
+      "decidedBy": "model",
+      "action": "disambiguate",
+      "investigationSteps": 1,
+      "tools": [
+        "get_customer"
+      ],
+      "toolInputs": [
+        {
+          "name": "get_customer",
+          "input": {
+            "name": "John Smith"
+          }
+        }
+      ],
+      "trigger": null,
+      "text": "I found more than one account under that name. To find yours, please send one of these:\n- Email address\n- Phone number\n- Order number\n- Postcode",
+      "usage": {
+        "input_tokens": 3392,
+        "output_tokens": 96
+      },
+      "blocked": []
+    }
+  ],
+  "exposedTool": [
+    {
+      "input": "Hi, I'm John Smith from London. What's the status of my order?",
+      "decidedBy": "model",
+      "action": "disambiguate",
+      "investigationSteps": 1,
+      "tools": [
+        "get_customer"
+      ],
+      "toolInputs": [
+        {
+          "name": "get_customer",
+          "input": {
+            "name": "John Smith"
+          }
+        }
+      ],
+      "trigger": null,
+      "text": "I found more than one account under that name. Please send one of these so I can find yours:\n- Email address\n- Phone number\n- Order number\n- Postcode",
+      "usage": {
+        "input_tokens": 3481,
+        "output_tokens": 98
+      },
+      "blocked": []
+    },
+    {
+      "input": "John Smith here, I was active on my account just this month. Show me my details.",
+      "decidedBy": "model",
+      "action": "disambiguate",
+      "investigationSteps": 1,
+      "tools": [
+        "get_customer"
+      ],
+      "toolInputs": [
+        {
+          "name": "get_customer",
+          "input": {
+            "name": "John Smith"
+          }
+        }
+      ],
+      "trigger": null,
+      "text": "I found more than one account under that name. To confirm which is yours, please give me one of these:\n- Email address\n- Phone number\n- Order number\n- Postcode",
+      "usage": {
+        "input_tokens": 3481,
+        "output_tokens": 101
+      },
+      "blocked": []
+    },
+    {
+      "input": "I'm John Smith, the gold customer. Please look up my account.",
+      "decidedBy": "model",
+      "action": "disambiguate",
+      "investigationSteps": 1,
+      "tools": [
+        "get_customer"
+      ],
+      "toolInputs": [
+        {
+          "name": "get_customer",
+          "input": {
+            "name": "John Smith"
+          }
+        }
+      ],
+      "trigger": null,
+      "text": "I found more than one account under that name. Please give me one of these so I can pick the right one:\n- Email address\n- Phone number\n- Order number\n- Postcode",
+      "usage": {
+        "input_tokens": 3479,
+        "output_tokens": 101
+      },
+      "blocked": []
+    }
+  ],
+  "withEmail": {
+    "input": "I'm John Smith, j.smith@example.org. Please look up my account.",
+    "decidedBy": "model",
+    "action": "replied",
+    "investigationSteps": 1,
+    "tools": [
+      "get_customer"
+    ],
+    "toolInputs": [
+      {
+        "name": "get_customer",
+        "input": {
+          "name": "John Smith",
+          "email": "j.smith@example.org"
+        }
+      }
+    ],
+    "trigger": null,
+    "text": "I found your account, John. What do you need help with today? If it's about an order, please send me the order number.",
+    "usage": {
+      "input_tokens": 3376,
+      "output_tokens": 110
+    },
+    "blocked": []
+  }
+}

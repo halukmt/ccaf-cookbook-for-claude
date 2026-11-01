@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>08 Tool descriptions as routing</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<main>
+  <a class="back" href="/">← Dashboard</a>
+  <h1>08 Tool descriptions as routing</h1>
+  <p class="lede">
+    The tool's description is what the model routes on. Switch the descriptions and the system prompt,
+    and watch <strong>which tool is picked for the same queries</strong>.
+  </p>
+  <div id="example"></div>
+</main>
+<script type="module">
+import { mountExamplePage } from "/assets/example-page.js";
+
+mountExamplePage({
+  api: "/api/08-tool-descriptions/run",
+  runLabel: "Measure routing",
+  fields: [
+    { name: "descriptions", label: "Tool descriptions", options: [["vague", "Vague, one sentence"], ["rich", "Rich, with boundaries"]], value: "vague" },
+    { name: "system", label: "System prompt", options: [["none", "None"], ["conflicting", "Conflicting: always check customer details"], ["rewritten", "Rewritten: no tool bias"]], value: "none" },
+    { name: "set", label: "Queries", options: [["standard", "All 10"], ["harder", "4 harder: person named, purchase asked"], ["two", "First 2 only"]], value: "standard" },
+  ],
+  presets: [
+    { label: "Vague baseline", values: { descriptions: "vague", system: "none", set: "standard" } },
+    { label: "Rich descriptions", values: { descriptions: "rich", system: "none", set: "standard" } },
+    { label: "Prompt overrides descriptions", values: { descriptions: "rich", system: "conflicting", set: "standard" } },
+    { label: "Prompt rewritten", values: { descriptions: "rich", system: "rewritten", set: "standard" } },
+    { label: "Harder queries", values: { descriptions: "rich", system: "none", set: "harder" } },
+  ],
+  hint: "Every query is one real API call on Sonnet 5.5. A run of 10 costs about 2 to 4 cents.",
+});
+</script>
+</body>
+</html>

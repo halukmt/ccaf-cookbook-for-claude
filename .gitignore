@@ -1,0 +1,46 @@
+# --- Secrets ---------------------------------------------------------------
+/.env
+.env.*
+!.env.example
+*.key
+*.pem
+
+# --- Node ------------------------------------------------------------------
+node_modules/
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+/dist/
+/build/
+
+# --- Python ----------------------------------------------------------------
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+
+# --- Claude Code -----------------------------------------------------------
+/.claude/
+
+# --- Private source material, never published --------------------------------
+/_local/
+
+# --- OS / Editor -----------------------------------------------------------
+.DS_Store
+Thumbs.db
+desktop.ini
+/.vscode/
+.idea/
+
+# --- Scratch ---------------------------------------------------------------
+/tmp/
+/scratch/
+*.local.md
+
+# --- Viewer run recordings -------------------------------------------------
+# One JSON per viewer run. Useful while working on an example, noise in history.
+/_runs/

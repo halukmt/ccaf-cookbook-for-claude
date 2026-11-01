@@ -1,0 +1,140 @@
+{
+  "contracts": true,
+  "issues": [
+    {
+      "files": [
+        "orders.js",
+        "cart.js",
+        "payments.js"
+      ],
+      "category": "api_contract",
+      "severity": "critical",
+      "description": "orders.js passes cartTotal's integer-cents value to chargeCard, which expects decimal euros and multiplies by 100 again, so customers are charged 100 times the correct amount."
+    },
+    {
+      "files": [
+        "orders.js",
+        "config.js"
+      ],
+      "category": "api_contract",
+      "severity": "high",
+      "description": "orderTax reads config.taxRate, but config.js only defines vatRate, so the tax calculation yields NaN."
+    },
+    {
+      "files": [
+        "auth.js",
+        "config.js"
+      ],
+      "category": "api_contract",
+      "severity": "high",
+      "description": "auth.js passes config.sessionTtlMinutes (30) to jwt.sign expiresIn, which treats a bare number as seconds, so tokens expire after 30 seconds instead of 30 minutes."
+    },
+    {
+      "files": [
+        "inventory.js",
+        "database.js"
+      ],
+      "category": "api_contract",
+      "severity": "critical",
+      "description": "inventory.js destructures the result of query() as an array (`const [row] = await query(...)`), but database.query resolves to an object `{ rows, rowCount }`, so stockLevel and reserveStock throw a TypeError or misread the result."
+    },
+    {
+      "files": [
+        "api-routes.js",
+        "auth.js"
+      ],
+      "category": "api_contract",
+      "severity": "high",
+      "description": "verifyToken returns null for invalid or expired tokens and does not throw, but api-routes.js assigns the result to req.user inside a try/catch, so a bad token can reach handlers like req.user.id with a null user or be treated as authenticated."
+    },
+    {
+      "files": [
+        "api-routes.js",
+        "auth.js"
+      ],
+      "category": "data_flow",
+      "severity": "critical",
+      "description": "Unvalidated req.body.email from the login route flows into auth.js's string-concatenated SQL query, making the unauthenticated login endpoint exploitable through SQL injection."
+    },
+    {
+      "files": [
+        "api-routes.js",
+        "reports.js"
+      ],
+      "category": "data_flow",
+      "severity": "critical",
+      "description": "Unvalidated req.query.from and req.query.to flow from the sales report route into reports.js's concatenated SQL, so any logged-in customer can perform SQL injection."
+    },
+    {
+      "files": [
+        "api-routes.js",
+        "reports.js"
+      ],
+      "category": "contradictory_finding",
+      "severity": "medium",
+      "description": "api-routes.js is flagged for lacking a role check on the staff-only sales report and reports.js is flagged for lacking authorization, so each layer assumes the other enforces access and nobody does."
+    },
+    {
+      "files": [
+        "api-routes.js",
+        "orders.js",
+        "cart.js"
+      ],
+      "category": "data_flow",
+      "severity": "high",
+      "description": "The client-supplied cart from req.body flows through placeOrder into cartTotal, which trusts the client's priceCents and quantity with no server-side price lookup or validation, allowing price tampering."
+    },
+    {
+      "files": [
+        "api-routes.js",
+        "orders.js",
+        "payments.js"
+      ],
+      "category": "data_flow",
+      "severity": "high",
+      "description": "Raw card data from req.body passes through the route and placeOrder to chargeCard, which logs the full card number and CVC, so card data is exposed in logs."
+    },
+    {
+      "files": [
+        "orders.js",
+        "notifications.js"
+      ],
+      "category": "contradictory_finding",
+      "severity": "medium",
+      "description": "orders.js is flagged because an email failure would make placeOrder throw after the charge, but notifications.js swallows send errors in an empty catch, so only the user lookup can fail and email failures go unreported."
+    },
+    {
+      "files": [
+        "orders.js",
+        "payments.js"
+      ],
+      "category": "data_flow",
+      "severity": "high",
+      "description": "orders.js never refunds after a failed insert or reservation, and payments.js refundCharge returns true even when the refund fails, so a charged customer with no order cannot be reliably recovered."
+    },
+    {
+      "files": [
+        "orders.js",
+        "inventory.js"
+      ],
+      "category": "data_flow",
+      "severity": "high",
+      "description": "orders.js treats reserveStock as completed before continuing to charge, but inventory.js does not await the UPDATE, so the charge and order can proceed while the reservation fails or is not yet persisted."
+    },
+    {
+      "files": [
+        "orders.js",
+        "notifications.js"
+      ],
+      "category": "data_flow",
+      "severity": "low",
+      "description": "order.total comes from the cents-based total in orders.js and is passed to formatCurrency in notifications.js with a hard-coded EUR, so the email may show an amount in the wrong unit or currency."
+    }
+  ],
+  "brokenLines": 0,
+  "stopReason": "end_turn",
+  "usage": {
+    "input_tokens": 5755,
+    "output_tokens": 2781
+  }
+}

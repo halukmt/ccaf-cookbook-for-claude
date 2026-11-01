@@ -1,0 +1,5 @@
+SERVICE AGREEMENT
+
+This agreement is made on 1 February 2024 between Rhein Cloud Hosting GmbH (the provider) and the customer.
+The provider supplies managed hosting for 12 months. The fee is EUR 450.00 per month, payable monthly in advance.
+Either party may terminate with three months' notice.

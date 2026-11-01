@@ -1,0 +1,10 @@
+Meridian Facilities Services
+Q1 Facilities Spend Report
+Report date: 2024-04-05
+
+| Category | USD       |
+|----------|-----------|
+| Cleaning |  3,200.00 |
+| Security |  5,400.00 |
+| Energy   |  2,150.50 |
+| Total    | 10,750.50 |

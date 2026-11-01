@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>30 Source provenance</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<main>
+  <a class="back" href="/">← Dashboard</a>
+  <h1>30 Source provenance</h1>
+  <p class="lede">
+    Each claim stays tied to its source through every step.
+    <strong>Code checks each sentence against what it cites, and keeps both values when sources disagree.</strong>
+  </p>
+  <div id="example"></div>
+</main>
+<script type="module">
+import { mountExamplePage } from "/assets/example-page.js";
+
+const SWAPPED = "By April, 61% of organisations had adopted session tokens [5]. By August the figure was 38% [7]. See https://survey.example.org/spring-adoption-q2.html.";
+const HONEST = "By April, 38% of organisations had adopted session tokens [5]. By August the figure was 61% [7].";
+
+mountExamplePage({
+  api: "/api/30-source-provenance/run",
+  runLabel: "Show it",
+  fields: [
+    { name: "mode", label: "What to run", options: [["saved", "Saved results: no cost"], ["verify", "Check the report below against the saved findings: no cost"], ["live", "Live, one synthesis: about $0.01"]] },
+    { name: "rule", label: "Attribution rule, for a live run", options: [["on", "With the rule"], ["off", "Without the rule"]] },
+    { name: "report", label: "Report to check", kind: "textarea", value: SWAPPED },
+  ],
+  presets: [
+    { label: "Saved results", values: { mode: "saved" } },
+    { label: "Check: swapped numbers, URL present", values: { mode: "verify", report: SWAPPED } },
+    { label: "Check: correct numbers, some dropped", values: { mode: "verify", report: HONEST } },
+    { label: "Live: with the rule", values: { mode: "live", rule: "on" } },
+    { label: "Live: without the rule", values: { mode: "live", rule: "off" } },
+  ],
+  hint: "All documents are invented. The swapped report passes a test that looks for a URL anywhere, and fails this one.",
+});
+</script>
+</body>
+</html>

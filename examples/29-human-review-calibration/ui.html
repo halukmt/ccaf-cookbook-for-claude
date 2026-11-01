@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>29 Human review and calibration</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<main>
+  <a class="back" href="/">← Dashboard</a>
+  <h1>29 Human review and calibration</h1>
+  <p class="lede">
+    A good overall number can hide a failing segment, and a raw score means different things in different places.
+    <strong>This page calculates everything from seeded simulated data, with known truth and no model.</strong>
+  </p>
+  <div id="example"></div>
+</main>
+<script type="module">
+import { mountExamplePage } from "/assets/example-page.js";
+
+mountExamplePage({
+  api: "/api/29-human-review-calibration/run",
+  runLabel: "Calculate",
+  fields: [
+    { name: "seed", label: "Production data seed", value: "20310915" },
+    { name: "capacity", label: "Reviewer capacity, in fields", value: "300" },
+    { name: "target", label: "Accuracy target for automation", value: "0.97" },
+    { name: "rawThreshold", label: "Raw threshold to compare with", value: "0.8" },
+  ],
+  presets: [
+    { label: "Default", values: { seed: "20310915", capacity: "300", target: "0.97", rawThreshold: "0.8" } },
+    { label: "Tiny capacity", values: { seed: "20310915", capacity: "50", target: "0.97", rawThreshold: "0.8" } },
+    { label: "Big capacity", values: { seed: "20310915", capacity: "1000", target: "0.97", rawThreshold: "0.8" } },
+    { label: "Another seed", values: { seed: "12345", capacity: "300", target: "0.97", rawThreshold: "0.8" } },
+    { label: "Lax target", values: { seed: "20310915", capacity: "300", target: "0.9", rawThreshold: "0.9" } },
+  ],
+  hint: "Free to run. The accuracies are parameters in simulator.js. Fixed seeds repeat exactly.",
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,109 @@
+[
+  {
+    "docId": "d01",
+    "model": "claude-haiku-5-5",
+    "stopReason": "tool_use",
+    "blockTypes": [
+      "tool_use"
+    ],
+    "toolName": "extract_document",
+    "input": {
+      "category": "invoice",
+      "invoice_number": "INV-2024-1041",
+      "vendor_name": "NORTHWIND OFFICE SUPPLIES GMBH",
+      "document_date": "2024-03-15",
+      "payment_terms": "Net 30",
+      "purchase_order": "PO-7781",
+      "tax_id": "DE811907980"
+    },
+    "text": "",
+    "usage": {
+      "input_tokens": 870,
+      "output_tokens": 242
+    }
+  },
+  {
+    "docId": "d03",
+    "model": "claude-haiku-5-5",
+    "stopReason": "tool_use",
+    "blockTypes": [
+      "tool_use"
+    ],
+    "toolName": "extract_document",
+    "input": {
+      "category": "receipt",
+      "invoice_number": "R-88213",
+      "vendor_name": "Cafe Lindner",
+      "document_date": "2024-06-11",
+      "tax_id": "DE298765432",
+      "payment_terms": null,
+      "purchase_order": null
+    },
+    "text": "",
+    "usage": {
+      "input_tokens": 776,
+      "output_tokens": 216
+    }
+  },
+  {
+    "docId": "d15",
+    "model": "claude-haiku-5-5",
+    "stopReason": "tool_use",
+    "blockTypes": [
+      "thinking",
+      "tool_use"
+    ],
+    "toolName": "extract_document",
+    "input": {
+      "category": "contract",
+      "invoice_number": "Not stated",
+      "vendor_name": "Rhein Cloud Hosting GmbH",
+      "document_date": "2024-02-01",
+      "payment_terms": "EUR 450.00 per month, payable monthly in advance",
+      "purchase_order": null,
+      "tax_id": null
+    },
+    "text": "",
+    "usage": {
+      "input_tokens": 775,
+      "output_tokens": 408
+    }
+  },
+  {
+    "docId": "d14",
+    "model": "claude-haiku-5-5",
+    "stopReason": "end_turn",
+    "blockTypes": [
+      "thinking",
+      "text"
+    ],
+    "toolName": null,
+    "input": null,
+    "text": "This message looks like a payment confirmation, not a document I can extract data from. It doesn't include an invoice or receipt number, a date, a currency, or a company name, so I can't verify the payment or match it to an account.\n\nWhat would you like to do with it? For example, I could:\n- Extract details from an invoice or receipt if you share it (as a file or pasted text).\n- Help you draft a reply asking the sender to confirm the invoice number, date, and currency for the £120 payment (if that's the currency).\n- Help you write a note for your records.",
+    "usage": {
+      "input_tokens": 705,
+      "output_tokens": 347
+    }
+  },
+  {
+    "docId": "d13",
+    "model": "claude-haiku-5-5",
+    "stopReason": "tool_use",
+    "blockTypes": [
+      "thinking",
+      "tool_use"
+    ],
+    "toolName": "extract_document",
+    "input": {
+      "category": "invoice",
+      "invoice_number": "1234",
+      "vendor_name": "Acme Corp",
+      "document_date": "2024-03-15"
+    },
+    "text": "",
+    "usage": {
+      "input_tokens": 696,
+      "output_tokens": 349
+    }
+  }
+]

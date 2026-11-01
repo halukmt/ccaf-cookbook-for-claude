@@ -1,0 +1,1048 @@
+{
+  "batchId": "msgbatch_01JP64yVpV1EptiWmrVy5H78",
+  "retryBatchId": "msgbatch_01FTUSEZdkNaXQyspyheMzMk",
+  "failingRequest": "forced tool_choice on Sonnet 5.5",
+  "rejectedAtCreate": [],
+  "createdAt": "2026-10-31T22:20:18.988673+00:00",
+  "endedAt": "2026-10-31T22:22:27.671680+00:00",
+  "retryCreatedAt": "2026-10-31T22:22:42.651590+00:00",
+  "retryEndedAt": "2026-10-31T22:24:46.616077+00:00",
+  "counts": {
+    "processing": 0,
+    "succeeded": 19,
+    "errored": 1,
+    "canceled": 0,
+    "expired": 0
+  },
+  "retryCounts": {
+    "processing": 0,
+    "succeeded": 2,
+    "errored": 0,
+    "canceled": 0,
+    "expired": 0
+  },
+  "receivedOrder": [
+    "doc-receipt-005-d06",
+    "doc-invoice-017-d18",
+    "doc-invoice-004-d05",
+    "doc-report-018-d19",
+    "doc-report-006-d07",
+    "doc-contract-014-d15",
+    "doc-invoice-012-d13",
+    "doc-report-003-d04",
+    "doc-invoice-000-d01",
+    "doc-receipt-019-d20",
+    "doc-fragment-013-d14",
+    "doc-invoice-010-d11",
+    "doc-receipt-002-d03",
+    "doc-invoice-007-d08",
+    "doc-receipt-011-d12",
+    "doc-invoice-008-d09",
+    "doc-invoice-015-d16",
+    "doc-invoice-001-d02",
+    "doc-invoice-009-d10",
+    "doc-invoice-016-d17"
+  ],
+  "requestOrder": [
+    "doc-invoice-000-d01",
+    "doc-invoice-001-d02",
+    "doc-receipt-002-d03",
+    "doc-report-003-d04",
+    "doc-invoice-004-d05",
+    "doc-receipt-005-d06",
+    "doc-report-006-d07",
+    "doc-invoice-007-d08",
+    "doc-invoice-008-d09",
+    "doc-invoice-009-d10",
+    "doc-invoice-010-d11",
+    "doc-receipt-011-d12",
+    "doc-invoice-012-d13",
+    "doc-fragment-013-d14",
+    "doc-contract-014-d15",
+    "doc-invoice-015-d16",
+    "doc-invoice-016-d17",
+    "doc-invoice-017-d18",
+    "doc-report-018-d19",
+    "doc-receipt-019-d20"
+  ],
+  "failed": [
+    {
+      "id": "doc-invoice-004-d05",
+      "failure": "truncated",
+      "detail": "stop_reason max_tokens, 30 tokens"
+    },
+    {
+      "id": "doc-invoice-001-d02",
+      "failure": "errored",
+      "detail": "tool_choice: type \"tool\" and \"any\" are not supported for this model."
+    }
+  ],
+  "byId": {
+    "doc-receipt-005-d06": {
+      "usable": true,
+      "input": {
+        "invoice_number": null,
+        "vendor_name": null,
+        "document_date": "2024-02-14",
+        "due_date": null,
+        "payment_terms": null,
+        "purchase_order": null,
+        "tax_id": null,
+        "currency": "GBP",
+        "total_amount": 500,
+        "line_items": [
+          {
+            "description": "Widgets (50 x £10.00)",
+            "amount": 500
+          }
+        ]
+      },
+      "type": "succeeded",
+      "usage": {
+        "input_tokens": 992,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 282,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "batch",
+        "inference_geo": "global",
+        "speed": "standard"
+      },
+      "model": "claude-haiku-5-5"
+    },
+    "doc-invoice-017-d18": {
+      "usable": true,
+      "input": {
+        "invoice_number": "OL-20240912-7",
+        "vendor_name": "Orion Lab Supplies Inc.",
+        "document_date": "2024-09-12",
+        "due_date": "2024-10-12",
+        "payment_terms": "Net 30",
+        "purchase_order": "PO-6620",
+        "tax_id": "98-7654321",
+        "currency": "USD",
+        "total_amount": 161,
+        "line_items": [
+          {
+            "description": "Pipettes",
+            "amount": 125
+          },
+          {
+            "description": "Gloves",
+            "amount": 36
+          }
+        ]
+      },
+      "type": "succeeded",
+      "usage": {
+        "input_tokens": 1109,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 333,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "batch",
+        "inference_geo": "global",
+        "speed": "standard"
+      },
+      "model": "claude-haiku-5-5"
+    },
+    "doc-invoice-004-d05": {
+      "usable": false,
+      "failure": "truncated",
+      "detail": "stop_reason max_tokens, 30 tokens",
+      "type": "succeeded",
+      "usage": {
+        "input_tokens": 1072,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 30,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "batch",
+        "inference_geo": "global",
+        "speed": "standard"
+      },
+      "model": "claude-haiku-5-5"
+    },
+    "doc-report-018-d19": {
+      "usable": true,
+      "input": {
+        "invoice_number": null,
+        "vendor_name": "Kestrel Aviation Consulting",
+        "document_date": null,
+        "due_date": null,
+        "payment_terms": null,
+        "purchase_order": null,
+        "tax_id": null,
+        "currency": "EUR",
+        "total_amount": 3790,
+        "line_items": [
+          {
+            "description": "Flights",
+            "amount": 2310
+          },
+          {
+            "description": "Hotels",
+            "amount": 1480
+          }
+        ]
+      },
+      "type": "succeeded",
+      "usage": {
+        "input_tokens": 1001,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 306,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "batch",
+        "inference_geo": "global",
+        "speed": "standard"
+      },
+      "model": "claude-haiku-5-5"
+    },
+    "doc-report-006-d07": {
+      "usable": true,
+      "input": {
+        "invoice_number": null,
+        "vendor_name": "Bluepeak Surveying",
+        "document_date": "2024-04-30",
+        "due_date": null,
+        "payment_terms": null,
+        "purchase_order": null,
+        "tax_id": null,
+        "currency": "USD",
+        "total_amount": 1352.4,
+        "line_items": [
+          {
+            "description": "Fuel",
+            "amount": 312.4
+          },
+          {
+            "description": "Lodging near site",
+            "amount": 890
+          },
+          {
+            "description": "County site permit",
+            "amount": 150
+          }
+        ]
+      },
+      "type": "succeeded",
+      "usage": {
+        "input_tokens": 1025,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 328,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "batch",
+        "inference_geo": "global",
+        "speed": "standard"
+      },
+      "model": "claude-haiku-5-5"
+    },
+    "doc-contract-014-d15": {
+      "usable": true,
+      "input": {
+        "invoice_number": null,
+        "vendor_name": "Rhein Cloud Hosting GmbH",
+        "document_date": "2024-02-01",
+        "due_date": null,
+        "payment_terms": "payable monthly in advance",
+        "purchase_order": null,
+        "tax_id": null,
+        "currency": "EUR",
+        "total_amount": null,
+        "line_items": [
+          {
+            "description": "Managed hosting, monthly fee (12 months)",
+            "amount": 450
+          }
+        ]
+      },
+      "type": "succeeded",
+      "usage": {
+        "input_tokens": 1040,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 310,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "batch",
+        "inference_geo": "global",
+        "speed": "standard"
+      },
+      "model": "claude-haiku-5-5"
+    },
+    "doc-invoice-012-d13": {
+      "usable": true,
+      "input": {
+        "invoice_number": "1234",
+        "vendor_name": "Acme Corp",
+        "document_date": "2024-03-15",
+        "due_date": null,
+        "payment_terms": null,
+        "purchase_order": null,
+        "tax_id": null,
+        "currency": "USD",
+        "total_amount": 500,
+        "line_items": []
+      },
+      "type": "succeeded",
+      "usage": {
+        "input_tokens": 961,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 263,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "batch",
+        "inference_geo": "global",
+        "speed": "standard"
+      },
+      "model": "claude-haiku-5-5"
+    },
+    "doc-report-003-d04": {
+      "usable": true,
+      "input": {
+        "invoice_number": null,
+        "vendor_name": "Meridian Facilities Services",
+        "document_date": "2024-04-05",
+        "due_date": null,
+        "payment_terms": null,
+        "purchase_order": null,
+        "tax_id": null,
+        "currency": "USD",
+        "total_amount": 10750.5,
+        "line_items": [
+          {
+            "description": "Cleaning",
+            "amount": 3200
+          },
+          {
+            "description": "Security",
+            "amount": 5400
+          },
+          {
+            "description": "Energy",
+            "amount": 2150.5
+          }
+        ]
+      },
+      "type": "succeeded",
+      "usage": {
+        "input_tokens": 1040,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 327,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "batch",
+        "inference_geo": "global",
+        "speed": "standard"
+      },
+      "model": "claude-haiku-5-5"
+    },
+    "doc-invoice-000-d01": {
+      "usable": true,
+      "input": {
+        "invoice_number": "INV-2024-1041",
+        "vendor_name": "NORTHWIND OFFICE SUPPLIES GMBH",
+        "document_date": "2024-03-15",
+        "due_date": "2024-04-14",
+        "payment_terms": "Net 30",
+        "purchase_order": "PO-7781",
+        "tax_id": "DE811907980",
+        "currency": "EUR",
+        "total_amount": 428.4,
+        "line_items": [
+          {
+            "description": "Copy paper",
+            "amount": 120
+          },
+          {
+            "description": "Toner cartridges",
+            "amount": 240
+          },
+          {
+            "description": "VAT 19%",
+            "amount": 68.4
+          }
+        ]
+      },
+      "type": "succeeded",
+      "usage": {
+        "input_tokens": 1135,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 368,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "batch",
+        "inference_geo": "global",
+        "speed": "standard"
+      },
+      "model": "claude-haiku-5-5"
+    },
+    "doc-receipt-019-d20": {
+      "usable": true,
+      "input": {
+        "invoice_number": "00917",
+        "vendor_name": "FreshMart Store 221",
+        "document_date": "2024-09-30",
+        "due_date": null,
+        "payment_terms": null,
+        "purchase_order": null,
+        "tax_id": "GB555666777",
+        "currency": "GBP",
+        "total_amount": 56,
+        "line_items": [
+          {
+            "description": "Groceries",
+            "amount": 43.2
+          },
+          {
+            "description": "Household",
+            "amount": 12.8
+          }
+        ]
+      },
+      "type": "succeeded",
+      "usage": {
+        "input_tokens": 997,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 308,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "batch",
+        "inference_geo": "global",
+        "speed": "standard"
+      },
+      "model": "claude-haiku-5-5"
+    },
+    "doc-fragment-013-d14": {
+      "usable": true,
+      "input": {
+        "invoice_number": null,
+        "vendor_name": "accounts",
+        "document_date": null,
+        "due_date": null,
+        "payment_terms": null,
+        "purchase_order": null,
+        "tax_id": null,
+        "currency": null,
+        "total_amount": 120,
+        "line_items": []
+      },
+      "type": "succeeded",
+      "usage": {
+        "input_tokens": 970,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 251,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "batch",
+        "inference_geo": "global",
+        "speed": "standard"
+      },
+      "model": "claude-haiku-5-5"
+    },
+    "doc-invoice-010-d11": {
+      "usable": true,
+      "input": {
+        "invoice_number": "3381",
+        "vendor_name": "Brightway Electrical Ltd",
+        "document_date": "2024-11-08",
+        "due_date": null,
+        "payment_terms": null,
+        "purchase_order": null,
+        "tax_id": null,
+        "currency": "GBP",
+        "total_amount": 1545.5,
+        "line_items": [
+          {
+            "description": "Rewiring",
+            "amount": 1200
+          },
+          {
+            "description": "Parts",
+            "amount": 345.5
+          }
+        ]
+      },
+      "type": "succeeded",
+      "usage": {
+        "input_tokens": 1036,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 311,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "batch",
+        "inference_geo": "global",
+        "speed": "standard"
+      },
+      "model": "claude-haiku-5-5"
+    },
+    "doc-receipt-002-d03": {
+      "usable": true,
+      "input": {
+        "invoice_number": "R-88213",
+        "vendor_name": "Cafe Lindner",
+        "document_date": "2024-06-11",
+        "due_date": null,
+        "payment_terms": null,
+        "purchase_order": null,
+        "tax_id": "DE298765432",
+        "currency": "EUR",
+        "total_amount": 17.3,
+        "line_items": [
+          {
+            "description": "Coffee",
+            "amount": 7.8
+          },
+          {
+            "description": "Sandwich",
+            "amount": 9.5
+          }
+        ]
+      },
+      "type": "succeeded",
+      "usage": {
+        "input_tokens": 1041,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 312,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "batch",
+        "inference_geo": "global",
+        "speed": "standard"
+      },
+      "model": "claude-haiku-5-5"
+    },
+    "doc-invoice-007-d08": {
+      "usable": true,
+      "input": {
+        "invoice_number": "AT-99017",
+        "vendor_name": "Alpine Tooling AG",
+        "document_date": "2024-07-19",
+        "due_date": null,
+        "payment_terms": "Zahlbar innert 30 Tagen",
+        "purchase_order": "4500123",
+        "tax_id": "CHE-123.456.789",
+        "currency": "CHF",
+        "total_amount": 1725,
+        "line_items": [
+          {
+            "description": "Milling cutters",
+            "amount": 1250
+          },
+          {
+            "description": "Regrinding service",
+            "amount": 430
+          },
+          {
+            "description": "Shipping",
+            "amount": 45
+          }
+        ]
+      },
+      "type": "succeeded",
+      "usage": {
+        "input_tokens": 1124,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 360,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "batch",
+        "inference_geo": "global",
+        "speed": "standard"
+      },
+      "model": "claude-haiku-5-5"
+    },
+    "doc-receipt-011-d12": {
+      "usable": true,
+      "input": {
+        "invoice_number": null,
+        "vendor_name": "Joe's Hardware",
+        "document_date": null,
+        "due_date": null,
+        "payment_terms": null,
+        "purchase_order": null,
+        "tax_id": null,
+        "currency": "USD",
+        "total_amount": 19.5,
+        "line_items": [
+          {
+            "description": "3 hinges @ 4.50 ea",
+            "amount": 13.5
+          },
+          {
+            "description": "1 box screws",
+            "amount": 6
+          }
+        ]
+      },
+      "type": "succeeded",
+      "usage": {
+        "input_tokens": 993,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 309,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "batch",
+        "inference_geo": "global",
+        "speed": "standard"
+      },
+      "model": "claude-haiku-5-5"
+    },
+    "doc-invoice-008-d09": {
+      "usable": true,
+      "input": {
+        "invoice_number": "FA-2024-311",
+        "vendor_name": "Societe Lumiere SARL",
+        "document_date": "2024-09-12",
+        "due_date": "2024-10-12",
+        "payment_terms": "30 days",
+        "purchase_order": null,
+        "tax_id": "FR40303265045",
+        "currency": "EUR",
+        "total_amount": 1841.4,
+        "line_items": [
+          {
+            "description": "Eclairage LED",
+            "amount": 1234.5
+          },
+          {
+            "description": "Installation",
+            "amount": 300
+          },
+          {
+            "description": "TVA 20 %",
+            "amount": 306.9
+          }
+        ]
+      },
+      "type": "succeeded",
+      "usage": {
+        "input_tokens": 1079,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 352,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "batch",
+        "inference_geo": "global",
+        "speed": "standard"
+      },
+      "model": "claude-haiku-5-5"
+    },
+    "doc-invoice-015-d16": {
+      "usable": true,
+      "input": {
+        "invoice_number": "CP-1180",
+        "vendor_name": "Castlegate Plumbing Ltd",
+        "document_date": "2024-08-05",
+        "due_date": "2024-09-04",
+        "payment_terms": "Net 30",
+        "purchase_order": "PO-8801",
+        "tax_id": "GB987654321",
+        "currency": "GBP",
+        "total_amount": 355,
+        "line_items": [
+          {
+            "description": "Boiler service",
+            "amount": 180
+          },
+          {
+            "description": "Valve replacement",
+            "amount": 95
+          },
+          {
+            "description": "Call-out charge",
+            "amount": 60
+          }
+        ]
+      },
+      "type": "succeeded",
+      "usage": {
+        "input_tokens": 1081,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 355,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "batch",
+        "inference_geo": "global",
+        "speed": "standard"
+      },
+      "model": "claude-haiku-5-5"
+    },
+    "doc-invoice-001-d02": {
+      "usable": false,
+      "failure": "errored",
+      "detail": "tool_choice: type \"tool\" and \"any\" are not supported for this model.",
+      "type": "errored",
+      "usage": null,
+      "model": null
+    },
+    "doc-invoice-009-d10": {
+      "usable": true,
+      "input": {
+        "invoice_number": "GP-7741",
+        "vendor_name": "Greenline Print Co.",
+        "document_date": "2024-01-22",
+        "due_date": "2024-02-21",
+        "payment_terms": "Net 30",
+        "purchase_order": "PO-5502",
+        "tax_id": "12-3456789",
+        "currency": "USD",
+        "total_amount": 777.6,
+        "line_items": [
+          {
+            "description": "Brochures",
+            "amount": 600
+          },
+          {
+            "description": "Posters",
+            "amount": 200
+          }
+        ]
+      },
+      "type": "succeeded",
+      "usage": {
+        "input_tokens": 1132,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 323,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "batch",
+        "inference_geo": "global",
+        "speed": "standard"
+      },
+      "model": "claude-haiku-5-5"
+    },
+    "doc-invoice-016-d17": {
+      "usable": true,
+      "input": {
+        "invoice_number": "FL-2291",
+        "vendor_name": "Fenwick Legal LLP",
+        "document_date": "2024-06-20",
+        "due_date": "2024-05-20",
+        "payment_terms": "Net 30",
+        "purchase_order": "PO-1207",
+        "tax_id": "GB444555666",
+        "currency": "GBP",
+        "total_amount": 1500,
+        "line_items": [
+          {
+            "description": "Contract review fee",
+            "amount": 1500
+          }
+        ]
+      },
+      "type": "succeeded",
+      "usage": {
+        "input_tokens": 1058,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 311,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "batch",
+        "inference_geo": "global",
+        "speed": "standard"
+      },
+      "model": "claude-haiku-5-5"
+    }
+  },
+  "retryById": {
+    "doc-invoice-004-d05-retry-1": {
+      "usable": true,
+      "input": {
+        "invoice_number": "ES-204",
+        "vendor_name": "Elm Street Consulting",
+        "document_date": "2024-03-03",
+        "due_date": null,
+        "payment_terms": "Net 30",
+        "purchase_order": null,
+        "tax_id": null,
+        "currency": "EUR",
+        "total_amount": 2740,
+        "line_items": [
+          {
+            "description": "Workshop 1",
+            "amount": 1200
+          },
+          {
+            "description": "Workshop 2",
+            "amount": 1200
+          },
+          {
+            "description": "Travel",
+            "amount": 340
+          }
+        ]
+      },
+      "type": "succeeded",
+      "usage": {
+        "input_tokens": 1072,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 329,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "batch",
+        "inference_geo": "global",
+        "speed": "standard"
+      },
+      "model": "claude-haiku-5-5"
+    },
+    "doc-invoice-001-d02-retry-1": {
+      "usable": true,
+      "input": {
+        "invoice_number": "HFL-5520",
+        "vendor_name": "Harbor Freight Logistics Ltd",
+        "document_date": "2024-05-02",
+        "due_date": "2024-05-16",
+        "payment_terms": "Net 14",
+        "purchase_order": "PO-3310",
+        "tax_id": "GB123456789",
+        "currency": "GBP",
+        "total_amount": 1025.5,
+        "line_items": [
+          {
+            "description": "Container handling",
+            "amount": 850
+          },
+          {
+            "description": "Customs clearance",
+            "amount": 175.5
+          }
+        ]
+      },
+      "type": "succeeded",
+      "usage": {
+        "input_tokens": 1085,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "output_tokens": 335,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "batch",
+        "inference_geo": "global",
+        "speed": "standard"
+      },
+      "model": "claude-haiku-5-5"
+    }
+  },
+  "firstPass": {
+    "accuracy": 0.9887640449438202,
+    "tally": {
+      "fields": 178,
+      "correct": 119,
+      "correct_null": 57,
+      "wrong": 1,
+      "empty": 0,
+      "fabricated": 1,
+      "present": 120,
+      "absent": 58
+    },
+    "docsRight": 16,
+    "docs": 18,
+    "wrongFields": [
+      {
+        "doc": "d14",
+        "field": "vendor_name",
+        "outcome": "fabricated",
+        "got": "\"accounts\""
+      },
+      {
+        "doc": "d10",
+        "field": "line_items",
+        "outcome": "wrong",
+        "got": "[{\"description\":\"Brochures\",\"amount\":600},{\"description\":\"Posters\",\"am"
+      }
+    ]
+  },
+  "unseen": {
+    "accuracy": 0.984375,
+    "tally": {
+      "fields": 128,
+      "correct": 82,
+      "correct_null": 44,
+      "wrong": 1,
+      "empty": 0,
+      "fabricated": 1,
+      "present": 83,
+      "absent": 45
+    },
+    "docsRight": 11,
+    "docs": 13,
+    "wrongFields": [
+      {
+        "doc": "d14",
+        "field": "vendor_name",
+        "outcome": "fabricated",
+        "got": "\"accounts\""
+      },
+      {
+        "doc": "d10",
+        "field": "line_items",
+        "outcome": "wrong",
+        "got": "[{\"description\":\"Brochures\",\"amount\":600},{\"description\":\"Posters\",\"am"
+      }
+    ]
+  },
+  "final": {
+    "accuracy": 0.98989898989899,
+    "tally": {
+      "fields": 198,
+      "correct": 136,
+      "correct_null": 60,
+      "wrong": 1,
+      "empty": 0,
+      "fabricated": 1,
+      "present": 137,
+      "absent": 61
+    },
+    "docsRight": 18,
+    "docs": 20,
+    "wrongFields": [
+      {
+        "doc": "d14",
+        "field": "vendor_name",
+        "outcome": "fabricated",
+        "got": "\"accounts\""
+      },
+      {
+        "doc": "d10",
+        "field": "line_items",
+        "outcome": "wrong",
+        "got": "[{\"description\":\"Brochures\",\"amount\":600},{\"description\":\"Posters\",\"am"
+      }
+    ]
+  },
+  "usage": {
+    "input_tokens": 19886,
+    "output_tokens": 5739
+  },
+  "retryUsage": {
+    "input_tokens": 2157,
+    "output_tokens": 664
+  }
+}

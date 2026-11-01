@@ -1,0 +1,539 @@
+{
+  "model": "claude-haiku-5-5",
+  "runs": [
+    [
+      {
+        "id": "sql-injection",
+        "findings": [
+          {
+            "severity": "critical",
+            "category": "security",
+            "description": "The login function builds its SQL by concatenating the raw email parameter into the query string, so an attacker can supply an email such as ' OR '1'='1' -- to alter the query (SQL injection). The query should use a parameterised placeholder (e.g. $1 with a separate parameter array) instead of string concatenation."
+          }
+        ],
+        "usage": {
+          "input_tokens": 1175,
+          "output_tokens": 129
+        }
+      },
+      {
+        "id": "sql-injection-python",
+        "findings": [
+          {
+            "severity": "critical",
+            "category": "security",
+            "description": "find_user builds a SQL query by interpolating user_input directly into an f-string and passes it to db.execute with no parameterisation or validation. Input such as \"1 OR 1=1\" or \"1; DROP TABLE users\" changes the query, which is a SQL injection vulnerability. Use a parameterised query instead (for example db.execute(\"SELECT * FROM users WHERE id = %s\", (user_input,)))."
+          }
+        ],
+        "usage": {
+          "input_tokens": 1146,
+          "output_tokens": 170
+        }
+      },
+      {
+        "id": "card-in-log",
+        "findings": [
+          {
+            "severity": "critical",
+            "category": "security",
+            "description": "chargeCard logs the full card number and CVC via console.log (`console.log(\"Charging card\", card.number, \"cvc\", card.cvc, ...)`). Card data written to logs violates PCI requirements and exposes sensitive payment data to anyone with log access."
+          }
+        ],
+        "usage": {
+          "input_tokens": 1195,
+          "output_tokens": 117
+        }
+      },
+      {
+        "id": "null-access",
+        "findings": [
+          {
+            "severity": "major",
+            "category": "logic",
+            "description": "In userName, response.data is null for an unknown user (per the inline comment), so accessing response.data.user throws a TypeError instead of handling the missing user. Any caller passing an id that does not exist will get an unhandled exception rather than a clear not-found result. Fix: check response.data before reading response.data.user.name and return null/undefined or throw a specific not-found error."
+          }
+        ],
+        "usage": {
+          "input_tokens": 1152,
+          "output_tokens": 146
+        }
+      },
+      {
+        "id": "off-by-one",
+        "findings": [
+          {
+            "severity": "major",
+            "category": "logic",
+            "description": "The loop condition uses `i <= cart.items.length` instead of `i < cart.items.length`. On the last iteration `i` equals `cart.items.length`, so `cart.items[i]` is undefined and `cart.items[i].sku` throws a TypeError. Any non-empty cart will crash partway through reserving stock, after earlier items may already have been reserved. An empty cart also throws on the first iteration."
+          }
+        ],
+        "usage": {
+          "input_tokens": 1176,
+          "output_tokens": 162
+        }
+      },
+      {
+        "id": "page-short",
+        "findings": [
+          {
+            "severity": "major",
+            "category": "logic",
+            "description": "paginate returns pageSize-1 items because the slice end is start + pageSize - 1. For example, paginate([1..30], 1, 10) returns 9 items (indexes 0-8) instead of 10, and each page skips one item, so items at page boundaries are never shown. The end index should be start + pageSize."
+          }
+        ],
+        "usage": {
+          "input_tokens": 1174,
+          "output_tokens": 255
+        }
+      },
+      {
+        "id": "doc-contradiction",
+        "findings": [
+          {
+            "severity": "major",
+            "category": "documentation_mismatch",
+            "description": "The comment says prices are sorted from highest to lowest, but the comparator (a, b) => a - b sorts ascending (lowest to highest). For example, sortedPrices([3, 1, 2]) returns [1, 2, 3], not [3, 2, 1]."
+          }
+        ],
+        "usage": {
+          "input_tokens": 1153,
+          "output_tokens": 121
+        }
+      },
+      {
+        "id": "doc-contradiction-retries",
+        "findings": [
+          {
+            "severity": "major",
+            "category": "documentation_mismatch",
+            "description": "The comment says upload tries three times before giving up, but upload() calls send(file) once with no retry loop, so a failed send is never retried."
+          }
+        ],
+        "usage": {
+          "input_tokens": 1132,
+          "output_tokens": 116
+        }
+      },
+      {
+        "id": "unused-variable",
+        "findings": [],
+        "usage": {
+          "input_tokens": 1144,
+          "output_tokens": 10
+        }
+      },
+      {
+        "id": "naming-inconsistency",
+        "findings": [],
+        "usage": {
+          "input_tokens": 1143,
+          "output_tokens": 10
+        }
+      },
+      {
+        "id": "formatting",
+        "findings": [],
+        "usage": {
+          "input_tokens": 1116,
+          "output_tokens": 10
+        }
+      },
+      {
+        "id": "unused-import",
+        "findings": [],
+        "usage": {
+          "input_tokens": 1146,
+          "output_tokens": 10
+        }
+      },
+      {
+        "id": "doc-accurate",
+        "findings": [],
+        "usage": {
+          "input_tokens": 1180,
+          "output_tokens": 90
+        }
+      },
+      {
+        "id": "doc-todo",
+        "findings": [],
+        "usage": {
+          "input_tokens": 1160,
+          "output_tokens": 9
+        }
+      },
+      {
+        "id": "doc-vague-history",
+        "findings": [],
+        "usage": {
+          "input_tokens": 1167,
+          "output_tokens": 10
+        }
+      },
+      {
+        "id": "safe-sql",
+        "findings": [],
+        "usage": {
+          "input_tokens": 1144,
+          "output_tokens": 10
+        }
+      }
+    ],
+    [
+      {
+        "id": "sql-injection",
+        "findings": [
+          {
+            "severity": "critical",
+            "category": "security",
+            "description": "The login function builds its SQL by concatenating the raw `email` argument into the query string with no escaping or parameterisation. An email containing a single quote (for example `' OR '1'='1' --`) changes the query's structure, which allows SQL injection and can bypass authentication or expose other rows of the users table. The query should use a parameterised placeholder with the value passed separately."
+          }
+        ],
+        "usage": {
+          "input_tokens": 1175,
+          "output_tokens": 146
+        }
+      },
+      {
+        "id": "sql-injection-python",
+        "findings": [
+          {
+            "severity": "critical",
+            "category": "security",
+            "description": "find_user builds the SQL query with an f-string that interpolates user_input directly, so untrusted input reaches the database query unsanitised. For example, user_input = \"1 OR 1=1\" returns every row, and a crafted value can run arbitrary SQL. Use a parameterised query (e.g. db.execute(\"SELECT * FROM users WHERE id = ?\", (user_input,)))."
+          }
+        ],
+        "usage": {
+          "input_tokens": 1146,
+          "output_tokens": 160
+        }
+      },
+      {
+        "id": "card-in-log",
+        "findings": [
+          {
+            "severity": "critical",
+            "category": "security",
+            "description": "chargeCard logs the full card number and CVC via console.log (card.number, card.cvc). Card data written to logs violates PCI requirements and exposes payment credentials."
+          }
+        ],
+        "usage": {
+          "input_tokens": 1195,
+          "output_tokens": 83
+        }
+      },
+      {
+        "id": "null-access",
+        "findings": [
+          {
+            "severity": "major",
+            "category": "logic",
+            "description": "In userName, response.data is null for an unknown user, so response.data.user throws a TypeError instead of handling the missing user. Input: any id for which fetchUser resolves to { data: null }. The access should be guarded (e.g. check response.data before reading .user.name) or the function should return a defined fallback or signal not-found."
+          }
+        ],
+        "usage": {
+          "input_tokens": 1152,
+          "output_tokens": 131
+        }
+      },
+      {
+        "id": "off-by-one",
+        "findings": [
+          {
+            "severity": "major",
+            "category": "logic",
+            "description": "The loop condition uses `i <= cart.items.length`, so on the final iteration `i` equals `cart.items.length` and `cart.items[i]` is undefined. Accessing `.sku` on it throws a TypeError, so any non-empty cart crashes after reserving stock for the earlier items, leaving stock partially reserved. The condition should be `i < cart.items.length`."
+          }
+        ],
+        "usage": {
+          "input_tokens": 1176,
+          "output_tokens": 152
+        }
+      },
+      {
+        "id": "page-short",
+        "findings": [
+          {
+            "severity": "major",
+            "category": "logic",
+            "description": "In paginate, the slice end is start + pageSize - 1, so each page returns only pageSize - 1 items. For example, paginate([a,b,c,d,e,f,g,g,h,i], 1, 10) returns 9 items instead of 10, and every page is short by one item. The end index should be start + pageSize."
+          }
+        ],
+        "usage": {
+          "input_tokens": 1174,
+          "output_tokens": 280
+        }
+      },
+      {
+        "id": "doc-contradiction",
+        "findings": [
+          {
+            "severity": "major",
+            "category": "documentation_mismatch",
+            "description": "The comment says prices are sorted from highest to lowest, but the comparator (a, b) => a - b sorts ascending, lowest to highest. For example, sortedPrices([3, 1, 2]) returns [1, 2, 3], contradicting the documented order."
+          }
+        ],
+        "usage": {
+          "input_tokens": 1153,
+          "output_tokens": 119
+        }
+      },
+      {
+        "id": "doc-contradiction-retries",
+        "findings": [
+          {
+            "severity": "major",
+            "category": "documentation_mismatch",
+            "description": "The comment says upload tries three times before giving up, but upload() calls send(file) once with no retry loop, so a failed send is never retried."
+          }
+        ],
+        "usage": {
+          "input_tokens": 1132,
+          "output_tokens": 116
+        }
+      },
+      {
+        "id": "unused-variable",
+        "findings": [],
+        "usage": {
+          "input_tokens": 1144,
+          "output_tokens": 92
+        }
+      },
+      {
+        "id": "naming-inconsistency",
+        "findings": [],
+        "usage": {
+          "input_tokens": 1143,
+          "output_tokens": 10
+        }
+      },
+      {
+        "id": "formatting",
+        "findings": [],
+        "usage": {
+          "input_tokens": 1116,
+          "output_tokens": 10
+        }
+      },
+      {
+        "id": "unused-import",
+        "findings": [],
+        "usage": {
+          "input_tokens": 1146,
+          "output_tokens": 10
+        }
+      },
+      {
+        "id": "doc-accurate",
+        "findings": [],
+        "usage": {
+          "input_tokens": 1180,
+          "output_tokens": 93
+        }
+      },
+      {
+        "id": "doc-todo",
+        "findings": [],
+        "usage": {
+          "input_tokens": 1160,
+          "output_tokens": 9
+        }
+      },
+      {
+        "id": "doc-vague-history",
+        "findings": [],
+        "usage": {
+          "input_tokens": 1167,
+          "output_tokens": 10
+        }
+      },
+      {
+        "id": "safe-sql",
+        "findings": [],
+        "usage": {
+          "input_tokens": 1144,
+          "output_tokens": 10
+        }
+      }
+    ],
+    [
+      {
+        "id": "sql-injection",
+        "findings": [
+          {
+            "severity": "critical",
+            "category": "security",
+            "description": "In login(), the email parameter is concatenated directly into the SQL string: \"SELECT id, password_hash FROM users WHERE email = '\" + email + \"'\". An attacker can supply an email such as x' OR '1'='1' -- to bypass the lookup, or inject arbitrary SQL. The query should use a parameterised placeholder with the value passed separately, e.g. query('SELECT id, password_hash FROM users WHERE email = $1', [email])."
+          }
+        ],
+        "usage": {
+          "input_tokens": 1175,
+          "output_tokens": 231
+        }
+      },
+      {
+        "id": "sql-injection-python",
+        "findings": [
+          {
+            "severity": "critical",
+            "category": "security",
+            "description": "find_user builds a SQL query by interpolating user_input directly into an f-string and passes it to db.execute. Untrusted input such as \"1 OR 1=1\" or \"1; DROP TABLE users\" alters the query, so this is SQL injection. Use a parameterised query (e.g. db.execute(\"SELECT * FROM users WHERE id = ?\", (user_input,))) instead."
+          }
+        ],
+        "usage": {
+          "input_tokens": 1146,
+          "output_tokens": 161
+        }
+      },
+      {
+        "id": "card-in-log",
+        "findings": [
+          {
+            "severity": "critical",
+            "category": "security",
+            "description": "chargeCard logs the full card number and CVC via console.log (card.number, card.cvc). Card data written to logs violates PCI requirements and exposes payment credentials to anyone with log access."
+          }
+        ],
+        "usage": {
+          "input_tokens": 1195,
+          "output_tokens": 90
+        }
+      },
+      {
+        "id": "null-access",
+        "findings": [
+          {
+            "severity": "major",
+            "category": "logic",
+            "description": "In userName, response.data is null when the user is unknown (per the inline comment), so response.data.user throws a TypeError instead of handling the missing user. Input: any id for a user that does not exist makes the function reject with an unhandled TypeError rather than returning a clear result or error. Fix by checking response.data before accessing user.name."
+          }
+        ],
+        "usage": {
+          "input_tokens": 1152,
+          "output_tokens": 133
+        }
+      },
+      {
+        "id": "off-by-one",
+        "findings": [
+          {
+            "severity": "major",
+            "category": "logic",
+            "description": "The loop condition uses `<=` instead of `<`, so on the final iteration `i === cart.items.length` and `cart.items[i]` is undefined. Accessing `.sku` on it throws a TypeError, for example with any non-empty cart (items = [a, b] gives i = 2 and reads undefined.sku). The order fails after stock has already been reserved for earlier items, leaving partial reservations behind."
+          }
+        ],
+        "usage": {
+          "input_tokens": 1176,
+          "output_tokens": 162
+        }
+      },
+      {
+        "id": "page-short",
+        "findings": [
+          {
+            "severity": "major",
+            "category": "logic",
+            "description": "paginate returns one item fewer than a full page. The end index is start + pageSize - 1, so slice excludes the last item of each page. For example, paginate([1,2,3,4,5,6,7,8,9,10,11], 1, 10) returns 9 items [1..9] instead of 10 items [1..10]. Every page after the first is also shifted and loses one item, so items at multiples of pageSize are skipped across pages. The end index should be start + pageSize."
+          }
+        ],
+        "usage": {
+          "input_tokens": 1174,
+          "output_tokens": 275
+        }
+      },
+      {
+        "id": "doc-contradiction",
+        "findings": [
+          {
+            "severity": "major",
+            "category": "documentation_mismatch",
+            "description": "The comment says the prices are sorted from highest to lowest, but the comparator (a, b) => a - b sorts in ascending order, lowest to highest. The comment contradicts the code's behaviour."
+          }
+        ],
+        "usage": {
+          "input_tokens": 1153,
+          "output_tokens": 98
+        }
+      },
+      {
+        "id": "doc-contradiction-retries",
+        "findings": [
+          {
+            "severity": "major",
+            "category": "documentation_mismatch",
+            "description": "The comment says the upload is tried three times before giving up, but upload(file) calls send(file) once and has no retry loop, so a failed send is never retried."
+          }
+        ],
+        "usage": {
+          "input_tokens": 1132,
+          "output_tokens": 120
+        }
+      },
+      {
+        "id": "unused-variable",
+        "findings": [],
+        "usage": {
+          "input_tokens": 1144,
+          "output_tokens": 10
+        }
+      },
+      {
+        "id": "naming-inconsistency",
+        "findings": [],
+        "usage": {
+          "input_tokens": 1143,
+          "output_tokens": 10
+        }
+      },
+      {
+        "id": "formatting",
+        "findings": [],
+        "usage": {
+          "input_tokens": 1116,
+          "output_tokens": 10
+        }
+      },
+      {
+        "id": "unused-import",
+        "findings": [],
+        "usage": {
+          "input_tokens": 1146,
+          "output_tokens": 10
+        }
+      },
+      {
+        "id": "doc-accurate",
+        "findings": [],
+        "usage": {
+          "input_tokens": 1180,
+          "output_tokens": 86
+        }
+      },
+      {
+        "id": "doc-todo",
+        "findings": [],
+        "usage": {
+          "input_tokens": 1160,
+          "output_tokens": 10
+        }
+      },
+      {
+        "id": "doc-vague-history",
+        "findings": [],
+        "usage": {
+          "input_tokens": 1167,
+          "output_tokens": 10
+        }
+      },
+      {
+        "id": "safe-sql",
+        "findings": [],
+        "usage": {
+          "input_tokens": 1144,
+          "output_tokens": 10
+        }
+      }
+    ]
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "rejected": [
+    {
+      "toolChoice": {
+        "type": "any"
+      },
+      "status": 400,
+      "message": "tool_choice: type \"tool\" and \"any\" are not supported for this model."
+    },
+    {
+      "toolChoice": {
+        "type": "tool",
+        "name": "extract_document"
+      },
+      "status": 400,
+      "message": "tool_choice: type \"tool\" and \"any\" are not supported for this model."
+    }
+  ],
+  "arms": [
+    {
+      "arm": "strict + auto, no instruction",
+      "answered": "5 of 5",
+      "correct": "30 of 30",
+      "invented": "0 of 5",
+      "schemaProblems": 0
+    },
+    {
+      "arm": "strict + auto, told to use the tool",
+      "answered": "5 of 5",
+      "correct": "30 of 30",
+      "invented": "0 of 5",
+      "schemaProblems": 0
+    },
+    {
+      "arm": "output_config.format",
+      "answered": "5 of 5",
+      "correct": "30 of 30",
+      "invented": "0 of 5",
+      "schemaProblems": 0
+    }
+  ]
+}

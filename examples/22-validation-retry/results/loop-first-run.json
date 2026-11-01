@@ -1,0 +1,1085 @@
+{
+  "natural": {
+    "d10": {
+      "result": {
+        "vendor_name": "Greenline Print Co.",
+        "invoice_number": "GP-7741",
+        "invoice_date": "2024-01-22",
+        "due_date": "2024-02-21",
+        "tax_id": "12-3456789",
+        "category": "invoice",
+        "line_items": [
+          {
+            "description": "Brochures",
+            "amount": 600,
+            "detected_pattern": "table_row"
+          },
+          {
+            "description": "Posters",
+            "amount": 200,
+            "detected_pattern": "table_row"
+          },
+          {
+            "description": "Loyalty discount 10% on subtotal",
+            "amount": -80,
+            "detected_pattern": "discount"
+          },
+          {
+            "description": "Sales tax on discounted amount",
+            "amount": 57.6,
+            "detected_pattern": "tax_line"
+          }
+        ],
+        "calculated_total": 777.6,
+        "stated_total": 777.6,
+        "total_discrepancy": false,
+        "conflict_detected": false
+      },
+      "retries": 0,
+      "errors": [],
+      "firstErrors": [],
+      "history": [
+        {
+          "attempt": 0,
+          "seeded": false,
+          "result": {
+            "vendor_name": "Greenline Print Co.",
+            "invoice_number": "GP-7741",
+            "invoice_date": "2024-01-22",
+            "due_date": "2024-02-21",
+            "tax_id": "12-3456789",
+            "category": "invoice",
+            "line_items": [
+              {
+                "description": "Brochures",
+                "amount": 600,
+                "detected_pattern": "table_row"
+              },
+              {
+                "description": "Posters",
+                "amount": 200,
+                "detected_pattern": "table_row"
+              },
+              {
+                "description": "Loyalty discount 10% on subtotal",
+                "amount": -80,
+                "detected_pattern": "discount"
+              },
+              {
+                "description": "Sales tax on discounted amount",
+                "amount": 57.6,
+                "detected_pattern": "tax_line"
+              }
+            ],
+            "calculated_total": 777.6,
+            "stated_total": 777.6,
+            "total_discrepancy": false,
+            "conflict_detected": false
+          },
+          "errors": []
+        }
+      ],
+      "usages": [
+        {
+          "input_tokens": 1313,
+          "output_tokens": 462
+        }
+      ],
+      "status": "clean",
+      "exhausted": false,
+      "humanReasons": []
+    },
+    "d18": {
+      "result": {
+        "vendor_name": "Orion Lab Supplies Inc.",
+        "invoice_number": "OL-20240912-7",
+        "invoice_date": "2024-09-12",
+        "due_date": "2024-10-12",
+        "tax_id": "98-7654321",
+        "category": "invoice",
+        "line_items": [
+          {
+            "description": "Pipettes (10 x 12.50)",
+            "amount": 125,
+            "detected_pattern": "quantity_times_price"
+          },
+          {
+            "description": "Gloves (4 x 9.00)",
+            "amount": 36,
+            "detected_pattern": "quantity_times_price"
+          }
+        ],
+        "calculated_total": 161,
+        "stated_total": 161,
+        "total_discrepancy": false,
+        "conflict_detected": false
+      },
+      "retries": 0,
+      "errors": [],
+      "firstErrors": [],
+      "history": [
+        {
+          "attempt": 0,
+          "seeded": false,
+          "result": {
+            "vendor_name": "Orion Lab Supplies Inc.",
+            "invoice_number": "OL-20240912-7",
+            "invoice_date": "2024-09-12",
+            "due_date": "2024-10-12",
+            "tax_id": "98-7654321",
+            "category": "invoice",
+            "line_items": [
+              {
+                "description": "Pipettes (10 x 12.50)",
+                "amount": 125,
+                "detected_pattern": "quantity_times_price"
+              },
+              {
+                "description": "Gloves (4 x 9.00)",
+                "amount": 36,
+                "detected_pattern": "quantity_times_price"
+              }
+            ],
+            "calculated_total": 161,
+            "stated_total": 161,
+            "total_discrepancy": false,
+            "conflict_detected": false
+          },
+          "errors": []
+        }
+      ],
+      "usages": [
+        {
+          "input_tokens": 1290,
+          "output_tokens": 412
+        }
+      ],
+      "status": "clean",
+      "exhausted": false,
+      "humanReasons": []
+    },
+    "d13": {
+      "result": {
+        "vendor_name": "Acme Corp",
+        "invoice_number": "1234",
+        "invoice_date": "2024-03-15",
+        "due_date": null,
+        "tax_id": null,
+        "category": "invoice",
+        "line_items": [],
+        "calculated_total": 0,
+        "stated_total": 500,
+        "total_discrepancy": true,
+        "conflict_detected": false
+      },
+      "retries": 0,
+      "errors": [
+        {
+          "code": "not_in_source",
+          "field": "due_date",
+          "message": "due_date is null and was not found in source. A person must supply it.",
+          "fixable": false
+        },
+        {
+          "code": "not_in_source",
+          "field": "tax_id",
+          "message": "tax_id is null and was not found in source. A person must supply it.",
+          "fixable": false
+        },
+        {
+          "code": "not_in_source",
+          "field": "line_items",
+          "message": "line_items is empty and no itemisation was found in source. A person must supply it.",
+          "fixable": false
+        }
+      ],
+      "firstErrors": [
+        {
+          "code": "not_in_source",
+          "field": "due_date",
+          "message": "due_date is null and was not found in source. A person must supply it.",
+          "fixable": false
+        },
+        {
+          "code": "not_in_source",
+          "field": "tax_id",
+          "message": "tax_id is null and was not found in source. A person must supply it.",
+          "fixable": false
+        },
+        {
+          "code": "not_in_source",
+          "field": "line_items",
+          "message": "line_items is empty and no itemisation was found in source. A person must supply it.",
+          "fixable": false
+        }
+      ],
+      "history": [
+        {
+          "attempt": 0,
+          "seeded": false,
+          "result": {
+            "vendor_name": "Acme Corp",
+            "invoice_number": "1234",
+            "invoice_date": "2024-03-15",
+            "due_date": null,
+            "tax_id": null,
+            "category": "invoice",
+            "line_items": [],
+            "calculated_total": 0,
+            "stated_total": 500,
+            "total_discrepancy": true,
+            "conflict_detected": false
+          },
+          "errors": [
+            {
+              "code": "not_in_source",
+              "field": "due_date",
+              "message": "due_date is null and was not found in source. A person must supply it.",
+              "fixable": false
+            },
+            {
+              "code": "not_in_source",
+              "field": "tax_id",
+              "message": "tax_id is null and was not found in source. A person must supply it.",
+              "fixable": false
+            },
+            {
+              "code": "not_in_source",
+              "field": "line_items",
+              "message": "line_items is empty and no itemisation was found in source. A person must supply it.",
+              "fixable": false
+            }
+          ]
+        }
+      ],
+      "usages": [
+        {
+          "input_tokens": 1142,
+          "output_tokens": 293
+        }
+      ],
+      "status": "human_review",
+      "exhausted": false,
+      "humanReasons": [
+        "due_date is null and was not found in source. A person must supply it.",
+        "tax_id is null and was not found in source. A person must supply it.",
+        "line_items is empty and no itemisation was found in source. A person must supply it."
+      ]
+    },
+    "d03": {
+      "result": {
+        "vendor_name": "Cafe Lindner",
+        "invoice_number": "R-88213",
+        "invoice_date": "2024-06-11",
+        "due_date": null,
+        "tax_id": "DE298765432",
+        "category": "receipt",
+        "line_items": [
+          {
+            "description": "Coffee",
+            "amount": 7.8,
+            "detected_pattern": "table_row"
+          },
+          {
+            "description": "Sandwich",
+            "amount": 9.5,
+            "detected_pattern": "table_row"
+          }
+        ],
+        "calculated_total": 17.3,
+        "stated_total": 17.3,
+        "total_discrepancy": false,
+        "conflict_detected": false
+      },
+      "retries": 0,
+      "errors": [
+        {
+          "code": "not_in_source",
+          "field": "due_date",
+          "message": "due_date is null and was not found in source. A person must supply it.",
+          "fixable": false
+        }
+      ],
+      "firstErrors": [
+        {
+          "code": "not_in_source",
+          "field": "due_date",
+          "message": "due_date is null and was not found in source. A person must supply it.",
+          "fixable": false
+        }
+      ],
+      "history": [
+        {
+          "attempt": 0,
+          "seeded": false,
+          "result": {
+            "vendor_name": "Cafe Lindner",
+            "invoice_number": "R-88213",
+            "invoice_date": "2024-06-11",
+            "due_date": null,
+            "tax_id": "DE298765432",
+            "category": "receipt",
+            "line_items": [
+              {
+                "description": "Coffee",
+                "amount": 7.8,
+                "detected_pattern": "table_row"
+              },
+              {
+                "description": "Sandwich",
+                "amount": 9.5,
+                "detected_pattern": "table_row"
+              }
+            ],
+            "calculated_total": 17.3,
+            "stated_total": 17.3,
+            "total_discrepancy": false,
+            "conflict_detected": false
+          },
+          "errors": [
+            {
+              "code": "not_in_source",
+              "field": "due_date",
+              "message": "due_date is null and was not found in source. A person must supply it.",
+              "fixable": false
+            }
+          ]
+        }
+      ],
+      "usages": [
+        {
+          "input_tokens": 1222,
+          "output_tokens": 371
+        }
+      ],
+      "status": "human_review",
+      "exhausted": false,
+      "humanReasons": [
+        "due_date is null and was not found in source. A person must supply it."
+      ]
+    },
+    "d20": {
+      "result": {
+        "vendor_name": "FreshMart Store 221",
+        "invoice_number": "00917",
+        "invoice_date": "2024-09-30",
+        "due_date": null,
+        "tax_id": "GB555666777",
+        "category": "receipt",
+        "line_items": [
+          {
+            "description": "Groceries",
+            "amount": 43.2,
+            "detected_pattern": "table_row"
+          },
+          {
+            "description": "Household",
+            "amount": 12.8,
+            "detected_pattern": "table_row"
+          }
+        ],
+        "calculated_total": 56,
+        "stated_total": 56,
+        "total_discrepancy": false,
+        "conflict_detected": false
+      },
+      "retries": 0,
+      "errors": [
+        {
+          "code": "not_in_source",
+          "field": "due_date",
+          "message": "due_date is null and was not found in source. A person must supply it.",
+          "fixable": false
+        }
+      ],
+      "firstErrors": [
+        {
+          "code": "not_in_source",
+          "field": "due_date",
+          "message": "due_date is null and was not found in source. A person must supply it.",
+          "fixable": false
+        }
+      ],
+      "history": [
+        {
+          "attempt": 0,
+          "seeded": false,
+          "result": {
+            "vendor_name": "FreshMart Store 221",
+            "invoice_number": "00917",
+            "invoice_date": "2024-09-30",
+            "due_date": null,
+            "tax_id": "GB555666777",
+            "category": "receipt",
+            "line_items": [
+              {
+                "description": "Groceries",
+                "amount": 43.2,
+                "detected_pattern": "table_row"
+              },
+              {
+                "description": "Household",
+                "amount": 12.8,
+                "detected_pattern": "table_row"
+              }
+            ],
+            "calculated_total": 56,
+            "stated_total": 56,
+            "total_discrepancy": false,
+            "conflict_detected": false
+          },
+          "errors": [
+            {
+              "code": "not_in_source",
+              "field": "due_date",
+              "message": "due_date is null and was not found in source. A person must supply it.",
+              "fixable": false
+            }
+          ]
+        }
+      ],
+      "usages": [
+        {
+          "input_tokens": 1178,
+          "output_tokens": 367
+        }
+      ],
+      "status": "human_review",
+      "exhausted": false,
+      "humanReasons": [
+        "due_date is null and was not found in source. A person must supply it."
+      ]
+    },
+    "d16": {
+      "result": {
+        "vendor_name": "Castlegate Plumbing Ltd",
+        "invoice_number": "CP-1180",
+        "invoice_date": "2024-08-05",
+        "due_date": "2024-09-04",
+        "tax_id": "GB987654321",
+        "category": "invoice",
+        "line_items": [
+          {
+            "description": "Boiler service",
+            "amount": 180,
+            "detected_pattern": "table_row"
+          },
+          {
+            "description": "Valve replacement",
+            "amount": 95,
+            "detected_pattern": "table_row"
+          },
+          {
+            "description": "Call-out charge",
+            "amount": 60,
+            "detected_pattern": "table_row"
+          }
+        ],
+        "calculated_total": 335,
+        "stated_total": 355,
+        "total_discrepancy": true,
+        "conflict_detected": true
+      },
+      "retries": 1,
+      "errors": [
+        {
+          "code": "source_conflict",
+          "field": "stated_total",
+          "message": "Line items sum to 335 but stated_total is 355, and the document's own figures disagree. A person must decide.",
+          "fixable": false
+        }
+      ],
+      "firstErrors": [
+        {
+          "code": "sum_mismatch",
+          "field": "line_items",
+          "message": "Line items sum to 335 but stated_total is 355. Re-read the charges. If the document's own figures truly disagree, keep them as printed and set conflict_detected to true.",
+          "fixable": true
+        }
+      ],
+      "history": [
+        {
+          "attempt": 0,
+          "seeded": false,
+          "result": {
+            "vendor_name": "Castlegate Plumbing Ltd",
+            "invoice_number": "CP-1180",
+            "invoice_date": "2024-08-05",
+            "due_date": "2024-09-04",
+            "tax_id": "GB987654321",
+            "category": "invoice",
+            "line_items": [
+              {
+                "description": "Boiler service",
+                "amount": 180,
+                "detected_pattern": "table_row"
+              },
+              {
+                "description": "Valve replacement",
+                "amount": 95,
+                "detected_pattern": "table_row"
+              },
+              {
+                "description": "Call-out charge",
+                "amount": 60,
+                "detected_pattern": "table_row"
+              }
+            ],
+            "calculated_total": 335,
+            "stated_total": 355,
+            "total_discrepancy": true,
+            "conflict_detected": true
+          },
+          "errors": [
+            {
+              "code": "sum_mismatch",
+              "field": "line_items",
+              "message": "Line items sum to 335 but stated_total is 355. Re-read the charges. If the document's own figures truly disagree, keep them as printed and set conflict_detected to true.",
+              "fixable": true
+            }
+          ]
+        },
+        {
+          "attempt": 1,
+          "message": "Original document:\nCastlegate Plumbing Ltd, VAT GB987654321\nInvoice CP-1180\nDate: 2024-08-05    Due: 2024-09-04    Terms: Net 30    PO: PO-8801\n\n| Work               | GBP    |\n|--------------------|--------|\n| Boiler service     | 180.00 |\n| Valve replacement  |  95.00 |\n| Call-out charge    |  60.00 |\n| Total              | 355.00 |\n\n\nYour extraction:\n{\n  \"vendor_name\": \"Castlegate Plumbing Ltd\",\n  \"invoice_number\": \"CP-1180\",\n  \"invoice_date\": \"2024-08-05\",\n  \"due_date\": \"2024-09-04\",\n  \"tax_id\": \"GB987654321\",\n  \"category\": \"invoice\",\n  \"line_items\": [\n    {\n      \"description\": \"Boiler service\",\n      \"amount\": 180,\n      \"detected_pattern\": \"table_row\"\n    },\n    {\n      \"description\": \"Valve replacement\",\n      \"amount\": 95,\n      \"detected_pattern\": \"table_row\"\n    },\n    {\n      \"description\": \"Call-out charge\",\n      \"amount\": 60,\n      \"detected_pattern\": \"table_row\"\n    }\n  ],\n  \"calculated_total\": 335,\n  \"stated_total\": 355,\n  \"total_discrepancy\": true,\n  \"conflict_detected\": true\n}\n\nValidation errors:\n- Line items sum to 335 but stated_total is 355. Re-read the charges. If the document's own figures truly disagree, keep them as printed and set conflict_detected to true.\n\nRe-extract the document, fixing these errors. Report only what the document states. Do not add a value or a line item to make the numbers agree.",
+          "result": {
+            "vendor_name": "Castlegate Plumbing Ltd",
+            "invoice_number": "CP-1180",
+            "invoice_date": "2024-08-05",
+            "due_date": "2024-09-04",
+            "tax_id": "GB987654321",
+            "category": "invoice",
+            "line_items": [
+              {
+                "description": "Boiler service",
+                "amount": 180,
+                "detected_pattern": "table_row"
+              },
+              {
+                "description": "Valve replacement",
+                "amount": 95,
+                "detected_pattern": "table_row"
+              },
+              {
+                "description": "Call-out charge",
+                "amount": 60,
+                "detected_pattern": "table_row"
+              }
+            ],
+            "calculated_total": 335,
+            "stated_total": 355,
+            "total_discrepancy": true,
+            "conflict_detected": true
+          },
+          "errors": [
+            {
+              "code": "source_conflict",
+              "field": "stated_total",
+              "message": "Line items sum to 335 but stated_total is 355, and the document's own figures disagree. A person must decide.",
+              "fixable": false
+            }
+          ]
+        }
+      ],
+      "usages": [
+        {
+          "input_tokens": 1262,
+          "output_tokens": 421
+        },
+        {
+          "input_tokens": 1671,
+          "output_tokens": 421
+        }
+      ],
+      "status": "human_review",
+      "exhausted": false,
+      "humanReasons": [
+        "Line items sum to 335 but stated_total is 355, and the document's own figures disagree. A person must decide."
+      ]
+    },
+    "d17": {
+      "result": {
+        "vendor_name": "Fenwick Legal LLP",
+        "invoice_number": "FL-2291",
+        "invoice_date": "2024-06-20",
+        "due_date": "2024-05-20",
+        "tax_id": "GB444555666",
+        "category": "invoice",
+        "line_items": [
+          {
+            "description": "Contract review fee",
+            "amount": 1500,
+            "detected_pattern": "table_row"
+          }
+        ],
+        "calculated_total": 1500,
+        "stated_total": 1500,
+        "total_discrepancy": false,
+        "conflict_detected": true
+      },
+      "retries": 0,
+      "errors": [
+        {
+          "code": "source_conflict",
+          "field": "due_date",
+          "message": "due_date 2024-05-20 is before invoice_date 2024-06-20, and the document prints both. A person must decide.",
+          "fixable": false
+        }
+      ],
+      "firstErrors": [
+        {
+          "code": "source_conflict",
+          "field": "due_date",
+          "message": "due_date 2024-05-20 is before invoice_date 2024-06-20, and the document prints both. A person must decide.",
+          "fixable": false
+        }
+      ],
+      "history": [
+        {
+          "attempt": 0,
+          "seeded": false,
+          "result": {
+            "vendor_name": "Fenwick Legal LLP",
+            "invoice_number": "FL-2291",
+            "invoice_date": "2024-06-20",
+            "due_date": "2024-05-20",
+            "tax_id": "GB444555666",
+            "category": "invoice",
+            "line_items": [
+              {
+                "description": "Contract review fee",
+                "amount": 1500,
+                "detected_pattern": "table_row"
+              }
+            ],
+            "calculated_total": 1500,
+            "stated_total": 1500,
+            "total_discrepancy": false,
+            "conflict_detected": true
+          },
+          "errors": [
+            {
+              "code": "source_conflict",
+              "field": "due_date",
+              "message": "due_date 2024-05-20 is before invoice_date 2024-06-20, and the document prints both. A person must decide.",
+              "fixable": false
+            }
+          ]
+        }
+      ],
+      "usages": [
+        {
+          "input_tokens": 1239,
+          "output_tokens": 350
+        }
+      ],
+      "status": "human_review",
+      "exhausted": false,
+      "humanReasons": [
+        "due_date 2024-05-20 is before invoice_date 2024-06-20, and the document prints both. A person must decide."
+      ]
+    }
+  },
+  "seeded": {
+    "d10": {
+      "result": {
+        "vendor_name": "Greenline Print Co.",
+        "invoice_number": "GP-7741",
+        "invoice_date": "2024-01-22",
+        "due_date": "2024-02-21",
+        "tax_id": "12-3456789",
+        "category": "invoice",
+        "line_items": [
+          {
+            "description": "Brochures",
+            "amount": 600,
+            "detected_pattern": "table_row"
+          },
+          {
+            "description": "Posters",
+            "amount": 200,
+            "detected_pattern": "table_row"
+          },
+          {
+            "description": "Loyalty discount (10%)",
+            "amount": -80,
+            "detected_pattern": "discount"
+          },
+          {
+            "description": "Sales tax",
+            "amount": 57.6,
+            "detected_pattern": "tax_line"
+          }
+        ],
+        "calculated_total": 697.6,
+        "stated_total": 777.6,
+        "total_discrepancy": true,
+        "conflict_detected": true
+      },
+      "retries": 3,
+      "errors": [
+        {
+          "code": "calculated_total_wrong",
+          "field": "calculated_total",
+          "message": "calculated_total is 697.6, but the line items sum to 777.6.",
+          "fixable": true
+        },
+        {
+          "code": "flag_wrong",
+          "field": "total_discrepancy",
+          "message": "total_discrepancy is true, expected false.",
+          "fixable": true
+        }
+      ],
+      "firstErrors": [
+        {
+          "code": "sum_mismatch",
+          "field": "line_items",
+          "message": "Line items sum to 1577.6 but stated_total is 777.6. Re-read the charges. If the document's own figures truly disagree, keep them as printed and set conflict_detected to true.",
+          "fixable": true
+        }
+      ],
+      "history": [
+        {
+          "attempt": 0,
+          "seeded": true,
+          "result": {
+            "category": "invoice",
+            "conflict_detected": false,
+            "vendor_name": "Greenline Print Co.",
+            "invoice_number": "GP-7741",
+            "invoice_date": "2024-01-22",
+            "due_date": "2024-02-21",
+            "tax_id": "12-3456789",
+            "line_items": [
+              {
+                "description": "Brochures",
+                "amount": 600,
+                "detected_pattern": "table_row"
+              },
+              {
+                "description": "Posters",
+                "amount": 200,
+                "detected_pattern": "table_row"
+              },
+              {
+                "description": "Subtotal",
+                "amount": 800,
+                "detected_pattern": "table_row"
+              },
+              {
+                "description": "Loyalty discount",
+                "amount": -80,
+                "detected_pattern": "discount"
+              },
+              {
+                "description": "Sales tax",
+                "amount": 57.6,
+                "detected_pattern": "tax_line"
+              }
+            ],
+            "calculated_total": 1577.6,
+            "stated_total": 777.6,
+            "total_discrepancy": true
+          },
+          "errors": [
+            {
+              "code": "sum_mismatch",
+              "field": "line_items",
+              "message": "Line items sum to 1577.6 but stated_total is 777.6. Re-read the charges. If the document's own figures truly disagree, keep them as printed and set conflict_detected to true.",
+              "fixable": true
+            }
+          ]
+        },
+        {
+          "attempt": 1,
+          "message": "Original document:\nGreenline Print Co. (EIN 12-3456789)\nInvoice GP-7741, January 22, 2024. Payment due February 21, 2024 (Net 30). Customer PO: PO-5502.\n\nItems as discussed with your marketing team:\n\n| Item      | USD    |\n|-----------|--------|\n| Brochures | 600.00 |\n| Posters   | 200.00 |\n| Subtotal  | 800.00 |\n\nA loyalty discount of 10% (-80.00) applies to the subtotal, and sales tax of 57.60 was charged on the discounted amount.\n\nAmount due: USD 777.60\n\n\nYour extraction:\n{\n  \"category\": \"invoice\",\n  \"conflict_detected\": false,\n  \"vendor_name\": \"Greenline Print Co.\",\n  \"invoice_number\": \"GP-7741\",\n  \"invoice_date\": \"2024-01-22\",\n  \"due_date\": \"2024-02-21\",\n  \"tax_id\": \"12-3456789\",\n  \"line_items\": [\n    {\n      \"description\": \"Brochures\",\n      \"amount\": 600,\n      \"detected_pattern\": \"table_row\"\n    },\n    {\n      \"description\": \"Posters\",\n      \"amount\": 200,\n      \"detected_pattern\": \"table_row\"\n    },\n    {\n      \"description\": \"Subtotal\",\n      \"amount\": 800,\n      \"detected_pattern\": \"table_row\"\n    },\n    {\n      \"description\": \"Loyalty discount\",\n      \"amount\": -80,\n      \"detected_pattern\": \"discount\"\n    },\n    {\n      \"description\": \"Sales tax\",\n      \"amount\": 57.6,\n      \"detected_pattern\": \"tax_line\"\n    }\n  ],\n  \"calculated_total\": 1577.6,\n  \"stated_total\": 777.6,\n  \"total_discrepancy\": true\n}\n\nValidation errors:\n- Line items sum to 1577.6 but stated_total is 777.6. Re-read the charges. If the document's own figures truly disagree, keep them as printed and set conflict_detected to true.\n\nRe-extract the document, fixing these errors. Report only what the document states. Do not add a value or a line item to make the numbers agree.",
+          "result": {
+            "vendor_name": "Greenline Print Co.",
+            "invoice_number": "GP-7741",
+            "invoice_date": "2024-01-22",
+            "due_date": "2024-02-21",
+            "tax_id": "12-3456789",
+            "category": "invoice",
+            "line_items": [
+              {
+                "description": "Brochures",
+                "amount": 600,
+                "detected_pattern": "table_row"
+              },
+              {
+                "description": "Posters",
+                "amount": 200,
+                "detected_pattern": "table_row"
+              },
+              {
+                "description": "Loyalty discount (10%)",
+                "amount": -80,
+                "detected_pattern": "discount"
+              },
+              {
+                "description": "Sales tax",
+                "amount": 57.6,
+                "detected_pattern": "tax_line"
+              }
+            ],
+            "calculated_total": 697.6,
+            "stated_total": 777.6,
+            "total_discrepancy": true,
+            "conflict_detected": true
+          },
+          "errors": [
+            {
+              "code": "calculated_total_wrong",
+              "field": "calculated_total",
+              "message": "calculated_total is 697.6, but the line items sum to 777.6.",
+              "fixable": true
+            },
+            {
+              "code": "flag_wrong",
+              "field": "total_discrepancy",
+              "message": "total_discrepancy is true, expected false.",
+              "fixable": true
+            }
+          ]
+        },
+        {
+          "attempt": 2,
+          "message": "Original document:\nGreenline Print Co. (EIN 12-3456789)\nInvoice GP-7741, January 22, 2024. Payment due February 21, 2024 (Net 30). Customer PO: PO-5502.\n\nItems as discussed with your marketing team:\n\n| Item      | USD    |\n|-----------|--------|\n| Brochures | 600.00 |\n| Posters   | 200.00 |\n| Subtotal  | 800.00 |\n\nA loyalty discount of 10% (-80.00) applies to the subtotal, and sales tax of 57.60 was charged on the discounted amount.\n\nAmount due: USD 777.60\n\n\nYour extraction:\n{\n  \"vendor_name\": \"Greenline Print Co.\",\n  \"invoice_number\": \"GP-7741\",\n  \"invoice_date\": \"2024-01-22\",\n  \"due_date\": \"2024-02-21\",\n  \"tax_id\": \"12-3456789\",\n  \"category\": \"invoice\",\n  \"line_items\": [\n    {\n      \"description\": \"Brochures\",\n      \"amount\": 600,\n      \"detected_pattern\": \"table_row\"\n    },\n    {\n      \"description\": \"Posters\",\n      \"amount\": 200,\n      \"detected_pattern\": \"table_row\"\n    },\n    {\n      \"description\": \"Loyalty discount (10%)\",\n      \"amount\": -80,\n      \"detected_pattern\": \"discount\"\n    },\n    {\n      \"description\": \"Sales tax\",\n      \"amount\": 57.6,\n      \"detected_pattern\": \"tax_line\"\n    }\n  ],\n  \"calculated_total\": 697.6,\n  \"stated_total\": 777.6,\n  \"total_discrepancy\": true,\n  \"conflict_detected\": true\n}\n\nValidation errors:\n- calculated_total is 697.6, but the line items sum to 777.6.\n- total_discrepancy is true, expected false.\n\nRe-extract the document, fixing these errors. Report only what the document states. Do not add a value or a line item to make the numbers agree.",
+          "result": {
+            "vendor_name": "Greenline Print Co.",
+            "invoice_number": "GP-7741",
+            "invoice_date": "2024-01-22",
+            "due_date": "2024-02-21",
+            "tax_id": "12-3456789",
+            "category": "invoice",
+            "line_items": [
+              {
+                "description": "Brochures",
+                "amount": 600,
+                "detected_pattern": "table_row"
+              },
+              {
+                "description": "Posters",
+                "amount": 200,
+                "detected_pattern": "table_row"
+              },
+              {
+                "description": "Loyalty discount (10%)",
+                "amount": -80,
+                "detected_pattern": "discount"
+              },
+              {
+                "description": "Sales tax",
+                "amount": 57.6,
+                "detected_pattern": "tax_line"
+              }
+            ],
+            "calculated_total": 697.6,
+            "stated_total": 777.6,
+            "total_discrepancy": true,
+            "conflict_detected": true
+          },
+          "errors": [
+            {
+              "code": "calculated_total_wrong",
+              "field": "calculated_total",
+              "message": "calculated_total is 697.6, but the line items sum to 777.6.",
+              "fixable": true
+            },
+            {
+              "code": "flag_wrong",
+              "field": "total_discrepancy",
+              "message": "total_discrepancy is true, expected false.",
+              "fixable": true
+            }
+          ]
+        },
+        {
+          "attempt": 3,
+          "message": "Original document:\nGreenline Print Co. (EIN 12-3456789)\nInvoice GP-7741, January 22, 2024. Payment due February 21, 2024 (Net 30). Customer PO: PO-5502.\n\nItems as discussed with your marketing team:\n\n| Item      | USD    |\n|-----------|--------|\n| Brochures | 600.00 |\n| Posters   | 200.00 |\n| Subtotal  | 800.00 |\n\nA loyalty discount of 10% (-80.00) applies to the subtotal, and sales tax of 57.60 was charged on the discounted amount.\n\nAmount due: USD 777.60\n\n\nYour extraction:\n{\n  \"vendor_name\": \"Greenline Print Co.\",\n  \"invoice_number\": \"GP-7741\",\n  \"invoice_date\": \"2024-01-22\",\n  \"due_date\": \"2024-02-21\",\n  \"tax_id\": \"12-3456789\",\n  \"category\": \"invoice\",\n  \"line_items\": [\n    {\n      \"description\": \"Brochures\",\n      \"amount\": 600,\n      \"detected_pattern\": \"table_row\"\n    },\n    {\n      \"description\": \"Posters\",\n      \"amount\": 200,\n      \"detected_pattern\": \"table_row\"\n    },\n    {\n      \"description\": \"Loyalty discount (10%)\",\n      \"amount\": -80,\n      \"detected_pattern\": \"discount\"\n    },\n    {\n      \"description\": \"Sales tax\",\n      \"amount\": 57.6,\n      \"detected_pattern\": \"tax_line\"\n    }\n  ],\n  \"calculated_total\": 697.6,\n  \"stated_total\": 777.6,\n  \"total_discrepancy\": true,\n  \"conflict_detected\": true\n}\n\nValidation errors:\n- calculated_total is 697.6, but the line items sum to 777.6.\n- total_discrepancy is true, expected false.\n\nRe-extract the document, fixing these errors. Report only what the document states. Do not add a value or a line item to make the numbers agree.",
+          "result": {
+            "vendor_name": "Greenline Print Co.",
+            "invoice_number": "GP-7741",
+            "invoice_date": "2024-01-22",
+            "due_date": "2024-02-21",
+            "tax_id": "12-3456789",
+            "category": "invoice",
+            "line_items": [
+              {
+                "description": "Brochures",
+                "amount": 600,
+                "detected_pattern": "table_row"
+              },
+              {
+                "description": "Posters",
+                "amount": 200,
+                "detected_pattern": "table_row"
+              },
+              {
+                "description": "Loyalty discount (10%)",
+                "amount": -80,
+                "detected_pattern": "discount"
+              },
+              {
+                "description": "Sales tax",
+                "amount": 57.6,
+                "detected_pattern": "tax_line"
+              }
+            ],
+            "calculated_total": 697.6,
+            "stated_total": 777.6,
+            "total_discrepancy": true,
+            "conflict_detected": true
+          },
+          "errors": [
+            {
+              "code": "calculated_total_wrong",
+              "field": "calculated_total",
+              "message": "calculated_total is 697.6, but the line items sum to 777.6.",
+              "fixable": true
+            },
+            {
+              "code": "flag_wrong",
+              "field": "total_discrepancy",
+              "message": "total_discrepancy is true, expected false.",
+              "fixable": true
+            }
+          ]
+        }
+      ],
+      "usages": [
+        {
+          "input_tokens": 1810,
+          "output_tokens": 452
+        },
+        {
+          "input_tokens": 1749,
+          "output_tokens": 452
+        },
+        {
+          "input_tokens": 1749,
+          "output_tokens": 452
+        }
+      ],
+      "status": "human_review",
+      "exhausted": true,
+      "humanReasons": [
+        "calculated_total is 697.6, but the line items sum to 777.6.",
+        "total_discrepancy is true, expected false."
+      ]
+    },
+    "d18": {
+      "result": {
+        "vendor_name": "Orion Lab Supplies Inc.",
+        "invoice_number": "OL-20240912-7",
+        "invoice_date": "2024-09-12",
+        "due_date": "2024-10-12",
+        "tax_id": "98-7654321",
+        "category": "invoice",
+        "line_items": [
+          {
+            "description": "Pipettes",
+            "amount": 125,
+            "detected_pattern": "table_row"
+          },
+          {
+            "description": "Gloves",
+            "amount": 36,
+            "detected_pattern": "table_row"
+          }
+        ],
+        "calculated_total": 161,
+        "stated_total": 161,
+        "total_discrepancy": false,
+        "conflict_detected": false
+      },
+      "retries": 1,
+      "errors": [],
+      "firstErrors": [
+        {
+          "code": "sum_mismatch",
+          "field": "line_items",
+          "message": "Line items sum to 21.5 but stated_total is 161. Re-read the charges. If the document's own figures truly disagree, keep them as printed and set conflict_detected to true.",
+          "fixable": true
+        }
+      ],
+      "history": [
+        {
+          "attempt": 0,
+          "seeded": true,
+          "result": {
+            "category": "invoice",
+            "conflict_detected": false,
+            "vendor_name": "Orion Lab Supplies Inc.",
+            "invoice_number": "OL-20240912-7",
+            "invoice_date": "2024-09-12",
+            "due_date": "2024-10-12",
+            "tax_id": "98-7654321",
+            "line_items": [
+              {
+                "description": "Pipettes",
+                "amount": 12.5,
+                "detected_pattern": "table_row"
+              },
+              {
+                "description": "Gloves",
+                "amount": 9,
+                "detected_pattern": "table_row"
+              }
+            ],
+            "calculated_total": 21.5,
+            "stated_total": 161,
+            "total_discrepancy": true
+          },
+          "errors": [
+            {
+              "code": "sum_mismatch",
+              "field": "line_items",
+              "message": "Line items sum to 21.5 but stated_total is 161. Re-read the charges. If the document's own figures truly disagree, keep them as printed and set conflict_detected to true.",
+              "fixable": true
+            }
+          ]
+        },
+        {
+          "attempt": 1,
+          "message": "Original document:\nOrion Lab Supplies Inc., Tax ID 98-7654321\nOrder ref 20240912 | Doc no. OL-20240912-7 | 12 Sep 2024 | Due 12 Oct 2024 | Net 30 | PO-6620\n\n| Line total | Qty | Unit price | Item     |\n|------------|-----|------------|----------|\n|     125.00 |  10 |      12.50 | Pipettes |\n|      36.00 |   4 |       9.00 | Gloves   |\n\nBalance payable (USD): 161.00\n\n\nYour extraction:\n{\n  \"category\": \"invoice\",\n  \"conflict_detected\": false,\n  \"vendor_name\": \"Orion Lab Supplies Inc.\",\n  \"invoice_number\": \"OL-20240912-7\",\n  \"invoice_date\": \"2024-09-12\",\n  \"due_date\": \"2024-10-12\",\n  \"tax_id\": \"98-7654321\",\n  \"line_items\": [\n    {\n      \"description\": \"Pipettes\",\n      \"amount\": 12.5,\n      \"detected_pattern\": \"table_row\"\n    },\n    {\n      \"description\": \"Gloves\",\n      \"amount\": 9,\n      \"detected_pattern\": \"table_row\"\n    }\n  ],\n  \"calculated_total\": 21.5,\n  \"stated_total\": 161,\n  \"total_discrepancy\": true\n}\n\nValidation errors:\n- Line items sum to 21.5 but stated_total is 161. Re-read the charges. If the document's own figures truly disagree, keep them as printed and set conflict_detected to true.\n\nRe-extract the document, fixing these errors. Report only what the document states. Do not add a value or a line item to make the numbers agree.",
+          "result": {
+            "vendor_name": "Orion Lab Supplies Inc.",
+            "invoice_number": "OL-20240912-7",
+            "invoice_date": "2024-09-12",
+            "due_date": "2024-10-12",
+            "tax_id": "98-7654321",
+            "category": "invoice",
+            "line_items": [
+              {
+                "description": "Pipettes",
+                "amount": 125,
+                "detected_pattern": "table_row"
+              },
+              {
+                "description": "Gloves",
+                "amount": 36,
+                "detected_pattern": "table_row"
+              }
+            ],
+            "calculated_total": 161,
+            "stated_total": 161,
+            "total_discrepancy": false,
+            "conflict_detected": false
+          },
+          "errors": []
+        }
+      ],
+      "usages": [
+        {
+          "input_tokens": 1663,
+          "output_tokens": 386
+        }
+      ],
+      "status": "clean",
+      "exhausted": false,
+      "humanReasons": []
+    }
+  }
+}

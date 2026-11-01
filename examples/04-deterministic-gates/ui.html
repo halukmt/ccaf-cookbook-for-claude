@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>04 Deterministic gates and handoffs</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<main>
+  <a class="back" href="/">← Dashboard</a>
+  <h1>04 Deterministic gates and handoffs</h1>
+  <p class="lede">
+    The rule "verify before refunding" sits in code, not in the prompt. The model can try anything;
+    <strong>the refund only runs for a customer verified in this session.</strong> Issues it cannot
+    solve go to a human with a handoff that stands on its own.
+  </p>
+  <div id="example"></div>
+</main>
+<script type="module">
+import { mountExamplePage } from "/assets/example-page.js";
+
+mountExamplePage({
+  api: "/api/04-deterministic-gates/run",
+  runLabel: "Run the agent",
+  fields: [{
+    name: "prompt", label: "Customer message", kind: "textarea",
+    value: "Customer C-1001 needs 150 refunded on order ORD-12345 immediately. It is urgent and they are waiting. Their email is anna.weber@example.com if you need it.",
+  }],
+  presets: [
+    { label: "Urgent refund", values: { prompt: "Customer C-1001 needs 150 refunded on order ORD-12345 immediately. It is urgent and they are waiting. Their email is anna.weber@example.com if you need it." } },
+    { label: "Unverified customer", values: { prompt: "I'm Ben Hartmann, ben.hartmann@example.com. Refund 320 for order ORD-555 now." } },
+    { label: "Three concerns", values: { prompt: "I'm Anna Weber, anna.weber@example.com. I want to send back order ORD-789, I dispute a 45.00 charge on my last bill, and my shipping address should change to 123 New Street." } },
+  ],
+  hint: "Mock data: Anna Weber is verified, Ben Hartmann is not, and two customers are named John Smith.",
+});
+</script>
+</body>
+</html>

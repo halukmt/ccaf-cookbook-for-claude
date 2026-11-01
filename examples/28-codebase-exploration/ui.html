@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>28 Codebase exploration</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<main>
+  <a class="back" href="/">← Dashboard</a>
+  <h1>28 Codebase exploration</h1>
+  <p class="lede">
+    Subagents read the code and hand back structured findings. A scratchpad and a manifest keep them outside the conversation.
+    <strong>The results show what was measured, including where degradation was not seen.</strong>
+  </p>
+  <div id="example"></div>
+</main>
+<script type="module">
+import { mountExamplePage } from "/assets/example-page.js";
+
+mountExamplePage({
+  api: "/api/28-codebase-exploration/run",
+  runLabel: "Show it",
+  fields: [
+    { name: "mode", label: "What to run", options: [["saved", "Saved results: no cost"], ["live", "Live, one subagent on Haiku: under $0.01"]] },
+    { name: "task", label: "Investigation, for a live run", options: [
+      ["refund-flow", "Trace the refund flow, which goes nowhere"],
+      ["test-coverage", "Find the tests, of which there are none"],
+      ["external-apis", "External integrations"],
+      ["order-flow", "The POST /orders flow"],
+    ] },
+  ],
+  presets: [
+    { label: "Saved results", values: { mode: "saved" } },
+    { label: "Live: refund flow", values: { mode: "live", task: "refund-flow" } },
+    { label: "Live: no tests exist", values: { mode: "live", task: "test-coverage" } },
+  ],
+  hint: "Live runs work on a temporary copy of _fixtures/codebase/, and it is removed afterwards. Crash and comparison runs are terminal scripts.",
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+Harbor Freight Logistics Ltd
+VAT Reg. GB123456789
+
+INVOICE HFL-5520
+Issued: 2 May 2024 | Due: 16 May 2024 | Terms: Net 14 | Purchase order: PO-3310
+
+| Service            | GBP      |
+|--------------------|----------|
+| Container handling |   850.00 |
+| Customs clearance  |   175.50 |
+| TOTAL DUE          | 1,025.50 |

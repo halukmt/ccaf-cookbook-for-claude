@@ -1,0 +1,487 @@
+[
+  {
+    "fileName": "api-routes.js",
+    "issues": [
+      {
+        "file": "api-routes.js",
+        "line": 35,
+        "severity": "critical",
+        "description": "DELETE /admin/users/:id has no authentication or admin authorization middleware, so anyone can delete any user."
+      },
+      {
+        "file": "api-routes.js",
+        "line": 31,
+        "severity": "high",
+        "description": "The sales report endpoint requires only a logged-in user and has no role check, so any customer can read business-sensitive sales data."
+      },
+      {
+        "file": "api-routes.js",
+        "line": 20,
+        "severity": "high",
+        "description": "The async login handler has no try/catch and no input validation, and Express 4 does not catch rejected promises, so errors cause unhandled rejections and hung requests; there is also no rate limiting against brute-force attacks."
+      },
+      {
+        "file": "api-routes.js",
+        "line": 26,
+        "severity": "high",
+        "description": "The async order handler has no error handling or validation of cart/card, so failures leave the request hanging, and raw card data from the request body is passed along (PCI risk)."
+      },
+      {
+        "file": "api-routes.js",
+        "line": 27,
+        "severity": "medium",
+        "description": "The client-supplied cart and card are passed to placeOrder without schema validation, which risks malformed input and price or quantity tampering."
+      },
+      {
+        "file": "api-routes.js",
+        "line": 32,
+        "severity": "medium",
+        "description": "Query parameters from/to are passed unvalidated to salesReport (possible injection or invalid dates) and the async handler lacks error handling."
+      },
+      {
+        "file": "api-routes.js",
+        "line": 36,
+        "severity": "medium",
+        "description": "The async delete handler has no error handling, and req.params.id is unvalidated, and a missing user still returns 204."
+      },
+      {
+        "file": "api-routes.js",
+        "line": 13,
+        "severity": "low",
+        "description": "The Authorization header is passed directly to verifyToken without handling the 'Bearer ' prefix or a missing header, which is fragile and depends on verifyToken's behavior."
+      },
+      {
+        "file": "api-routes.js",
+        "line": 15,
+        "severity": "low",
+        "description": "The catch block swallows the error without logging, making auth failures hard to diagnose."
+      }
+    ],
+    "bugCount": 9,
+    "stopReason": "end_turn",
+    "brokenLines": 0,
+    "usage": {
+      "input_tokens": 648,
+      "output_tokens": 659
+    }
+  },
+  {
+    "fileName": "cart.js",
+    "issues": [
+      {
+        "file": "cart.js",
+        "line": 10,
+        "severity": "low",
+        "description": "The cart-full check runs before looking up an existing SKU, so adding more of an item already in a full cart is rejected even though no new line would be created."
+      },
+      {
+        "file": "cart.js",
+        "line": 15,
+        "severity": "high",
+        "description": "item.quantity is never validated, so negative, zero, fractional, NaN or huge values can reduce the total, produce invalid totals, or bypass limits when added to an existing line."
+      },
+      {
+        "file": "cart.js",
+        "line": 17,
+        "severity": "high",
+        "description": "The whole caller-supplied item is copied into the cart, including priceCents and any extra fields, with no validation or server-side price lookup, which allows price tampering if the data comes from a client."
+      },
+      {
+        "file": "cart.js",
+        "line": 13,
+        "severity": "low",
+        "description": "When a matching SKU exists, a different item.priceCents is silently ignored, so the cart can keep a stale or inconsistent price without any warning."
+      },
+      {
+        "file": "cart.js",
+        "line": 24,
+        "severity": "medium",
+        "description": "cartTotal trusts that priceCents and quantity are valid integers, so malformed lines produce NaN, fractional or negative totals, which breaks the integer-cents guarantee."
+      }
+    ],
+    "bugCount": 5,
+    "stopReason": "end_turn",
+    "brokenLines": 0,
+    "usage": {
+      "input_tokens": 444,
+      "output_tokens": 628
+    }
+  },
+  {
+    "fileName": "config.js",
+    "issues": [],
+    "bugCount": 0,
+    "stopReason": "end_turn",
+    "brokenLines": 0,
+    "usage": {
+      "input_tokens": 328,
+      "output_tokens": 240
+    }
+  },
+  {
+    "fileName": "database.js",
+    "issues": [
+      {
+        "file": "database.js",
+        "line": 11,
+        "severity": "high",
+        "description": "If connection.query throws, connection.release() on line 12 is never called, leaking the pooled client and eventually exhausting the pool; wrap in try/finally."
+      },
+      {
+        "file": "database.js",
+        "line": 10,
+        "severity": "low",
+        "description": "Acquiring a dedicated client for every single statement is unnecessary overhead; pool.query(sql, params) handles acquire/release automatically and safely."
+      },
+      {
+        "file": "database.js",
+        "line": 6,
+        "severity": "low",
+        "description": "Pool is created without error handling, so an idle client error emits an unhandled 'error' event that can crash the process; add pool.on('error', ...) and consider setting max, idleTimeoutMillis, and connectionTimeoutMillis."
+      },
+      {
+        "file": "database.js",
+        "line": 6,
+        "severity": "low",
+        "description": "No TLS/SSL configuration is specified for the database connection, which may allow unencrypted connections in production unless enforced via the connection string."
+      },
+      {
+        "file": "database.js",
+        "line": 9,
+        "severity": "low",
+        "description": "query() accepts raw SQL strings with no guard or documentation that callers must use parameterized values, leaving room for SQL injection through string concatenation in other modules."
+      }
+    ],
+    "bugCount": 5,
+    "stopReason": "end_turn",
+    "brokenLines": 0,
+    "usage": {
+      "input_tokens": 368,
+      "output_tokens": 400
+    }
+  },
+  {
+    "fileName": "inventory.js",
+    "issues": [
+      {
+        "file": "inventory.js",
+        "line": 11,
+        "severity": "high",
+        "description": "Check-then-act race condition: stock is read and then updated in separate statements without a transaction or lock, so concurrent reservations can oversell."
+      },
+      {
+        "file": "inventory.js",
+        "line": 15,
+        "severity": "high",
+        "description": "The UPDATE query promise is not awaited, so errors become unhandled rejections and the function returns success before the reservation is persisted."
+      },
+      {
+        "file": "inventory.js",
+        "line": 15,
+        "severity": "medium",
+        "description": "The UPDATE has no guard such as 'AND quantity >= $1', so quantity can go negative if the earlier check is stale; use an atomic conditional update and check affected rows."
+      },
+      {
+        "file": "inventory.js",
+        "line": 10,
+        "severity": "medium",
+        "description": "The quantity parameter is not validated (negative, zero, non-integer, or NaN values), so a negative quantity would increase stock and bypass the availability check."
+      },
+      {
+        "file": "inventory.js",
+        "line": 13,
+        "severity": "low",
+        "description": "Generic Error with an interpolated SKU makes it hard for callers to distinguish insufficient stock programmatically; use a custom error type."
+      }
+    ],
+    "bugCount": 5,
+    "stopReason": "end_turn",
+    "brokenLines": 0,
+    "usage": {
+      "input_tokens": 402,
+      "output_tokens": 378
+    }
+  },
+  {
+    "fileName": "reports.js",
+    "issues": [
+      {
+        "file": "reports.js",
+        "line": 8,
+        "severity": "critical",
+        "description": "SQL injection: `from` and `to` are concatenated directly into the query string instead of using parameterized queries."
+      },
+      {
+        "file": "reports.js",
+        "line": 12,
+        "severity": "high",
+        "description": "Empty catch block silently swallows database errors, hiding failures and making debugging impossible."
+      },
+      {
+        "file": "reports.js",
+        "line": 13,
+        "severity": "medium",
+        "description": "Returning an empty array on error makes a failed query indistinguishable from a period with no sales, producing misleading reports."
+      },
+      {
+        "file": "reports.js",
+        "line": 5,
+        "severity": "medium",
+        "description": "No validation of `from`/`to` inputs (type, date format, from <= to) and no authorization check despite being staff-only reporting."
+      },
+      {
+        "file": "reports.js",
+        "line": 7,
+        "severity": "low",
+        "description": "BETWEEN with a date-only `to` value excludes orders created later that day, and GROUP BY alias `day` is not portable across all SQL databases."
+      },
+      {
+        "file": "reports.js",
+        "line": 17,
+        "severity": "low",
+        "description": "orderCount has no error handling, inconsistent with salesReport, and relies on rows[0] existing."
+      },
+      {
+        "file": "reports.js",
+        "line": 18,
+        "severity": "low",
+        "description": "Number() on a COUNT(*) result (often a bigint string) may lose precision for very large counts."
+      }
+    ],
+    "bugCount": 7,
+    "stopReason": "end_turn",
+    "brokenLines": 0,
+    "usage": {
+      "input_tokens": 399,
+      "output_tokens": 443
+    }
+  },
+  {
+    "fileName": "auth.js",
+    "issues": [
+      {
+        "file": "auth.js",
+        "line": 9,
+        "severity": "critical",
+        "description": "SQL injection: user-supplied email is concatenated directly into the query string instead of using a parameterized query."
+      },
+      {
+        "file": "auth.js",
+        "line": 13,
+        "severity": "critical",
+        "description": "MD5 is a fast, broken hash unsuitable for password storage; use bcrypt, scrypt, or argon2 with a per-user salt."
+      },
+      {
+        "file": "auth.js",
+        "line": 14,
+        "severity": "medium",
+        "description": "Hash comparison uses non-constant-time `!==`, which may leak timing information; use crypto.timingSafeEqual."
+      },
+      {
+        "file": "auth.js",
+        "line": 11,
+        "severity": "low",
+        "description": "Early return for unknown email skips hashing, creating a timing difference that enables user enumeration."
+      },
+      {
+        "file": "auth.js",
+        "line": 19,
+        "severity": "medium",
+        "description": "jwt.sign expiresIn given a bare number is interpreted as seconds, but the config name 'sessionTtlMinutes' implies minutes, so tokens will expire far too soon (or the unit is wrong)."
+      },
+      {
+        "file": "auth.js",
+        "line": 25,
+        "severity": "medium",
+        "description": "jwt.verify does not restrict allowed algorithms; specify { algorithms: [\"HS256\"] } to prevent algorithm confusion."
+      },
+      {
+        "file": "auth.js",
+        "line": 19,
+        "severity": "low",
+        "description": "jwt.sign does not specify an algorithm explicitly, relying on library defaults."
+      },
+      {
+        "file": "auth.js",
+        "line": 8,
+        "severity": "low",
+        "description": "No input validation on email/password types or presence; non-string password would cause createHash.update to throw."
+      }
+    ],
+    "bugCount": 8,
+    "stopReason": "end_turn",
+    "brokenLines": 0,
+    "usage": {
+      "input_tokens": 546,
+      "output_tokens": 544
+    }
+  },
+  {
+    "fileName": "notifications.js",
+    "issues": [
+      {
+        "file": "notifications.js",
+        "line": 9,
+        "severity": "high",
+        "description": "user.name is interpolated into HTML without escaping, allowing HTML/content injection (XSS-style) in the email body."
+      },
+      {
+        "file": "notifications.js",
+        "line": 14,
+        "severity": "high",
+        "description": "Empty catch block silently swallows send failures, so errors are never logged, retried, or reported to the caller."
+      },
+      {
+        "file": "notifications.js",
+        "line": 10,
+        "severity": "medium",
+        "description": "Currency is hard-coded to \"EUR\" rather than using the order's currency, which could show wrong currency to customers."
+      },
+      {
+        "file": "notifications.js",
+        "line": 13,
+        "severity": "low",
+        "description": "user.email is used as the recipient without validation or header-injection checks (e.g., newline characters), and the subject is a hard-coded non-localized string."
+      },
+      {
+        "file": "notifications.js",
+        "line": 7,
+        "severity": "low",
+        "description": "No input validation for user or order (null/undefined would throw), and no plain-text fallback is provided for the HTML email."
+      },
+      {
+        "file": "notifications.js",
+        "line": 5,
+        "severity": "low",
+        "description": "Importing from a stub module (mailer-stub.js) suggests a placeholder mailer is used in production code."
+      }
+    ],
+    "bugCount": 6,
+    "stopReason": "end_turn",
+    "brokenLines": 0,
+    "usage": {
+      "input_tokens": 367,
+      "output_tokens": 395
+    }
+  },
+  {
+    "fileName": "orders.js",
+    "issues": [
+      {
+        "file": "orders.js",
+        "line": 16,
+        "severity": "critical",
+        "description": "Off-by-one loop condition `i <= cart.items.length` accesses an undefined item on the last iteration, causing a TypeError after all real items are reserved."
+      },
+      {
+        "file": "orders.js",
+        "line": 17,
+        "severity": "high",
+        "description": "Stock is reserved without any rollback if a later reservation or the card charge fails, leaving inventory permanently reserved."
+      },
+      {
+        "file": "orders.js",
+        "line": 21,
+        "severity": "high",
+        "description": "Card is charged with no idempotency key, so retries can double-charge, and there is no refund if the subsequent DB insert fails."
+      },
+      {
+        "file": "orders.js",
+        "line": 23,
+        "severity": "high",
+        "description": "Order insert is not in a transaction with the stock reservation and charge, so failures can leave a charged payment with no order record."
+      },
+      {
+        "file": "orders.js",
+        "line": 20,
+        "severity": "high",
+        "description": "Total is computed from client-supplied cart data without server-side price validation, allowing price tampering."
+      },
+      {
+        "file": "orders.js",
+        "line": 15,
+        "severity": "medium",
+        "description": "No validation of userId, cart (empty or malformed items, non-positive quantities), or card input, and no authorization check that the caller owns userId."
+      },
+      {
+        "file": "orders.js",
+        "line": 27,
+        "severity": "medium",
+        "description": "Tax is calculated and returned but not included in the charged total or persisted, creating inconsistency between the amount charged and the order data."
+      },
+      {
+        "file": "orders.js",
+        "line": 29,
+        "severity": "medium",
+        "description": "Email sending or user lookup failure after the order is charged and saved will throw and make placeOrder appear to fail even though the order succeeded."
+      },
+      {
+        "file": "orders.js",
+        "line": 15,
+        "severity": "low",
+        "description": "Reservations are performed sequentially with await in a loop and there is no error handling or logging around the order flow."
+      }
+    ],
+    "bugCount": 9,
+    "stopReason": "end_turn",
+    "brokenLines": 0,
+    "usage": {
+      "input_tokens": 604,
+      "output_tokens": 602
+    }
+  },
+  {
+    "fileName": "payments.js",
+    "issues": [
+      {
+        "file": "payments.js",
+        "line": 7,
+        "severity": "critical",
+        "description": "Logs the full card number and CVC in plaintext, which violates PCI DSS and exposes sensitive card data in logs."
+      },
+      {
+        "file": "payments.js",
+        "line": 6,
+        "severity": "high",
+        "description": "chargeCard does not validate card or amountEuros (e.g. NaN, negative, zero, non-number), so invalid or malicious amounts could be sent to the provider."
+      },
+      {
+        "file": "payments.js",
+        "line": 8,
+        "severity": "medium",
+        "description": "The provider.charge call has no error handling or idempotency key, so failures propagate unhandled and retries risk duplicate charges."
+      },
+      {
+        "file": "payments.js",
+        "line": 10,
+        "severity": "low",
+        "description": "Math.round(amountEuros * 100) is subject to floating-point errors for some decimal values; amounts should be handled as integer cents or with a decimal library."
+      },
+      {
+        "file": "payments.js",
+        "line": 20,
+        "severity": "high",
+        "description": "Empty catch block silently swallows refund errors, hiding failures and making debugging impossible."
+      },
+      {
+        "file": "payments.js",
+        "line": 21,
+        "severity": "critical",
+        "description": "refundCharge returns true even when the refund failed, so callers will believe the customer was refunded when they were not."
+      },
+      {
+        "file": "payments.js",
+        "line": 16,
+        "severity": "medium",
+        "description": "refundCharge does not validate chargeId and has no authorization or idempotency checks, allowing arbitrary or repeated refund attempts."
+      }
+    ],
+    "bugCount": 7,
+    "stopReason": "end_turn",
+    "brokenLines": 0,
+    "usage": {
+      "input_tokens": 419,
+      "output_tokens": 483
+    }
+  }
+]

@@ -1,0 +1,392 @@
+[
+  {
+    "fileName": "api-routes.js",
+    "issues": [
+      {
+        "file": "api-routes.js",
+        "line": 35,
+        "severity": "critical",
+        "confidence": 0.95,
+        "reasoning": "The admin delete route has no requireUser middleware and no role check, so any unauthenticated caller can delete any user. This is visible directly in the file.",
+        "description": "DELETE /admin/users/:id has no authentication or authorization, allowing anyone to delete users."
+      },
+      {
+        "file": "api-routes.js",
+        "line": 31,
+        "severity": "major",
+        "confidence": 0.6,
+        "reasoning": "The sales report is guarded only by requireUser, which checks for a valid login and nothing about roles. Any logged-in customer could read business-wide sales data. Whether salesReport enforces permissions internally is not visible here.",
+        "description": "Sales report endpoint lacks an admin/role check, so any authenticated user can access it."
+      },
+      {
+        "file": "api-routes.js",
+        "line": 20,
+        "severity": "major",
+        "confidence": 0.6,
+        "reasoning": "The async handler has no try/catch. In Express 4, a rejected promise from login (DB error, or req.body undefined if no body parser) is unhandled, so the request hangs and can raise an unhandledRejection. The Express version is not visible, so confidence is moderate.",
+        "description": "Async route handler has no error handling, so a rejection leaves the request hanging or crashes the process."
+      },
+      {
+        "file": "api-routes.js",
+        "line": 26,
+        "severity": "major",
+        "confidence": 0.55,
+        "reasoning": "placeOrder handles payment data and may throw, for example on a declined card or invalid cart. The async handler has no error handling, so Express 4 gets an unhandled rejection and the client sees a hang rather than an error. The raw card data in req.body is also passed through with no validation here.",
+        "description": "Order placement route lacks error handling and input validation for cart and card data."
+      },
+      {
+        "file": "api-routes.js",
+        "line": 32,
+        "severity": "minor",
+        "confidence": 0.5,
+        "reasoning": "The from and to query parameters are passed straight to salesReport without validation. Depending on how reports.js builds its query this could allow injection or errors, and an exception would be unhandled in this async handler.",
+        "description": "Unvalidated query parameters are passed to the report function, and errors are unhandled."
+      },
+      {
+        "file": "api-routes.js",
+        "line": 13,
+        "severity": "minor",
+        "confidence": 0.3,
+        "reasoning": "verifyToken receives the raw Authorization header. If it does not strip the 'Bearer ' prefix or handle a missing header, auth could fail incorrectly. This depends on auth.js, which is not visible.",
+        "description": "The raw Authorization header is passed to verifyToken without Bearer parsing or a missing-header check."
+      }
+    ],
+    "brokenLines": 0,
+    "stopReason": "end_turn",
+    "usage": {
+      "input_tokens": 699,
+      "output_tokens": 863
+    }
+  },
+  {
+    "fileName": "cart.js",
+    "issues": [
+      {
+        "file": "cart.js",
+        "line": 10,
+        "severity": "minor",
+        "confidence": 0.5,
+        "reasoning": "The full-cart check runs before the lookup for an existing line. A cart at the limit rejects an increase to a SKU already in it, even though that adds no new line. It is only a bug if maxCartItems limits distinct lines, and the name could also mean total quantity, so I'm only moderately sure.",
+        "description": "The cart-full check is applied even when the item merges into an existing line, so quantities of existing SKUs cannot be increased once the cart is full."
+      },
+      {
+        "file": "cart.js",
+        "line": 15,
+        "severity": "major",
+        "confidence": 0.5,
+        "reasoning": "Neither the merge branch nor the push branch checks that item.quantity is a positive integer. A negative quantity reduces the total or removes value, zero adds a dead line, a fractional quantity gives non-integer cents, and a missing quantity gives NaN. Callers might validate this, but nothing in this file does, and cartTotal assumes integer cents.",
+        "description": "addItem does not validate quantity (or priceCents), so negative, zero, fractional or undefined values can corrupt the cart total."
+      },
+      {
+        "file": "cart.js",
+        "line": 17,
+        "severity": "minor",
+        "confidence": 0.3,
+        "reasoning": "Lines are matched only by sku. If a caller sends a different priceCents for an existing SKU, the new price is silently ignored. If the client supplies prices, it can also set arbitrary prices for new lines. Whether this matters depends on how callers get the item data.",
+        "description": "The item's price is taken as supplied and never checked against a catalog, and price differences on merge are silently ignored."
+      }
+    ],
+    "brokenLines": 0,
+    "stopReason": "end_turn",
+    "usage": {
+      "input_tokens": 495,
+      "output_tokens": 818
+    }
+  },
+  {
+    "fileName": "config.js",
+    "issues": [
+      {
+        "file": "config.js",
+        "line": 5,
+        "severity": "minor",
+        "confidence": 0.3,
+        "reasoning": "process.env.JWT_SECRET and DATABASE_URL are exported with no check that they are set, so a missing variable becomes undefined. Whether this causes a real problem depends on how the consuming code handles an undefined secret, and that code is not visible here. Most JWT libraries throw on an undefined secret, but a lenient or custom signing path could fail silently or weaken token verification.",
+        "description": "Required secrets (jwtSecret, databaseUrl) are read from the environment without validation or fail-fast handling, so a missing value silently becomes undefined."
+      }
+    ],
+    "brokenLines": 0,
+    "stopReason": "end_turn",
+    "usage": {
+      "input_tokens": 379,
+      "output_tokens": 363
+    }
+  },
+  {
+    "fileName": "database.js",
+    "issues": [
+      {
+        "file": "database.js",
+        "line": 11,
+        "severity": "major",
+        "confidence": 0.95,
+        "reasoning": "If connection.query throws (syntax error, constraint violation, connection loss), release() on line 12 is never reached. Each failing query permanently leaks a pool client, and once the pool max (default 10) is exhausted all later calls hang forever on pool.connect().",
+        "description": "The connection is not released when the query throws because there is no try/finally, so failed queries leak pool clients and eventually exhaust the pool."
+      },
+      {
+        "file": "database.js",
+        "line": 10,
+        "severity": "minor",
+        "confidence": 0.5,
+        "reasoning": "Acquiring a dedicated client for each single statement is unnecessary, since pool.query() acquires and releases automatically and avoids the leak. It also prevents multi-statement transactions from working through this API, because consecutive calls may use different connections. The impact depends on how callers use query(), which isn't visible here.",
+        "description": "Using pool.connect() for every statement adds overhead, and because query() is the only access path, callers cannot run transactions on a single connection."
+      },
+      {
+        "file": "database.js",
+        "line": 6,
+        "severity": "minor",
+        "confidence": 0.3,
+        "reasoning": "No 'error' handler is attached to the pool. In node-postgres, an error emitted by an idle client with no listener becomes an uncaught exception that can crash the process, for example on a database restart. Whether this matters depends on whether other modules attach a handler, and I can't see them.",
+        "description": "The pool has no 'error' event listener, so idle client errors can crash the process."
+      }
+    ],
+    "brokenLines": 0,
+    "stopReason": "end_turn",
+    "usage": {
+      "input_tokens": 419,
+      "output_tokens": 507
+    }
+  },
+  {
+    "fileName": "inventory.js",
+    "issues": [
+      {
+        "file": "inventory.js",
+        "line": 15,
+        "severity": "critical",
+        "confidence": 0.9,
+        "reasoning": "The query() call is not awaited and has no catch. The function returns success before the UPDATE completes, so a failed update goes unnoticed and reports a reservation that never happened. The rejection is also unhandled, which can crash the Node process.",
+        "description": "The UPDATE query is not awaited, so reserveStock returns success before the decrement finishes or even if it fails, and any rejection is unhandled."
+      },
+      {
+        "file": "inventory.js",
+        "line": 11,
+        "severity": "critical",
+        "confidence": 0.85,
+        "reasoning": "The stock check and the decrement are separate statements with no transaction, row lock, or conditional update. Concurrent requests can all pass the check and then all decrement, overselling and driving quantity negative. This follows from the code shown, though a database CHECK constraint could limit the effect.",
+        "description": "A check-then-update race condition in reserveStock allows overselling because the availability check and the decrement are not atomic."
+      },
+      {
+        "file": "inventory.js",
+        "line": 12,
+        "severity": "minor",
+        "confidence": 0.4,
+        "reasoning": "quantity is never validated. A negative value passes the availability check and then increases stock through the UPDATE. A zero or non-integer value is also accepted. Callers may validate this elsewhere, so the confidence is moderate.",
+        "description": "There is no validation that quantity is a positive integer, so negative quantities can add stock or bypass the check."
+      }
+    ],
+    "brokenLines": 0,
+    "stopReason": "end_turn",
+    "usage": {
+      "input_tokens": 453,
+      "output_tokens": 482
+    }
+  },
+  {
+    "fileName": "reports.js",
+    "issues": [
+      {
+        "file": "reports.js",
+        "line": 8,
+        "severity": "critical",
+        "confidence": 0.95,
+        "reasoning": "The from and to parameters are concatenated directly into the SQL string with no parameterization or validation, so anyone controlling them can inject arbitrary SQL. The query call takes only the sql string here, so nothing else sanitizes the input.",
+        "description": "SQL injection through unsanitized from/to parameters concatenated into the query."
+      },
+      {
+        "file": "reports.js",
+        "line": 12,
+        "severity": "major",
+        "confidence": 0.9,
+        "reasoning": "The empty catch block swallows every error, including database failures and injection-related syntax errors, and the function then returns an empty array. Callers cannot tell a failed query from a period with no sales, and nothing is logged.",
+        "description": "Errors are silently swallowed and an empty report is returned, hiding failures and producing misleading results."
+      },
+      {
+        "file": "reports.js",
+        "line": 5,
+        "severity": "minor",
+        "confidence": 0.35,
+        "reasoning": "The function has no visible authorization check, though the comment says it is for staff. Access control may be enforced by the caller, which is not in this file, so this is uncertain.",
+        "description": "The report function does no authorization check itself and may expose sales data if callers do not enforce staff-only access."
+      }
+    ],
+    "brokenLines": 0,
+    "stopReason": "end_turn",
+    "usage": {
+      "input_tokens": 450,
+      "output_tokens": 409
+    }
+  },
+  {
+    "fileName": "auth.js",
+    "issues": [
+      {
+        "file": "auth.js",
+        "line": 9,
+        "severity": "critical",
+        "confidence": 0.97,
+        "reasoning": "The email is concatenated directly into the SQL string, so input such as ' OR '1'='1 changes the query. This is visible in the file and needs no outside code to demonstrate.",
+        "description": "SQL injection in login because the email is concatenated into the query instead of passed as a parameter."
+      },
+      {
+        "file": "auth.js",
+        "line": 13,
+        "severity": "major",
+        "confidence": 0.9,
+        "reasoning": "MD5 is fast and unsalted, so leaked hashes can be cracked or looked up in rainbow tables. The code compares against a bare MD5 hex digest, which shows that is how passwords are stored. A slow salted KDF such as bcrypt, scrypt or argon2 should be used.",
+        "description": "Passwords are hashed with unsalted MD5, which is a weak scheme for password storage."
+      },
+      {
+        "file": "auth.js",
+        "line": 14,
+        "severity": "minor",
+        "confidence": 0.4,
+        "reasoning": "The hashes are compared with !==, which is not constant-time. Over a network the timing leak is hard to exploit, and the hashed comparison reduces the risk further, so impact is low.",
+        "description": "Hash comparison is not constant-time."
+      },
+      {
+        "file": "auth.js",
+        "line": 19,
+        "severity": "major",
+        "confidence": 0.6,
+        "reasoning": "jsonwebtoken treats a numeric expiresIn as seconds, while a string without units is treated as milliseconds. The name sessionTtlMinutes suggests minutes, so a value like 30 would expire in 30 seconds. I cannot see config.js, so the actual value and type are unknown, which lowers confidence.",
+        "description": "expiresIn is given a minutes value, but jsonwebtoken interprets a number as seconds, so sessions likely expire far too early."
+      },
+      {
+        "file": "auth.js",
+        "line": 25,
+        "severity": "minor",
+        "confidence": 0.35,
+        "reasoning": "jwt.verify is called without an algorithms option. Recent jsonwebtoken versions restrict the defaults for a secret key, so the risk depends on the library version, which is not visible here.",
+        "description": "Token verification does not pin the allowed algorithms."
+      }
+    ],
+    "brokenLines": 0,
+    "stopReason": "end_turn",
+    "usage": {
+      "input_tokens": 597,
+      "output_tokens": 723
+    }
+  },
+  {
+    "fileName": "notifications.js",
+    "issues": [
+      {
+        "file": "notifications.js",
+        "line": 9,
+        "severity": "major",
+        "confidence": 0.85,
+        "reasoning": "user.name is interpolated directly into an HTML email body without escaping. If a user can set their name to markup, they can inject HTML such as phishing links into emails. The impact depends on where the name comes from, but nothing in this file sanitizes it.",
+        "description": "User-controlled name is inserted into the HTML email without escaping, allowing HTML injection."
+      },
+      {
+        "file": "notifications.js",
+        "line": 14,
+        "severity": "major",
+        "confidence": 0.9,
+        "reasoning": "The empty catch block swallows every error from mailer.send. Failures go unlogged, and the caller cannot tell that the email was never sent, so customers may silently miss order confirmations and nobody can diagnose it.",
+        "description": "Email send errors are silently swallowed, with no logging, retry or propagation."
+      },
+      {
+        "file": "notifications.js",
+        "line": 10,
+        "severity": "minor",
+        "confidence": 0.4,
+        "reasoning": "The currency is hardcoded to \"EUR\" instead of taken from the order or config. If orders can be in other currencies, the email will show the wrong currency. The argument order of formatCurrency and the order's currency field cannot be verified from this file.",
+        "description": "The currency is hardcoded as EUR rather than taken from the order, which could produce an incorrect total."
+      }
+    ],
+    "brokenLines": 0,
+    "stopReason": "end_turn",
+    "usage": {
+      "input_tokens": 418,
+      "output_tokens": 442
+    }
+  },
+  {
+    "fileName": "orders.js",
+    "issues": [
+      {
+        "file": "orders.js",
+        "line": 16,
+        "severity": "critical",
+        "confidence": 0.97,
+        "reasoning": "The loop condition `i <= cart.items.length` runs one iteration past the end. `cart.items[length]` is undefined, so `.sku` throws a TypeError after all real items have been reserved. Every order therefore fails before the charge, and the reserved stock is leaked.",
+        "description": "Off-by-one loop bound makes placeOrder always throw a TypeError on the final iteration, so no order can complete."
+      },
+      {
+        "file": "orders.js",
+        "line": 21,
+        "severity": "major",
+        "confidence": 0.6,
+        "reasoning": "Stock is reserved and the card is charged before the order row is inserted, and there is no try/catch or compensation. If chargeCard fails, the reservations are never released. If the INSERT fails, the customer has been charged but no order exists. Release or refund functions are not visible here, but nothing in this file handles either case.",
+        "description": "No rollback or compensation for stock reservations or the card charge when a later step fails, which can leave stock stuck or charge customers without an order."
+      },
+      {
+        "file": "orders.js",
+        "line": 29,
+        "severity": "minor",
+        "confidence": 0.5,
+        "reasoning": "The order is already charged and persisted when the email is sent. If findUserById or sendOrderEmail throws, placeOrder rejects, so the caller sees a failure and may retry, causing a duplicate charge and order.",
+        "description": "A failure in the notification step after the order is committed makes the whole call fail even though the order succeeded."
+      },
+      {
+        "file": "orders.js",
+        "line": 27,
+        "severity": "minor",
+        "confidence": 0.35,
+        "reasoning": "The customer is charged `total` (line 21), but the tax is computed on `total` as if it were the net amount and is not added to the charge. Either the tax is already included in cartTotal and is then computed incorrectly, or the customer is never charged tax. cartTotal is not visible, so this depends on code outside the file.",
+        "description": "Tax is computed on the charged total but never added to the charge, so the tax handling is inconsistent."
+      }
+    ],
+    "brokenLines": 0,
+    "stopReason": "end_turn",
+    "usage": {
+      "input_tokens": 655,
+      "output_tokens": 916
+    }
+  },
+  {
+    "fileName": "payments.js",
+    "issues": [
+      {
+        "file": "payments.js",
+        "line": 7,
+        "severity": "critical",
+        "confidence": 0.97,
+        "reasoning": "The log statement writes the full card number and CVC to the console. This is demonstrable from this file alone, and it violates PCI DSS because CVC must never be stored or logged.",
+        "description": "Sensitive card data (full card number and CVC) is logged in plaintext."
+      },
+      {
+        "file": "payments.js",
+        "line": 20,
+        "severity": "critical",
+        "confidence": 0.95,
+        "reasoning": "The empty catch block swallows every refund error, and line 21 returns true regardless. Callers will believe a refund succeeded when it failed, and the error is never logged or propagated.",
+        "description": "Refund failures are silently swallowed and the function reports success anyway."
+      },
+      {
+        "file": "payments.js",
+        "line": 21,
+        "severity": "major",
+        "confidence": 0.9,
+        "reasoning": "The fallthrough return true makes the function's boolean result meaningless, since it is true on both success and failure. It should return false or rethrow.",
+        "description": "refundCharge always returns true, so callers cannot detect a failed refund."
+      },
+      {
+        "file": "payments.js",
+        "line": 10,
+        "severity": "minor",
+        "confidence": 0.35,
+        "reasoning": "Math.round(amountEuros * 100) is mostly fine for typical values, but floating-point products like 1.005*100 can round incorrectly. There is also no validation for NaN, negative, or zero amounts. The impact depends on what callers pass in.",
+        "description": "Converting a float euro amount to cents without validating the input can produce wrong or invalid charges."
+      }
+    ],
+    "brokenLines": 0,
+    "stopReason": "end_turn",
+    "usage": {
+      "input_tokens": 470,
+      "output_tokens": 507
+    }
+  }
+]

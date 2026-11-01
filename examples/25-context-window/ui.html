@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>25 Context window management</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<main>
+  <a class="back" href="/">← Dashboard</a>
+  <h1>25 Context window management</h1>
+  <p class="lede">
+    Long conversations get summarised, and summaries lose exact values.
+    <strong>Case facts extracted in code stay outside the summary and go into every request.</strong>
+    Every value below is checked against known figures.
+  </p>
+  <div id="example"></div>
+</main>
+<script type="module">
+import { mountExamplePage } from "/assets/example-page.js";
+
+mountExamplePage({
+  api: "/api/25-context-window/run",
+  runLabel: "Show it",
+  fields: [
+    { name: "mode", label: "What to run", options: [["saved", "Saved results: no cost"], ["live", "Live, one short call: under $0.01"]] },
+    { name: "block", label: "Case facts block, for a live run", options: [["on", "With the block"], ["off", "Without the block"]] },
+    { name: "summary", label: "Summary of the earlier conversation, for a live run", kind: "textarea", value: "The customer would like their money back on an order placed recently" },
+  ],
+  presets: [
+    { label: "Saved results", values: { mode: "saved" } },
+    { label: "Live: lossy summary, with block", values: { mode: "live", block: "on", summary: "The customer would like their money back on an order placed recently" } },
+    { label: "Live: lossy summary, no block", values: { mode: "live", block: "off", summary: "The customer would like their money back on an order placed recently" } },
+    { label: "Live: good summary, no block", values: { mode: "live", block: "off", summary: "Refund requested: $247.83 on order #8891, placed 2024-03-03." } },
+  ],
+  hint: "The ten-turn conversation costs about $0.20, so it runs from the terminal. The lossy summary is hand-written, so what it loses is forced.",
+});
+</script>
+</body>
+</html>
